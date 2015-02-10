@@ -129,8 +129,8 @@ if ( surface_exists( prepSurface ) ) {
         draw_set_alpha( 1 );
         //draw_circle( mouse_x, 
         //            mouse_y, 32, false );
-        draw_circle( mouse_x / room_width * view_wview, 
-                    mouse_y / room_height * view_hview, 32, false );
+        //draw_circle( mouse_x / room_width * view_wview, 
+        //            mouse_y / room_height * view_hview, 32, false );
     
     
     while ( !ds_queue_empty( drawQueue ) ) {

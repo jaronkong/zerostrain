@@ -90,9 +90,9 @@ part_system_destroy( system1 );
             <string>///emit
 part_emitter_region( system1, emitter1, mouse_x, mouse_x, mouse_y, mouse_y, ps_shape_ellipse, ps_distr_gaussian );
 
-part_emitter_burst( system1, emitter1, getParticle( "burstCore2" ), 5 );
-part_emitter_burst( system1, emitter1, getParticle( "splashSpin1" ), 5 );
+part_emitter_burst( system1, emitter1, getParticle( "burstCore1" ), 5 );
 part_emitter_burst( system1, emitter1, getParticle( "splashSpin2" ), 5 );
+
 
 </string>
           </argument>
