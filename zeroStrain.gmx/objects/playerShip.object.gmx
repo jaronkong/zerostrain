@@ -104,6 +104,47 @@ firing = false;
             <kind>1</kind>
             <string>///Get input
 
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
+// Keyboard
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
+
+if ( !gamepad_is_connected( 0 ) ) {
+    inputMovePercent = 0;
+    inputAimPercent = 0;
+    var tKeyboardInputAngleX = 0;
+    var tKeyboardInputAngleY = 0;
+    if ( keyboard_check( ord("A") ) ) {
+        inputMovePercent = 1;
+        tKeyboardInputAngleX -= 1;
+    }
+    if ( keyboard_check( ord("D") ) ) {
+        inputMovePercent = 1;
+        tKeyboardInputAngleX += 1;
+    }
+    if ( keyboard_check( ord("W") ) ) {
+        inputMovePercent = 1;
+        tKeyboardInputAngleY -= 1;
+    }
+    if ( keyboard_check( ord("S") ) ) {
+        inputMovePercent = 1;
+        tKeyboardInputAngleY += 1;
+    }
+    
+    if ( mouse_check_button( mb_left )) {
+        inputAimPercent = 1;
+    }
+    
+    inputMoveDir = point_direction( 0, 0, tKeyboardInputAngleX, tKeyboardInputAngleY );
+    inputAimDir = point_direction( x, y, mouse_x, mouse_y );
+}
+
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
+// Controller
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 if ( gamepad_is_connected( 0 ) ) {
     var tXInputValL = gamepad_axis_value( 0, gp_axislh );
     var tYInputValL = gamepad_axis_value( 0, gp_axislv );

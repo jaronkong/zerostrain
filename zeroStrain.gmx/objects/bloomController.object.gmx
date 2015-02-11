@@ -28,18 +28,24 @@
             <string>///Setup
 
 // size/scale in pixels of blur.
-_size = 2.5;//2.1;//1.1
-_intensity = 1.5;//1.5;
+_size = 0.001;//2.1;//1.1
+_intensity = 2.5;//1.5;
+
+passSurface = -1;
 
 drawQueue = ds_priority_create();
 
 showMap = true;
-targetShader = bloom_sdr;
 
-uScale = shader_get_uniform(targetShader, "uScale");
-uIntensity = shader_get_uniform(targetShader, "uIntensity");
-colorMap = shader_get_sampler_index(targetShader, "colorMap");
+blurHShader = blurH_sdr;
+//uScale = shader_get_uniform(blurHShader, "uScale");
+blurSizeH = shader_get_uniform(blurHShader, "inputSize");
+colorMapH = shader_get_sampler_index(blurHShader, "heightMap");
 
+blurVShader = blurV_sdr;
+//uScale = shader_get_uniform(blurHShader, "uScale");
+blurSizeV = shader_get_uniform(blurVShader, "inputSize");
+colorMapV = shader_get_sampler_index(blurVShader, "heightMap");
 
 </string>
           </argument>
@@ -142,22 +148,40 @@ surface_reset_target();
           <argument>
             <kind>1</kind>
             <string>///Draw
-
 // bind shader.
+
+//d3d_set_projection_ortho( view_xview[0], view_yview[0], view_wview[0], view_hview[0], view_angle[0] );
+
+var tGlobalSurface = effects_getShaderSurface();
+if ( !surface_exists( passSurface ) ) {
+    passSurface = surface_create( surface_get_width( tGlobalSurface ), surface_get_height( tGlobalSurface ) );
+}
+
+
 draw_set_blend_mode( bm_add );
-shader_set(targetShader);
-    shader_set_uniform_f( uIntensity, _intensity );
-    var tGlobalSurface = effects_getShaderSurface();
-    texture_set_stage(colorMap, surface_get_texture( tGlobalSurface ));
+
+shader_set(blurHShader);
+surface_set_target( passSurface );
+    draw_clear_alpha( c_black, 0 );
+    
+    shader_set_uniform_f( blurSizeH, _size );
+    texture_set_stage(colorMapH, surface_get_texture( tGlobalSurface ));
     var texScreen = surface_get_texture(tGlobalSurface);
+        //shader_set_uniform_f(uScale, texture_get_texel_width(texScreen) * _size, 0.0);
+        //draw_surface_stretched(tGlobalSurface, view_xview, view_yview, 
+        //            view_wview, 
+        //            view_hview);
+        draw_surface_stretched(tGlobalSurface, 0, 0, 
+                    surface_get_width( tGlobalSurface ), 
+                    surface_get_height( tGlobalSurface ));
+surface_reset_target();
+shader_reset();
 
-        shader_set_uniform_f(uScale, texture_get_texel_width(texScreen) * _size, 0.0);
-        draw_surface_stretched(tGlobalSurface, view_xview, view_yview, 
-                    view_wview, 
-                    view_hview);
-
-        shader_set_uniform_f(uScale, 0.0, texture_get_texel_height(texScreen) * _size);
-        draw_surface_stretched(tGlobalSurface, view_xview, view_yview, 
+shader_set(blurVShader);
+    shader_set_uniform_f( blurSizeV, _size );
+    texture_set_stage(colorMapV, surface_get_texture( tGlobalSurface ));
+    var texScreen = surface_get_texture(tGlobalSurface);
+        draw_surface_stretched(passSurface, view_xview, view_yview, 
                     view_wview, 
                     view_hview);
 

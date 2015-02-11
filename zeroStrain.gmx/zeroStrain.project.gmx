@@ -69,6 +69,8 @@
     <shader type="GLSLES">shaders\distortionGlow_sdr.shader</shader>
     <shader type="GLSLES">shaders\refraction_sdr.shader</shader>
     <shader type="GLSLES">shaders\dispersion_sdr.shader</shader>
+    <shader type="GLSLES">shaders\blurH_sdr.shader</shader>
+    <shader type="GLSLES">shaders\blurV_sdr.shader</shader>
   </shaders>
   <objects name="objects">
     <object>objects\playerShip</object>
