@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///Setup
 
+globalInit();
 initGlobalPartMap();
 
 instance_create( 0, 0, bloomController );

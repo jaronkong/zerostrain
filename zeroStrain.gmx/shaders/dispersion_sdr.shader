@@ -33,7 +33,7 @@ void main()
 
     vec3 normal = texture2D(normalMap, normal_texcoord).rgb * 2.0 - 1.0;
     //vec4 baseColor = texture2D(gm_BaseTexture, coord + normal.rg * 0.5 );
-    vec4 baseColor = texture2D(gm_BaseTexture, coord - normal.rg * 0.2 ); //0.05
+    vec4 baseColor = texture2D(gm_BaseTexture, coord - normal.rg * 0.07 ); //0.05 //0.2=aztec like stone
     vec3 newBaseColor = baseColor.rgb * decay;
     float newAlpha = baseColor.a * decay;
     
