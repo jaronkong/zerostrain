@@ -46,6 +46,8 @@ bloom_attachParticleSystem( system1, BLOOM_DEPTH );
 //refraction_attachParticleSystem( system1 );
 dispersion_attachParticleSystem( system1 );
 
+part_system_automatic_draw( system1, true );
+
 </string>
           </argument>
         </arguments>

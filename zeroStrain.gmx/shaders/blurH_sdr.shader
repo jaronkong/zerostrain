@@ -50,5 +50,5 @@ void main(void)
     sum += texture2D(gm_BaseTexture, vec2(vTexCoord.x + 3.0*blurSize, vTexCoord.y)) * 0.09;
     sum += texture2D(gm_BaseTexture, vec2(vTexCoord.x + 4.0*blurSize, vTexCoord.y)) * 0.05;
     
-    gl_FragColor = sum;
+    gl_FragColor = sum*1.25;
 }

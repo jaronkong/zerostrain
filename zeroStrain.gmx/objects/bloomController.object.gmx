@@ -28,7 +28,7 @@
             <string>///Setup
 
 // size/scale in pixels of blur.
-_size = 0.001;//2.1;//1.1
+_size = 0.0035;//2.1;//1.1
 _intensity = 2.5;//1.5;
 
 passSurface = -1;
@@ -167,10 +167,6 @@ surface_set_target( passSurface );
     shader_set_uniform_f( blurSizeH, _size );
     texture_set_stage(colorMapH, surface_get_texture( tGlobalSurface ));
     var texScreen = surface_get_texture(tGlobalSurface);
-        //shader_set_uniform_f(uScale, texture_get_texel_width(texScreen) * _size, 0.0);
-        //draw_surface_stretched(tGlobalSurface, view_xview, view_yview, 
-        //            view_wview, 
-        //            view_hview);
         draw_surface_stretched(tGlobalSurface, 0, 0, 
                     surface_get_width( tGlobalSurface ), 
                     surface_get_height( tGlobalSurface ));
