@@ -55,6 +55,35 @@ inputAimPercent = 0;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Weapons
+
+equippedWeapon = instance_create( 0, 0, weapon_gun_con );
+with ( equippedWeapon ) {
+    owner = other.id;
+}
+
+firing = false;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -104,12 +133,12 @@ if ( gamepad_is_connected( 0 ) ) {
     if ( tInputMagnitudeRight &gt; deadZone ) {
         inputAimDir = point_direction( 0, 0, tXInputValR, tYInputValR );
     
-        inputAimPercent = tInputMagnitude;
-        //inputAimPercent = clamp( inputMovePercent, 0, 1 );
+        inputAimPercent = tInputMagnitudeRight;
+        inputAimPercent = clamp( inputAimPercent, 0, 1 );
         
     }
     else {
-        //inputAimPercent = 0;
+        inputAimPercent = 0;
     }
 }
 
@@ -149,6 +178,42 @@ aimDir = inputAimDir;
 targetFaceDir = inputMoveDir;
 currentFaceDir += angle_difference( targetFaceDir, currentFaceDir ) * faceDirTween;
 image_angle = currentFaceDir;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Weapon control
+
+if ( instance_exists( equippedWeapon ) ) {
+    with ( equippedWeapon ) {
+        firing = other.firing;
+        aimDir = other.aimDir;
+    }
+}
+
+if ( inputAimPercent &gt; 0 ) {
+    firing = true;
+}
+else {
+    firing = false;
+}
 
 </string>
           </argument>
@@ -198,5 +263,8 @@ draw_line( x, y, x + lengthdir_x( 128, aimDir ), y + lengthdir_y( 128, aimDir ) 
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>16,16</point>
+    <point>16,16</point>
+  </PhysicsShapePoints>
 </object>

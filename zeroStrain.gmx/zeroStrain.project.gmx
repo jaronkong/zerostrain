@@ -5,7 +5,14 @@
   </Configs>
   <datafiles number="1" name="datafiles"/>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sounds name="Weapons">
+      <sounds name="Gun">
+        <sound>sound\gunHit_sd</sound>
+        <sound>sound\gunShot_sd</sound>
+      </sounds>
+    </sounds>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
     <sprites name="Particles">
@@ -24,6 +31,7 @@
       <sprite>sprites\smokeNormal_spr</sprite>
       <sprite>sprites\distortMap_spr</sprite>
     </sprites>
+    <sprite>sprites\sprite13</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -33,7 +41,10 @@
     <scripts name="Particles">
       <script>scripts\getParticle.gml</script>
       <script>scripts\initGlobalPartMap.gml</script>
-      <script>scripts\particleInit_bigBurst.gml</script>
+      <scripts name="Weapons">
+        <script>scripts\particleInit_bigBurst.gml</script>
+        <script>scripts\particleDef_gun.gml</script>
+      </scripts>
     </scripts>
     <scripts name="Effects">
       <scripts name="Shader">
@@ -42,7 +53,7 @@
         <script>scripts\distortionGlow_addToQueue.gml</script>
         <script>scripts\distortionGlow_attachParticleSystem.gml</script>
         <script>scripts\refraction_addToQueue.gml</script>
-        <script>scripts\refracton_attachParticleSystem.gml</script>
+        <script>scripts\refraction_attachParticleSystem.gml</script>
         <script>scripts\dispersion_addToQueue.gml</script>
         <script>scripts\dispersion_attachParticleSystem.gml</script>
         <script>scripts\effects_getShaderSurface.gml</script>
@@ -51,6 +62,7 @@
       </scripts>
     </scripts>
     <script>scripts\globalInit.gml</script>
+    <script>scripts\playSound.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\bloom_sdr.shader</shader>
@@ -90,10 +102,24 @@
       </objects>
       <object>objects\testEmitter</object>
     </objects>
+    <objects name="Weapons">
+      <object>objects\weaponControllerPar</object>
+      <object>objects\weaponController_projectiles</object>
+      <object>objects\weaponPar_projectile</object>
+      <objects name="Gun">
+        <object>objects\weapon_gun_con</object>
+        <object>objects\weapon_gun_bullet</object>
+      </objects>
+    </objects>
+    <object>objects\enemyBasic</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
   </rooms>
+  <constants number="2">
+    <constant name="PARTICLE_DEPTH">-50</constant>
+    <constant name="BLOOM_DEPTH">-50</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>

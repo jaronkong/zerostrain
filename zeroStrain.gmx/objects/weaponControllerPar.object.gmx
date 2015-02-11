@@ -27,43 +27,27 @@
             <kind>1</kind>
             <string>///Setup
 
-system1 = part_system_create();
-bloom_attachParticleSystem( system1, -50 );
-distortionGlow_attachParticleSystem( system1 );
-refraction_attachParticleSystem( system1 );
-dispersion_attachParticleSystem( system1 );
+owner = noone;
+
+firing = false;
+
+shootOriginX = 0;
+shootOriginY = 0;
+aimDir = 0;
+aimOffset = 16;
+
+damage = 1;
+fireRate = room_speed / 5;
 
 
-emitter1 = part_emitter_create( system1 );
-part_emitter_region( system1, emitter1, x, x, y, y, ps_shape_ellipse, ps_distr_gaussian );
+//Control
+enum WEAPON_EV {
+    FIRE,
+    
+    NUM_EV
+}
+fireTimer = 0;
 
-burstDir = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Clean up
-
-part_emitter_destroy( system1, emitter1 );
-part_system_destroy( system1 );
 
 </string>
           </argument>
@@ -87,13 +71,40 @@ part_system_destroy( system1 );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///emit
-part_emitter_region( system1, emitter1, mouse_x, mouse_x, mouse_y, mouse_y, ps_shape_ellipse, ps_distr_gaussian );
+            <string>///Fire Control
 
-part_emitter_burst( system1, emitter1, getParticle( "burstCore1" ), 5 );
-part_emitter_burst( system1, emitter1, getParticle( "splashSpin2" ), 5 );
+if ( firing ) {
+    fireTimer --;
+    
+    if ( fireTimer &lt;= 0 ) {
+        event_user( WEAPON_EV.FIRE );
+        fireTimer = fireRate;
+    }
+}
 
-
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Fire Weapon
 </string>
           </argument>
         </arguments>

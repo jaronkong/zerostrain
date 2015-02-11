@@ -1,4 +1,4 @@
-///refracton_attachParticleSystem( system );
+///refraction_attachParticleSystem( system );
 
 if ( !instance_exists( refractionController ) ) {
     exit;
