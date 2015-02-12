@@ -34,6 +34,56 @@ y = room_height / 2;
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="73">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///End 3D
+
+d3d_end( );
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="72">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Enable 3D
+
+d3d_start( );
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -53,16 +103,18 @@ y = room_height / 2;
             <kind>1</kind>
             <string>///Draw a cylinder
 
-d3d_start( );
 d3d_transform_stack_push( );
 d3d_transform_add_rotation_x( 90 );
-d3d_transform_add_translation( 0, ( room_height / 2 ), 0 );
+d3d_transform_add_translation( x, y, 0 );
 
-var r = 12;
-d3d_draw_cylinder( x-r, y-r, -24, x+r, y+r, 24, -1, false, false, true, 8 );
+shader_set( dnaShader );
+
+var r = 64;
+d3d_draw_cylinder( -r, -r, -128, +r, +r, 128, -1, false, false, true, 8 );
+
+shader_reset( );
 
 d3d_transform_stack_pop( );
-d3d_end( );
 </string>
           </argument>
         </arguments>
