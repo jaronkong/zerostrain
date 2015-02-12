@@ -9,10 +9,12 @@ attribute vec2 in_TextureCoord;              // (u,v)
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
+uniform float in_angle;
+
 void main()
 {
     vec4 object_space_pos = vec4( in_Position.x, in_Position.y, in_Position.z, 1.0);
-    float deg = ( 0.3 * object_space_pos.z );
+    float deg = ( in_angle * object_space_pos.z );
     mat4 rotate = mat4(
         cos( deg ), -sin( deg ), 0.0, 0.0,
         sin( deg ), cos( deg ), 0.0, 0.0,
