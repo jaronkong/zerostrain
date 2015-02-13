@@ -88,10 +88,14 @@ part_system_destroy( system1 );
           <argument>
             <kind>1</kind>
             <string>///emit
+
+var t = global.timeTickFactor;
+var ti = 1 / t;
+
 part_emitter_region( system1, emitter1, mouse_x, mouse_x, mouse_y, mouse_y, ps_shape_ellipse, ps_distr_gaussian );
 
-part_emitter_burst( system1, emitter1, getParticle( "burstCore1" ), 5 );
-part_emitter_burst( system1, emitter1, getParticle( "splashSpin2" ), 5 );
+part_emitter_burst( system1, emitter1, getParticle( "burstCore1" ), 2 *ti );
+part_emitter_burst( system1, emitter1, getParticle( "splashSpin2" ), 5 *ti );
 
 
 </string>

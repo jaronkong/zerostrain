@@ -206,14 +206,14 @@ repeat ( 200 ) {
     tRandDist = random( radius );
     
     part_type_direction(getParticle( "fissureSpin1" ),
-                            tRandAngle + 90,tRandAngle + 90,4 *ti,0 *ti);
+                            tRandAngle + 90,tRandAngle + 90,2 *ti,0 *ti);
     part_particles_create( system1, 
                                 burstX + lengthdir_x( tRandDist, tRandAngle ),
                                 burstY + lengthdir_y( tRandDist, tRandAngle ),
                                 getParticle( "fissureSpin1" ), 1 );
                                 
     part_type_direction(getParticle( "fissureSpin2" ),
-                            tRandAngle - 90,tRandAngle - 90,-4 *ti,0 *ti);
+                            tRandAngle - 90,tRandAngle - 90,-2 *ti,0 *ti);
     part_particles_create( system1, 
                                 burstX + lengthdir_x( tRandDist, tRandAngle ),
                                 burstY + lengthdir_y( tRandDist, tRandAngle ),
