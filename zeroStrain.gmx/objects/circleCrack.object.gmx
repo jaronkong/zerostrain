@@ -31,7 +31,7 @@ size = 100;
 color = c_white;
 
 currentAlpha = 1;
-fadeRate = 0.01;
+fadeRate = 0.005;
 
 </string>
           </argument>
@@ -57,7 +57,10 @@ fadeRate = 0.01;
             <kind>1</kind>
             <string>///Tween
 
-currentAlpha -= fadeRate;
+var t = global.timeTickFactor;
+var ti = 1 / t;
+
+currentAlpha -= fadeRate *ti;
 
 if ( currentAlpha &lt;= 0 ) {
     instance_destroy();
