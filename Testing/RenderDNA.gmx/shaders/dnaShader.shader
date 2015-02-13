@@ -13,6 +13,7 @@ uniform float in_angle;
 
 void main()
 {
+    //Rotate the strand
     vec4 object_space_pos = vec4( in_Position.x, in_Position.y, in_Position.z, 1.0);
     float deg = ( in_angle * object_space_pos.z );
     mat4 rotate = mat4(
@@ -22,8 +23,11 @@ void main()
         0.0, 0.0, 0.0, 1.0
     );
     object_space_pos = ( rotate * object_space_pos );
+    
+    //Get final position
     gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * object_space_pos;
     
+    //Pass through colors
     v_vColour = in_Colour;
     v_vTexcoord = in_TextureCoord;
 }
