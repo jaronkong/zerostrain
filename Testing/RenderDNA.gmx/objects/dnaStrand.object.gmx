@@ -74,12 +74,18 @@ shader_angle = shader_get_uniform( dnaShader, "in_angle" );
             <string>///Create models
 
 segments = 32;
-radius = 32;
+radius = 4;
 
-model = d3d_model_create( );
-var r = 8;
+edgeModel = d3d_model_create( );
+var r = 0.75;
 for ( var i = -1; i &lt; segments; ++i ) {
-    d3d_model_cylinder( model, radius-r, -r, i, radius+r, r, i+1, 4, 1, false, 8 );
+    d3d_model_cylinder( edgeModel, radius-r, -r, i, radius+r, r, i+1, 4, 1, false, 8 );
+}
+
+rungModel = d3d_model_create( );
+r = 0.2;
+for ( var i = 0; i &lt; segments; ++i ) {
+    d3d_model_block( rungModel, 0, -r, i-r, radius+r, r, i+r, 4, 1 );
 }
 </string>
           </argument>
@@ -105,7 +111,8 @@ for ( var i = -1; i &lt; segments; ++i ) {
             <kind>1</kind>
             <string>///Free models
 
-d3d_model_destroy( model );
+d3d_model_destroy( edgeModel );
+d3d_model_destroy( rungModel );
 </string>
           </argument>
         </arguments>
@@ -155,7 +162,7 @@ d3d_set_projection_ext( 0, 0, 250,
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw a cylinder
+            <string>///Draw the strand
 
 draw_set_color( c_white );
 draw_set_alpha( 1 );
@@ -167,7 +174,7 @@ var rotY = lerp( -180, 180, -mouse_x / room_width );
 
 d3d_transform_stack_push( );
 d3d_transform_add_translation( 0, 0, -segments/2 );
-d3d_transform_add_scaling( 1, 1, 10 );
+d3d_transform_add_scaling( 10, 10, 10 );
 d3d_transform_add_rotation_x( 90 );
 d3d_transform_stack_push( );
 d3d_transform_add_rotation_x( rotX );
@@ -176,14 +183,16 @@ d3d_transform_add_rotation_y( rotY );
 shader_set( dnaShader );
 shader_set_uniform_f( shader_angle, degtorad( 20 ) );
 
-d3d_model_draw( model, 0, 0, 0, tex );
+d3d_model_draw( edgeModel, 0, 0, 0, tex );
+d3d_model_draw( rungModel, 0, 0, 0, tex );
 
 d3d_transform_stack_pop( );
 d3d_transform_add_rotation_y( 180 );
 d3d_transform_add_rotation_x( rotX );
 d3d_transform_add_rotation_y( rotY );
 
-d3d_model_draw( model, 0, 0, 0, tex );
+d3d_model_draw( edgeModel, 0, 0, 0, tex );
+d3d_model_draw( rungModel, 0, 0, 0, tex );
 
 shader_reset( );
 
