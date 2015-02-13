@@ -16,11 +16,11 @@ part_type_size(tPartType,0.5,1,0 *ti,0 *ti);
 part_type_scale(tPartType,1,1);
 part_type_color2(tPartType,make_color_rgb( 255, 200, 0 ),c_purple);
 part_type_alpha2(tPartType,1,0);
-part_type_speed(tPartType,0.5 *ti,1 *ti,0 *ti,0 *ti);
+part_type_speed(tPartType,0.25 *ti,0.5 *ti,0 *ti,0 *ti);
 part_type_direction(tPartType,0,359,0 *ti,0 *ti);
-part_type_orientation(tPartType,0,359,0.5 *ti,0 *ti,0);
+part_type_orientation(tPartType,0,359,0.25 *ti,0 *ti,0);
 part_type_blend(tPartType,1);
-part_type_life(tPartType,30 *t,60 *t);
+part_type_life(tPartType,60 *t,120 *t);
 
 
 tPartName = "burstCore2"
@@ -30,12 +30,12 @@ if not ( ds_map_exists( global.particleMap, tPartName ) ) {
 }
 tPartType = getParticle( tPartName );
 part_type_sprite(tPartType, particle_sphere_spr, 0, 0, 0 );
-part_type_size(tPartType,1,2,-0.005 *ti,0 *ti);
+part_type_size(tPartType,1,2,-0.0025 *ti,0 *ti);
 part_type_scale(tPartType,2,1);
 part_type_color3(tPartType,16711680,255,make_color_rgb( 255, 200, 50 ));
 part_type_alpha3(tPartType,0,0.4,0);
-part_type_speed(tPartType,2 *ti,15 *ti,0 *ti,1 *ti);
+part_type_speed(tPartType,1 *ti,7.5 *ti,0 *ti,1 *ti);
 part_type_direction(tPartType,0,359,0 *ti,0 *ti);
 part_type_orientation(tPartType,0,0,0 *ti,0 *ti,1);
 part_type_blend(tPartType,1);
-part_type_life(tPartType,30 *t,60 *t);
+part_type_life(tPartType,60 *t,120 *t);
