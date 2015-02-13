@@ -10,6 +10,7 @@ varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
 uniform float in_angle;
+uniform float in_count;
 
 void main()
 {
@@ -29,7 +30,7 @@ void main()
     
     //Pass through colors
     v_vColour = in_Colour;
-    v_vTexcoord = in_TextureCoord;
+    v_vTexcoord = vec2( (floor(in_Position.z+0.5)/in_count), 0.5 );
 }
 
 //######################_==_YOYO_SHADER_MARKER_==_######################@~//

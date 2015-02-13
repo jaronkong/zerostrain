@@ -51,6 +51,7 @@ show_debug_overlay( true );
             <string>///Get shader uniforms
 
 shader_angle = shader_get_uniform( dnaShader, "in_angle" );
+shader_count = shader_get_uniform( dnaShader, "in_count" );
 </string>
           </argument>
         </arguments>
@@ -91,6 +92,30 @@ for ( var i = 0; i &lt; segments; ++i ) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Define surfaces
+
+edgeSurf = -1;
+rungSurf = -1;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -117,8 +142,75 @@ d3d_model_destroy( rungModel );
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Free surfaces
+
+if ( surface_exists( edgeSurf ) ) surface_free( edgeSurf );
+if ( surface_exists( rungSurf ) ) surface_free( rungSurf );
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Create surfaces
+
+if ( !surface_exists( edgeSurf ) ) {
+    edgeSurf = surface_create( 1, 1 );
+    surface_set_target( edgeSurf );
+    draw_clear_alpha( make_color_rgb( 110, 49, 74 ), 1 );
+    surface_reset_target( );
+}
+
+if ( !surface_exists( rungSurf ) ) {
+    rungSurf = surface_create( segments, 1 );
+    surface_set_target( rungSurf );
+    for ( var i = 0; i &lt; segments; ++i ) {
+        var tCol = choose(
+            make_color_rgb( 102, 85, 122 ),
+            make_color_rgb( 125, 65, 133 ),
+            make_color_rgb( 133, 56, 46 ),
+            make_color_rgb( 122, 46, 7 )
+        );
+        draw_point_color( i, 0, tCol );
+    }
+    surface_reset_target( );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -167,8 +259,6 @@ d3d_set_projection_ext( 0, 0, 250,
 draw_set_color( c_white );
 draw_set_alpha( 1 );
 
-var tex = sprite_get_texture( grid_spr, 0 );
-
 var rotX = lerp( -90, 90, -mouse_y / room_height );
 var rotY = lerp( -180, 180, -mouse_x / room_width );
 
@@ -182,17 +272,18 @@ d3d_transform_add_rotation_y( rotY );
 
 shader_set( dnaShader );
 shader_set_uniform_f( shader_angle, degtorad( 20 ) );
+shader_set_uniform_f( shader_count, segments );
 
-d3d_model_draw( edgeModel, 0, 0, 0, tex );
-d3d_model_draw( rungModel, 0, 0, 0, tex );
+d3d_model_draw( edgeModel, 0, 0, 0, surface_get_texture( edgeSurf ) );
+d3d_model_draw( rungModel, 0, 0, 0, surface_get_texture( rungSurf ) );
 
 d3d_transform_stack_pop( );
 d3d_transform_add_rotation_y( 180 );
 d3d_transform_add_rotation_x( rotX );
 d3d_transform_add_rotation_y( rotY );
 
-d3d_model_draw( edgeModel, 0, 0, 0, tex );
-d3d_model_draw( rungModel, 0, 0, 0, tex );
+d3d_model_draw( edgeModel, 0, 0, 0, surface_get_texture( edgeSurf ) );
+d3d_model_draw( rungModel, 0, 0, 0, surface_get_texture( rungSurf ) );
 
 shader_reset( );
 
