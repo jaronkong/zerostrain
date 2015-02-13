@@ -30,6 +30,7 @@
     <sprites name="Effects">
       <sprite>sprites\smokeNormal_spr</sprite>
       <sprite>sprites\distortMap_spr</sprite>
+      <sprite>sprites\circleCrack_spr</sprite>
     </sprites>
     <sprite>sprites\sprite13</sprite>
   </sprites>
@@ -44,6 +45,7 @@
       <scripts name="Weapons">
         <script>scripts\particleInit_bigBurst.gml</script>
         <script>scripts\particleDef_gun.gml</script>
+        <script>scripts\particleDef_fissureBomb.gml</script>
       </scripts>
     </scripts>
     <scripts name="Effects">
@@ -60,6 +62,14 @@
         <script>scripts\effects_globalSurfaceExists.gml</script>
         <script>scripts\effects_surfaceInit.gml</script>
       </scripts>
+      <scripts name="LightPrimitives">
+        <script>scripts\createLightBurst.gml</script>
+        <script>scripts\createLightBurstAtPosition.gml</script>
+        <script>scripts\createLightWhirl.gml</script>
+        <script>scripts\createLightWhirlAtPosition.gml</script>
+        <script>scripts\createLightWhirlSingle.gml</script>
+      </scripts>
+      <script>scripts\circleCrackCreate.gml</script>
     </scripts>
     <script>scripts\globalInit.gml</script>
     <script>scripts\playSound.gml</script>
@@ -102,6 +112,18 @@
         <object>objects\dispersionParticleDrawer</object>
         <object>objects\dispersionEffectPar</object>
       </objects>
+      <objects name="LightPrimitives">
+        <object>objects\lightBurstRay</object>
+        <object>objects\lightPrimitiveEffectPar</object>
+        <object>objects\lightStreak</object>
+        <object>objects\lightWhirl</object>
+        <objects name="SpecialLights">
+          <object>objects\lightDistortionRay</object>
+        </objects>
+      </objects>
+      <objects name="Misc">
+        <object>objects\circleCrack</object>
+      </objects>
       <object>objects\testEmitter</object>
     </objects>
     <objects name="Weapons">
@@ -111,6 +133,9 @@
       <objects name="Gun">
         <object>objects\weapon_gun_con</object>
         <object>objects\weapon_gun_bullet</object>
+      </objects>
+      <objects name="Specials">
+        <object>objects\weapon_fissureBomb</object>
       </objects>
     </objects>
     <object>objects\enemyBasic</object>
