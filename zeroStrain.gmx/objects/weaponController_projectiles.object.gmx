@@ -43,7 +43,7 @@
 
 //Projectile based weapons inherit from this
 
-projectileSpeed = 10;
+projectileSpeed = 5;
 projectileToShoot = weapon_gun_bullet;
 
 </string>

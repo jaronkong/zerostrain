@@ -30,19 +30,19 @@
 aimDir = 0;
 aimPercent = 0;
 
-frictionAmount = 0.4;
+frictionAmount = 0.25;
 currentFriction = frictionAmount;
 
-accel = 4;
+accel = 2;
 currentAccel = accel;
 
-maxSpeed = 10;
+maxSpeed = 5;
 currentMaxSpeed = maxSpeed;
 
 //Visual
 currentFaceDir = 0;
 targetFaceDir = 0;
-faceDirTween = 0.35;
+faceDirTween = 0.2;
 
 //Control
 deadZone = 0.2;
@@ -73,7 +73,7 @@ inputAimPercent = 0;
             <kind>1</kind>
             <string>///Weapons
 
-equippedWeapon = instance_create( 0, 0, weapon_fissureBomb );
+equippedWeapon = instance_create( 0, 0, weapon_gun_con );
 with ( equippedWeapon ) {
     owner = other.id;
 }
@@ -217,7 +217,7 @@ aimDir = inputAimDir;
 
 //Visual
 targetFaceDir = inputMoveDir;
-currentFaceDir += angle_difference( targetFaceDir, currentFaceDir ) * faceDirTween;
+currentFaceDir += angle_difference( targetFaceDir, currentFaceDir ) * faceDirTween * t;
 image_angle = currentFaceDir;
 
 </string>

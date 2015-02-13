@@ -43,8 +43,8 @@
 
 //Remember to set the particle def script in the step
 fireRate = room_speed / 10;
-projectileSpeed = 20;
-projectileLife = 120;
+projectileSpeed = 10;
+projectileLife = 240;
 projectileToShoot = weapon_gun_bullet;
 
 bulletHalfSpread = 16;
@@ -127,11 +127,13 @@ particleDef_gun();
             <kind>1</kind>
             <string>///Shoot
 
+var t = 1 / global.timeTickFactor;
+
 if ( instance_exists( owner ) ) {
     playSound( gunShot_sd, 1, false );
     
     shootOriginX = owner.x;
-    shootOriginY = owner.y;    
+    shootOriginY = owner.y;
     var tShootDir = owner.aimDir;
 
     var tShootX = shootOriginX + lengthdir_x( aimOffset, aimDir );
@@ -141,17 +143,17 @@ if ( instance_exists( owner ) ) {
     with ( instance_create( tShootX + lengthdir_x( bulletHalfSpread, aimDir + 90 ), 
                             tShootY + lengthdir_y( bulletHalfSpread, aimDir + 90 ), 
                             projectileToShoot ) ) {
-        speed = other.projectileSpeed;
+        speed = other.projectileSpeed * t;
         direction = tShootDir;
-        lifespan = other.projectileLife;
+        lifespan = other.projectileLife * t;
     }
     
     with ( instance_create( tShootX + lengthdir_x( bulletHalfSpread, aimDir - 90 ), 
                             tShootY + lengthdir_y( bulletHalfSpread, aimDir - 90 ), 
                             projectileToShoot ) ) {
-        speed = other.projectileSpeed;
+        speed = other.projectileSpeed * t;
         direction = tShootDir;
-        lifespan = other.projectileLife;
+        lifespan = other.projectileLife * t;
     }
 
 }

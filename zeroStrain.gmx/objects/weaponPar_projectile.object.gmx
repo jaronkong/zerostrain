@@ -34,8 +34,8 @@ enum WEAPON_PROJ_EV {
     NUM_EV
 }
 
-lifetime = 120;
-speed = 10;
+lifetime = 240;
+speed = 5;
 
 
 system1 = part_system_create();

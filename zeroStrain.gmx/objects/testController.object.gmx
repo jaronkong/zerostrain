@@ -27,17 +27,18 @@
             <kind>1</kind>
             <string>///Move view
 
+var spd = 2.5 / global.timeTickFactor;
 if ( keyboard_check( vk_right ) ) {
-    view_xview += 5;
+    view_xview += spd;
 }
 if ( keyboard_check( vk_left ) ) {
-    view_xview -= 5;
+    view_xview -= spd;
 }
 if ( keyboard_check( vk_up ) ) {
-    view_yview -= 5;
+    view_yview -= spd;
 }
 if ( keyboard_check( vk_down ) ) {
-    view_yview += 5;
+    view_yview += spd;
 }
 
 </string>
