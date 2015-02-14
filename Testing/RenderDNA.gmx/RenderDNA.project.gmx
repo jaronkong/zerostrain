@@ -15,6 +15,7 @@
   </shaders>
   <objects name="objects">
     <object>objects\dnaStrand</object>
+    <object>objects\dnaHandler</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Test_rm</room>

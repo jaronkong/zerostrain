@@ -50,8 +50,9 @@ show_debug_overlay( true );
             <kind>1</kind>
             <string>///Get shader uniforms
 
-shader_angle = shader_get_uniform( dnaShader, "in_angle" );
 shader_count = shader_get_uniform( dnaShader, "in_count" );
+shader_angle = shader_get_uniform( dnaShader, "in_angle" );
+shader_split = shader_get_uniform( dnaShader, "in_split" );
 </string>
           </argument>
         </arguments>
@@ -77,17 +78,8 @@ shader_count = shader_get_uniform( dnaShader, "in_count" );
 segments = 32;
 radius = 4;
 
-edgeModel = d3d_model_create( );
-var r = 0.75;
-for ( var i = -1; i &lt; segments; ++i ) {
-    d3d_model_cylinder( edgeModel, radius-r, -r, i, radius+r, r, i+1, 4, 1, false, 8 );
-}
-
-rungModel = d3d_model_create( );
-r = 0.2;
-for ( var i = 0; i &lt; segments; ++i ) {
-    d3d_model_block( rungModel, 0, -r, i-r, radius+r, r, i+r, 4, 1 );
-}
+edgeModel = -1;
+rungModel = -1;
 </string>
           </argument>
         </arguments>
@@ -112,6 +104,39 @@ for ( var i = 0; i &lt; segments; ++i ) {
 
 edgeSurf = -1;
 rungSurf = -1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Define state
+
+x = 0;
+y = 0;
+z = 0;
+rx = 0;
+ry = 0;
+rz = 0;
+
+mirror = false;
+
+twist = 0;
+split = 0;
 </string>
           </argument>
         </arguments>
@@ -227,6 +252,43 @@ if ( !surface_exists( rungSurf ) ) {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Create models
+
+if ( edgeModel &lt; 0 ) {
+    edgeModel = d3d_model_create( );
+    var r = 0.75;
+    for ( var i = -1; i &lt; segments; ++i ) {
+        d3d_model_cylinder( edgeModel, radius-r, -r, i, radius+r, r, i+1, 4, 1, false, 8 );
+    }
+}
+
+if ( rungModel &lt; 0 ) {
+    rungModel = d3d_model_create( );
+    r = 0.2;
+    for ( var i = 0; i &lt; segments; ++i ) {
+        d3d_model_block( rungModel, 0, -r, i-r, radius+r, r, i+r, 4, 1 );
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Enable 3D
 
 d3d_start( );
@@ -259,28 +321,22 @@ d3d_set_projection_ext( 0, 0, 250,
 draw_set_color( c_white );
 draw_set_alpha( 1 );
 
-var rotX = lerp( -90, 90, -mouse_y / room_height );
-var rotY = lerp( -180, 180, -mouse_x / room_width );
-
 d3d_transform_stack_push( );
 d3d_transform_add_translation( 0, 0, -segments/2 );
 d3d_transform_add_scaling( 10, 10, 10 );
 d3d_transform_add_rotation_x( 90 );
-d3d_transform_stack_push( );
-d3d_transform_add_rotation_x( rotX );
-d3d_transform_add_rotation_y( rotY );
+
+if ( mirror ) d3d_transform_add_rotation_y( 180 );
+
+d3d_transform_add_rotation_x( rx );
+d3d_transform_add_rotation_y( ry );
+d3d_transform_add_rotation_z( rz );
+d3d_transform_add_translation( x, y, z );
 
 shader_set( dnaShader );
-shader_set_uniform_f( shader_angle, degtorad( 20 ) );
 shader_set_uniform_f( shader_count, segments );
-
-d3d_model_draw( edgeModel, 0, 0, 0, surface_get_texture( edgeSurf ) );
-d3d_model_draw( rungModel, 0, 0, 0, surface_get_texture( rungSurf ) );
-
-d3d_transform_stack_pop( );
-d3d_transform_add_rotation_y( 180 );
-d3d_transform_add_rotation_x( rotX );
-d3d_transform_add_rotation_y( rotY );
+shader_set_uniform_f( shader_angle, degtorad( twist ) );
+shader_set_uniform_f( shader_split, split );
 
 d3d_model_draw( edgeModel, 0, 0, 0, surface_get_texture( edgeSurf ) );
 d3d_model_draw( rungModel, 0, 0, 0, surface_get_texture( rungSurf ) );

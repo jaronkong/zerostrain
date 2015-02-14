@@ -9,13 +9,15 @@ attribute vec2 in_TextureCoord;              // (u,v)
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
-uniform float in_angle;
 uniform float in_count;
+uniform float in_angle;
+uniform float in_split;
 
 void main()
 {
     //Rotate the strand
     vec4 object_space_pos = vec4( in_Position.x, in_Position.y, in_Position.z, 1.0);
+    object_space_pos.x += smoothstep( in_split, in_split+8.0, in_Position.z ) * -4.0 + 4.0;
     float deg = ( in_angle * object_space_pos.z );
     mat4 rotate = mat4(
         cos( deg ), -sin( deg ), 0.0, 0.0,
