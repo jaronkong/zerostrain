@@ -17,8 +17,9 @@ void main()
 {
     //Rotate the strand
     vec4 object_space_pos = vec4( in_Position.x, in_Position.y, in_Position.z, 1.0);
-    object_space_pos.x += smoothstep( in_split, in_split+8.0, in_Position.z ) * -4.0 + 4.0;
-    float deg = ( in_angle * object_space_pos.z );
+    float splitProp = smoothstep( in_split, in_split+8.0, in_Position.z );
+    object_space_pos.x += ( ( splitProp * -4.0 ) + 4.0 );
+    float deg = ( in_angle * (object_space_pos.z - in_split) * splitProp );
     mat4 rotate = mat4(
         cos( deg ), -sin( deg ), 0.0, 0.0,
         sin( deg ), cos( deg ), 0.0, 0.0,
