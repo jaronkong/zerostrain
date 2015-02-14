@@ -73,7 +73,7 @@ inputAimPercent = 0;
             <kind>1</kind>
             <string>///Weapons
 
-equippedWeapon = instance_create( 0, 0, weapon_fissureBomb );
+equippedWeapon = instance_create( 0, 0, weapon_gun_con );
 with ( equippedWeapon ) {
     owner = other.id;
 }

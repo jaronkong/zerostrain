@@ -51,6 +51,7 @@
       <sprite>sprites\circleCrack_spr</sprite>
     </sprites>
     <sprite>sprites\sprite13</sprite>
+    <sprite>sprites\sprite15</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
