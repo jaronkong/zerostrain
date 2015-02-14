@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///Move view
 
-var spd = 2.5 / global.timeTickFactor;
+var spd = 2.5 * global.timeTickFactor;
 if ( keyboard_check( vk_right ) ) {
     view_xview += spd;
 }
@@ -64,7 +64,7 @@ if ( keyboard_check( vk_down ) ) {
             <string>///Effects
 
 if ( keyboard_check( ord("Q") ) ) {
-    global.timeTickFactor = 2;
+    global.timeTickFactor = 0.5;
 }
 
 global.timeTickFactor = lerp( global.timeTickFactor, 1, 0.05 );

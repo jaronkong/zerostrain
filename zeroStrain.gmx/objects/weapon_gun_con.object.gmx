@@ -127,7 +127,7 @@ particleDef_gun();
             <kind>1</kind>
             <string>///Shoot
 
-var t = 1 / global.timeTickFactor;
+var t = global.timeTickFactor;
 
 if ( instance_exists( owner ) ) {
     playSound( gunShot_sd, 1, false );
@@ -143,17 +143,17 @@ if ( instance_exists( owner ) ) {
     with ( instance_create( tShootX + lengthdir_x( bulletHalfSpread, aimDir + 90 ), 
                             tShootY + lengthdir_y( bulletHalfSpread, aimDir + 90 ), 
                             projectileToShoot ) ) {
-        speed = other.projectileSpeed * t;
+        speed = other.projectileSpeed;
         direction = tShootDir;
-        lifespan = other.projectileLife * t;
+        lifespan = other.projectileLife;
     }
     
     with ( instance_create( tShootX + lengthdir_x( bulletHalfSpread, aimDir - 90 ), 
                             tShootY + lengthdir_y( bulletHalfSpread, aimDir - 90 ), 
                             projectileToShoot ) ) {
-        speed = other.projectileSpeed * t;
+        speed = other.projectileSpeed;
         direction = tShootDir;
-        lifespan = other.projectileLife * t;
+        lifespan = other.projectileLife;
     }
 
 }

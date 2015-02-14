@@ -60,7 +60,7 @@ fadeRate = 0.005;
 var t = global.timeTickFactor;
 var ti = 1 / t;
 
-currentAlpha -= fadeRate *ti;
+currentAlpha -= fadeRate *t;
 
 if ( currentAlpha &lt;= 0 ) {
     instance_destroy();

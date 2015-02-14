@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///Setup
 
+var t = global.timeTickFactor;
+
 enum WEAPON_PROJ_EV {
     HIT,
     DESTROYED,
@@ -96,7 +98,7 @@ part_system_destroy( system1 );
             <kind>1</kind>
             <string>///Decay lifetime
 
-lifetime --;
+lifetime -= global.timeTickFactor;
 
 if ( lifetime &lt;= 0 ) {
     event_user( WEAPON_PROJ_EV.DESTROYED );

@@ -205,7 +205,7 @@ if ( gamepad_is_connected( 0 ) ) {
             <kind>1</kind>
             <string>///Control ship movement
 
-var t = 1 / global.timeTickFactor;
+var t = global.timeTickFactor;
 
 friction = frictionAmount*t;
 motion_add( inputMoveDir, accel*inputMovePercent*t );

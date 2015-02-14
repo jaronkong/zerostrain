@@ -6,4 +6,3 @@ with ( instance_create( argument0, argument1, circleCrack ) ) {
     fadeRate = 1/(room_speed*argument4);
     image_angle = random( 360 );
 }
-

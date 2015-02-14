@@ -85,14 +85,14 @@ part_system_automatic_draw( system1, true );
           <argument>
             <kind>1</kind>
             <string>///Effects
-var ti = 1/global.timeTickFactor;
+var t = global.timeTickFactor;
 part_emitter_region( system1, emitter1, x, x, y, y, ps_shape_ellipse, ps_distr_gaussian );
 
-part_type_direction(getParticle( "shotCore" ), direction + 180,direction + 180, 0 *ti,0 *ti);
-part_type_direction(getParticle( "shotCoreTrail" ), direction + 180,direction + 180, 0 *ti,0 *ti);
+part_type_direction(getParticle( "shotCore" ), direction + 180,direction + 180, 0 *t,0 *t);
+part_type_direction(getParticle( "shotCoreTrail" ), direction + 180,direction + 180, 0 *t,0 *t);
 
-part_emitter_burst( system1, emitter1, getParticle( "shotCore" ), 1 *ti );
-part_emitter_burst( system1, emitter1, getParticle( "shotCoreTrail" ), 2 *ti );
+part_emitter_burst( system1, emitter1, getParticle( "shotCore" ), 1 *t );
+part_emitter_burst( system1, emitter1, getParticle( "shotCoreTrail" ), 2 *t );
 
 
 </string>
