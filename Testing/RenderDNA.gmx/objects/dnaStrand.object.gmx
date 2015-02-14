@@ -232,7 +232,7 @@ if ( !surface_exists( rungSurf ) ) {
 d3d_start( );
 d3d_set_projection_ext( 0, 0, 250,
     0, 0, 0, 0, -1, 0, 90,
-    ( room_width / room_height ), 1, 1000
+    ( room_width / room_height ), 1, 500
 );
 </string>
           </argument>
