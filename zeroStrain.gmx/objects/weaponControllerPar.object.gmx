@@ -73,9 +73,8 @@ fireTimer = 0;
             <kind>1</kind>
             <string>///Fire Control
 
+fireTimer -= global.timeTickFactor;
 if ( firing ) {
-    fireTimer --;
-    
     if ( fireTimer &lt;= 0 ) {
         event_user( WEAPON_EV.FIRE );
         fireTimer = fireRate;
