@@ -30,7 +30,10 @@
 draw_set_color( c_white );
 draw_set_alpha( 1 );
 
-draw_rectangle( 64, 64, 256, 256, false );
+shader_set( perlin_shader );
+shader_set_uniform_f( shader_get_uniform(perlin_shader, "time"), get_timer( )/10000000 );
+draw_rectangle( 64, 64, 512, 512, false );
+shader_reset( );
 </string>
           </argument>
         </arguments>
