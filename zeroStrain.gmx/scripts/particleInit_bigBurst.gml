@@ -7,8 +7,8 @@ var tPartType = 0;
 
 tPartName = "burstCore1"
 if not ( ds_map_exists( global.particleMap, tPartName ) ) {
-    pBurstCore1 = part_type_create();
-    ds_map_add( global.particleMap, tPartName, pBurstCore1 );
+    tPartType = part_type_create();
+    ds_map_add( global.particleMap, tPartName, tPartType );
 }
 tPartType = getParticle( tPartName );
 part_type_sprite(tPartType, particle_flare_spr, 0, 0, 0 );
@@ -25,8 +25,8 @@ part_type_life(tPartType,60 *ti,120 *ti);
 
 tPartName = "burstCore2"
 if not ( ds_map_exists( global.particleMap, tPartName ) ) {
-    pBurstCore2 = part_type_create();
-    ds_map_add( global.particleMap, tPartName, pBurstCore2 );
+    tPartType = part_type_create();
+    ds_map_add( global.particleMap, tPartName, tPartType );
 }
 tPartType = getParticle( tPartName );
 part_type_sprite(tPartType, particle_sphere_spr, 0, 0, 0 );

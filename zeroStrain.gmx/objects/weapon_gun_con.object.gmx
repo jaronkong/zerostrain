@@ -49,6 +49,14 @@ projectileToShoot = weapon_gun_bullet;
 
 bulletHalfSpread = 16;
 
+
+bloom_attachParticleSystem( system1, BLOOM_DEPTH );
+//distortionGlow_attachParticleSystem( system1 );
+//refraction_attachParticleSystem( system1 );
+dispersion_attachParticleSystem( system1 );
+
+part_system_automatic_draw( system1, true );
+
 </string>
           </argument>
         </arguments>
@@ -140,20 +148,18 @@ if ( instance_exists( owner ) ) {
     var tShootY = shootOriginY + lengthdir_y( aimOffset, aimDir );
     
     
-    with ( instance_create( tShootX + lengthdir_x( bulletHalfSpread, aimDir + 90 ), 
+    with ( weaponCreateProjectile( tShootX + lengthdir_x( bulletHalfSpread, aimDir + 90 ), 
                             tShootY + lengthdir_y( bulletHalfSpread, aimDir + 90 ), 
-                            projectileToShoot ) ) {
+                            projectileToShoot, id ) ) {
         speed = other.projectileSpeed;
         direction = tShootDir;
-        lifespan = other.projectileLife;
     }
     
-    with ( instance_create( tShootX + lengthdir_x( bulletHalfSpread, aimDir - 90 ), 
+    with ( weaponCreateProjectile( tShootX + lengthdir_x( bulletHalfSpread, aimDir - 90 ), 
                             tShootY + lengthdir_y( bulletHalfSpread, aimDir - 90 ), 
-                            projectileToShoot ) ) {
+                            projectileToShoot, id ) ) {
         speed = other.projectileSpeed;
         direction = tShootDir;
-        lifespan = other.projectileLife;
     }
 
 }

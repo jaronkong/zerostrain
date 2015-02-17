@@ -5,10 +5,24 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>weaponController_projectiles</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -27,77 +41,18 @@
             <kind>1</kind>
             <string>///Setup
 
-owner = noone;
+//Remember to set the particle def script in the step
+fireRate = room_speed / 2;
+projectileSpeed = 20;
+projectileLife = 120;
+projectileToShoot = weapon_pulseDriver_bullet;
 
-firing = false;
+bloom_attachParticleSystem( system1, BLOOM_DEPTH );
+distortionGlow_attachParticleSystem( system1 );
+refraction_attachParticleSystem( system1 );
+dispersion_attachParticleSystem( system1 );
 
-shootOriginX = 0;
-shootOriginY = 0;
-aimDir = 0;
-aimOffset = 16;
-
-damage = 1;
-fireRate = room_speed / 5;
-
-
-//Control
-enum WEAPON_EV {
-    FIRE,
-    
-    NUM_EV
-}
-fireTimer = 0;
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Effects
-
-system1 = part_system_create();
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Clean up
-
-part_system_destroy( system1 );
+part_system_automatic_draw( system1, true );
 
 </string>
           </argument>
@@ -107,36 +62,18 @@ part_system_destroy( system1 );
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>604</id>
+        <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Fire Control
-
-fireTimer -= global.timeTickFactor;
-if ( firing ) {
-    if ( fireTimer &lt;= 0 ) {
-        event_user( WEAPON_EV.FIRE );
-        fireTimer = fireRate;
-    }
-}
-
-</string>
-          </argument>
-        </arguments>
       </action>
-    </event>
-    <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -153,7 +90,70 @@ if ( firing ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Fire Weapon
+            <string>///Effect definition
+
+particleDef_pulseDriver();
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Shoot
+
+var t = global.timeTickFactor;
+
+if ( instance_exists( owner ) ) {
+    playSound( pulseDriveShot_sd, 1, false );
+    
+    shootOriginX = owner.x;
+    shootOriginY = owner.y;
+    var tShootDir = owner.aimDir;
+
+    var tShootX = shootOriginX + lengthdir_x( aimOffset, aimDir );
+    var tShootY = shootOriginY + lengthdir_y( aimOffset, aimDir );
+    
+    
+    with ( weaponCreateProjectile( tShootX, 
+                            tShootY, 
+                            projectileToShoot, id ) ) {
+        speed = other.projectileSpeed;
+        direction = tShootDir;
+    }
+
+
+}
 </string>
           </argument>
         </arguments>

@@ -29,6 +29,9 @@
         <sound>sound\gunHit_sd</sound>
         <sound>sound\gunShot_sd</sound>
       </sounds>
+      <sounds name="PulseDriver">
+        <sound>sound\pulseDriveShot_sd</sound>
+      </sounds>
     </sounds>
   </sounds>
   <sprites name="sprites">
@@ -64,7 +67,11 @@
       <scripts name="Weapons">
         <script>scripts\particleInit_bigBurst.gml</script>
         <script>scripts\particleDef_gun.gml</script>
+        <script>scripts\particleDef_pulseDriver.gml</script>
         <script>scripts\particleDef_fissureBomb.gml</script>
+        <script>scripts\weaponDoDamage.gml</script>
+        <script>scripts\weaponCheckForwardLineColl.gml</script>
+        <script>scripts\weaponCreateProjectile.gml</script>
       </scripts>
     </scripts>
     <scripts name="Effects">
@@ -89,6 +96,7 @@
         <script>scripts\createLightWhirlSingle.gml</script>
       </scripts>
       <script>scripts\circleCrackCreate.gml</script>
+      <script>scripts\audioSetPitchRand.gml</script>
     </scripts>
     <script>scripts\globalInit.gml</script>
     <script>scripts\playSound.gml</script>
@@ -154,11 +162,18 @@
         <object>objects\weapon_gun_con</object>
         <object>objects\weapon_gun_bullet</object>
       </objects>
+      <objects name="PulseDriver">
+        <object>objects\weapon_pulseDriver_con</object>
+        <object>objects\weapon_pulseDriver_bullet</object>
+      </objects>
       <objects name="Specials">
         <object>objects\weapon_fissureBomb</object>
       </objects>
     </objects>
-    <object>objects\enemyBasic</object>
+    <objects name="Enemy">
+      <object>objects\enemyPar</object>
+      <object>objects\enemyBasic</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

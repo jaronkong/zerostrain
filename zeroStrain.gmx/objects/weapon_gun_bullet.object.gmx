@@ -41,12 +41,12 @@
             <kind>1</kind>
             <string>///Specific properties
 
-bloom_attachParticleSystem( system1, BLOOM_DEPTH );
+//bloom_attachParticleSystem( system1, BLOOM_DEPTH );
 //distortionGlow_attachParticleSystem( system1 );
 //refraction_attachParticleSystem( system1 );
-dispersion_attachParticleSystem( system1 );
+//dispersion_attachParticleSystem( system1 );
 
-part_system_automatic_draw( system1, true );
+//part_system_automatic_draw( system1, true );
 
 </string>
           </argument>
@@ -94,6 +94,44 @@ part_type_direction(getParticle( "shotCoreTrail" ), direction + 180,direction + 
 part_emitter_burst( system1, emitter1, getParticle( "shotCore" ), 1 *t );
 part_emitter_burst( system1, emitter1, getParticle( "shotCoreTrail" ), 2 *t );
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check collision
+
+var tHitObj = weaponCheckForwardLineColl( id );
+if ( tHitObj != noone ) {
+    var tTargetDir = point_direction( x, y, tHitObj.x, tHitObj.y );
+    
+    part_type_direction(getParticle( "gunHitSparks" ), tTargetDir + 180 - 30,tTargetDir + 180 + 30, 0 *t,0 *t);
+    part_type_direction(getParticle( "gunHitCore" ), tTargetDir + 180 - 10,tTargetDir + 180 + 10, 0 *t,0 *t);
+
+    part_emitter_burst( system1, emitter1, getParticle( "gunHitSparks" ), 50 *t );
+    part_emitter_burst( system1, emitter1, getParticle( "gunHitCore" ), 10 *t );
+    
+    audioSetPitchRand( gunHit_sd );
+    playSound( gunHit_sd, 1, false );
+    
+    event_user( WEAPON_PROJ_EV.HIT );
+}
 
 </string>
           </argument>
