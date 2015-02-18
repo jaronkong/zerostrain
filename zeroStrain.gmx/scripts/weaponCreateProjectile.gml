@@ -18,4 +18,3 @@ if ( instance_exists( aCon ) ) {
 }
 
 return tNewProj;
-
