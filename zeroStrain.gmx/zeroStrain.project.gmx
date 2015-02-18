@@ -133,6 +133,7 @@
     <shader type="GLSLES">shaders\dispersion_sdr.shader</shader>
     <shader type="GLSLES">shaders\blurH_sdr.shader</shader>
     <shader type="GLSLES">shaders\blurV_sdr.shader</shader>
+    <shader type="GLSLES">shaders\dnaShader.shader</shader>
   </shaders>
   <objects name="objects">
     <object>objects\playerShip</object>
@@ -201,6 +202,8 @@
     </objects>
     <objects name="Genetics">
       <object>objects\genomeData</object>
+      <object>objects\genePickup</object>
+      <object>objects\dnaRender</object>
     </objects>
   </objects>
   <rooms name="rooms">
