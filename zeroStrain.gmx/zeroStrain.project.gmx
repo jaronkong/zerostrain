@@ -81,6 +81,7 @@
     <scripts name="Particles">
       <script>scripts\getParticle.gml</script>
       <script>scripts\initGlobalPartMap.gml</script>
+      <script>scripts\particleDef_enemyBody.gml</script>
       <scripts name="Weapons">
         <script>scripts\particleInit_bigBurst.gml</script>
         <script>scripts\particleDef_gun.gml</script>
@@ -140,6 +141,7 @@
       <object>objects\effectsGlobalCon</object>
       <object>objects\testController</object>
       <object>objects\stepController</object>
+      <object>objects\spawnCon</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">

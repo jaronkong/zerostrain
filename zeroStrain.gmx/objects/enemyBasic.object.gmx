@@ -8,7 +8,21 @@
   <parentName>enemyPar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="3" enumb="0">
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,9 +39,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Test Particles
+            <string>///Setup
 
-bodyMaps_spawnParticle( BODY_MAPS.ENEMY1, id, image_angle, system1, getParticle( "shotCore" ) );
+event_user( ENEMY_EV.CREATE );
 
 </string>
           </argument>
@@ -35,6 +49,20 @@ bodyMaps_spawnParticle( BODY_MAPS.ENEMY1, id, image_angle, system1, getParticle(
       </action>
     </event>
     <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

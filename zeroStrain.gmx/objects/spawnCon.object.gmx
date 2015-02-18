@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
+    <event eventtype="9" enumb="32">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,29 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Setup
+            <string>///Spawn enemy
 
-globalInit();
-
-instance_create( 0, 0, bloomController );
-instance_create( 0, 0, distortionGlowController );
-instance_create( 0, 0, refractionController );
-instance_create( 0, 0, dispersionController );
-
-initGlobalPartMap();
-
-global.shaderEffectSurface = -1;
-global.shaderEffectResolution = 1;
-global.debugMode = false;
-
-global.resX = -1;
-global.resXMax = -1;
-global.resXScale = 1;
-global.resY = -1;
-global.resYMax = -1;
-global.resYScale = 1;
-global.resScale = 1;
-
+instance_create( random( view_wview ), random( view_hview ), enemyBasic );
 
 </string>
           </argument>

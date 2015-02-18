@@ -136,7 +136,9 @@ if ( !gamepad_is_connected( 0 ) ) {
         inputAimPercent = 1;
     }
     
-    inputMoveDir = point_direction( 0, 0, tKeyboardInputAngleX, tKeyboardInputAngleY );
+    if ( tKeyboardInputAngleX != 0 || tKeyboardInputAngleY != 0 ) {
+        inputMoveDir = point_direction( 0, 0, tKeyboardInputAngleX, tKeyboardInputAngleY );
+    }
     inputAimDir = point_direction( x, y, mouse_x, mouse_y );
 }
 

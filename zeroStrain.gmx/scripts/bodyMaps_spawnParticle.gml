@@ -33,22 +33,5 @@ var tActualAngle = point_direction( 0, 0, tTargetX, tTargetY ) + aAngle;
 part_particles_create( aPartSystem, aRootObj.x + lengthdir_x( tActualDist, tActualAngle), 
                                 aRootObj.y + lengthdir_y( tActualDist, tActualAngle ),
                                 aPartType, 1 );
-/*
-with ( backgroundController ) {
-    ds_list_add( flowerList, tTreeXPos + tTargetX, tHeightOffset + tTargetY, 
-                    random_range( 0.5, 1.5 ), 
-                    random( 360 ),
-                    choose( 
-                        make_color_rgb( 255, 192, 187 ), 
-                        make_color_rgb( 255, 160, 157 ),
-                        make_color_rgb( 255, 146, 145 ) ) );
-    //Effects
-    part_particles_create( global.backgroundSystem, tTreeXPos + tTargetX, tHeightOffset + tTargetY, getParticle( "flowerPoof" ), 100 );
-    part_particles_create( global.backgroundSystem, tTreeXPos + tTargetX, tHeightOffset + tTargetY, getParticle( "flowerPoof2" ), 100 );
-    createLightBurstAtPosition( tTreeXPos + tTargetX, tHeightOffset + tTargetY, 6, 300, make_color_rgb( 232, 101, 153 ) );
-    createLightBurstAtPosition( tTreeXPos + tTargetX, tHeightOffset + tTargetY, 6, 150, make_color_rgb( 255, 101, 153 ) );
-
-}
-*/
 
 
