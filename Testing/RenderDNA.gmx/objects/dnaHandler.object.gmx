@@ -120,7 +120,7 @@ with ( right ) instance_destroy( );
             <string>///Update twist
 
 var spd = 0.05;
-if ( mouse_check_button( mb_right ) ) {
+if ( keyboard_check( ord( 'Z' ) ) ) {
     twist = lerp( twist, 0, spd );
 } else {
     twist = lerp( twist, 20, spd );
@@ -148,7 +148,7 @@ if ( mouse_check_button( mb_right ) ) {
             <string>///Update split
 
 var spd = 0.25;
-if ( mouse_check_button( mb_left ) ) {
+if ( keyboard_check( ord( 'X' ) ) ) {
     split += spd;
 } else { 
     split -= spd;
