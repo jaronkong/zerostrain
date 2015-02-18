@@ -121,6 +121,10 @@
     </scripts>
     <script>scripts\globalInit.gml</script>
     <script>scripts\playSound.gml</script>
+    <scripts name="Genetics">
+      <script>scripts\geneGetData.gml</script>
+      <script>scripts\geneGenerateRandom.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\bloom_sdr.shader</shader>
