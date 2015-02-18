@@ -1,0 +1,26 @@
+[groups]
+group = 1
+0 = plr_stat
+1 = plr_wep
+count = 2
+
+[plr_stat]
+group = 1
+0 = plr_stat_spd
+count = 1
+[plr_stat_spd]
+default = 1
+offset = 0.1
+
+[plr_wep]
+group = 1
+0 = plr_wep_gat
+count = 1
+
+[plr_wep_gat]
+group = 1
+0 = plr_wep_gat_dmg
+count = 1
+[plr_wep_gat_dmg]
+default = 1
+offset = 0.1
