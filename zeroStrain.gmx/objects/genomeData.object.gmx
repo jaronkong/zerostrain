@@ -90,22 +90,22 @@ ds_queue_enqueue( "groups" );
 
 while ( !ds_queue_empty( data ) ) {
     var tSection = ds_queue_dequeue( data );
-    if ( ini_read_real( tSection, "group", false ) ) {
-        //We have to go deeper
-        var tCount = ini_read_real( tSection, "count", 0 );
-        for ( var i = 0; i &lt; tCount; ++i ) {
-            ds_queue_enqueue( data, ini_read_string( tSection, string( i ), "" ) );
+    var tCount = ini_read_real( tSection, "count", 0 );
+    for ( var i = 0; i &lt; tCount; ++i ) {
+        var tTag = ini_read_string( tSection, string( i ), "" );
+        if ( ini_read_real( tSection, "group", false ) ) {
+            //We have to go deeper
+            ds_queue_enqueue( data, tTag );
+        } else {
+            //Load in a potential segment
+            var tDef = ini_read_real( tTag, "default", 1 );
+            var tOff = ini_read_real( tTag, "offset", 1 );
+            var tIndex = ds_grid_height( data );
+            ds_grid_resize( data, geneSize, ( tIndex + 1 ) );
+            ds_grid_set( data, geneTag, tIndex, tTag );
+            ds_grid_set( data, geneDef, tIndex, tDef );
+            ds_grid_set( data, geneOff, tIndex, tOff );
         }
-    } else {
-        //Load in a potential segment
-        var tTag = tSection;
-        var tDef = ini_read_real( tTag, "default", 1 );
-        var tOff = ini_read_real( tTag, "offset", 1 );
-        var tIndex = ds_grid_height( data );
-        ds_grid_resize( data, geneSize, ( tIndex + 1 ) );
-        ds_grid_set( data, geneTag, tIndex, tTag );
-        ds_grid_set( data, geneDef, tIndex, tDef );
-        ds_grid_set( data, geneOff, tIndex, tOff );
     }
 }
 
