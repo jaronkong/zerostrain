@@ -42,6 +42,23 @@
       </ConfigOptions>
       <filename>timer.dll</filename>
     </datafile>
+    <datafile>
+      <name>bodyMap.ini</name>
+      <exists>-1</exists>
+      <size>294</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>bodyMap.ini</filename>
+    </datafile>
   </datafiles>
   <NewExtensions/>
   <sounds name="sound">
@@ -85,14 +102,12 @@
     <scripts name="Particles">
       <script>scripts\getParticle.gml</script>
       <script>scripts\initGlobalPartMap.gml</script>
+      <script>scripts\particleDef_enemyBody.gml</script>
       <scripts name="Weapons">
         <script>scripts\particleInit_bigBurst.gml</script>
         <script>scripts\particleDef_gun.gml</script>
         <script>scripts\particleDef_pulseDriver.gml</script>
         <script>scripts\particleDef_fissureBomb.gml</script>
-        <script>scripts\weaponDoDamage.gml</script>
-        <script>scripts\weaponCheckForwardLineColl.gml</script>
-        <script>scripts\weaponCreateProjectile.gml</script>
       </scripts>
     </scripts>
     <scripts name="Effects">
@@ -116,8 +131,19 @@
         <script>scripts\createLightWhirlAtPosition.gml</script>
         <script>scripts\createLightWhirlSingle.gml</script>
       </scripts>
+      <scripts name="BodyMaterialize">
+        <script>scripts\bodyMaps_init.gml</script>
+        <script>scripts\bodyMaps_shutdown.gml</script>
+        <script>scripts\bodyMaps_spawnParticle.gml</script>
+        <script>scripts\bodyMaps_load.gml</script>
+      </scripts>
       <script>scripts\circleCrackCreate.gml</script>
       <script>scripts\audioSetPitchRand.gml</script>
+    </scripts>
+    <scripts name="Weapons">
+      <script>scripts\weaponDoDamage.gml</script>
+      <script>scripts\weaponCreateProjectile.gml</script>
+      <script>scripts\weaponCheckForwardLineColl.gml</script>
     </scripts>
     <script>scripts\globalInit.gml</script>
     <script>scripts\playSound.gml</script>
@@ -141,6 +167,7 @@
       <object>objects\effectsGlobalCon</object>
       <object>objects\testController</object>
       <object>objects\stepController</object>
+      <object>objects\spawnCon</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">
