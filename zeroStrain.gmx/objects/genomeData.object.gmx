@@ -86,16 +86,16 @@ ds_grid_destroy( data );
 ini_open( working_directory + "\data\genome\" + file + ".dat" );
 
 var tQueue = ds_queue_create( );
-ds_queue_enqueue( "groups" );
+ds_queue_enqueue( tQueue, "groups" );
 
-while ( !ds_queue_empty( data ) ) {
-    var tSection = ds_queue_dequeue( data );
+while ( !ds_queue_empty( tQueue ) ) {
+    var tSection = ds_queue_dequeue( tQueue );
     var tCount = ini_read_real( tSection, "count", 0 );
     for ( var i = 0; i &lt; tCount; ++i ) {
         var tTag = ini_read_string( tSection, string( i ), "" );
         if ( ini_read_real( tSection, "group", false ) ) {
             //We have to go deeper
-            ds_queue_enqueue( data, tTag );
+            ds_queue_enqueue( tQueue, tTag );
         } else {
             //Load in a potential segment
             var tDef = ini_read_real( tTag, "default", 1 );
@@ -109,7 +109,7 @@ while ( !ds_queue_empty( data ) ) {
     }
 }
 
-ds_queue_destroy( data );
+ds_queue_destroy( tQueue );
 
 ini_close( );
 </string>
