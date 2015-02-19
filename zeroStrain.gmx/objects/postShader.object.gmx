@@ -27,29 +27,56 @@
             <kind>1</kind>
             <string>///Setup
 
-globalInit();
+draw_set_color(c_white);
 
-instance_create( 0, 0, bloomController );
-instance_create( 0, 0, distortionGlowController );
-instance_create( 0, 0, refractionController );
-instance_create( 0, 0, dispersionController );
+uni_time = shader_get_uniform(finalScreen_sdr,"time");
+var_time_var = 0;
 
-initGlobalPartMap();
+//uni_mouse_pos = shader_get_uniform(finalScreen_sdr,"mouse_pos");
+//var_mouse_pos_x = mouse_x - view_xview;
+//var_mouse_pos_y = mouse_y - view_yview;
 
-instance_create( 0, 0, postShader );
+uni_resolution = shader_get_uniform(finalScreen_sdr,"resolution");
+var_resolution_x = view_wview;
+var_resolution_y = view_hview;
 
-global.shaderEffectSurface = -1;
-global.shaderEffectResolution = 1;
-global.debugMode = false;
+shader_enabled = true;
+full_screen_effect = true;
 
-global.resX = -1;
-global.resXMax = -1;
-global.resXScale = 1;
-global.resY = -1;
-global.resYMax = -1;
-global.resYScale = 1;
-global.resScale = 1;
+//alarm[0] = 180;
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw screen
+
+if (shader_enabled) { 
+    shader_set(finalScreen_sdr);
+        shader_set_uniform_f(uni_resolution, var_resolution_x, var_resolution_y);
+        if (full_screen_effect) {
+           draw_surface(application_surface,0,0);
+        }
+    shader_reset();
+}
 
 </string>
           </argument>

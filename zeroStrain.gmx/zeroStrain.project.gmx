@@ -160,6 +160,7 @@
     <shader type="GLSLES">shaders\blurH_sdr.shader</shader>
     <shader type="GLSLES">shaders\blurV_sdr.shader</shader>
     <shader type="GLSLES">shaders\dnaShader.shader</shader>
+    <shader type="GLSLES">shaders\finalScreen_sdr.shader</shader>
   </shaders>
   <objects name="objects">
     <object>objects\playerShip</object>
@@ -204,6 +205,9 @@
       </objects>
       <objects name="Misc">
         <object>objects\circleCrack</object>
+      </objects>
+      <objects name="FullScreenEffects">
+        <object>objects\postShader</object>
       </objects>
       <object>objects\testEmitter</object>
     </objects>
