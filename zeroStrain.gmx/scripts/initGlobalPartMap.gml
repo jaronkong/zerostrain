@@ -12,5 +12,5 @@ refraction_attachParticleSystem( global.enemySpawnSystem );
 dispersion_attachParticleSystem( global.enemySpawnSystem );
 
 
-//particleInit_bigBurst();
+particleDef_pickups();
 particleDef_enemyBody();

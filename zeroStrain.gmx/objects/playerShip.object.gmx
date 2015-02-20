@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>bloomablePar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -26,6 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>///Setup
+
+selfHealth = 100;
+selfHealthMax = 100;
 
 aimDir = 0;
 aimPercent = 0;
@@ -73,12 +76,54 @@ inputAimPercent = 0;
             <kind>1</kind>
             <string>///Weapons
 
-equippedWeapon = instance_create( 0, 0, weapon_gun_con );
-with ( equippedWeapon ) {
-    owner = other.id;
-}
+equippedWeapon = noone;
+weaponEquip( weapon_gun_con, other.id );
+
 
 firing = false;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Local HUD
+
+radius = 70;
+arcRes = 3;
+arcTween = 0.2;
+
+healthAngleRange = 90;
+healthStartAngle = 180;
+healthAlertPercent = 0.25;
+currentDrawHealth = 0;
+healthColor = c_yellow;
+
+weaponDurationRange = 180;
+weaponDurationStartAngle = 0;
+weaponDurationAlertPercent = 0.3;
+currentDrawWeaponDuration = 0;
+weaponDurationColor = c_orange;
+
+hudFlashColor = c_red;
+hudFlashOn = false;
+hudFlashRate = 3;
+hudFlashTimer = 0;
 
 </string>
           </argument>
@@ -262,6 +307,101 @@ else {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///HUD flashing and tweening
+
+currentDrawHealth = lerp( currentDrawHealth, selfHealth, arcTween );
+if ( instance_exists( equippedWeapon ) ) {
+    currentDrawWeaponDuration = lerp( currentDrawWeaponDuration, equippedWeapon.duration, arcTween );
+}
+
+hudFlashTimer --;
+
+if ( hudFlashTimer &lt;= 0 ) {
+    hudFlashOn = !hudFlashOn;
+    hudFlashTimer = hudFlashRate;
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw
+
+//---------------------------------------------------
+// HUD stuff
+//---------------------------------------------------
+draw_sprite_ext( playerHUDRing_spr, 0, x, y, 1, 1, 0, c_white, 0.7 );
+
+//Health
+var tHealthPercent = currentDrawHealth / selfHealthMax;
+draw_set_color( healthColor );
+if ( hudFlashOn &amp;&amp; tHealthPercent &lt;= healthAlertPercent ) {
+    draw_set_color( hudFlashColor );
+}
+draw_set_alpha( 1 );
+drawArc( healthAngleRange * tHealthPercent, arcRes, radius, healthStartAngle, x, y );
+
+//Weapon Duration
+if ( instance_exists( equippedWeapon ) ) {
+    var tDurationPercent = currentDrawWeaponDuration/equippedWeapon.maxDuration;
+    draw_set_color( weaponDurationColor );
+    if ( hudFlashOn &amp;&amp; tDurationPercent &lt;= weaponDurationAlertPercent ) {
+        draw_set_color( hudFlashColor );
+    }
+    draw_set_alpha( 1 );
+    drawArc( weaponDurationRange * tDurationPercent, arcRes, radius, weaponDurationStartAngle, x, y );
+
+}
+
+//---------------------------------------------------
+// Player image and tracers
+//---------------------------------------------------
+
+draw_self();
+
+draw_set_color( c_white );
+draw_set_alpha( 1 );
+
+draw_line( x, y, x + lengthdir_x( 128, aimDir ), y + lengthdir_y( 128, aimDir ) );
+
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -282,12 +422,7 @@ else {
             <kind>1</kind>
             <string>///Draw
 
-draw_self();
-
-draw_set_color( c_white );
-draw_set_alpha( 1 );
-
-draw_line( x, y, x + lengthdir_x( 128, aimDir ), y + lengthdir_y( 128, aimDir ) );
+event_user( 0 );
 
 </string>
           </argument>

@@ -69,6 +69,8 @@
       </sounds>
       <sounds name="PulseDriver">
         <sound>sound\pulseDriveShot_sd</sound>
+        <sound>sound\pulseHit_sd</sound>
+        <sound>sound\pulseShatter_sd</sound>
       </sounds>
     </sounds>
   </sounds>
@@ -93,6 +95,7 @@
     </sprites>
     <sprite>sprites\sprite13</sprite>
     <sprite>sprites\sprite15</sprite>
+    <sprite>sprites\playerHUDRing_spr</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -105,6 +108,7 @@
       <script>scripts\particleDef_enemyBody.gml</script>
       <scripts name="Weapons">
         <script>scripts\particleInit_bigBurst.gml</script>
+        <script>scripts\particleDef_pickups.gml</script>
         <script>scripts\particleDef_gun.gml</script>
         <script>scripts\particleDef_pulseDriver.gml</script>
         <script>scripts\particleDef_fissureBomb.gml</script>
@@ -142,8 +146,13 @@
     </scripts>
     <scripts name="Weapons">
       <script>scripts\weaponDoDamage.gml</script>
+      <script>scripts\weaponDoDamageRaw.gml</script>
       <script>scripts\weaponCreateProjectile.gml</script>
       <script>scripts\weaponCheckForwardLineColl.gml</script>
+      <script>scripts\weaponEquip.gml</script>
+    </scripts>
+    <scripts name="Drawing">
+      <script>scripts\drawArc.gml</script>
     </scripts>
     <script>scripts\globalInit.gml</script>
     <script>scripts\playSound.gml</script>
@@ -226,6 +235,7 @@
       <objects name="Specials">
         <object>objects\weapon_fissureBomb</object>
       </objects>
+      <object>objects\weaponPickup</object>
     </objects>
     <objects name="Enemy">
       <object>objects\enemyPar</object>

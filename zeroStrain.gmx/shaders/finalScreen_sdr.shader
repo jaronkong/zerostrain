@@ -27,6 +27,7 @@ void main()
 
     vec4 colour = texture2D(gm_BaseTexture, v_vTexcoord);
     
+    
     float half_y = v_vTexcoord.y * resolution.y * 0.5;
     float delta = floor(half_y) - half_y;
     if (delta * delta < 0.1) { colour.rgb = colour.rgb*vec3(0.9, 0.9, 0.9); }
@@ -35,6 +36,7 @@ void main()
     float deltax = floor(half_x) - half_x;
     if (deltax * deltax < 0.1) { colour.rgb = colour.rgb*vec3(0.9, 0.9, 0.9); }
     //if (deltax * deltax < 0.08) { colour.rgb = colour.rgb * colour.rgb; }
+    
     
     gl_FragColor = colour;
 }

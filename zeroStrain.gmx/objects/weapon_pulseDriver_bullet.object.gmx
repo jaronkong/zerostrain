@@ -112,10 +112,43 @@ part_emitter_burst( system1, emitter1, getParticle( "pulseShotLineTail" ), 2 *t 
             <kind>1</kind>
             <string>///Check collision
 
-if ( weaponCheckForwardLineColl( id ) != noone ) {
+var tHitObj = weaponCheckForwardLineColl( id );
+if ( tHitObj != noone ) {
+    var tTargetDir = point_direction( x, y, tHitObj.x, tHitObj.y );
+    var tTriggerBurst = false;
+    
+    with ( tHitObj ) {
+        pulseDriverStacks ++;
+        if ( pulseDriverStacks &gt;= 3 ) {
+            tTriggerBurst = true;
+        }
+    }
+    if ( tTriggerBurst ) {
+        with ( ownerController ) {
+            
+            playSound( pulseShatter_sd, 1, false );
+            part_type_direction(getParticle( "pulseShotHitCore" ), tTargetDir,tTargetDir, 0 *t,0 *t);
+            part_type_direction(getParticle( "pulseShotHitSplash" ), 0 ,359, 0 *t,0 *t);
+            repeat( 50 ) {
+                bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotVaporize" ) );
+                bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotHitSplash" ) );
+                bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotHitCore" ) );
+            }
+            weaponDoDamageRaw( tHitObj, burstDamage );
+        }
+    }
+    
+    part_type_direction(getParticle( "pulseShotHitCore" ), tTargetDir + 180 - 10,tTargetDir + 180 + 10, 0 *t,0 *t);
+    part_type_direction(getParticle( "pulseShotHitSplash" ), tTargetDir + 180 - 50,tTargetDir + 180 + 50, 0 *t,0 *t);
+
+    part_emitter_burst( system1, emitter1, getParticle( "pulseShotHitCore" ), 15 *t );
+    part_emitter_burst( system1, emitter1, getParticle( "pulseShotHitSplash" ), 50 *t );
+    
+    audioSetPitchRand( pulseHit_sd );
+    playSound( pulseHit_sd, 1, false );
+    
     event_user( WEAPON_PROJ_EV.HIT );
 }
-
 
 </string>
           </argument>

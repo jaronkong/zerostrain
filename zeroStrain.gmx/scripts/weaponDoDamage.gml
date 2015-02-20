@@ -14,4 +14,3 @@ with ( aTargetID ) {
     selfHealth -= tDamage;
 }
 
-

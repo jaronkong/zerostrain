@@ -41,6 +41,10 @@ enum ENEMY_EV {
     NUM_EV
 };
 
+//Specifics
+pulseDriverStacks = 0;
+
+
 </string>
           </argument>
         </arguments>
