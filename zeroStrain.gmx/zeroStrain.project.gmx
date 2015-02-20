@@ -96,6 +96,7 @@
     <sprite>sprites\sprite13</sprite>
     <sprite>sprites\sprite15</sprite>
     <sprite>sprites\playerHUDRing_spr</sprite>
+    <sprite>sprites\weapIcon_pulse_spr</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
