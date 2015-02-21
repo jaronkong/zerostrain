@@ -160,6 +160,7 @@
     <scripts name="Genetics">
       <script>scripts\geneGetData.gml</script>
       <script>scripts\geneGenerateRandom.gml</script>
+      <script>scripts\geneComputeEffects.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
