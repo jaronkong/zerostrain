@@ -12,7 +12,7 @@ var tDataDef = tDataObj.geneDefault;
 var tDataOff = tDataObj.geneOffset;
 
 var tResult = ds_map_create( );
-for ( var i = 0; i < ds_grid_height( tData.data ); ++i ) {
+for ( var i = 0; i < ds_grid_height( tData ); ++i ) {
     var tTag = ds_grid_get( tData, tDataTag, i );
     var tOff = ds_grid_get( tData, tDataDef, i );
     ds_map_add( tResult, tTag, tOff );

@@ -97,7 +97,7 @@ while ( !ds_queue_empty( tQueue ) ) {
     var tCount = ini_read_real( tSection, "count", 0 );
     for ( var i = 0; i &lt; tCount; ++i ) {
         var tTag = ini_read_string( tSection, string( i ), "" );
-        if ( ini_read_real( tSection, "group", false ) ) {
+        if ( ini_read_real( tTag, "group", false ) ) {
             //We have to go deeper
             ds_queue_enqueue( tQueue, tTag );
         } else {
@@ -115,7 +115,7 @@ while ( !ds_queue_empty( tQueue ) ) {
             var tIndex = ds_grid_height( data );
             ds_grid_resize( data, geneSize, ( tIndex + 1 ) );
             ds_grid_set( data, geneTag, tIndex, tTag );
-            ds_grid_set( data, geneDef, tIndex, tDef );
+            ds_grid_set( data, geneDefault, tIndex, tDef );
             ds_grid_set( data, geneOffset, tIndex, tOffsets );
         }
     }
