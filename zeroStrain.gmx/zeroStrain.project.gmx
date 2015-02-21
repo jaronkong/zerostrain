@@ -232,6 +232,7 @@
       <objects name="PulseDriver">
         <object>objects\weapon_pulseDriver_con</object>
         <object>objects\weapon_pulseDriver_bullet</object>
+        <object>objects\pulseDriverStackIcon</object>
       </objects>
       <objects name="Specials">
         <object>objects\weapon_fissureBomb</object>

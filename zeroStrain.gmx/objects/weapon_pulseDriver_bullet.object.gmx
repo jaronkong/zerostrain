@@ -118,9 +118,23 @@ if ( tHitObj != noone ) {
     var tTriggerBurst = false;
     
     with ( tHitObj ) {
-        pulseDriverStacks ++;
-        if ( pulseDriverStacks &gt;= 3 ) {
-            tTriggerBurst = true;
+        if ( !instance_exists(pulseDriverAttachedIcon) ) {
+            pulseDriverAttachedIcon = instance_create( 0, 0, pulseDriverStackIcon );
+            with ( pulseDriverAttachedIcon ) {
+                attachTarget = other.id;
+                event_user( 1 );
+            }
+        }
+        else {
+            with ( pulseDriverAttachedIcon ) {
+                if ( targetBaseAlpha &gt; 0 ) {
+                    event_user( 1 );
+                    if ( currentStacks &gt;= 3 ) {
+                        event_user( 2 );
+                        tTriggerBurst = true;
+                    }
+                }
+            }
         }
     }
     if ( tTriggerBurst ) {

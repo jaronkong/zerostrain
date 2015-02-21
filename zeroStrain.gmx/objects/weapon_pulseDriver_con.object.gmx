@@ -41,10 +41,10 @@
             <kind>1</kind>
             <string>///Setup
 
-burstDamage = 2;
+burstDamage = 5;
 
 //Remember to set the particle def script in the step
-fireRate = room_speed / 2;
+fireRate = room_speed / 4;
 projectileSpeed = 20;
 projectileLife = 120;
 projectileToShoot = weapon_pulseDriver_bullet;
