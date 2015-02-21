@@ -31,7 +31,6 @@ geneSize = 0;
 geneTag = geneSize++;
 geneDefault = geneSize++;
 geneOffset = geneSize++;
-geneExtra = geneSize++;
 
 file = "player";
 data = ds_grid_create( geneSize, 0 );
@@ -60,7 +59,7 @@ data = ds_grid_create( geneSize, 0 );
             <string>///Destroy the grid
 
 for ( var i = 0; i &lt; ds_grid_height( data ); ++i ) {
-    ds_map_destroy( ds_grid_get( data, geneExtra, i ) );
+    ds_map_destroy( ds_grid_get( data, geneOffset, i ) );
 }
 
 ds_grid_destroy( data );
@@ -105,19 +104,19 @@ while ( !ds_queue_empty( tQueue ) ) {
             //Load in a potential segment
             var tDef = ini_read_real( tTag, "default", 1 );
             var tOff = ini_read_real( tTag, "offset", 1 );
+            var tOffsets = ds_map_create( );
+            ds_map_add( tOffsets, tTag, tOff );
             var tExtraCount = ini_read_real( tTag, "count", 0 );
-            var tExtra = ds_map_create( );
             for ( var j = 0; j &lt; tExtraCount; ++j ) {
                 var tExtraTag = ini_read_string( tTag, "tag"+string(j), "" );
                 var tExtraOff = ini_read_real( tTag, "off"+string(j), 0 );
-                ds_map_add( tExtra, tExtraTag, tExtraOff );
+                ds_map_add( tOffsets, tExtraTag, tExtraOff );
             }
             var tIndex = ds_grid_height( data );
             ds_grid_resize( data, geneSize, ( tIndex + 1 ) );
             ds_grid_set( data, geneTag, tIndex, tTag );
             ds_grid_set( data, geneDef, tIndex, tDef );
-            ds_grid_set( data, geneOff, tIndex, tOff );
-            ds_grid_set( data, geneExtra, tIndex, tExtra );
+            ds_grid_set( data, geneOffset, tIndex, tOffsets );
         }
     }
 }
