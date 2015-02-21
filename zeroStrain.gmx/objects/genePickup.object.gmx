@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -29,6 +29,9 @@
 
 length = 128;
 genome = geneGenerateRandom( "player", length );
+
+//TODO: REMOVE DEBUG STUFF
+effects = geneComputeEffects( "player", genome, length );
 </string>
           </argument>
         </arguments>
