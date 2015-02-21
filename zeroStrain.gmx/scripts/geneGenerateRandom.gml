@@ -1,6 +1,6 @@
 ///geneGenerateRandom( label, length )
 
-var tMax = ( ds_grid_height( geneGetData( argument0 ) ) - 1 );
+var tMax = ( ds_grid_height( geneGetData( argument0 ).data ) - 1 );
 var tResult = false;
 
 for ( var i = ( argument1 - 1 ); i >= 0; --i ) {
