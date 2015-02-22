@@ -246,8 +246,8 @@
     </objects>
     <objects name="Genetics">
       <object>objects\genomeData</object>
-      <object>objects\genePickup</object>
       <object>objects\dnaRender</object>
+      <object>objects\genePickup</object>
     </objects>
   </objects>
   <rooms name="rooms">
