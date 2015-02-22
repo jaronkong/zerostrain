@@ -6,21 +6,21 @@ var aGene = argument1;
 var aLength = argument2;
 
 var tDataObj = geneGetData( aLabel );
-var tData = tDataObj.data;
-var tDataTag = tDataObj.geneTag;
-var tDataDef = tDataObj.geneDefault;
-var tDataOff = tDataObj.geneOffset;
+var tGeneData = tDataObj.geneData;
+var tGeneTag = tDataObj.geneTag;
+var tGeneDef = tDataObj.geneDefault;
+var tAlleleData = tDataObj.alleleData;
+var tAlleleValues = tDataObj.alleleValues;
 
 var tResult = ds_map_create( );
-for ( var i = 0; i < ds_grid_height( tData ); ++i ) {
-    var tTag = ds_grid_get( tData, tDataTag, i );
-    var tOff = ds_grid_get( tData, tDataDef, i );
+for ( var i = 0; i < ds_grid_height( tGeneData ); ++i ) {
+    var tTag = ds_grid_get( tGeneData, tGeneTag, i );
+    var tOff = ds_grid_get( tGeneData, tGeneDef, i );
     ds_map_add( tResult, tTag, tOff );
 }
 
 for ( var i = 0; i < aLength; ++i ) {
-    var tTag = ds_grid_get( tData, tDataTag, aGene[i] );
-    var tOff = ds_grid_get( tData, tDataOff, aGene[i] );
+    var tOff = ds_grid_get( tAlleleData, tAlleleValues, aGene[i] );
     var tOffTag = ds_map_find_first( tOff );
     repeat ( ds_map_size( tOff ) ) {
         var tOffVal = ds_map_find_value( tOff, tOffTag );

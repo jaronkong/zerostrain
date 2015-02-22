@@ -25,15 +25,63 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Define data to load
+            <string>///Define data set
+
+file = "player";
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Define gene data to load
 
 geneSize = 0;
 geneTag = geneSize++;
 geneDefault = geneSize++;
-geneOffset = geneSize++;
 
-file = "player";
-data = ds_grid_create( geneSize, 0 );
+geneData = ds_grid_create( geneSize, 0 );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Define allele data to load
+
+alleleSize = 0;
+alleleTag = alleleSize++;
+alleleValues = alleleSize++;
+
+alleleData = ds_grid_create( alleleSize, 0 );
 </string>
           </argument>
         </arguments>
@@ -56,13 +104,14 @@ data = ds_grid_create( geneSize, 0 );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Destroy the grid
+            <string>///Destroy the grids
 
-for ( var i = 0; i &lt; ds_grid_height( data ); ++i ) {
-    ds_map_destroy( ds_grid_get( data, geneOffset, i ) );
+ds_grid_destroy( geneData );
+
+for ( var i = 0; i &lt; ds_grid_height( alleleData ); ++i ) {
+    ds_map_destroy( ds_grid_get( alleleData, alleleValues, i ) );
 }
-
-ds_grid_destroy( data );
+ds_grid_destroy( alleleData );
 </string>
           </argument>
         </arguments>
@@ -102,21 +151,29 @@ while ( !ds_queue_empty( tQueue ) ) {
             ds_queue_enqueue( tQueue, tTag );
         } else {
             //Load in a potential segment
-            var tDef = ini_read_real( tTag, "default", 1 );
-            var tOff = ini_read_real( tTag, "offset", 1 );
-            var tOffsets = ds_map_create( );
-            ds_map_add( tOffsets, tTag, tOff );
-            var tExtraCount = ini_read_real( tTag, "count", 0 );
-            for ( var j = 0; j &lt; tExtraCount; ++j ) {
-                var tExtraTag = ini_read_string( tTag, "tag"+string(j), "" );
-                var tExtraOff = ini_read_real( tTag, "off"+string(j), 0 );
-                ds_map_add( tOffsets, tExtraTag, tExtraOff );
+            {
+                //Load in gene
+                var tDef = ini_read_real( tTag, "default", 1 );
+                var tIndex = ds_grid_height( geneData );
+                ds_grid_resize( geneData, geneSize, ( tIndex + 1 ) );
+                ds_grid_set( geneData, geneTag, tIndex, tTag );
+                ds_grid_set( geneData, geneDefault, tIndex, tDef );
             }
-            var tIndex = ds_grid_height( data );
-            ds_grid_resize( data, geneSize, ( tIndex + 1 ) );
-            ds_grid_set( data, geneTag, tIndex, tTag );
-            ds_grid_set( data, geneDefault, tIndex, tDef );
-            ds_grid_set( data, geneOffset, tIndex, tOffsets );
+            {
+                //Load in allele
+                var tOffsets = ds_map_create( );
+                ds_map_add( tOffsets, tTag, ini_read_real( tTag, "offset", 1 ) );
+                var tExtraCount = ini_read_real( tTag, "count", 0 );
+                for ( var j = 0; j &lt; tExtraCount; ++j ) {
+                    var tExtraTag = ini_read_string( tTag, "tag"+string(j), "" );
+                    var tExtraOff = ini_read_real( tTag, "off"+string(j), 0 );
+                    ds_map_add( tOffsets, tExtraTag, tExtraOff );
+                }
+                var tIndex = ds_grid_height( alleleData );
+                ds_grid_resize( alleleData, alleleSize, ( tIndex + 1 ) );
+                ds_grid_set( alleleData, alleleTag, tIndex, tTag );
+                ds_grid_set( alleleData, alleleValues, tIndex, tOffsets );
+            }
         }
     }
 }
