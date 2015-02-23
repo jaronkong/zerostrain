@@ -47,6 +47,7 @@ count = 3
 [plr_wep_gatling_chance]
 default = 0
 offset = 2
+hidden = 1
 
 [plr_wep_gatling_dmg]
 default = 1
@@ -77,6 +78,7 @@ count = 3
 [plr_wep_spreader_chance]
 default = 0
 offset = 2
+hidden = 1
 
 [plr_wep_spreader_dmg]
 default = 1
@@ -107,6 +109,7 @@ count = 3
 [plr_wep_javelin_chance]
 default = 0
 offset = 2
+hidden = 1
 
 [plr_wep_javelin_dmg]
 default = 1

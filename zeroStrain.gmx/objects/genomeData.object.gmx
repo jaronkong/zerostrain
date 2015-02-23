@@ -53,6 +53,7 @@ file = "player";
 enum Gene {
     Tag,
     Default,
+    Hidden,
     Size
 }
 
@@ -207,10 +208,12 @@ while ( !ds_queue_empty( tQueue ) ) {
             {
                 //Load in gene
                 var tDef = ini_read_real( tTag, "default", 1 );
+                var tHide = ini_read_real( tTag, "hidden", false );
                 var tIndex = ds_grid_height( geneData );
                 ds_grid_resize( geneData, Gene.Size, ( tIndex + 1 ) );
                 ds_grid_set( geneData, Gene.Tag, tIndex, tTag );
                 ds_grid_set( geneData, Gene.Default, tIndex, tDef );
+                ds_grid_set( geneData, Gene.Hidden, tIndex, tHide );
                 //Add it to the current group
                 if ( tGroup &gt;= 0 ) {
                     var tGroupList = ds_grid_get( groupData, GeneGroup.Items, tGroup );
