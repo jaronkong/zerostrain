@@ -121,6 +121,8 @@ var tHitObj = weaponCheckForwardLineColl( id );
 if ( tHitObj != noone ) {
     var tTargetDir = point_direction( x, y, tHitObj.x, tHitObj.y );
     
+    forceApplyToEnemy( tHitObj, tTargetDir, hitForce );
+    
     part_type_direction(getParticle( "gunHitSparks" ), tTargetDir + 180 - 30,tTargetDir + 180 + 30, 0 *t,0 *t);
     part_type_direction(getParticle( "gunHitCore" ), tTargetDir + 180 - 10,tTargetDir + 180 + 10, 0 *t,0 *t);
 
@@ -129,6 +131,7 @@ if ( tHitObj != noone ) {
     
     audioSetPitchRand( gunHit_sd );
     playSound( gunHit_sd, 1, false );
+    shakeScreen( 4 );
     
     event_user( WEAPON_PROJ_EV.HIT );
 }

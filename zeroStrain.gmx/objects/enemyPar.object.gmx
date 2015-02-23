@@ -77,6 +77,30 @@ pulseDriverAttachedIcon = noone;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Movement
+
+baseFriction = 0.1;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Effects
 
 system1 = global.enemySpawnSystem;
@@ -160,11 +184,70 @@ if ( selfHealth &lt;= 0 ) {
             <string>///Health
 
 if ( selfHealth &lt; damageHealth ) {
-    damageHealth -= damageDecayRate;
+    damageHealth -= damageDecayRate * global.timeTickFactor;
     if ( damageHealth &lt; selfHealth ) {
         damageHealth = selfHealth;
     }
 }
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Stay in bounds
+
+var tCenteringForce = 1;
+if ( x &lt; 0 ) {
+    motion_add( 0, tCenteringForce );
+}
+if ( x &gt; room_width ) {
+    motion_add( 180, tCenteringForce );
+}
+if ( y &lt; 0 ) {
+    motion_add( 270, tCenteringForce );
+}
+if ( y &gt; room_height ) {
+    motion_add( 90, tCenteringForce );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Movement Restrictions
+
+friction = baseFriction * global.timeTickFactor;
 
 </string>
           </argument>
@@ -190,6 +273,7 @@ if ( selfHealth &lt; damageHealth ) {
             <kind>1</kind>
             <string>///Destroy Effects
 
+particleDef_enemyBody();
 part_type_color3(getParticle( "enemyBodyBurst1" ), make_color_rgb( 255, 50, 50 ), color1, color2);
 part_type_color3(getParticle( "enemyBodyBurst2" ), make_color_rgb( 255, 50, 50 ), color1, color2);
 
@@ -226,6 +310,7 @@ repeat( 8 ) {
             <kind>1</kind>
             <string>///Spawn
 
+particleDef_enemyBody();
 part_type_color3(getParticle( "enemyBodyForm1" ), make_color_rgb( 255, 50, 50 ), color1, color2);
 part_type_color3(getParticle( "enemyBodyForm2" ), make_color_rgb( 255, 50, 50 ), color1, color2);
 

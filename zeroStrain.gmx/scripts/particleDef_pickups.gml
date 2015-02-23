@@ -30,7 +30,7 @@ if not ( ds_map_exists( global.particleMap, tPartName ) ) {
 }
 tPartType = getParticle( tPartName );
 part_type_sprite(tPartType, particle_flare_spr, 0, 0, 0 );
-part_type_size(tPartType,0.2,0.7,-0.004 *t,0 *t);
+part_type_size(tPartType,0.2,0.9,-0.004 *t,0 *t);
 part_type_scale(tPartType,2,1);
 part_type_color3(tPartType,16711680,255,make_color_rgb( 255, 200, 50 ));
 part_type_alpha3(tPartType,0,1,0);
@@ -47,7 +47,7 @@ if not ( ds_map_exists( global.particleMap, tPartName ) ) {
 }
 tPartType = getParticle( tPartName );
 part_type_sprite(tPartType, particle_flare_spr, 0, 0, 0 );
-part_type_size(tPartType,0.2,0.7,-0.004 *t,0 *t);
+part_type_size(tPartType,0.2,0.9,-0.004 *t,0 *t);
 part_type_scale(tPartType,2,1);
 part_type_color3(tPartType,16711680,255,make_color_rgb( 255, 200, 50 ));
 part_type_alpha3(tPartType,0,1,0);

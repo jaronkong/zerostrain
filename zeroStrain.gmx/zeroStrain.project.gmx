@@ -72,6 +72,9 @@
         <sound>sound\pulseHit_sd</sound>
         <sound>sound\pulseShatter_sd</sound>
       </sounds>
+      <sounds name="Bursts">
+        <sound>sound\energyBurst_sd</sound>
+      </sounds>
     </sounds>
   </sounds>
   <sprites name="sprites">
@@ -144,6 +147,7 @@
       </scripts>
       <script>scripts\circleCrackCreate.gml</script>
       <script>scripts\audioSetPitchRand.gml</script>
+      <script>scripts\shakeScreen.gml</script>
     </scripts>
     <scripts name="Weapons">
       <script>scripts\weaponDoDamage.gml</script>
@@ -151,10 +155,14 @@
       <script>scripts\weaponCreateProjectile.gml</script>
       <script>scripts\weaponCheckForwardLineColl.gml</script>
       <script>scripts\weaponEquip.gml</script>
+      <script>scripts\weaponUseInstant.gml</script>
     </scripts>
     <scripts name="Drawing">
       <script>scripts\drawArc.gml</script>
       <script>scripts\drawTextSize.gml</script>
+    </scripts>
+    <scripts name="Physics">
+      <script>scripts\forceApplyToEnemy.gml</script>
     </scripts>
     <script>scripts\globalInit.gml</script>
     <script>scripts\playSound.gml</script>
@@ -186,6 +194,7 @@
       <object>objects\stepController</object>
       <object>objects\spawnCon</object>
       <object>objects\enemyInfoDrawer</object>
+      <object>objects\particleTickController</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">
@@ -227,11 +236,15 @@
         <object>objects\postShader</object>
       </objects>
       <object>objects\testEmitter</object>
+      <object>objects\cameraShake</object>
     </objects>
     <objects name="Weapons">
       <object>objects\weaponControllerPar</object>
       <object>objects\weaponController_projectiles</object>
       <object>objects\weaponPar_projectile</object>
+      <objects name="Pickups">
+        <object>objects\pickup_pulseDriver</object>
+      </objects>
       <objects name="Gun">
         <object>objects\weapon_gun_con</object>
         <object>objects\weapon_gun_bullet</object>

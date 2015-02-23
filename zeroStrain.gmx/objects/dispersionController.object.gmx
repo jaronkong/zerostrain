@@ -35,7 +35,7 @@ prepSurface = -1;
 stageSurface = -1;
 
 distortMap = distortMap_spr;
-decayFactor = 0.7; //0.9
+decayFactor = 0.8; //0.9
 
 drawQueue = ds_queue_create();
 

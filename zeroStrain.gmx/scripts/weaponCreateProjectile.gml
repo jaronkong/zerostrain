@@ -11,6 +11,7 @@ if ( instance_exists( aCon ) ) {
     tNewProj = instance_create( aX, aY, aProj );
     with ( tNewProj ) {
         lifespan = aCon.projectileLife;
+        hitForce = aCon.hitForce;
         ownerController = aCon.id;
         system1 = aCon.system1;
         emitter1 = part_emitter_create( system1 );

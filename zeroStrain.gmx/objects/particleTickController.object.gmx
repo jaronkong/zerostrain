@@ -25,11 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Other controllers
+            <string>///Info
 
-instance_create( 0, 0, spawnCon );
-instance_create( 0, 0, enemyInfoDrawer );
-instance_create( 0, 0, particleTickController );
+//Updates tick rates for global particles that don't belong to a particular object.
+
 </string>
           </argument>
         </arguments>
@@ -52,51 +51,9 @@ instance_create( 0, 0, particleTickController );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Move view
+            <string>///Update particle definitions
 
-var spd = 2.5 * global.timeTickFactor;
-if ( keyboard_check( vk_right ) ) {
-    view_xview += spd;
-}
-if ( keyboard_check( vk_left ) ) {
-    view_xview -= spd;
-}
-if ( keyboard_check( vk_up ) ) {
-    view_yview -= spd;
-}
-if ( keyboard_check( vk_down ) ) {
-    view_yview += spd;
-}
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Effects
-
-if ( keyboard_check( ord("Q") ) ) {
-    global.timeTickFactor = 0.5;
-}
-
-global.timeTickFactor = lerp( global.timeTickFactor, 1, 0.05 );
-
-particleInit_bigBurst();
 
 </string>
           </argument>

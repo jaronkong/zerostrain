@@ -48,6 +48,13 @@ fireRate = room_speed / 4;
 projectileSpeed = 20;
 projectileLife = 120;
 projectileToShoot = weapon_pulseDriver_bullet;
+hitForce = 2;
+
+pickupColor[ 0 ] = make_color_rgb( 0, 150, 255 );
+pickupColor[ 1 ] = make_color_rgb( 150, 100, 155 );
+
+pickupColor[ 2 ] = make_color_rgb( 200, 200, 255 );
+pickupColor[ 3 ] = make_color_rgb( 10, 10, 255 );
 
 bloom_attachParticleSystem( system1, BLOOM_DEPTH );
 distortionGlow_attachParticleSystem( system1 );
@@ -150,7 +157,7 @@ if ( instance_exists( owner ) ) {
     with ( weaponCreateProjectile( tShootX, 
                             tShootY, 
                             projectileToShoot, id ) ) {
-        speed = other.projectileSpeed;
+        maxSpeed = other.projectileSpeed;
         direction = tShootDir;
     }
 

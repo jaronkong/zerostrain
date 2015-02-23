@@ -1,4 +1,4 @@
-//weaponDoDamage( target ID, weaponController ID );
+///weaponDoDamage( target ID, weaponController ID );
 
 var aTargetID = argument0;
 var aWeaponConID = argument1;
@@ -13,4 +13,3 @@ with ( aWeaponConID ) {
 with ( aTargetID ) {
     selfHealth -= tDamage;
 }
-

@@ -41,12 +41,20 @@
             <kind>1</kind>
             <string>///Setup
 
+isInstant = true;
+
 fireRate = room_speed * 2;
-radius = 250;
+duration = room_speed * 1;
+damage = 500;
+hitForce = 5;
+
+radius = 300;
 
 burstX = 200;
 burstY = 200;
 
+currentAlpha = 1;
+alphaTween = 0.025;
 </string>
           </argument>
         </arguments>
@@ -148,7 +156,76 @@ part_system_destroy( system1 );
             <kind>1</kind>
             <string>///Update
 
+currentAlpha = lerp( currentAlpha, 0, alphaTween );
 particleDef_fissureBomb();
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Lock firing
+
+fireTimer = fireRate;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Detonate on equip
+
+if ( instance_exists( owner ) ) {
+    burstX = owner.x;
+    burstY = owner.y;
+    event_user( 0 );
+}
 
 </string>
           </argument>
@@ -193,6 +270,9 @@ var ti = 1/t;
 var tRandAngle = 0;
 var tRandDist = 0;
 
+shakeScreen( 32 );
+playSound( energyBurst_sd, 1, false );
+
 circleCrackCreate( burstX, burstY, radius*2, make_color_rgb(100, 150, 200), 1.5 );
 createLightBurstAtPosition( burstX, burstY, 40, radius * 1.5, c_white, lightDistortionRay );
 
@@ -221,6 +301,37 @@ repeat ( 200 ) {
                        
 }
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Deal damage
+
+with ( enemyPar ) {
+    if ( point_distance( x, y, other.burstX, other.burstY ) &lt; other.radius ) {
+        weaponDoDamage( id, other.id );
+        forceApplyToEnemy( id,
+                            point_direction( other.burstX, other.burstY, x, y ),
+                            other.hitForce );
+    }
+}
 
 </string>
           </argument>
@@ -258,9 +369,9 @@ repeat ( 200 ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///DEBUG
+            <string>///show radius
 draw_set_color( c_lime );
-draw_set_alpha( 1 );
+draw_set_alpha( currentAlpha );
 
 draw_circle( burstX, burstY, radius, true );
 

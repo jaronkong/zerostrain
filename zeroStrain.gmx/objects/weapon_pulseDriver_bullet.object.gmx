@@ -117,6 +117,8 @@ if ( tHitObj != noone ) {
     var tTargetDir = point_direction( x, y, tHitObj.x, tHitObj.y );
     var tTriggerBurst = false;
     
+    forceApplyToEnemy( tHitObj, tTargetDir, hitForce );
+    
     with ( tHitObj ) {
         if ( !instance_exists(pulseDriverAttachedIcon) ) {
             pulseDriverAttachedIcon = instance_create( 0, 0, pulseDriverStackIcon );
@@ -149,6 +151,7 @@ if ( tHitObj != noone ) {
                 bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotHitCore" ) );
             }
             weaponDoDamageRaw( tHitObj, burstDamage );
+            shakeScreen( 16 );
         }
     }
     
@@ -160,6 +163,7 @@ if ( tHitObj != noone ) {
     
     audioSetPitchRand( pulseHit_sd );
     playSound( pulseHit_sd, 1, false );
+    shakeScreen( 8 );
     
     event_user( WEAPON_PROJ_EV.HIT );
 }

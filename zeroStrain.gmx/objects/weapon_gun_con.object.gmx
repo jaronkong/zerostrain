@@ -48,7 +48,7 @@ projectileLife = 240;
 projectileToShoot = weapon_gun_bullet;
 
 bulletHalfSpread = 16;
-
+hitForce = 0.5;
 
 bloom_attachParticleSystem( system1, BLOOM_DEPTH );
 //distortionGlow_attachParticleSystem( system1 );
@@ -151,14 +151,14 @@ if ( instance_exists( owner ) ) {
     with ( weaponCreateProjectile( tShootX + lengthdir_x( bulletHalfSpread, aimDir + 90 ), 
                             tShootY + lengthdir_y( bulletHalfSpread, aimDir + 90 ), 
                             projectileToShoot, id ) ) {
-        speed = other.projectileSpeed;
+        maxSpeed = other.projectileSpeed;
         direction = tShootDir;
     }
     
     with ( weaponCreateProjectile( tShootX + lengthdir_x( bulletHalfSpread, aimDir - 90 ), 
                             tShootY + lengthdir_y( bulletHalfSpread, aimDir - 90 ), 
                             projectileToShoot, id ) ) {
-        speed = other.projectileSpeed;
+        maxSpeed = other.projectileSpeed;
         direction = tShootDir;
     }
 
