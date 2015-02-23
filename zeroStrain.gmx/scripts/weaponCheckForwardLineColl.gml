@@ -35,4 +35,3 @@ for ( var i = 0; i < tSpeed; i += STEP_RES ) {
 }
 
 return noone;
-

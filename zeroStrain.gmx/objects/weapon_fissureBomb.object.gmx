@@ -40,12 +40,12 @@
           <argument>
             <kind>1</kind>
             <string>///Setup
-weaponType = WEAPON_TYPE.ENERGY;
+weaponType = WEAPON_TYPE.BLUE;
 isInstant = true;
 
 fireRate = room_speed * 2;
 duration = room_speed * 1;
-damage = 500;
+damage = 1000;
 hitForce = 5;
 
 radius = 300;

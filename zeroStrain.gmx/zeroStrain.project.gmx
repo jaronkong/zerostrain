@@ -157,6 +157,7 @@
       <script>scripts\circleCrackCreate.gml</script>
       <script>scripts\audioSetPitchRand.gml</script>
       <script>scripts\shakeScreen.gml</script>
+      <script>scripts\damageFlyNumberCreate.gml</script>
     </scripts>
     <scripts name="Weapons">
       <script>scripts\weaponDoDamage.gml</script>
@@ -165,6 +166,9 @@
       <script>scripts\weaponCheckForwardLineColl.gml</script>
       <script>scripts\weaponEquip.gml</script>
       <script>scripts\weaponUseInstant.gml</script>
+      <script>scripts\weaponPlayEquipSound.gml</script>
+      <script>scripts\weaponTypeGetColor.gml</script>
+      <script>scripts\typeGetResolution.gml</script>
     </scripts>
     <scripts name="Drawing">
       <script>scripts\drawArc.gml</script>
@@ -181,7 +185,6 @@
       <script>scripts\geneComputeEffects.gml</script>
     </scripts>
     <script>scripts\drawSegmentHealthBar.gml</script>
-    <script>scripts\weaponPlayEquipSound.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\bloom_sdr.shader</shader>
@@ -247,6 +250,9 @@
       </objects>
       <object>objects\testEmitter</object>
       <object>objects\cameraShake</object>
+      <objects name="FlyNumbers">
+        <object>objects\damageFlyNumber</object>
+      </objects>
     </objects>
     <objects name="Weapons">
       <object>objects\weaponControllerPar</object>
@@ -274,6 +280,7 @@
     <objects name="Enemy">
       <object>objects\enemyPar</object>
       <object>objects\enemyBasic</object>
+      <object>objects\enemyBlue</object>
     </objects>
     <objects name="Genetics">
       <object>objects\genomeData</object>

@@ -46,6 +46,8 @@ healthBarVOffset = 100;
 
 bodyMapNum = BODY_MAPS.ENEMY1;
 
+bodyType = WEAPON_TYPE.RED;
+
 enum ENEMY_EV {
     CREATE,
     DESTROY,
