@@ -37,9 +37,12 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
         var tItemDef = ds_grid_get( tGene, Gene.Default, tItemIndex );
         var tItemHide = ds_grid_get( tGene, Gene.Hidden, tItemIndex );
         var tItemValue = ds_map_find_value( aEffects, tItemTag );
+        var tItemValStr = ( string( tItemValue * 100 - 100 ) + "%" );
+        if ( tItemValue < 1 ) tItemValStr = ( "-" + tItemValStr );
+        else tItemValStr = ( "+" + tItemValStr );
         if ( ( tItemValue != tItemDef ) && !tItemHide ) {
             tItems[GeneDescGene.Title, tItemCount] = tItemTag;
-            tItems[GeneDescGene.Value, tItemCount] = string( tItemValue );
+            tItems[GeneDescGene.Value, tItemCount] = tItemValStr;
             tItemCount += 1;
         }
     }

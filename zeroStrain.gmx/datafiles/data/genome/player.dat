@@ -16,11 +16,11 @@ count = 2
 
 [plr_stat_spd]
 default = 1
-offset = 0.1
+offset = 0.01
 
 [plr_stat_health]
 default = 1
-offset = 0.01
+offset = 0.001
 
 
 	[PLAYER WEAPONS]
@@ -51,14 +51,14 @@ hidden = 1
 
 [plr_wep_gatling_dmg]
 default = 1
-offset = 0.1
+offset = 0.01
 tag0 = plr_wep_gatling_chance
 off0 = 1
 count = 1
 
 [plr_wep_gatling_rate]
 default = 1
-offset = 0.1
+offset = 0.01
 tag0 = plr_wep_gatling_chance
 off0 = 1
 count = 1
@@ -82,14 +82,14 @@ hidden = 1
 
 [plr_wep_spreader_dmg]
 default = 1
-offset = 0.1
+offset = 0.01
 tag0 = plr_wep_spreader_chance
 off0 = 1
 count = 1
 
 [plr_wep_spreader_rate]
 default = 1
-offset = 0.1
+offset = 0.01
 tag0 = plr_wep_spreader_chance
 off0 = 1
 count = 1
@@ -113,14 +113,14 @@ hidden = 1
 
 [plr_wep_javelin_dmg]
 default = 1
-offset = 0.1
+offset = 0.01
 tag0 = plr_wep_javelin_chance
 off0 = 1
 count = 1
 
 [plr_wep_javelin_rate]
 default = 1
-offset = 0.1
+offset = 0.01
 tag0 = plr_wep_javelin_chance
 off0 = 1
 count = 1
