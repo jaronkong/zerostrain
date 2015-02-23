@@ -27,8 +27,11 @@
             <kind>1</kind>
             <string>///Spawn enemy
 
-instance_create( random( view_wview ), random( view_hview ), enemyBasic );
+choose( 
+instance_create( random( view_wview ), random( view_hview ), enemyBasic ), 
+instance_create( random( view_wview ), random( view_hview ), enemyBlue )
 
+);
 </string>
           </argument>
         </arguments>

@@ -3,26 +3,12 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-600</depth>
   <persistent>0</persistent>
-  <parentName>weaponController_projectiles</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -41,29 +27,35 @@
             <kind>1</kind>
             <string>///Setup
 
-weaponType = WEAPON_TYPE.GREEN;
+flyDist = 32;
+baseFlyDistance = 32;
+maxFlyDistance = 64;
 
-//Remember to set the particle def script in the step
-fireRate = room_speed / 10;
-projectileSpeed = 10;
-projectileLife = 240;
-projectileToShoot = weapon_gun_bullet;
+value = 0;
+damageType = -1;
+minValue = 100;
+maxValue = 1000;
+color = c_white;
+damageEffectiveness = 0;
 
-bulletHalfSpread = 16;
-hitForce = 0.5;
+text = "";
+font = main_ft;
+fontSize = 16;
+baseFontSize = 16;
+maxFontSize = 32;
 
-pickupColor[ 0 ] = make_color_rgb( 50, 255, 50 );
-pickupColor[ 1 ] = make_color_rgb( 150, 255, 155 );
+//Distance
+distanceFactor = 0;
+distanceTween = 0.2;
 
-pickupColor[ 2 ] = make_color_rgb( 200, 255, 200 );
-pickupColor[ 3 ] = make_color_rgb( 10, 255, 10 );
+//Alpha
+tweenFactor = 0;
+tweenPercent = 0.05;
+baseTweenPercent = 0.05
+minTweenPercent = 0.02;
 
-bloom_attachParticleSystem( system1, BLOOM_DEPTH );
-//distortionGlow_attachParticleSystem( system1 );
-//refraction_attachParticleSystem( system1 );
-dispersion_attachParticleSystem( system1 );
-
-part_system_automatic_draw( system1, true );
+isCrit = false;
+isWeak = false;
 
 </string>
           </argument>
@@ -73,20 +65,6 @@ part_system_automatic_draw( system1, true );
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -101,9 +79,14 @@ part_system_automatic_draw( system1, true );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Effect definition
+            <string>///Tween
 
-particleDef_gun();
+tweenFactor = lerp( tweenFactor, 1, tweenPercent );
+distanceFactor = lerp( distanceFactor, 1, distanceTween );
+
+if ( tweenFactor &gt;= 0.99 ) {
+    instance_destroy();
+}
 
 </string>
           </argument>
@@ -113,18 +96,56 @@ particleDef_gun();
     <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Create the fly number
+
+var tValuePercent = value / maxValue;
+tValuePercent = clamp( tValuePercent, 0, 1 );
+
+flyDist = baseFlyDistance + (maxFlyDistance - baseFlyDistance) * tValuePercent;
+fontSize = baseFontSize + (maxFontSize - baseFontSize) * tValuePercent;
+tweenPercent = baseTweenPercent - ( baseTweenPercent - minTweenPercent ) * tValuePercent;
+
+color = weaponTypeGetColor( damageType );
+
+if ( damageEffectiveness &gt; 0 ) {
+    isCrit = true;
+}
+else if ( damageEffectiveness &lt; 0 ) {
+    isWeak = true;
+}
+
+if ( isCrit ) {
+    text = string( value ) + "!";
+}
+else if ( isWeak ) {
+    text = string( value ) + "...";
+    color = c_white;
+}
+else {
+    text = string( value );
+}
+
+
+</string>
+          </argument>
+        </arguments>
       </action>
+    </event>
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -141,36 +162,23 @@ particleDef_gun();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Shoot
+            <string>///Draw
 
-var t = global.timeTickFactor;
+draw_set_color( color );
+draw_set_alpha( 1 - tweenFactor );
 
-if ( instance_exists( owner ) ) {
-    playSound( gunShot_sd, 1, false );
-    
-    shootOriginX = owner.x;
-    shootOriginY = owner.y;
-    var tShootDir = owner.aimDir;
-
-    var tShootX = shootOriginX + lengthdir_x( aimOffset, aimDir );
-    var tShootY = shootOriginY + lengthdir_y( aimOffset, aimDir );
-    
-    
-    with ( weaponCreateProjectile( tShootX + lengthdir_x( bulletHalfSpread, aimDir + 90 ), 
-                            tShootY + lengthdir_y( bulletHalfSpread, aimDir + 90 ), 
-                            projectileToShoot, id ) ) {
-        maxSpeed = other.projectileSpeed;
-        direction = tShootDir;
-    }
-    
-    with ( weaponCreateProjectile( tShootX + lengthdir_x( bulletHalfSpread, aimDir - 90 ), 
-                            tShootY + lengthdir_y( bulletHalfSpread, aimDir - 90 ), 
-                            projectileToShoot, id ) ) {
-        maxSpeed = other.projectileSpeed;
-        direction = tShootDir;
-    }
-
+if ( isWeak ) {
+    draw_set_alpha( (1-tweenFactor) * 0.5 );
 }
+
+draw_set_valign( fa_center );
+draw_set_halign( fa_center );
+
+var tX = x;
+var tY = y - flyDist*distanceFactor;
+
+drawTextSize( tX, tY, text, font, fontSize );
+
 </string>
           </argument>
         </arguments>

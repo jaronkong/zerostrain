@@ -11,5 +11,15 @@ with ( aWeaponConID ) {
 }
 
 with ( aTargetID ) {
+    var tEffective = typeGetResolution( aWeaponConID.weaponType, bodyType );
+    
+    if ( tEffective > 0 ) {
+        tDamage *= 2;
+    }
+    else if ( tEffective < 0 ) {
+        tDamage *= 0.5;
+    }
+
     selfHealth -= tDamage;
+    damageFlyNumberCreate( x, y, tDamage, aWeaponConID.weaponType, tEffective );
 }

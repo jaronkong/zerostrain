@@ -43,7 +43,7 @@ with ( enemyPar ) {
     drawSegmentHealthBar( x - healthBarWidth/2, y + healthBarVOffset,
                         x + healthBarWidth/2, y + healthBarVOffset + healthBarHeight,
                         selfHealth, damageHealth, selfHealthMax,
-                        c_yellow, c_red, c_dkgray,
+                        weaponTypeGetColor( bodyType ), c_yellow, c_dkgray,
                         true, true );
 
 }   
