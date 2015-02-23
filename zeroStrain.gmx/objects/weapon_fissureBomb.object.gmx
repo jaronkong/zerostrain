@@ -40,7 +40,7 @@
           <argument>
             <kind>1</kind>
             <string>///Setup
-
+weaponType = WEAPON_TYPE.ENERGY;
 isInstant = true;
 
 fireRate = room_speed * 2;
@@ -55,6 +55,9 @@ burstY = 200;
 
 currentAlpha = 1;
 alphaTween = 0.025;
+
+
+
 </string>
           </argument>
         </arguments>
@@ -90,6 +93,11 @@ distortionGlow_attachParticleSystem( system1 );
 refraction_attachParticleSystem( system1 );
 dispersion_attachParticleSystem( system1 );
 
+pickupColor[ 0 ] = make_color_rgb( 255, 255, 255 );
+pickupColor[ 1 ] = make_color_rgb( 150, 150, 255 );
+
+pickupColor[ 2 ] = make_color_rgb( 255, 255, 100 );
+pickupColor[ 3 ] = make_color_rgb( 50, 50, 255 );
 </string>
           </argument>
         </arguments>

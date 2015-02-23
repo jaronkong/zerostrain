@@ -41,6 +41,7 @@
             <kind>1</kind>
             <string>///Setup
 
+weaponType = WEAPON_TYPE.ENERGY;
 burstDamage = 1000;
 
 //Remember to set the particle def script in the step

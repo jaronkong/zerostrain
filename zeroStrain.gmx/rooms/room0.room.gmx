@@ -68,6 +68,14 @@
     <instance objName="pickup_pulseDriver" x="704" y="352" name="inst_9C7C9998" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="pickup_pulseDriver" x="800" y="608" name="inst_B8A1D2BD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="pickup_pulseDriver" x="896" y="608" name="inst_538580B9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="pickup_gun" x="704" y="768" name="inst_55BE749B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="pickup_gun" x="800" y="768" name="inst_D128D322" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="pickup_gun" x="896" y="768" name="inst_7C783FEC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="pickup_gun" x="992" y="768" name="inst_E6B624FB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="pickup_burst" x="384" y="448" name="inst_48A2CC2A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="pickup_burst" x="384" y="544" name="inst_4C5084D9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="pickup_burst" x="384" y="640" name="inst_A66A6BB8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="pickup_burst" x="384" y="736" name="inst_C53C8683" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

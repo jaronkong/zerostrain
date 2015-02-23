@@ -75,6 +75,11 @@
       <sounds name="Bursts">
         <sound>sound\energyBurst_sd</sound>
       </sounds>
+      <sounds name="Pickup">
+        <sound>sound\weapPickup_energy_sd</sound>
+        <sound>sound\weapPickup_explo_sd</sound>
+        <sound>sound\weapPickup_proj_sd</sound>
+      </sounds>
     </sounds>
   </sounds>
   <sprites name="sprites">
@@ -99,7 +104,11 @@
     <sprite>sprites\sprite13</sprite>
     <sprite>sprites\sprite15</sprite>
     <sprite>sprites\playerHUDRing_spr</sprite>
-    <sprite>sprites\weapIcon_pulse_spr</sprite>
+    <sprites name="Icons">
+      <sprite>sprites\weapIcon_pulse_spr</sprite>
+      <sprite>sprites\weapIcon_gun_spr</sprite>
+      <sprite>sprites\weapIcon_burst_spr</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -172,6 +181,7 @@
       <script>scripts\geneComputeEffects.gml</script>
     </scripts>
     <script>scripts\drawSegmentHealthBar.gml</script>
+    <script>scripts\weaponPlayEquipSound.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\bloom_sdr.shader</shader>
@@ -244,6 +254,8 @@
       <object>objects\weaponPar_projectile</object>
       <objects name="Pickups">
         <object>objects\pickup_pulseDriver</object>
+        <object>objects\pickup_gun</object>
+        <object>objects\pickup_burst</object>
       </objects>
       <objects name="Gun">
         <object>objects\weapon_gun_con</object>
