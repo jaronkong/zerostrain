@@ -138,6 +138,9 @@ alleleData = ds_grid_create( alleleSize, 0 );
 
 ds_grid_destroy( geneData );
 
+for ( var i = 0; i &lt; ds_grid_height( groupData ); ++i ) {
+    ds_list_destroy( ds_grid_get( groupData, GeneGroup.Items, i ) );
+}
 ds_grid_destroy( groupData );
 
 for ( var i = 0; i &lt; ds_grid_height( alleleData ); ++i ) {
@@ -181,12 +184,12 @@ while ( !ds_queue_empty( tQueue ) ) {
     if ( ini_key_exists( tSection, "title" ) ) {
         var tGroupTitle = ini_read_string( tSection, "title", "" );
         var tGroupValue = ini_read_string( tSection, "value", "" );
-        tGroup = ds_list_create( );
         var tIndex = ds_grid_height( groupData );
         ds_grid_resize( groupData, GeneGroup.Size, ( tIndex + 1 ) );
         ds_grid_set( groupData, GeneGroup.Title, tIndex, tGroupTitle );
         ds_grid_set( groupData, GeneGroup.Value, tIndex, tGroupValue );
-        ds_grid_set( groupData, GeneGroup.Items, tIndex, tGroup );
+        ds_grid_set( groupData, GeneGroup.Items, tIndex, ds_list_create( ) );
+        tGroup = tIndex;
     }
     //Process children
     var tCount = ini_read_real( tSection, "count", 0 );
@@ -205,8 +208,9 @@ while ( !ds_queue_empty( tQueue ) ) {
                 ds_grid_set( geneData, geneTag, tIndex, tTag );
                 ds_grid_set( geneData, geneDefault, tIndex, tDef );
                 //Add it to the current group
-                if ( ds_exists( tGroup, ds_type_list ) ) {
-                    ds_list_add( tGroup, tIndex );
+                if ( tGroup &gt;= 0 ) {
+                    var tGroupList = ds_grid_get( groupData, GeneGroup.Items, tGroup );
+                    ds_list_add( tGroupList, tIndex );
                 }
             }
             {
@@ -231,6 +235,20 @@ while ( !ds_queue_empty( tQueue ) ) {
 ds_queue_destroy( tQueue );
 
 ini_close( );
+
+//Convert gene group values to indices
+for ( var i = 0; i &lt; ds_grid_height( groupData ); ++i ) {
+    var tValue = ds_grid_get( groupData, GeneGroup.Value, i );
+    var tIndex = -1;
+    if ( ds_grid_value_exists( geneData, geneTag, 0,
+        geneTag, ( ds_grid_height( geneData ) - 1 ), tValue ) )
+    {
+        tIndex = ds_grid_value_y( geneData, geneTag, 0,
+            geneTag, ( ds_grid_height( geneData ) - 1 ), tValue
+        );
+    }
+    ds_grid_set( groupData, GeneGroup.Value, i, tIndex );
+}
 </string>
           </argument>
         </arguments>
