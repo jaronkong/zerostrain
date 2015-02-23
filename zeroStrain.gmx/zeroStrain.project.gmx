@@ -154,6 +154,7 @@
     </scripts>
     <scripts name="Drawing">
       <script>scripts\drawArc.gml</script>
+      <script>scripts\drawTextSize.gml</script>
     </scripts>
     <script>scripts\globalInit.gml</script>
     <script>scripts\playSound.gml</script>
@@ -162,6 +163,7 @@
       <script>scripts\geneGenerateRandom.gml</script>
       <script>scripts\geneComputeEffects.gml</script>
     </scripts>
+    <script>scripts\drawSegmentHealthBar.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\bloom_sdr.shader</shader>
@@ -173,6 +175,9 @@
     <shader type="GLSLES">shaders\dnaShader.shader</shader>
     <shader type="GLSLES">shaders\finalScreen_sdr.shader</shader>
   </shaders>
+  <fonts name="fonts">
+    <font>fonts\main_ft</font>
+  </fonts>
   <objects name="objects">
     <object>objects\playerShip</object>
     <objects name="Controllers">
@@ -180,6 +185,7 @@
       <object>objects\testController</object>
       <object>objects\stepController</object>
       <object>objects\spawnCon</object>
+      <object>objects\enemyInfoDrawer</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">

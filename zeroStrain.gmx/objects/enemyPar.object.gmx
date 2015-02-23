@@ -30,7 +30,19 @@
 color1 = make_color_rgb( 255, 50, 60 );
 color2 = make_color_rgb( 255, 100, 70 );
 
-selfHealth = 20;
+name = "Crawler"
+level = 1;
+tagFontSize = 8;
+tagFont = main_ft;
+tagColor = c_orange;
+
+selfHealth = 2000;
+selfHealthMax = selfHealth;
+damageHealth = selfHealth;
+damageDecayRate = selfHealthMax / room_speed * 0.8;
+healthBarHeight = 8;
+healthBarWidth = 100;
+healthBarVOffset = 100;
 
 bodyMapNum = BODY_MAPS.ENEMY1;
 
@@ -123,6 +135,35 @@ system1 = global.enemySpawnSystem;
 if ( selfHealth &lt;= 0 ) {
     event_user( ENEMY_EV.DESTROY );
     instance_destroy();
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Health
+
+if ( selfHealth &lt; damageHealth ) {
+    damageHealth -= damageDecayRate;
+    if ( damageHealth &lt; selfHealth ) {
+        damageHealth = selfHealth;
+    }
 }
 
 </string>

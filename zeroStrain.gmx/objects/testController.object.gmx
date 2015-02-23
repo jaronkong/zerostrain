@@ -28,7 +28,7 @@
             <string>///Other controllers
 
 instance_create( 0, 0, spawnCon );
-
+instance_create( 0, 0, enemyInfoDrawer );
 </string>
           </argument>
         </arguments>

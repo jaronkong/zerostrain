@@ -36,7 +36,7 @@ shootOriginY = 0;
 aimDir = 0;
 aimOffset = 16;
 
-damage = 1;
+damage = 100;
 duration = room_speed * 10;
 maxDuration = duration;
 fireRate = room_speed / 5;

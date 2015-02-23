@@ -41,7 +41,7 @@
             <kind>1</kind>
             <string>///Setup
 
-burstDamage = 5;
+burstDamage = 1000;
 
 //Remember to set the particle def script in the step
 fireRate = room_speed / 4;
