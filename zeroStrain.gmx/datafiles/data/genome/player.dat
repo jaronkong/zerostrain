@@ -9,6 +9,7 @@ count = 2
 
 [plr_stat]
 group = 1
+title = Player
 0 = plr_stat_spd
 1 = plr_stat_health
 count = 2
@@ -36,6 +37,8 @@ count = 3
 
 [plr_wep_gatling]
 group = 1
+title = Gatling Gun
+value = plr_wep_gatling_chance
 0 = plr_wep_gatling_chance
 1 = plr_wep_gatling_dmg
 2 = plr_wep_gatling_rate
@@ -64,6 +67,8 @@ count = 1
 
 [plr_wep_spreader]
 group = 1
+title = Spreader
+value = plr_wep_spreader_chance
 0 = plr_wep_spreader_chance
 1 = plr_wep_spreader_dmg
 2 = plr_wep_spreader_rate
@@ -92,6 +97,8 @@ count = 1
 
 [plr_wep_javelin]
 group = 1
+title = Javelin
+value = plr_wep_javelin_chance
 0 = plr_wep_javelin_chance
 1 = plr_wep_javelin_dmg
 2 = plr_wep_javelin_rate

@@ -75,6 +75,36 @@ geneData = ds_grid_create( geneSize, 0 );
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Define group data to load
+
+enum GeneGroup {
+    Title,
+    Value,
+    Items,
+    Size
+}
+
+groupData = ds_grid_create( GeneGroup.Size, 0 );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Define allele data to load
 
 alleleSize = 0;
@@ -107,6 +137,8 @@ alleleData = ds_grid_create( alleleSize, 0 );
             <string>///Destroy the grids
 
 ds_grid_destroy( geneData );
+
+ds_grid_destroy( groupData );
 
 for ( var i = 0; i &lt; ds_grid_height( alleleData ); ++i ) {
     ds_map_destroy( ds_grid_get( alleleData, alleleValues, i ) );
@@ -141,8 +173,22 @@ ini_open( working_directory + "\data\genome\" + file + ".dat" );
 var tQueue = ds_queue_create( );
 ds_queue_enqueue( tQueue, "groups" );
 
+var tGroup = -1;
+
 while ( !ds_queue_empty( tQueue ) ) {
     var tSection = ds_queue_dequeue( tQueue );
+    //Process group
+    if ( ini_key_exists( tSection, "title" ) ) {
+        var tGroupTitle = ini_read_string( tSection, "title", "" );
+        var tGroupValue = ini_read_string( tSection, "value", "" );
+        tGroup = ds_list_create( );
+        var tIndex = ds_grid_height( groupData );
+        ds_grid_resize( groupData, GeneGroup.Size, ( tIndex + 1 ) );
+        ds_grid_set( groupData, GeneGroup.Title, tIndex, tGroupTitle );
+        ds_grid_set( groupData, GeneGroup.Value, tIndex, tGroupValue );
+        ds_grid_set( groupData, GeneGroup.Items, tIndex, tGroup );
+    }
+    //Process children
     var tCount = ini_read_real( tSection, "count", 0 );
     for ( var i = 0; i &lt; tCount; ++i ) {
         var tTag = ini_read_string( tSection, string( i ), "" );
@@ -158,6 +204,10 @@ while ( !ds_queue_empty( tQueue ) ) {
                 ds_grid_resize( geneData, geneSize, ( tIndex + 1 ) );
                 ds_grid_set( geneData, geneTag, tIndex, tTag );
                 ds_grid_set( geneData, geneDefault, tIndex, tDef );
+                //Add it to the current group
+                if ( ds_exists( tGroup, ds_type_list ) ) {
+                    ds_list_add( tGroup, tIndex );
+                }
             }
             {
                 //Load in allele
