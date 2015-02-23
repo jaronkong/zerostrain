@@ -47,5 +47,24 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
     ds_grid_set( tResult, GeneDescGroup.ItemCount, tIndex, tItemCount );
 }
 
+//Compute percentages
+var tValueSum = ds_grid_get_sum( tResult,
+    GeneDescGroup.Value, 0, GeneDescGroup.Value,
+    ( ds_grid_height( tResult ) - 1 )
+);
+if ( tValueSum <= 0 ) tValueSum = 1;
+ds_grid_multiply_region( tResult,
+    GeneDescGroup.Value, 0, GeneDescGroup.Value,
+    ( ds_grid_height( tResult ) - 1 ), ( 100 / tValueSum )
+);
+
+//Convert to numbers
+for ( var i = 0; i < ds_grid_height( tResult ); ++i ) {
+    var tValue = ds_grid_get( tResult, GeneDescGroup.Value, i );
+    var tValueStr = "";
+    if ( tValue > 0 ) tValueStr = ( string( tValue ) + "%" );
+    ds_grid_set( tResult, GeneDescGroup.Value, i, tValueStr );
+}
+
 return tResult;
 
