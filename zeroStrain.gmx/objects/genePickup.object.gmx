@@ -32,6 +32,7 @@ genome = geneGenerateRandom( "player", length );
 
 //TODO: REMOVE DEBUG STUFF
 effects = geneComputeEffects( "player", genome, length );
+desc = geneDescribeEffects( "player", effects );
 </string>
           </argument>
         </arguments>
