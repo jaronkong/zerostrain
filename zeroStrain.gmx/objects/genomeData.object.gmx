@@ -50,11 +50,13 @@ file = "player";
             <kind>1</kind>
             <string>///Define gene data to load
 
-geneSize = 0;
-geneTag = geneSize++;
-geneDefault = geneSize++;
+enum Gene {
+    Tag,
+    Default,
+    Size
+}
 
-geneData = ds_grid_create( geneSize, 0 );
+geneData = ds_grid_create( Gene.Size, 0 );
 </string>
           </argument>
         </arguments>
@@ -107,11 +109,13 @@ groupData = ds_grid_create( GeneGroup.Size, 0 );
             <kind>1</kind>
             <string>///Define allele data to load
 
-alleleSize = 0;
-alleleTag = alleleSize++;
-alleleValues = alleleSize++;
+enum GeneAllele {
+    Tag,
+    Values,
+    Size
+}
 
-alleleData = ds_grid_create( alleleSize, 0 );
+alleleData = ds_grid_create( GeneAllele.Size, 0 );
 </string>
           </argument>
         </arguments>
@@ -144,7 +148,7 @@ for ( var i = 0; i &lt; ds_grid_height( groupData ); ++i ) {
 ds_grid_destroy( groupData );
 
 for ( var i = 0; i &lt; ds_grid_height( alleleData ); ++i ) {
-    ds_map_destroy( ds_grid_get( alleleData, alleleValues, i ) );
+    ds_map_destroy( ds_grid_get( alleleData, GeneAllele.Values, i ) );
 }
 ds_grid_destroy( alleleData );
 </string>
@@ -204,9 +208,9 @@ while ( !ds_queue_empty( tQueue ) ) {
                 //Load in gene
                 var tDef = ini_read_real( tTag, "default", 1 );
                 var tIndex = ds_grid_height( geneData );
-                ds_grid_resize( geneData, geneSize, ( tIndex + 1 ) );
-                ds_grid_set( geneData, geneTag, tIndex, tTag );
-                ds_grid_set( geneData, geneDefault, tIndex, tDef );
+                ds_grid_resize( geneData, Gene.Size, ( tIndex + 1 ) );
+                ds_grid_set( geneData, Gene.Tag, tIndex, tTag );
+                ds_grid_set( geneData, Gene.Default, tIndex, tDef );
                 //Add it to the current group
                 if ( tGroup &gt;= 0 ) {
                     var tGroupList = ds_grid_get( groupData, GeneGroup.Items, tGroup );
@@ -224,9 +228,9 @@ while ( !ds_queue_empty( tQueue ) ) {
                     ds_map_add( tOffsets, tExtraTag, tExtraOff );
                 }
                 var tIndex = ds_grid_height( alleleData );
-                ds_grid_resize( alleleData, alleleSize, ( tIndex + 1 ) );
-                ds_grid_set( alleleData, alleleTag, tIndex, tTag );
-                ds_grid_set( alleleData, alleleValues, tIndex, tOffsets );
+                ds_grid_resize( alleleData, GeneAllele.Size, ( tIndex + 1 ) );
+                ds_grid_set( alleleData, GeneAllele.Tag, tIndex, tTag );
+                ds_grid_set( alleleData, GeneAllele.Values, tIndex, tOffsets );
             }
         }
     }
@@ -240,11 +244,11 @@ ini_close( );
 for ( var i = 0; i &lt; ds_grid_height( groupData ); ++i ) {
     var tValue = ds_grid_get( groupData, GeneGroup.Value, i );
     var tIndex = -1;
-    if ( ds_grid_value_exists( geneData, geneTag, 0,
-        geneTag, ( ds_grid_height( geneData ) - 1 ), tValue ) )
+    if ( ds_grid_value_exists( geneData, Gene.Tag, 0,
+        Gene.Tag, ( ds_grid_height( geneData ) - 1 ), tValue ) )
     {
-        tIndex = ds_grid_value_y( geneData, geneTag, 0,
-            geneTag, ( ds_grid_height( geneData ) - 1 ), tValue
+        tIndex = ds_grid_value_y( geneData, Gene.Tag, 0,
+            Gene.Tag, ( ds_grid_height( geneData ) - 1 ), tValue
         );
     }
     ds_grid_set( groupData, GeneGroup.Value, i, tIndex );
