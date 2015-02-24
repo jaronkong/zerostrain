@@ -281,10 +281,14 @@
         <object>objects\weapon_pulseDriver_bullet</object>
         <object>objects\pulseDriverStackIcon</object>
       </objects>
+      <objects name="Artillery">
+        <object>objects\weapon_artillery_con</object>
+        <object>objects\weapon_artillery_shot</object>
+      </objects>
+      <object>objects\weaponPickup</object>
       <objects name="Specials">
         <object>objects\weapon_fissureBomb</object>
       </objects>
-      <object>objects\weaponPickup</object>
     </objects>
     <objects name="Enemy">
       <object>objects\enemyPar</object>

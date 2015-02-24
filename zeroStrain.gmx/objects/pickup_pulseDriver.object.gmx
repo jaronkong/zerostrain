@@ -41,7 +41,7 @@
             <kind>1</kind>
             <string>///Setup
 
-heldWeapon = weapon_pulseDriver_con;
+heldWeapon = weapon_artillery_con;
 
 
 

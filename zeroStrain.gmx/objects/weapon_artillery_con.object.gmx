@@ -5,10 +5,24 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>weaponController_projectiles</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -27,21 +41,34 @@
             <kind>1</kind>
             <string>///Setup
 
-cameraTween = 0.05;
+weaponType = WEAPON_TYPE.RED;
+range = 400;
+burstRadius = 100;
+randomSpread = 100;
 
-playerOffset = 150;
+//Remember to set the particle def script in the step
+fireRate = room_speed / 5;
+projectileSpeed = 10;
+projectileLife = 240;
+projectileToShoot = weapon_artillery_shot;
 
-cameraFocusX = 0;
-cameraFocusY = 0;
+hitForce = 0.5;
+kickAmount = 3;
+kickForce = 2;
 
-targetCameraFocusX = 0;
-targetCameraFocusY = 0;
+pickupColor[ 0 ] = make_color_rgb( 50, 255, 50 );
+pickupColor[ 1 ] = make_color_rgb( 150, 255, 155 );
 
-//Shake 
-shakeAmount = 0;
-shakeOffsetX = 0;
-shakeOffsetY = 0;
-shakeTween = 0.05;
+pickupColor[ 2 ] = make_color_rgb( 200, 255, 200 );
+pickupColor[ 3 ] = make_color_rgb( 10, 255, 10 );
+
+bloom_attachParticleSystem( system1, BLOOM_DEPTH );
+//distortionGlow_attachParticleSystem( system1 );
+//refraction_attachParticleSystem( system1 );
+dispersion_attachParticleSystem( system1 );
+
+part_system_automatic_draw( system1, true );
+
 </string>
           </argument>
         </arguments>
@@ -50,36 +77,17 @@ shakeTween = 0.05;
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>604</id>
+        <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Screen shake
-
-shakeOffsetX = 0;
-shakeOffsetY = 0;
-
-shakeOffsetX = -(shakeAmount/2) + random( shakeAmount );
-shakeOffsetY = -(shakeAmount/2) + random( shakeAmount );
-
-cameraFocusX += shakeOffsetX;
-cameraFocusY += shakeOffsetY;
-
-shakeAmount = lerp( shakeAmount, 0, shakeTween );
-
-</string>
-          </argument>
-        </arguments>
       </action>
       <action>
         <libid>1</libid>
@@ -97,23 +105,29 @@ shakeAmount = lerp( shakeAmount, 0, shakeTween );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Tween camera
+            <string>///Effect definition
 
-cameraFocusX = lerp( cameraFocusX, targetCameraFocusX, cameraTween );
-cameraFocusY = lerp( cameraFocusY, targetCameraFocusY, cameraTween );
-
-cameraFocusX = clamp( cameraFocusX, view_wview/2, room_width - view_wview/2 );
-cameraFocusY = clamp( cameraFocusY, view_hview/2, room_height - view_hview/2 );
-
-view_xview = cameraFocusX - view_wview / 2;
-view_yview = cameraFocusY - view_hview / 2;
-
-//view_xview = clamp( view_xview, 0, room_width - view_wview );
-//view_yview = clamp( view_yview, 0, room_height - view_hview );
+particleDef_gun();
 
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
       <action>
         <libid>1</libid>
@@ -131,20 +145,36 @@ view_yview = cameraFocusY - view_hview / 2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Set camera position
+            <string>///Shoot
 
-if ( instance_exists( playerShip ) ) {
-    var tCamX, tCamY;
+var t = global.timeTickFactor;
+
+if ( instance_exists( owner ) ) {
+    playSound( gunShot_sd, 1, false );
     
-    with ( playerShip ) {
-        tCamX = x + lengthdir_x( other.playerOffset * aimDistPercent, aimDir );
-        tCamY = y + lengthdir_y( other.playerOffset * aimDistPercent, aimDir );
+    shootOriginX = owner.x;
+    shootOriginY = owner.y;
+    var tShootDir = owner.aimDir;
+
+    var tShootX = shootOriginX + lengthdir_x( aimOffset, aimDir );
+    var tShootY = shootOriginY + lengthdir_y( aimOffset, aimDir );
+    
+    var tRandOffsetAngle = random( 360 );
+    var tRandSpread = random( randomSpread );
+    var tDestiX = tShootX + lengthdir_x( range, aimDir ) + lengthdir_x( tRandSpread, tRandOffsetAngle );
+    var tDestiY = tShootY + lengthdir_y( range, aimDir ) + lengthdir_y( tRandSpread, tRandOffsetAngle );
+    
+    with ( weaponCreateProjectile( tShootX, tShootY, 
+                            projectileToShoot, id ) ) {
+        targetX = tDestiX;
+        targetY = tDestiY;
+        radius = other.burstRadius;
+        speed = 0;
+        
     }
 
-    targetCameraFocusX = tCamX;
-    targetCameraFocusY = tCamY;
-}
 
+}
 </string>
           </argument>
         </arguments>

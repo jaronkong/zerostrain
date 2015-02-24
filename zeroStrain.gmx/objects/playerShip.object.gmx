@@ -32,6 +32,7 @@ selfHealthMax = 100;
 
 aimDir = 0;
 aimPercent = 0;
+aimDistPercent = 0;
 
 frictionAmount = 0.25; //0.25
 currentFriction = frictionAmount;
@@ -49,11 +50,12 @@ faceDirTween = 0.2;
 
 //Control
 deadZone = 0.2;
+mouseAimRadius = 300;
 inputMoveDir = 0;
 inputMovePercent = 0; //How much of the accel to apply in a direction.
 inputAimDir = 0;
 inputAimPercent = 0;
-
+inputAimDistPercent = 0;
 </string>
           </argument>
         </arguments>
@@ -185,6 +187,7 @@ if ( !gamepad_is_connected( 0 ) ) {
         inputMoveDir = point_direction( 0, 0, tKeyboardInputAngleX, tKeyboardInputAngleY );
     }
     inputAimDir = point_direction( x, y, mouse_x, mouse_y );
+    inputAimDistPercent = point_distance( x, y, mouse_x, mouse_y ) / mouseAimRadius;
 }
 
 //--------------------------------------------------------------------------
@@ -223,10 +226,11 @@ if ( gamepad_is_connected( 0 ) ) {
     
         inputAimPercent = tInputMagnitudeRight;
         inputAimPercent = clamp( inputAimPercent, 0, 1 );
-        
+        inputAimDistPercent = inputAimPercent;
     }
     else {
         inputAimPercent = 0;
+        inputAimDistPercent = 0;
     }
 }
 
@@ -261,6 +265,7 @@ if ( speed &gt; currentMaxSpeed*inputMovePercent*t ) {
 }
 
 aimDir = inputAimDir;
+aimDistPercent = min( 1, inputAimDistPercent );
 
 //Visual
 targetFaceDir = inputMoveDir;
