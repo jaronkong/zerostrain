@@ -25,13 +25,23 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Other controllers
+            <string>///Setup
 
-instance_create( 0, 0, spawnCon );
-instance_create( 0, 0, enemyInfoDrawer );
-instance_create( 0, 0, particleTickController );
-instance_create( 0, 0, cameraController );
+cameraTween = 0.05;
 
+playerOffset = 150;
+
+cameraFocusX = 0;
+cameraFocusY = 0;
+
+targetCameraFocusX = 0;
+targetCameraFocusY = 0;
+
+//Shake 
+shakeAmount = 0;
+shakeOffsetX = 0;
+shakeOffsetY = 0;
+shakeTween = 0.1;
 </string>
           </argument>
         </arguments>
@@ -54,21 +64,18 @@ instance_create( 0, 0, cameraController );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Move view
+            <string>///Screen shake
 
-var spd = 2.5 * global.timeTickFactor;
-if ( keyboard_check( vk_right ) ) {
-    view_xview += spd;
-}
-if ( keyboard_check( vk_left ) ) {
-    view_xview -= spd;
-}
-if ( keyboard_check( vk_up ) ) {
-    view_yview -= spd;
-}
-if ( keyboard_check( vk_down ) ) {
-    view_yview += spd;
-}
+shakeOffsetX = 0;
+shakeOffsetY = 0;
+
+shakeOffsetX = -(shakeAmount/2) + random( shakeAmount );
+shakeOffsetY = -(shakeAmount/2) + random( shakeAmount );
+
+cameraFocusX += shakeOffsetX;
+cameraFocusY += shakeOffsetY;
+
+shakeAmount = lerp( shakeAmount, 0, shakeTween );
 
 </string>
           </argument>
@@ -90,15 +97,50 @@ if ( keyboard_check( vk_down ) ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Effects
+            <string>///Tween camera
 
-if ( keyboard_check( ord("Q") ) ) {
-    global.timeTickFactor = 0.5;
+cameraFocusX = lerp( cameraFocusX, targetCameraFocusX, cameraTween );
+cameraFocusY = lerp( cameraFocusY, targetCameraFocusY, cameraTween );
+
+view_xview = cameraFocusX - view_wview / 2;
+view_yview = cameraFocusY - view_hview / 2;
+
+view_xview = clamp( view_xview, 0, room_width - view_wview );
+view_yview = clamp( view_yview, 0, room_height - view_hview );
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set camera position
+
+if ( instance_exists( playerShip ) ) {
+    var tCamX, tCamY;
+    
+    with ( playerShip ) {
+        tCamX = x + lengthdir_x( other.playerOffset, aimDir );
+        tCamY = y + lengthdir_y( other.playerOffset, aimDir );
+    }
+
+    targetCameraFocusX = tCamX;
+    targetCameraFocusY = tCamY;
 }
-
-global.timeTickFactor = lerp( global.timeTickFactor, 1, 0.05 );
-
-particleInit_bigBurst();
 
 </string>
           </argument>

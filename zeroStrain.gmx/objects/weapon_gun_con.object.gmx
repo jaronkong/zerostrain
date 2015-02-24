@@ -51,6 +51,8 @@ projectileToShoot = weapon_gun_bullet;
 
 bulletHalfSpread = 16;
 hitForce = 0.5;
+kickAmount = 3;
+kickForce = 2;
 
 pickupColor[ 0 ] = make_color_rgb( 50, 255, 50 );
 pickupColor[ 1 ] = make_color_rgb( 150, 255, 155 );

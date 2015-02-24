@@ -157,6 +157,9 @@
       <script>scripts\circleCrackCreate.gml</script>
       <script>scripts\audioSetPitchRand.gml</script>
       <script>scripts\shakeScreen.gml</script>
+      <script>scripts\cameraKick.gml</script>
+      <script>scripts\doTimeSlow.gml</script>
+      <script>scripts\doStepSlow.gml</script>
       <script>scripts\damageFlyNumberCreate.gml</script>
     </scripts>
     <scripts name="Weapons">
@@ -209,6 +212,7 @@
       <object>objects\spawnCon</object>
       <object>objects\enemyInfoDrawer</object>
       <object>objects\particleTickController</object>
+      <object>objects\cameraController</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">
@@ -254,6 +258,8 @@
       <objects name="FlyNumbers">
         <object>objects\damageFlyNumber</object>
       </objects>
+      <object>objects\timeSlow</object>
+      <object>objects\stepSlow</object>
     </objects>
     <objects name="Weapons">
       <object>objects\weaponControllerPar</object>

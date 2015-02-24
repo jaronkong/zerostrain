@@ -43,6 +43,9 @@ duration = room_speed * 10;
 maxDuration = duration;
 fireRate = room_speed / 5;
 
+kickAmount = 0; //How much to kick the camera back when shooting.
+kickForce = 0; //How much to kick player back.
+
 weaponType = WEAPON_TYPE.GREEN;
 
 //Control
@@ -296,6 +299,15 @@ if ( instance_exists( owner ) ) {
           <argument>
             <kind>1</kind>
             <string>///Fire Weapon
+
+if ( instance_exists( owner ) ) {
+    cameraKick( kickAmount, owner.aimDir + 180 );
+    
+    with ( owner ) {
+        motion_add( aimDir + 180, other.kickForce );
+    }
+}
+
 </string>
           </argument>
         </arguments>

@@ -51,6 +51,9 @@ projectileLife = 120;
 projectileToShoot = weapon_pulseDriver_bullet;
 hitForce = 2;
 
+kickAmount = 8;
+kickForce = 16;
+
 pickupColor[ 0 ] = make_color_rgb( 0, 150, 255 );
 pickupColor[ 1 ] = make_color_rgb( 150, 100, 155 );
 

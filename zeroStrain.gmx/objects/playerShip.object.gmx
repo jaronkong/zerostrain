@@ -33,7 +33,7 @@ selfHealthMax = 100;
 aimDir = 0;
 aimPercent = 0;
 
-frictionAmount = 0.25;
+frictionAmount = 0.25; //0.25
 currentFriction = frictionAmount;
 
 accel = 2;
