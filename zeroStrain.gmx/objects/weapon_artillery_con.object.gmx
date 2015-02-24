@@ -48,7 +48,7 @@ burstRadius = 100;
 randomSpread = 100;
 
 //Remember to set the particle def script in the step
-fireRate = room_speed / 5;
+fireRate = room_speed / 4;
 projectileSpeed = 10;
 projectileLife = 240;
 projectileToShoot = weapon_artillery_shot;

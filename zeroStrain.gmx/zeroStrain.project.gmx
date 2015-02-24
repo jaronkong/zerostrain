@@ -112,6 +112,7 @@
       <sprite>sprites\weapIcon_pulse_spr</sprite>
       <sprite>sprites\weapIcon_gun_spr</sprite>
       <sprite>sprites\weapIcon_burst_spr</sprite>
+      <sprite>sprites\weapIcon_artillery_spr</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -277,6 +278,7 @@
         <object>objects\pickup_pulseDriver</object>
         <object>objects\pickup_gun</object>
         <object>objects\pickup_burst</object>
+        <object>objects\pickup_artillery</object>
       </objects>
       <objects name="Gun">
         <object>objects\weapon_gun_con</object>
