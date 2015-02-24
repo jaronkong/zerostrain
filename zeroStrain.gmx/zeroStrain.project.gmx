@@ -106,7 +106,7 @@
       <sprite>sprites\circleCrack_spr</sprite>
     </sprites>
     <sprite>sprites\sprite13</sprite>
-    <sprite>sprites\sprite15</sprite>
+    <sprite>sprites\enemy_spr</sprite>
     <sprite>sprites\playerHUDRing_spr</sprite>
     <sprites name="Icons">
       <sprite>sprites\weapIcon_pulse_spr</sprite>
@@ -302,6 +302,8 @@
       <object>objects\enemyPar</object>
       <object>objects\enemyBasic</object>
       <object>objects\enemyBlue</object>
+      <object>objects\behavior_blindSeek</object>
+      <object>objects\behaviorPar</object>
     </objects>
     <objects name="Genetics">
       <object>objects\genomeData</object>
