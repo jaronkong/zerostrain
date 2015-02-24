@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Weapon Name";
 owner = noone;
 active = true;
 firing = false;

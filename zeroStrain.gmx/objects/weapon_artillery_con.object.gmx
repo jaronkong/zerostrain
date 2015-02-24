@@ -41,8 +41,9 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Blast Volley";
 weaponType = WEAPON_TYPE.RED;
-range = 400;
+range = 500;
 burstRadius = 100;
 randomSpread = 100;
 
@@ -52,19 +53,21 @@ projectileSpeed = 10;
 projectileLife = 240;
 projectileToShoot = weapon_artillery_shot;
 
-hitForce = 0.5;
-kickAmount = 3;
-kickForce = 2;
+damage = 700;
 
-pickupColor[ 0 ] = make_color_rgb( 50, 255, 50 );
-pickupColor[ 1 ] = make_color_rgb( 150, 255, 155 );
+hitForce = 2;
+kickAmount = 8;
+kickForce = 32;
 
-pickupColor[ 2 ] = make_color_rgb( 200, 255, 200 );
-pickupColor[ 3 ] = make_color_rgb( 10, 255, 10 );
+pickupColor[ 0 ] = make_color_rgb( 50, 50, 255 );
+pickupColor[ 1 ] = make_color_rgb( 50, 50, 255 );
+
+pickupColor[ 2 ] = make_color_rgb( 255, 200, 50 );
+pickupColor[ 3 ] = make_color_rgb( 255, 10, 10 );
 
 bloom_attachParticleSystem( system1, BLOOM_DEPTH );
-//distortionGlow_attachParticleSystem( system1 );
-//refraction_attachParticleSystem( system1 );
+distortionGlow_attachParticleSystem( system1 );
+refraction_attachParticleSystem( system1 );
 dispersion_attachParticleSystem( system1 );
 
 part_system_automatic_draw( system1, true );
@@ -107,7 +110,7 @@ part_system_automatic_draw( system1, true );
             <kind>1</kind>
             <string>///Effect definition
 
-particleDef_gun();
+particleDef_artillery();
 
 </string>
           </argument>
@@ -150,7 +153,8 @@ particleDef_gun();
 var t = global.timeTickFactor;
 
 if ( instance_exists( owner ) ) {
-    playSound( gunShot_sd, 1, false );
+    //audioSetPitchRand( artilleryLaunch_sd );
+    playSound( artilleryLaunch_sd, 1, false );
     
     shootOriginX = owner.x;
     shootOriginY = owner.y;

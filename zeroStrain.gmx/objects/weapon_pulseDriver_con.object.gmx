@@ -41,6 +41,7 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Pulse Driver";
 weaponType = WEAPON_TYPE.BLUE;
 burstDamage = 1000;
 

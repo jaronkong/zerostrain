@@ -105,6 +105,9 @@ firing = false;
           <argument>
             <kind>1</kind>
             <string>///Local HUD
+hudX = x;
+hudY = y;
+hudPosTween = 0.2;
 
 radius = 70;
 arcRes = 3;
@@ -330,6 +333,9 @@ else {
             <kind>1</kind>
             <string>///HUD flashing and tweening
 
+hudX = lerp( hudX, x, hudPosTween );
+hudY = lerp( hudY, y, hudPosTween );
+
 currentDrawHealth = lerp( currentDrawHealth, selfHealth, arcTween );
 if ( instance_exists( equippedWeapon ) ) {
     currentDrawWeaponDuration = lerp( currentDrawWeaponDuration, equippedWeapon.duration, arcTween );
@@ -369,7 +375,7 @@ if ( hudFlashTimer &lt;= 0 ) {
 //---------------------------------------------------
 // HUD stuff
 //---------------------------------------------------
-draw_sprite_ext( playerHUDRing_spr, 0, x, y, 1, 1, 0, c_white, 0.7 );
+draw_sprite_ext( playerHUDRing_spr, 0, hudX, hudY, 1, 1, 0, c_white, 0.7 );
 
 //Health
 var tHealthPercent = currentDrawHealth / selfHealthMax;
@@ -378,7 +384,7 @@ if ( hudFlashOn &amp;&amp; tHealthPercent &lt;= healthAlertPercent ) {
     draw_set_color( hudFlashColor );
 }
 draw_set_alpha( 1 );
-drawArc( healthAngleRange * tHealthPercent, arcRes, radius, healthStartAngle, x, y );
+drawArc( healthAngleRange * tHealthPercent, arcRes, radius, healthStartAngle, hudX, hudY );
 
 //Weapon Duration
 if ( instance_exists( equippedWeapon ) ) {
@@ -388,7 +394,7 @@ if ( instance_exists( equippedWeapon ) ) {
         draw_set_color( hudFlashColor );
     }
     draw_set_alpha( 1 );
-    drawArc( weaponDurationRange * tDurationPercent, arcRes, radius, weaponDurationStartAngle, x, y );
+    drawArc( weaponDurationRange * tDurationPercent, arcRes, radius, weaponDurationStartAngle, hudX, hudY );
 
 }
 

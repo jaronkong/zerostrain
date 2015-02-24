@@ -8,4 +8,3 @@ with ( instance_create( argument0, argument1, damageFlyNumber ) ) {
     
     event_user( 0 );
 }
-

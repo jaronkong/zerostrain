@@ -379,7 +379,7 @@ with ( enemyPar ) {
           <argument>
             <kind>1</kind>
             <string>///show radius
-draw_set_color( c_lime );
+draw_set_color( c_blue );
 draw_set_alpha( currentAlpha );
 
 draw_circle( burstX, burstY, radius, true );

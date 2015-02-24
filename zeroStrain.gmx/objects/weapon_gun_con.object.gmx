@@ -41,6 +41,7 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Gatling Gun";
 weaponType = WEAPON_TYPE.GREEN;
 
 //Remember to set the particle def script in the step

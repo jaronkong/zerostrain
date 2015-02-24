@@ -44,18 +44,21 @@
 targetX = 0;
 targetY = 0;
 
-targetTween = 0.2;
+targetTween = 0.1;
 
 radius = 100;
 detonateDelay = 0.5 * room_speed;
 
-baseSize = 0.5;
-minSizeFactor = 0.1;
+baseSize = 1.5;
+minSizeFactor = 0.5;
 currentSizeFactor = 0;
 growing = true;
 
 sizeTweenUp = 0.2;
 sizeTweenDown = 0.05;
+
+circleTracerAlpha = 0;
+circleTracerTween = 0.1;
 
 detonated = false;
 destroyDelay = 1 * room_speed;
@@ -96,10 +99,54 @@ destroyDelay = 1 * room_speed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Tween and move
+            <string>///Effects
+
+if ( !detonated ) {
+    var t = global.timeTickFactor;
+    part_emitter_region( system1, emitter1, x, x, y, y, ps_shape_ellipse, ps_distr_gaussian );
+    
+    var tDir = point_direction( x, y, targetX, targetY );
+    part_type_direction(getParticle( "artilleryTrail1" ), tDir + 180,tDir + 180, 0 *t,0 *t);
+    part_type_direction(getParticle( "artilleryTrail2" ), tDir + 180,tDir + 180, 0 *t,0 *t);
+    
+    var tSize = baseSize*currentSizeFactor;
+    part_type_size( getParticle( "artilleryTrail1" ), 
+                    tSize, tSize, -tSize*0.02*t, 0 );
+    part_type_size( getParticle( "artilleryTrail2" ), 
+                    tSize, tSize, -tSize*0.02*t, 0 );     
+    part_type_size( getParticle( "artilleryHead" ), 
+                    tSize, tSize, -tSize*0.02*t, 0 );            
+    
+    part_emitter_burst( system1, emitter1, getParticle( "artilleryTrail1" ), 1 *t );
+    part_emitter_burst( system1, emitter1, getParticle( "artilleryTrail2" ), 2 *t );
+    part_emitter_burst( system1, emitter1, getParticle( "artilleryHead" ), 2 *t );
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Tween and move and detonate
 
 x = lerp( x, targetX, targetTween );
 y = lerp( y, targetY, targetTween );
+circleTracerAlpha = lerp( circleTracerAlpha, 0, circleTracerTween );
 
 if ( growing ) {
     currentSizeFactor = lerp( currentSizeFactor, 1, sizeTweenUp );
@@ -114,12 +161,36 @@ else {
 if ( detonateDelay &gt; 0 ) {
     detonateDelay --;
     if ( detonateDelay &lt;= 0 ) {
-        detonated = true;
+        
         //------------------------------------------------------------------------
         // Detonate
         //------------------------------------------------------------------------
-        
-        
+        if ( !detonated ) {
+            var t = global.timeTickFactor;
+            part_emitter_region( system1, emitter1, x - radius, x + radius, y - radius, y + radius, ps_shape_ellipse, ps_distr_gaussian );
+
+            part_emitter_burst( system1, emitter1, getParticle( "artilleryBurst1" ), 20 );
+            part_emitter_burst( system1, emitter1, getParticle( "artilleryBurst2" ), 30 );
+            part_emitter_burst( system1, emitter1, getParticle( "artilleryBurst3" ), 60 );
+            
+            circleTracerAlpha = 1;
+            
+            shakeScreen( 16 );
+            audioSetPitchRand( artilleryBurst_sd );
+            playSound( artilleryBurst_sd, 1, false );
+            
+            ///Deal damage
+
+            with ( enemyPar ) {
+                if ( point_distance( x, y, other.x, other.y ) &lt; other.radius ) {
+                    weaponDoDamage( id, other.ownerController );
+                    forceApplyToEnemy( id,
+                                        point_direction( other.x, other.y, x, y ),
+                                        other.hitForce );
+                }
+            }
+        }
+        detonated = true;
     }
 }
 
@@ -210,7 +281,13 @@ if ( detonated ) {
 image_xscale = currentSizeFactor;
 image_yscale = currentSizeFactor;
 
-draw_self();
+if ( detonated ) {
+    draw_set_color( c_red );
+    draw_set_alpha( circleTracerAlpha );
+    draw_circle( targetX, targetY, radius, true );
+}
+
+//draw_self();
 
 </string>
           </argument>

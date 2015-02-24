@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-600</depth>
+  <depth>-9002</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -51,7 +51,7 @@ distanceTween = 0.2;
 //Alpha
 tweenFactor = 0;
 tweenPercent = 0.05;
-baseTweenPercent = 0.05
+baseTweenPercent = tweenPercent;
 minTweenPercent = 0.02;
 
 isCrit = false;
@@ -133,7 +133,7 @@ if ( isCrit ) {
 }
 else if ( isWeak ) {
     text = string( value ) + "...";
-    color = c_white;
+    color = c_black;
 }
 else {
     text = string( value );
@@ -176,8 +176,8 @@ draw_set_halign( fa_center );
 
 var tX = x;
 var tY = y - flyDist*distanceFactor;
-
-drawTextSize( tX, tY, text, font, fontSize );
+drawTextOutline( tX, tY, text, font, fontSize, 0.1, 1 - tweenFactor, c_white, 1, 1 );
+//drawTextSize( tX, tY, text, font, fontSize );
 
 </string>
           </argument>
