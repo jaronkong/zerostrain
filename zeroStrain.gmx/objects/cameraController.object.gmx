@@ -41,7 +41,7 @@ targetCameraFocusY = 0;
 shakeAmount = 0;
 shakeOffsetX = 0;
 shakeOffsetY = 0;
-shakeTween = 0.1;
+shakeTween = 0.05;
 </string>
           </argument>
         </arguments>
@@ -102,11 +102,14 @@ shakeAmount = lerp( shakeAmount, 0, shakeTween );
 cameraFocusX = lerp( cameraFocusX, targetCameraFocusX, cameraTween );
 cameraFocusY = lerp( cameraFocusY, targetCameraFocusY, cameraTween );
 
+cameraFocusX = clamp( cameraFocusX, view_wview/2, room_width - view_wview/2 );
+cameraFocusY = clamp( cameraFocusY, view_hview/2, room_height - view_hview/2 );
+
 view_xview = cameraFocusX - view_wview / 2;
 view_yview = cameraFocusY - view_hview / 2;
 
-view_xview = clamp( view_xview, 0, room_width - view_wview );
-view_yview = clamp( view_yview, 0, room_height - view_hview );
+//view_xview = clamp( view_xview, 0, room_width - view_wview );
+//view_yview = clamp( view_yview, 0, room_height - view_hview );
 
 </string>
           </argument>
