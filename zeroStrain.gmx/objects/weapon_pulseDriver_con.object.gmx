@@ -45,7 +45,8 @@ weaponType = WEAPON_TYPE.BLUE;
 burstDamage = 1000;
 
 //Remember to set the particle def script in the step
-fireRate = room_speed / 4;
+damage = 300;
+fireRate = room_speed / 2;
 projectileSpeed = 20;
 projectileLife = 120;
 projectileToShoot = weapon_pulseDriver_bullet;

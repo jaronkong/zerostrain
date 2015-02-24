@@ -10,6 +10,9 @@ if ( tNewWeapon.isInstant ) {
 }
 else {
     with ( aPlayer ) {
+        with ( equippedWeapon ) {
+            duration = 0; //End the previous weapon
+        }
         equippedWeapon = tNewWeapon;
         with ( equippedWeapon ) {
             owner = other.id;

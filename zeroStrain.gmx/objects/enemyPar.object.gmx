@@ -29,6 +29,10 @@
 
 color1 = make_color_rgb( 255, 50, 60 );
 color2 = make_color_rgb( 255, 100, 70 );
+part_form1 = "enemyBodyForm1";
+part_form2 = "enemyBodyForm2";
+part_destroy1 = "enemyBodyBurst1";
+part_destroy2 = "enemyBodyBurst2";
 
 name = "Crawler"
 level = 1;
@@ -277,16 +281,16 @@ friction = baseFriction * global.timeTickFactor;
 
 doStepSlow( 30, 2 );
 
-particleDef_enemyBody();
-part_type_color3(getParticle( "enemyBodyBurst1" ), make_color_rgb( 255, 50, 50 ), color1, color2);
-part_type_color3(getParticle( "enemyBodyBurst2" ), make_color_rgb( 255, 50, 50 ), color1, color2);
+//particleDef_enemyBody();
+//part_type_color3(getParticle( "enemyBodyBurst1" ), make_color_rgb( 255, 50, 50 ), color1, color2);
+//part_type_color3(getParticle( "enemyBodyBurst2" ), make_color_rgb( 255, 50, 50 ), color1, color2);
 
 repeat( 40 ) {  
-    bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( "enemyBodyBurst1" ) );
+    bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_destroy1 ) );
 
 }
 repeat( 8 ) {
-    bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( "enemyBodyBurst2" ) );
+    bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_destroy2 ) );
 }
 
 
@@ -314,19 +318,19 @@ repeat( 8 ) {
             <kind>1</kind>
             <string>///Spawn
 
-particleDef_enemyBody();
-part_type_color3(getParticle( "enemyBodyForm1" ), make_color_rgb( 255, 50, 50 ), color1, color2);
-part_type_color3(getParticle( "enemyBodyForm2" ), make_color_rgb( 255, 50, 50 ), color1, color2);
+//particleDef_enemyBody();
+//part_type_color3(getParticle( part_form1 ), make_color_rgb( 255, 50, 50 ), color1, color2);
+//part_type_color3(getParticle( part_form1 ), make_color_rgb( 255, 50, 50 ), color1, color2);
 
-part_type_direction(getParticle( "enemyBodyForm1" ), image_angle + 180,image_angle + 180,0,0);
-part_type_direction(getParticle( "enemyBodyForm2" ), image_angle + 180,image_angle + 180,0,0);
+part_type_direction(getParticle( part_form1 ), image_angle + 180,image_angle + 180,0,0);
+part_type_direction(getParticle( part_form2 ), image_angle + 180,image_angle + 180,0,0);
 
 repeat( 15 ) {  
-    bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( "enemyBodyForm1" ) );
+    bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_form1 ) );
 
 }
 repeat( 40 ) {
-    bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( "enemyBodyForm2" ) );
+    bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_form2 ) );
 }
 
 

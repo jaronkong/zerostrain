@@ -119,6 +119,8 @@
       <script>scripts\getParticle.gml</script>
       <script>scripts\initGlobalPartMap.gml</script>
       <script>scripts\particleDef_enemyBody.gml</script>
+      <script>scripts\particleDef_enemyBodyBlue.gml</script>
+      <script>scripts\particleDef_enemyBodyGreen.gml</script>
       <scripts name="Weapons">
         <script>scripts\particleInit_bigBurst.gml</script>
         <script>scripts\particleDef_pickups.gml</script>
