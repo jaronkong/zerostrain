@@ -111,7 +111,8 @@ value = plr_wep_artillery_chance
 0 = plr_wep_artillery_chance
 1 = plr_wep_artillery_dmg
 2 = plr_wep_artillery_rate
-count = 3
+3 = plr_wep_artillery_radius
+count = 4
 
 [plr_wep_artillery_chance]
 default = 0
@@ -129,6 +130,14 @@ count = 1
 [plr_wep_artillery_rate]
 default = 1
 title = Fire Rate
+offset = 0.01
+tag0 = plr_wep_artillery_chance
+off0 = 1
+count = 1
+
+[plr_wep_artillery_radius]
+default = 1
+title = Burst Radius
 offset = 0.01
 tag0 = plr_wep_artillery_chance
 off0 = 1
@@ -162,7 +171,7 @@ count = 1
 [plr_wep_fissure_radius]
 default = 1
 title = Radius
-offset = 1.1
+offset = 0.01
 tag0 = plr_wep_fissure_chance
 off0 = 1
 count = 1
