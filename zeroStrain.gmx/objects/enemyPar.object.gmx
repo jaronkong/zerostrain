@@ -283,6 +283,8 @@ friction = baseFriction * global.timeTickFactor;
             <string>///Destroy Effects
 
 doStepSlow( 30, 2 );
+audioSetPitchRand( enemyDeath_sd );
+playSound( enemyDeath_sd, 1, false );
 
 //particleDef_enemyBody();
 //part_type_color3(getParticle( "enemyBodyBurst1" ), make_color_rgb( 255, 50, 50 ), color1, color2);

@@ -85,6 +85,8 @@
         <sound>sound\artilleryLaunch_sd</sound>
       </sounds>
     </sounds>
+    <sound>sound\havoc_bgm</sound>
+    <sound>sound\enemyDeath_sd</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
