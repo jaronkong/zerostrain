@@ -101,7 +101,13 @@ pickupCount += 1;
 if ( instance_number( weaponPickup ) &lt; count ) {
     var tObj = chooseWeight( pickupObj, pickupChance );
     if ( object_exists( tObj ) ) {
-        instance_create( random( room_width ), random( room_height ), tObj );
+        with ( mainController ) {
+            instance_create(
+                random_range( roomLeft, roomRight ),
+                random_range( roomTop, roomBottom ),
+                tObj
+            );
+        }
     }
 }
 </string>
@@ -128,16 +134,21 @@ if ( instance_number( weaponPickup ) &lt; count ) {
             <kind>1</kind>
             <string>///Update weights
 
-var tEffects = -1;
-with ( playerGenetics ) {
-    tEffects = effects;
+for ( var i = 0; i &lt; pickupCount; ++i ) {
+    pickupChance[i] = 0;
 }
 
-if ( ds_exists( tEffects, ds_type_map ) ) {
-    for ( var i = 0; i &lt; pickupCount; ++i ) {
-        pickupChance[i] = geneGetEffect( tEffects, pickupTag[i], 0 );
+with ( playerGenetics ) {
+    var tEffects = effects;
+    with ( other.id ) {
+        if ( ds_exists( tEffects, ds_type_map ) ) {
+            for ( var i = 0; i &lt; pickupCount; ++i ) {
+                pickupChance[i] += geneGetEffect( tEffects, pickupTag[i], 0 );
+            }
+        }
     }
 }
+
 </string>
           </argument>
         </arguments>

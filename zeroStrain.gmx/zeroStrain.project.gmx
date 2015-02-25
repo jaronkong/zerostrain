@@ -206,6 +206,7 @@
     </scripts>
     <script>scripts\drawSegmentHealthBar.gml</script>
     <script>scripts\chooseWeight.gml</script>
+    <script>scripts\pointInBounds.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\bloom_sdr.shader</shader>
@@ -280,6 +281,7 @@
       <object>objects\stepSlow</object>
     </objects>
     <objects name="Weapons">
+      <object>objects\weaponSpawner</object>
       <object>objects\weaponControllerPar</object>
       <object>objects\weaponController_projectiles</object>
       <object>objects\weaponPar_projectile</object>
@@ -306,7 +308,6 @@
       <objects name="Specials">
         <object>objects\weapon_fissureBomb</object>
       </objects>
-      <object>objects\weaponSpawner</object>
     </objects>
     <objects name="Enemy">
       <object>objects\enemyPar</object>

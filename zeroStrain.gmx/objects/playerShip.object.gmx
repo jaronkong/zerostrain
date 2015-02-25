@@ -156,9 +156,6 @@ hudFlashTimer = 0;
 genome = instance_create( x, y, playerGenetics );
 genome.owner = id;
 with ( genome ) event_user( 1 );
-
-//Update stats
-event_user( 1 );
 </string>
           </argument>
         </arguments>
