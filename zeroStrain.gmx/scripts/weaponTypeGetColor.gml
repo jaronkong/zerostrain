@@ -10,6 +10,5 @@ else if ( argument0 == WEAPON_TYPE.RED ) {
     return c_red;
 }
 else {
-    return c_orange;
+    return c_yellow;
 }
-
