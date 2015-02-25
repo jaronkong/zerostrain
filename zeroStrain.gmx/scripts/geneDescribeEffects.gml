@@ -34,6 +34,7 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
     for ( var j = 0; j < ds_list_size( tList ); ++j ) {
         var tItemIndex = ds_list_find_value( tList, j );
         var tItemTag = ds_grid_get( tGene, Gene.Tag, tItemIndex );
+        var tItemTitle = ds_grid_get( tGene, Gene.Title, tItemIndex );
         var tItemDef = ds_grid_get( tGene, Gene.Default, tItemIndex );
         var tItemHide = ds_grid_get( tGene, Gene.Hidden, tItemIndex );
         var tItemValue = ds_map_find_value( aEffects, tItemTag );
@@ -41,7 +42,7 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
         if ( tItemValue < 1 ) tItemValStr = ( "-" + tItemValStr );
         else tItemValStr = ( "+" + tItemValStr );
         if ( ( tItemValue != tItemDef ) && !tItemHide ) {
-            tItems[GeneDescGene.Title, tItemCount] = tItemTag;
+            tItems[GeneDescGene.Title, tItemCount] = tItemTitle;
             tItems[GeneDescGene.Value, tItemCount] = tItemValStr;
             tItemCount += 1;
         }
@@ -74,4 +75,3 @@ for ( var i = 0; i < ds_grid_height( tResult ); ++i ) {
 }
 
 return tResult;
-
