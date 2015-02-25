@@ -223,7 +223,7 @@
     <object>objects\playerShip</object>
     <objects name="Controllers">
       <object>objects\effectsGlobalCon</object>
-      <object>objects\testController</object>
+      <object>objects\mainController</object>
       <object>objects\stepController</object>
       <object>objects\spawnCon</object>
       <object>objects\enemyInfoDrawer</object>
