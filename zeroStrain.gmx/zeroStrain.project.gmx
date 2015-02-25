@@ -116,6 +116,9 @@
       <sprite>sprites\weapIcon_burst_spr</sprite>
       <sprite>sprites\weapIcon_artillery_spr</sprite>
     </sprites>
+    <sprites name="HUD">
+      <sprite>sprites\circleBlack_spr</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -224,6 +227,7 @@
       <object>objects\enemyInfoDrawer</object>
       <object>objects\particleTickController</object>
       <object>objects\cameraController</object>
+      <object>objects\HUDController</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">
