@@ -99,11 +99,11 @@ shakeAmount = lerp( shakeAmount, 0, shakeTween );
             <kind>1</kind>
             <string>///Tween camera
 
+targetCameraFocusX = clamp( targetCameraFocusX, view_wview/2, room_width - view_wview/2 );
+targetCameraFocusY = clamp( targetCameraFocusY, view_hview/2, room_height - view_hview/2 );
+
 cameraFocusX = lerp( cameraFocusX, targetCameraFocusX, cameraTween );
 cameraFocusY = lerp( cameraFocusY, targetCameraFocusY, cameraTween );
-
-cameraFocusX = clamp( cameraFocusX, view_wview/2, room_width - view_wview/2 );
-cameraFocusY = clamp( cameraFocusY, view_hview/2, room_height - view_hview/2 );
 
 view_xview = cameraFocusX - view_wview / 2;
 view_yview = cameraFocusY - view_hview / 2;
