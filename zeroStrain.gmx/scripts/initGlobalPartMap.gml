@@ -6,6 +6,7 @@ global.particleEmitterMap = ds_map_create();
 
 //Global systems
 global.enemySpawnSystem = part_system_create();
+
 bloom_attachParticleSystem( global.enemySpawnSystem, BLOOM_DEPTH );
 distortionGlow_attachParticleSystem( global.enemySpawnSystem );
 refraction_attachParticleSystem( global.enemySpawnSystem );

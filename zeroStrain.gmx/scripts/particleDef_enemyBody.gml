@@ -40,6 +40,23 @@ part_type_direction(tPartType,0,359,0 *t,0 *t);
 part_type_orientation(tPartType,0,0,0 *t,0 *t,0);
 part_type_life(tPartType,20 *ti,60 *ti);
 
+tPartName = "enemyLineBurst"
+if not ( ds_map_exists( global.particleMap, tPartName ) ) {
+    tPartType = part_type_create();
+    ds_map_add( global.particleMap, tPartName, tPartType );
+}
+tPartType = getParticle( tPartName );
+part_type_blend(tPartType,1);
+part_type_sprite(tPartType, particle_flare_spr, 0, 0, 0 );
+part_type_size(tPartType,0.5,0.8,-0.008 *t,0 *t);
+part_type_scale(tPartType,2,0.25);
+part_type_color3(tPartType,make_color_rgb( 255, 255, 50 ),make_color_rgb( 255, 50, 60 ), make_color_rgb( 255, 100, 70 ));
+part_type_alpha2(tPartType,1, 0);
+part_type_speed(tPartType,5 *t,15 *t,-0.2 *t,0 *t);
+part_type_direction(tPartType,0,359,0 *t,0 *t);
+part_type_orientation(tPartType,0,0,0 *t,0 *t,1);
+part_type_life(tPartType,30 *ti,100 *ti);
+
 tPartName = "enemyBodyBurst1"
 if not ( ds_map_exists( global.particleMap, tPartName ) ) {
     tPartType = part_type_create();

@@ -47,6 +47,7 @@ part_form1 = "enemyBodyForm1b";
 part_form2 = "enemyBodyForm2b";
 part_destroy1 = "enemyBodyBurst1b";
 part_destroy2 = "enemyBodyBurst2b";
+part_lineBurst = "enemyLineBurstb";
 
 bodyType = WEAPON_TYPE.BLUE;
 
