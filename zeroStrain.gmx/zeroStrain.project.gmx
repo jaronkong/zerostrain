@@ -312,6 +312,7 @@
       <object>objects\dnaRender</object>
       <object>objects\genePickup</object>
       <object>objects\geneDescriptionBox</object>
+      <object>objects\playerGenetics</object>
     </objects>
   </objects>
   <rooms name="rooms">
