@@ -71,6 +71,8 @@ full_screen_effect = true;
 
 if (shader_enabled) { 
     shader_set(finalScreen_sdr);
+        var_resolution_x = view_wview;
+        var_resolution_y = view_hview;
         shader_set_uniform_f(uni_resolution, var_resolution_x, var_resolution_y);
         if (full_screen_effect) {
            draw_surface(application_surface,0,0);

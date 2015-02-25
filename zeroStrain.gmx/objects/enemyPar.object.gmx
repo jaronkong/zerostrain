@@ -46,7 +46,7 @@ damageHealth = selfHealth;
 damageDecayRate = selfHealthMax / room_speed * 0.8;
 healthBarHeight = 8;
 healthBarWidth = 100;
-healthBarVOffset = 100;
+healthBarVOffset = -64;
 
 brainType = behavior_blindSeek;
 myBrain = noone;
