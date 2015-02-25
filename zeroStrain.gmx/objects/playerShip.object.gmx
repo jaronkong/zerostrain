@@ -27,8 +27,9 @@
             <kind>1</kind>
             <string>///Setup
 
-selfHealth = 100;
-selfHealthMax = 100;
+selfHealthMaxBase = 100;
+selfHealthMax = selfHealthMaxBase;
+selfHealth = selfHealthMax;
 
 aimDir = 0;
 aimPercent = 0;
@@ -429,6 +430,11 @@ var tEffects = genome.effects;
 var tTag = "plr_stat_";
 
 currentMaxSpeed = ( geneGetEffect( tEffects, tTag+"speed" ) * maxSpeed );
+
+var tNewMaxHealth = ( geneGetEffect( tEffects, tTag+"health" ) * selfHealthMaxBase );
+selfHealth += max( ( tNewMaxHealth - selfHealthMax ), 0 );
+selfHealthMax = tNewMaxHealth;
+selfHealth = min( selfHealth, selfHealthMax );
 </string>
           </argument>
         </arguments>

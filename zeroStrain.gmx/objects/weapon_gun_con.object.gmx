@@ -42,6 +42,7 @@
             <string>///Setup
 
 name = "Gatling Gun";
+gene += "gatling";
 weaponType = WEAPON_TYPE.GREEN;
 
 //Remember to set the particle def script in the step
