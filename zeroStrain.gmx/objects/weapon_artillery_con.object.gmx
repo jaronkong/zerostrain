@@ -42,6 +42,7 @@
             <string>///Setup
 
 name = "Blast Volley";
+gene += "artillery";
 weaponType = WEAPON_TYPE.RED;
 range = 500;
 burstRadius = 100;
