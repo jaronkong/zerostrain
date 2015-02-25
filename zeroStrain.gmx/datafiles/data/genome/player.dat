@@ -10,11 +10,11 @@ count = 2
 [plr_stat]
 group = 1
 title = Player
-0 = plr_stat_spd
+0 = plr_stat_speed
 1 = plr_stat_health
 count = 2
 
-[plr_stat_spd]
+[plr_stat_speed]
 default = 1
 title = Speed
 offset = 0.01

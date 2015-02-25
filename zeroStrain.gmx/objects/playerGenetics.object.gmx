@@ -28,6 +28,7 @@
             <string>///Define player's genome
 
 tag = "player";
+owner = noone;
 
 length = 128;
 genome = geneGenerateRandom( tag, length );
