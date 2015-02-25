@@ -119,6 +119,7 @@
     <sprites name="HUD">
       <sprite>sprites\circleBlack_spr</sprite>
     </sprites>
+    <sprite>sprites\driverStack_spr</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>

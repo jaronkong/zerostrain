@@ -31,7 +31,7 @@ attachTarget = noone;
 currentStacks = 0;
 maxStacks = 3;
 
-radius = 32;
+radius = 8;
 enterExtraRadius = 128;
 
 startAngle = 90;
@@ -43,12 +43,15 @@ baseAlpha = 0.5;
 targetBaseAlpha = 0.5;
 baseAlphaTween = 0.05;
 
+stackImage = driverStack_spr;
+stackScale = 0.25;
+
 for ( var i = 0; i &lt; maxStacks; ++i ) {
     pieceCurrentFactor[ i ] = 0;
     pieceTargetFactor[ i ] = 0;
 }
 
-pieceTweenFactor = 0.1;
+pieceTweenFactor = 0.2;
 
 </string>
           </argument>
@@ -180,6 +183,23 @@ if ( currentStacks &lt; maxStacks ) {
             <kind>1</kind>
             <string>///Draw
 
+if ( instance_exists( attachTarget ) ) {
+    var tAngleIncrement = 360 / maxStacks;
+    for ( var i = 0; i &lt; currentStacks; ++i ) {
+        //if ( pieceCurrentFactor[ i ] &gt; 0 ) {
+            var tRadius = radius + enterExtraRadius * (1-pieceCurrentFactor[ i ]);
+            var tXPos = attachTarget.x + lengthdir_x( tRadius, startAngle + tAngleIncrement*i );
+            var tYPos = attachTarget.y + lengthdir_y( tRadius, startAngle + tAngleIncrement*i );
+            
+            draw_sprite_ext( stackImage, 0, tXPos, tYPos, 
+                            pieceCurrentFactor[ i ] * stackScale, pieceCurrentFactor[ i ] * stackScale, 
+                            i * tAngleIncrement + 90, c_white, baseAlpha * pieceCurrentFactor [ i ] );
+            
+        //}
+    }
+}
+
+/*
 draw_primitive_begin( pr_trianglefan );
 
 if ( currentStacks &gt; 0 &amp;&amp; instance_exists( attachTarget )) {
@@ -207,6 +227,7 @@ if ( currentStacks &gt; 0 &amp;&amp; instance_exists( attachTarget )) {
 }
 
 draw_primitive_end();
+*/
 
 </string>
           </argument>
