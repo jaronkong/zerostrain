@@ -201,6 +201,7 @@
       <script>scripts\geneGenerateRandom.gml</script>
       <script>scripts\geneComputeEffects.gml</script>
       <script>scripts\geneDescribeEffects.gml</script>
+      <script>scripts\geneGetEffect.gml</script>
     </scripts>
     <script>scripts\drawSegmentHealthBar.gml</script>
   </scripts>
@@ -316,6 +317,7 @@
       <object>objects\dnaRender</object>
       <object>objects\genePickup</object>
       <object>objects\geneDescriptionBox</object>
+      <object>objects\playerGenetics</object>
     </objects>
   </objects>
   <rooms name="rooms">
