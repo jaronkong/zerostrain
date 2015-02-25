@@ -45,7 +45,8 @@ value = plr_wep_gatling_chance
 0 = plr_wep_gatling_chance
 1 = plr_wep_gatling_dmg
 2 = plr_wep_gatling_rate
-count = 3
+3 = plr_wep_gatling_time
+count = 4
 
 [plr_wep_gatling_chance]
 default = 0
@@ -68,6 +69,14 @@ tag0 = plr_wep_gatling_chance
 off0 = 1
 count = 1
 
+[plr_wep_gatling_time]
+default = 1
+title = Duration
+offset = 0.01
+tag0 = plr_wep_gatling_chance
+off0 = 1
+count = 1
+
 
 	[PULSE DRIVER]
 
@@ -78,7 +87,8 @@ value = plr_wep_pulse_chance
 0 = plr_wep_pulse_chance
 1 = plr_wep_pulse_dmg
 2 = plr_wep_pulse_rate
-count = 3
+3 = plr_wep_pulse_time
+count = 4
 
 [plr_wep_pulse_chance]
 default = 0
@@ -101,6 +111,14 @@ tag0 = plr_wep_pulse_chance
 off0 = 1
 count = 1
 
+[plr_wep_pulse_time]
+default = 1
+title = Duration
+offset = 0.01
+tag0 = plr_wep_pulse_chance
+off0 = 1
+count = 1
+
 
 	[BLAST VOLLEY]
 
@@ -112,7 +130,8 @@ value = plr_wep_artillery_chance
 1 = plr_wep_artillery_dmg
 2 = plr_wep_artillery_rate
 3 = plr_wep_artillery_radius
-count = 4
+4 = plr_wep_artillery_time
+count = 5
 
 [plr_wep_artillery_chance]
 default = 0
@@ -138,6 +157,14 @@ count = 1
 [plr_wep_artillery_radius]
 default = 1
 title = Burst Radius
+offset = 0.01
+tag0 = plr_wep_artillery_chance
+off0 = 1
+count = 1
+
+[plr_wep_artillery_time]
+default = 1
+title = Duration
 offset = 0.01
 tag0 = plr_wep_artillery_chance
 off0 = 1
