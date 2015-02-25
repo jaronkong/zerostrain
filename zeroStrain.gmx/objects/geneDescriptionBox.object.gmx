@@ -29,30 +29,15 @@
 
 data = -1;
 index = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Define values to render
 
 title = "";
 value = "";
+
+itemTitle = false;
+itemValue = false;
+itemCount = 0;
+
+loaded = false;
 </string>
           </argument>
         </arguments>
@@ -102,12 +87,20 @@ height = 128;
             <kind>1</kind>
             <string>///Update values
 
-if ( ds_exists( data, ds_type_grid ) &amp;&amp; ( index &gt;= 0 ) ) {
-    title = ds_grid_get( data, GeneDescGroup.Title, index );
-    value = ds_grid_get( data, GeneDescGroup.Value, index );
-} else {
-    data = -1;
-    index = -1;
+if ( !loaded ) {
+    if ( ds_exists( data, ds_type_grid ) &amp;&amp; ( index &gt;= 0 ) ) {
+        title = ds_grid_get( data, GeneDescGroup.Title, index );
+        value = ds_grid_get( data, GeneDescGroup.Value, index );
+        
+        var tItems = ds_grid_get( data, GeneDescGroup.Items, index );
+        itemCount = ds_grid_get( data, GeneDescGroup.ItemCount, index );
+        for ( var i = 0; i &lt; itemCount; ++i ) {
+            itemTitle[i] = tItems[GeneDescGene.Title, i];
+            itemValue[i] = tItems[GeneDescGene.Value, i];
+        }
+        
+        loaded = true;
+    }
 }
 </string>
           </argument>
@@ -159,17 +152,23 @@ draw_rectangle( x, y, x+width, y+height, false );
             <kind>1</kind>
             <string>///Draw values
 
-var m = 4;
+var m = 8;
 
 draw_set_color( c_white );
 draw_set_alpha( 1 );
 draw_set_valign( fa_top );
 
+draw_set_halign( fa_right );
+drawTextSize( x+width-m, y+m, value, font, 10 );
+
 draw_set_halign( fa_left );
 drawTextSize( x+m, y+m, title, font, 12 );
 
-draw_set_halign( fa_right );
-drawTextSize( x+width-m, y+m, value, font, 10 );
+for ( var i = 0; i &lt; itemCount; ++i ) {
+    var py = ( y + ( i * 20 ) + 32 );
+    drawTextSize( x+m, py, itemTitle[i], font, 10 );
+    drawTextSize( x+width/2, py, itemValue[i], font, 10 );
+}
 </string>
           </argument>
         </arguments>
