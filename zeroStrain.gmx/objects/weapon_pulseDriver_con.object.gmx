@@ -44,7 +44,9 @@
 name = "Pulse Driver";
 gene += "pulse";
 weaponType = WEAPON_TYPE.BLUE;
-burstDamage = 1000;
+
+burstMultiplier = 2.5; //How many times normal damage to deal
+burstPercent = 0.1;
 
 //Remember to set the particle def script in the step
 damage = 300;

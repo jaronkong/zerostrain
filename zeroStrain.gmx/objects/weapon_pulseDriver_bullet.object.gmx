@@ -150,7 +150,9 @@ if ( tHitObj != noone ) {
                 bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotHitSplash" ) );
                 bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotHitCore" ) );
             }
-            weaponDoDamageRaw( tHitObj, burstDamage );
+            if ( instance_exists( tHitObj ) ) {
+                weaponDoDamageRaw( tHitObj, ceil(damage * burstMultiplier + tHitObj.selfHealth*burstPercent) );
+            }
             shakeScreen( 32 );
             doStepSlow( 30, 2 );
         }
