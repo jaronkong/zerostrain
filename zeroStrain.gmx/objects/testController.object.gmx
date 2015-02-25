@@ -31,6 +31,7 @@ instance_create( 0, 0, spawnCon );
 instance_create( 0, 0, enemyInfoDrawer );
 instance_create( 0, 0, particleTickController );
 instance_create( 0, 0, cameraController );
+instance_create( 0, 0, HUDController );
 
 </string>
           </argument>
