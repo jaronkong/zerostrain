@@ -108,6 +108,20 @@ cameraFocusY = clamp( cameraFocusY, view_hview/2, room_height - view_hview/2 );
 view_xview = cameraFocusX - view_wview / 2;
 view_yview = cameraFocusY - view_hview / 2;
 
+if ( window_get_width() != view_wview || window_get_height() != view_hview ) {
+    view_hport = view_hview;
+    view_wport = view_wview;
+    view_wview = window_get_width();
+    view_hview = window_get_height();
+    surface_resize( application_surface, view_wview, view_hview );
+    /*
+    surface_free( global.shaderEffectSurface );
+    global.shaderEffectSurface = surface_create( 
+                    view_wview[0] * global.shaderEffectResolution, 
+                    view_hview[0] * global.shaderEffectResolution );
+                    */
+}
+
 //view_xview = clamp( view_xview, 0, room_width - view_wview );
 //view_yview = clamp( view_yview, 0, room_height - view_hview );
 

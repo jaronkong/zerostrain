@@ -25,14 +25,34 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw Corner blacks
+            <string>///Draw Circle cover
 
-var tImageScale = max( view_wview, view_hview ) / sprite_get_width( circleBlack_spr ) ;
+var tImageScale = max( view_wview + 1, view_hview + 1 ) / sprite_get_width( circleBlack_spr ) ;
 
 draw_sprite_ext( circleBlack_spr, 0, 
                     view_xview + view_wview/2,
                     view_yview + view_hview/2,
-                    tImageScale, tImageScale, 0, c_white, 0.95 );
+                    tImageScale, tImageScale, 0, c_white, 1 );
+                    
+draw_set_color( c_yellow );
+draw_set_alpha( 1 );
+draw_set_halign( fa_left );
+draw_set_valign( fa_top );
+
+var tVSpacing = 16;
+var tVBase = 8;
+drawTextSize( view_xview + 8, view_yview + tVBase,
+                "magnification: 1000x", main_ft, 8 );
+if ( instance_exists( playerShip ) ) {
+    var tXLoc = playerShip.x - room_width/2;
+    var tYLoc = playerShip.y - room_height/2;
+    drawTextSize( view_xview + 8, view_yview + tVBase +tVSpacing,
+                    "X: " + string( tXLoc ), main_ft, 8 );
+    drawTextSize( view_xview + 8, view_yview + tVBase + tVSpacing*2,
+                    "Y: " + string( tYLoc ), main_ft, 8 );
+}
+
+
 </string>
           </argument>
         </arguments>
