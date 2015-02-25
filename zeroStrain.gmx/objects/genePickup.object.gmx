@@ -33,6 +33,12 @@ genome = geneGenerateRandom( "player", length );
 //TODO: REMOVE DEBUG STUFF
 effects = geneComputeEffects( "player", genome, length );
 desc = geneDescribeEffects( "player", effects );
+for ( var i = 0; i &lt; ds_grid_height( desc ); ++i ) {
+    with ( instance_create( x, y+64*i, geneDescriptionBox ) ) {
+        data = other.desc;
+        index = i;
+    }
+}
 </string>
           </argument>
         </arguments>
