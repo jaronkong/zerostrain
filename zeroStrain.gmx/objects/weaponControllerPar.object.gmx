@@ -32,7 +32,8 @@ gene = "plr_wep_";
 owner = noone;
 active = true;
 firing = false;
-isInstant = false;
+isInstant = false; //Duration unused, fires immediately
+isContinuous = false; //Fire rate unused, every frame/stat change
 
 shootOriginX = 0;
 shootOriginY = 0;
@@ -265,9 +266,13 @@ with ( playerGenetics ) {
         var tEffects = effects;
         with ( other.id ) {
             damage *= geneGetEffect( tEffects, gene+"_dmg" );
-            fireRate /= geneGetEffect( tEffects, gene+"_rate" );
-            duration *= geneGetEffect( tEffects, gene+"_time" );
-            maxDuration = duration;
+            if ( !isContinuous &amp;&amp; !isInstant ) {
+                fireRate /= geneGetEffect( tEffects, gene+"_rate" );
+            }
+            if ( !isInstant ) {
+                duration *= geneGetEffect( tEffects, gene+"_time" );
+                maxDuration = duration;
+            }
         }
     }
 }
