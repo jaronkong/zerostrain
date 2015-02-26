@@ -35,7 +35,7 @@ radius = 8;
 enterExtraRadius = 128;
 
 startAngle = 90;
-destroyDelay = 60;
+destroyDelay = 10;
 
 pieceColor = c_blue;
 pieceDetonateColor = c_white;
