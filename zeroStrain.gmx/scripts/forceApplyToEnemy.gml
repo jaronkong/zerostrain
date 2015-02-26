@@ -5,6 +5,5 @@ var aDirection = argument1;
 var aForce = argument2;
 
 with ( aEnemy ) {
-    motion_add( aDirection, aForce );
+    motion_add( aDirection, aForce / mass );
 }
-

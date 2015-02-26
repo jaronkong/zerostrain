@@ -41,6 +41,7 @@ tagFontSize = 8;
 tagFont = main_ft;
 tagColor = c_orange;
 
+//Health-------------------------------------------
 selfHealth = 2000;
 selfHealthMax = selfHealth;
 damageHealth = selfHealth;
@@ -48,6 +49,7 @@ damageDecayRate = selfHealthMax / room_speed * 0.8;
 healthBarHeight = 8;
 healthBarWidth = 100;
 healthBarVOffset = -64;
+
 
 brainType = behavior_blindSeek;
 myBrain = noone;
@@ -87,9 +89,15 @@ pulseDriverAttachedIcon = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Movement
+            <string>///Movement and size
 
 baseFriction = 0.1;
+trackingSpeed = 3;
+maxSpeed = 2;
+
+mass = 1;
+sizeFactor = 10; //used for things like body particles. bigger = more particles.
+
 
 </string>
           </argument>
@@ -291,14 +299,14 @@ playSound( enemyDeath_sd, 1, false );
 //part_type_color3(getParticle( "enemyBodyBurst1" ), make_color_rgb( 255, 50, 50 ), color1, color2);
 //part_type_color3(getParticle( "enemyBodyBurst2" ), make_color_rgb( 255, 50, 50 ), color1, color2);
 
-repeat( 40 ) {  
+repeat( 40 * sizeFactor ) {  
     bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_destroy1 ) );
 
 }
-repeat( 8 ) {
+repeat( 8 * sizeFactor ) {
     bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_destroy2 ) );
 }
-repeat( 100 ) {
+repeat( 100 * sizeFactor ) {
     bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_lineBurst ) );
 }
 
@@ -325,6 +333,8 @@ repeat( 100 ) {
           <argument>
             <kind>1</kind>
             <string>///Spawn
+
+enemyInitColor( id, bodyType );
 
 //particleDef_enemyBody();
 //part_type_color3(getParticle( part_form1 ), make_color_rgb( 255, 50, 50 ), color1, color2);
@@ -370,6 +380,33 @@ myBrain = instance_create( 0, 0, brainType );
 with ( myBrain ) {
     target = other.id;
 }
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw
+
+draw_self();
+
 
 </string>
           </argument>

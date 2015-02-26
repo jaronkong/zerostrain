@@ -29,10 +29,18 @@
 
 with ( target ) {
     if ( instance_exists( playerShip ) ) {
-        motion_add( point_direction( x, y, playerShip.x, playerShip.y ), 0.3 );
+        
+        
+        var tDir = point_direction( x, y, playerShip.x, playerShip.y );
+        var tDiff = angle_difference( tDir, direction );
+        motion_add( direction, 0.5 );
+        if ( abs( tDiff ) &gt; trackingSpeed ) {
+            direction += trackingSpeed * sign( tDiff );
+        }
+        
         image_angle = direction;
-        if ( speed &gt; 1 ) {
-            speed = 1;
+        if ( speed &gt; maxSpeed ) {
+            speed = maxSpeed;
         }
         
         var tCollObj = collision_circle( x, y, 32, enemyPar, false, true );

@@ -27,12 +27,10 @@
             <kind>1</kind>
             <string>///Spawn enemy
 
-var rand = irandom( 1 );
-
-if ( rand == 0 )
-    instance_create( random( view_wview ), random( view_hview ), enemyBlue );
-else
-    instance_create( random( view_wview ), random( view_hview ), enemyBasic )
+with ( instance_create( random( view_wview ), random( view_hview ), enemyBattleship ) ) {
+    bodyType = irandom( 2 );
+    event_user( ENEMY_EV.CREATE );
+}
 </string>
           </argument>
         </arguments>

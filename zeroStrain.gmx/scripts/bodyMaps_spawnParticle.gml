@@ -34,4 +34,3 @@ part_particles_create( aPartSystem, aRootObj.x + lengthdir_x( tActualDist, tActu
                                 aRootObj.y + lengthdir_y( tActualDist, tActualAngle ),
                                 aPartType, 1 );
 
-

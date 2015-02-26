@@ -2,7 +2,8 @@
 
 enum BODY_MAPS {
     ENEMY1,
-    ENEMY2,
+    ENEMY3,
+    ENEMY4,
     
     NUM_BODY_MAPS
 };
@@ -18,5 +19,4 @@ enum BODY_MAP_INFO {
 };
 
 global.bodyMaps = ds_map_create();
-
 

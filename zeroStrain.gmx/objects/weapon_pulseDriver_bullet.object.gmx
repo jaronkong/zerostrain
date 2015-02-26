@@ -145,7 +145,7 @@ if ( tHitObj != noone ) {
             playSound( pulseShatter_sd, 1, false );
             part_type_direction(getParticle( "pulseShotHitCore" ), tTargetDir,tTargetDir, 0 *t,0 *t);
             part_type_direction(getParticle( "pulseShotHitSplash" ), 0 ,359, 0 *t,0 *t);
-            repeat( 50 ) {
+            repeat( 50 * tHitObj.sizeFactor ) {
                 bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotVaporize" ) );
                 bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotHitSplash" ) );
                 bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotHitCore" ) );

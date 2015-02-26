@@ -41,7 +41,7 @@
             <kind>1</kind>
             <string>///Setup
 
-event_user( ENEMY_EV.CREATE );
+bodyMapNum = BODY_MAPS.ENEMY1;
 
 </string>
           </argument>
@@ -121,7 +121,6 @@ shakeScreen( 32 );
             <kind>1</kind>
             <string>///Draw
 
-draw_self();
 
 </string>
           </argument>

@@ -2,6 +2,8 @@
 
 bodyMaps_init();
 bodyMaps_load( "bodyMap.ini", BODY_MAPS.ENEMY1 );
+bodyMaps_load( "enemy3Map.ini", BODY_MAPS.ENEMY3 );
+bodyMaps_load( "enemy4Map.ini", BODY_MAPS.ENEMY4 );
 
 enum WEAPON_TYPE {
     GREEN,
@@ -12,4 +14,3 @@ enum WEAPON_TYPE {
 }
 
 global.timeTickFactor = 1; //Percent of real time to run things at. For slowdown effects.
-
