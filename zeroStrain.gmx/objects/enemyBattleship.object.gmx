@@ -52,6 +52,7 @@ healthBarVOffset = -128;
 trackingSpeed = 0.1;
 maxSpeed = 1.5;
 mass = 50;
+sizeFactor = 10;
 
 bodyMapNum = BODY_MAPS.ENEMY4;
 

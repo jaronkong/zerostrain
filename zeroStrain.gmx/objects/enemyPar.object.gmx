@@ -96,7 +96,7 @@ trackingSpeed = 3;
 maxSpeed = 2;
 
 mass = 1;
-sizeFactor = 10; //used for things like body particles. bigger = more particles.
+sizeFactor = 1; //used for things like body particles. bigger = more particles.
 
 
 </string>
@@ -343,11 +343,11 @@ enemyInitColor( id, bodyType );
 part_type_direction(getParticle( part_form1 ), image_angle + 180,image_angle + 180,0,0);
 part_type_direction(getParticle( part_form2 ), image_angle + 180,image_angle + 180,0,0);
 
-repeat( 15 ) {  
+repeat( 15 * sizeFactor ) {  
     bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_form1 ) );
 
 }
-repeat( 40 ) {
+repeat( 40 * sizeFactor ) {
     bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_form2 ) );
 }
 
