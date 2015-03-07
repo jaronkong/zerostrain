@@ -364,9 +364,10 @@
     <objects name="Genetics">
       <object>objects\genomeData</object>
       <object>objects\dnaRender</object>
-      <object>objects\genePickup</object>
       <object>objects\geneDescriptionBox</object>
       <object>objects\playerGenetics</object>
+      <object>objects\genePickup</object>
+      <object>objects\mergeMenu</object>
     </objects>
   </objects>
   <rooms name="rooms">
