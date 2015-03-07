@@ -57,11 +57,15 @@ length = 0;
             <kind>1</kind>
             <string>///Define base strand
 
-base = noone;
+baseL = noone;
+baseR = noone;
 
 baseDesc = -1
 baseInfo = false;
 baseInfoCount = 0;
+
+baseX = 0.1;
+baseY = 0.5;
 </string>
           </argument>
         </arguments>
@@ -86,7 +90,8 @@ baseInfoCount = 0;
             <kind>1</kind>
             <string>///Clear base strand objects
 
-with ( base ) instance_destroy( );
+with ( baseL ) instance_destroy( );
+with ( baseR ) instance_destroy( );
 
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) instance_destroy( );
@@ -116,8 +121,13 @@ if ( ds_exists( baseDesc, ds_type_grid ) ) ds_grid_destroy( baseDesc );
             <kind>1</kind>
             <string>///Initialize base strand
 
-base = instance_create( x, y, dnaRender );
-base.segments = other.length;
+baseL = instance_create( x, y, dnaRender );
+baseR = instance_create( x, y, dnaRender );
+baseL.segments = other.length;
+baseR.segments = other.length;
+baseR.mirror = true;
+baseL.visible = false;
+baseR.visible = false;
 
 var tEffects = geneComputeEffects( label, geneBase, length );
 baseDesc = geneDescribeEffects( label, tEffects );
@@ -131,6 +141,44 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
         index = i;
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="76">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update positions
+
+var px = ( display_get_gui_width( ) * baseX );
+var py = ( display_get_gui_height( ) * baseY );
+
+baseL.x = px;
+baseL.y = py;
+baseL.z = 1000;
+baseL.twist = 5;
+baseL.split = -16;
+
+baseR.x = px;
+baseR.y = py;
+baseR.z = 1000;
+baseR.twist = 5;
+baseR.split = -16;
 </string>
           </argument>
         </arguments>
@@ -164,6 +212,40 @@ draw_rectangle( 0, 0, display_get_gui_width( ), display_get_gui_height( ), false
 draw_set_color( c_white );
 draw_set_alpha( 1 );
 draw_set_blend_mode( bm_normal );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw DNA strands
+
+var tw = display_get_gui_width( );
+var th = display_get_gui_height( );
+
+d3d_start( );
+d3d_set_projection_perspective( 0, 0, tw, th, 0 );
+d3d_light_define_ambient( c_white );
+
+with ( baseL ) event_perform( ev_draw, false );
+with ( baseR ) event_perform( ev_draw, false );
+
+d3d_set_projection_ortho( 0, 0, tw, th, 0 );
+d3d_end( );
 </string>
           </argument>
         </arguments>
