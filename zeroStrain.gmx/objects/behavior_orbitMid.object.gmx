@@ -5,10 +5,24 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>behaviorPar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -27,7 +41,10 @@
             <kind>1</kind>
             <string>///Setup
 
-target = noone; //The enemy to control
+orbitDist = 400;
+
+currentOrbitAngle = 0;
+orbitSpeed = 0.1;
 
 </string>
           </argument>
@@ -35,6 +52,20 @@ target = noone; //The enemy to control
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -51,16 +82,35 @@ target = noone; //The enemy to control
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Don't overlap with other enemies
+            <string>///Seek player
 
+if ( currentOrbitAngle &gt; 360 ) {
+    currentOrbitAngle -= 360;
+}
+        
 with ( target ) {
-
-    var tCollObj = collision_circle( x, y, 48 * sizeFactor, enemyPar, false, true );
-    if ( instance_exists( tCollObj ) ) {
-        var tDir = point_direction( x, y, tCollObj.x, tCollObj.y );
-        motion_add( tDir + 180, 0.3 );
+    if ( instance_exists( playerShip ) ) {
+        
+        other.currentOrbitAngle += radtodeg( arctan( speed / other.orbitDist ) );
+        
+        var tTargetX = playerShip.x + lengthdir_x( other.orbitDist, other.currentOrbitAngle );
+        var tTargetY = playerShip.y + lengthdir_y( other.orbitDist, other.currentOrbitAngle );
+    
+        var tDir = point_direction( x, y, tTargetX, tTargetY );
+        var tDiff = angle_difference( tDir, direction );
+        motion_add( direction, 0.5 );
+        if ( abs( tDiff ) &gt; trackingSpeed ) {
+            direction += trackingSpeed * sign( tDiff );
+        }
+        
+        image_angle = direction;
+        
+        if ( speed &gt; maxSpeed ) {
+            speed = maxSpeed;
+        }
     }
 }
+
 </string>
           </argument>
         </arguments>

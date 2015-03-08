@@ -17,3 +17,4 @@ particleDef_pickups();
 particleDef_enemyBody();
 particleDef_enemyBodyBlue();
 particleDef_enemyBodyGreen();
+particleDef_enemyBullet();

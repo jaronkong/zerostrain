@@ -27,29 +27,42 @@
             <kind>1</kind>
             <string>///Setup
 
-globalInit();
+lifespan = 120;
 
-instance_create( 0, 0, bloomController );
-instance_create( 0, 0, distortionGlowController );
-instance_create( 0, 0, refractionController );
-instance_create( 0, 0, dispersionController );
+hitForce = 10;
+damage = 5;
 
-initGlobalPartMap();
+ownerEnemy = noone;
 
-instance_create( 0, 0, postShader );
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Decay
 
-global.shaderEffectSurface = -1;
-global.shaderEffectResolution = 0.25;
-global.debugMode = false;
+lifespan -= global.timeTickFactor;
 
-global.resX = -1;
-global.resXMax = -1;
-global.resXScale = 1;
-global.resY = -1;
-global.resYMax = -1;
-global.resYScale = 1;
-global.resScale = 1;
-
+if ( lifespan &lt;= 0 ) {
+    instance_destroy();
+}
 
 </string>
           </argument>
