@@ -280,8 +280,8 @@ d3d_transform_add_rotation_x( 90 );
 
 if ( mirror ) d3d_transform_add_rotation_y( 180 );
 
-d3d_transform_add_rotation_x( rx );
 d3d_transform_add_rotation_y( ry );
+d3d_transform_add_rotation_x( rx );
 d3d_transform_add_rotation_z( rz );
 d3d_transform_add_translation( x, y, z );
 

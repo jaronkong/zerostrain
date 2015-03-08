@@ -167,7 +167,7 @@ drawTextSize( x+m, y+m, title, font, 12 );
 for ( var i = 0; i &lt; itemCount; ++i ) {
     var py = ( y + ( i * 20 ) + 32 );
     drawTextSize( x+m, py, itemTitle[i], font, 10 );
-    drawTextSize( x+width/2, py, itemValue[i], font, 10 );
+    drawTextSize( x+width*0.6, py, itemValue[i], font, 10 );
 }
 </string>
           </argument>
