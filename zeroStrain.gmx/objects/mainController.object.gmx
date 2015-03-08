@@ -176,7 +176,7 @@ particleInit_bigBurst();
             <kind>1</kind>
             <string>///Background music
 
-//audio_play_sound( havoc_bgm, 1, true );
+audio_play_sound( havoc_bgm, 1, true );
 
 </string>
           </argument>

@@ -121,6 +121,10 @@
     </sounds>
     <sound>sound\havoc_bgm</sound>
     <sound>sound\enemyDeath_sd</sound>
+    <sound>sound\damageTaken_sd</sound>
+    <sounds name="Enemy">
+      <sound>sound\enemySmallShot_sd</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
@@ -172,6 +176,9 @@
       <script>scripts\particleDef_enemyBody.gml</script>
       <script>scripts\particleDef_enemyBodyBlue.gml</script>
       <script>scripts\particleDef_enemyBodyGreen.gml</script>
+      <scripts name="Enemy">
+        <script>scripts\particleDef_enemyBullet.gml</script>
+      </scripts>
       <scripts name="Weapons">
         <script>scripts\particleInit_bigBurst.gml</script>
         <script>scripts\particleDef_pickups.gml</script>
@@ -221,6 +228,7 @@
       <script>scripts\weaponDoDamageRaw.gml</script>
       <script>scripts\weaponCreateProjectile.gml</script>
       <script>scripts\weaponCheckForwardLineColl.gml</script>
+      <script>scripts\weaponCheckForwardLineAny.gml</script>
       <script>scripts\weaponEquip.gml</script>
       <script>scripts\weaponUseInstant.gml</script>
       <script>scripts\weaponPlayEquipSound.gml</script>
@@ -237,6 +245,10 @@
     </scripts>
     <scripts name="Enemies">
       <script>scripts\enemyInitColor.gml</script>
+    </scripts>
+    <scripts name="Gameplay">
+      <script>scripts\damagePlayer.gml</script>
+      <script>scripts\intercept_course.gml</script>
     </scripts>
     <script>scripts\globalInit.gml</script>
     <script>scripts\playSound.gml</script>
@@ -355,10 +367,16 @@
     <objects name="Enemy">
       <object>objects\enemyPar</object>
       <object>objects\enemyBasic</object>
+      <object>objects\enemyShot</object>
       <object>objects\enemyBattleship</object>
+      <objects name="EnemyWeapons">
+        <object>objects\enemyWeaponPar</object>
+        <object>objects\enemyBullet</object>
+      </objects>
       <objects name="EnemyBrains">
         <object>objects\behaviorPar</object>
         <object>objects\behavior_blindSeek</object>
+        <object>objects\behavior_orbitMid</object>
       </objects>
     </objects>
     <objects name="Genetics">

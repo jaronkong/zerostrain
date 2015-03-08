@@ -27,7 +27,12 @@
             <kind>1</kind>
             <string>///Setup
 
-target = noone; //The enemy to control
+lifespan = 120;
+
+hitForce = 10;
+damage = 5;
+
+ownerEnemy = noone;
 
 </string>
           </argument>
@@ -51,16 +56,14 @@ target = noone; //The enemy to control
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Don't overlap with other enemies
+            <string>///Decay
 
-with ( target ) {
+lifespan -= global.timeTickFactor;
 
-    var tCollObj = collision_circle( x, y, 48 * sizeFactor, enemyPar, false, true );
-    if ( instance_exists( tCollObj ) ) {
-        var tDir = point_direction( x, y, tCollObj.x, tCollObj.y );
-        motion_add( tDir + 180, 0.3 );
-    }
+if ( lifespan &lt;= 0 ) {
+    instance_destroy();
 }
+
 </string>
           </argument>
         </arguments>
