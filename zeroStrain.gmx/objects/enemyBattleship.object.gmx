@@ -41,6 +41,8 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Battleship"
+
 selfHealth = 15000;
 selfHealthMax = selfHealth;
 damageHealth = selfHealth;

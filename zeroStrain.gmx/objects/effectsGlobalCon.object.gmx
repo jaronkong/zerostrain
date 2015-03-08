@@ -39,7 +39,7 @@ initGlobalPartMap();
 instance_create( 0, 0, postShader );
 
 global.shaderEffectSurface = -1;
-global.shaderEffectResolution = 0.5;
+global.shaderEffectResolution = 0.25;
 global.debugMode = false;
 
 global.resX = -1;

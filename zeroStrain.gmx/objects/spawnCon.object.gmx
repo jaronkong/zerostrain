@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///Spawn enemy
 
-with ( instance_create( random( view_wview ), random( view_hview ), enemyBattleship ) ) {
+with ( instance_create( random( view_wview ), random( view_hview ), enemyBasic ) ) {
     bodyType = irandom( 2 );
     event_user( ENEMY_EV.CREATE );
 }

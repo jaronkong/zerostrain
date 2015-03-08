@@ -30,7 +30,7 @@
 showMap = true;
 targetShader = dispersion_sdr;
 
-resolution = 1;
+resolution = 0.25;
 prepSurface = -1;
 stageSurface = -1;
 
@@ -124,8 +124,8 @@ rate = 10;
 
 if ( surface_exists( prepSurface ) ) {
     surface_set_target( prepSurface );
-    //d3d_set_projection_ortho( view_xview[0], view_yview[0], view_wview[0], view_hview[0], view_angle[0] );
-    d3d_set_projection_ortho( 0, 0, room_width, room_height, view_angle[0] );
+    d3d_set_projection_ortho( view_xview[0], view_yview[0], view_wview[0], view_hview[0], view_angle[0] );
+    //d3d_set_projection_ortho( 0, 0, room_width, room_height, view_angle[0] );
         draw_set_color( c_lime );
         draw_set_alpha( 1 );
         //draw_circle( mouse_x, 
@@ -169,13 +169,13 @@ if ( surface_exists( prepSurface ) ) {
             <string>///Draw
 
 if ( !surface_exists( prepSurface ) ) {
-    prepSurface = surface_create( view_wview, view_hview );
+    prepSurface = surface_create( view_wview * resolution, view_hview * resolution );
     surface_set_target( prepSurface );
         draw_clear_alpha( c_black, 1 );
     surface_reset_target();
 }
 if ( !surface_exists( stageSurface ) ) {
-    stageSurface = surface_create( view_wview, view_hview );
+    stageSurface = surface_create( view_wview * resolution, view_hview * resolution );
     surface_set_target( stageSurface );
         draw_clear_alpha( c_black, 1 );
     surface_reset_target();
@@ -199,27 +199,30 @@ if ( !surface_exists( stageSurface ) ) {
         shader_set_uniform_f( s_normalUVs, uvs[0] + tUVWidth*tViewXPercent, uvs[1] + tUVHeight*tViewYPercent, 
                                             uvs[0] + tUVWidth*tViewXPercent + tUVWidth*tViewWPercent, 
                                             uvs[1] + tUVHeight*tViewYPercent + tUVHeight*tViewHPercent);
+        shader_set_uniform_f( s_normalUVs, uvs[0] + tUVWidth*tViewXPercent, uvs[1] + tUVHeight*tViewYPercent, 
+                                            uvs[0] + tUVWidth*tViewXPercent + tUVWidth*tViewWPercent, 
+                                            uvs[1] + tUVHeight*tViewYPercent + tUVHeight*tViewHPercent);
         
         surface_set_target( stageSurface );
             shader_set_uniform_f( s_decay, decayFactor );
             
             draw_surface_stretched(prepSurface, 0, 0, 
-                        view_wview, 
-                        view_hview);
+                        view_wview * resolution, 
+                        view_hview * resolution);
             
         surface_reset_target();
 
     shader_reset();
 draw_set_blend_mode( bm_add );
-/*
+
     draw_surface_stretched(stageSurface, view_xview, view_yview, 
                     view_wview, 
                     view_hview);
-*/
+/*
     draw_surface_stretched(stageSurface, 0, 0, 
                     room_width, 
                     room_height);
-                    
+*/                
 draw_set_blend_mode( bm_normal );                                   
     surface_copy( prepSurface, 0, 0, stageSurface ); //Copy the stage back to the prep
 
