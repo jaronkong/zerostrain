@@ -139,7 +139,7 @@ var tHor = 0;
 var tVer = 0;
 if ( gamepad_is_connected( 0 ) ) {
     tHor += gamepad_axis_value( 0, gp_axislh );
-    tVer -= gamepad_axis_value( 0, gp_axislv );
+    tVer += gamepad_axis_value( 0, gp_axislv );
 }
 if ( tHor &lt; 0 ) tHor /= 5;
 
