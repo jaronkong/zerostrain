@@ -57,14 +57,14 @@ length = 0;
             <kind>1</kind>
             <string>///Define base strand
 
-baseL = noone;
-baseR = noone;
+base[0] = noone;
+base[1] = noone;
 
 baseDesc = -1
 baseInfo = false;
 baseInfoCount = 0;
 
-baseX = 0.1;
+baseX = -0.2;
 baseY = 0.5;
 </string>
           </argument>
@@ -90,8 +90,9 @@ baseY = 0.5;
             <kind>1</kind>
             <string>///Clear base strand objects
 
-with ( baseL ) instance_destroy( );
-with ( baseR ) instance_destroy( );
+for ( var i = 0; i &lt; 2; ++i ) {
+    with ( base[i] ) instance_destroy( );
+}
 
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) instance_destroy( );
@@ -121,13 +122,13 @@ if ( ds_exists( baseDesc, ds_type_grid ) ) ds_grid_destroy( baseDesc );
             <kind>1</kind>
             <string>///Initialize base strand
 
-baseL = instance_create( x, y, dnaRender );
-baseR = instance_create( x, y, dnaRender );
-baseL.segments = other.length;
-baseR.segments = other.length;
-baseR.mirror = true;
-baseL.visible = false;
-baseR.visible = false;
+base[0] = instance_create( x, y, dnaRender );
+base[1] = instance_create( x, y, dnaRender );
+base[1].mirror = true;
+for ( var i = 0; i &lt; 2; ++i ) {
+    base[i].segments = other.length;
+    base[i].visible = false;
+}
 
 var tEffects = geneComputeEffects( label, geneBase, length );
 baseDesc = geneDescribeEffects( label, tEffects );
@@ -168,17 +169,17 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
 var px = ( display_get_gui_width( ) * baseX );
 var py = ( display_get_gui_height( ) * baseY );
 
-baseL.x = px;
-baseL.y = py;
-baseL.z = 1000;
-baseL.twist = 5;
-baseL.split = -16;
-
-baseR.x = px;
-baseR.y = py;
-baseR.z = 1000;
-baseR.twist = 5;
-baseR.split = -16;
+for ( var i = 0; i &lt; 2; ++i ) {
+    base[i].x = px;
+    base[i].y = py;
+    base[i].z = 1000;
+    base[i].rx = 0;
+    base[i].ry = 0;
+    base[i].rz = 0;
+    base[i].twist = 5;
+    base[i].split = -16;
+}
+baseR+=1;
 </string>
           </argument>
         </arguments>
@@ -241,8 +242,8 @@ d3d_start( );
 d3d_set_projection_perspective( 0, 0, tw, th, 0 );
 d3d_light_define_ambient( c_white );
 
-with ( baseL ) event_perform( ev_draw, false );
-with ( baseR ) event_perform( ev_draw, false );
+with ( base[0] ) event_perform( ev_draw, false );
+with ( base[1] ) event_perform( ev_draw, false );
 
 d3d_set_projection_ortho( 0, 0, tw, th, 0 );
 d3d_end( );
