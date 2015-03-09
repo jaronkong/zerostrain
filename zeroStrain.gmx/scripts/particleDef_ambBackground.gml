@@ -22,4 +22,3 @@ part_type_direction(tPartType,0,359,0 *t,1 *t);
 part_type_orientation(tPartType,0,360,0 *t,0 *t,0);
 part_type_life(tPartType,room_speed*2 *ti,room_speed*4 *ti);
 
-

@@ -32,7 +32,7 @@ globalInit();
 instance_create( 0, 0, bloomController );
 instance_create( 0, 0, distortionGlowController );
 instance_create( 0, 0, refractionController );
-instance_create( 0, 0, dispersionController );
+//instance_create( 0, 0, dispersionController );
 instance_create( 0, 0, ambientParticles );
 
 initGlobalPartMap();

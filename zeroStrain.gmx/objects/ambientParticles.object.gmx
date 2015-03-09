@@ -37,14 +37,15 @@ speedFalloff = 0.8 / numLayers;
 
 for ( var i = 0; i &lt; numLayers; i ++ ) {
     partSystems[ i ] = part_system_create();
-    //bloom_attachParticleSystem( system1, BLOOM_DEPTH );
+    part_system_depth( partSystems[ i ], 10 - 5*i );
+    //bloom_attachParticleSystem( partSystems[ i ], BLOOM_DEPTH );
     //distortionGlow_attachParticleSystem( system1 );
-    //refraction_attachParticleSystem( system1 );
+    //refraction_attachParticleSystem( partSystems[ i ] );
     
     emitters[ i ] = part_emitter_create( partSystems[ i ] );
     part_emitter_region( partSystems[ i ], emitters[ i ], 
-                            0, room_width + ( room_width * layerOffset * i ), 
-                            0, room_height + ( room_height * layerOffset * i ), ps_shape_rectangle, ps_distr_linear );
+                            0, room_width + ( room_width * layerOffset / 2 * i ), 
+                            0, room_height + ( room_height * layerOffset / 2 * i ), ps_shape_rectangle, ps_distr_linear );
 
 }
 </string>
@@ -82,6 +83,7 @@ for ( var i = 0; i &lt; numLayers; i ++ ) {
     part_type_size(getParticle( "ambBackground" ),tSize,tSize + 0.1,-0.001,0.05);
     part_type_speed(getParticle( "ambBackground" ),tSpeed *t,tSpeed + 0.5 *t,0 *t,0.1 *t);
     part_emitter_burst( partSystems[ i ], emitters[ i ], getParticle( "ambBackground" ), 1 );
+
     
     tSize += sizeFalloff;
     tSpeed -= speedFalloff;
