@@ -41,7 +41,7 @@ void main()
     v_vColour.rgb *= vec3( -norm.z/5.0 );
     
     //Apply fog
-    v_vColour.rgb *= pow(clamp(1.0-(gl_Position.z/750.0),0.0,1.0), 0.6);
+    //v_vColour.rgb *= pow(clamp(1.0-(gl_Position.z/750.0),0.0,1.0), 0.6);
 }
 
 //######################_==_YOYO_SHADER_MARKER_==_######################@~//

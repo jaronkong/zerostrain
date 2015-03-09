@@ -1,4 +1,4 @@
-///geneDescribeEffect( label, effects )
+///geneDescribeEffects( label, effects )
 //Create a grid with textual data about the effects map
 
 var aLabel = argument0;

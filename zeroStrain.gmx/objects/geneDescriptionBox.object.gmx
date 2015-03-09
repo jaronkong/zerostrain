@@ -127,9 +127,41 @@ if ( !loaded ) {
             <string>///Draw back
 
 draw_set_color( c_dkgray );
-draw_set_alpha( 1 );
+draw_set_alpha( image_alpha );
 
-draw_rectangle( x, y, x+width, y+height, false );
+//draw_rectangle( x, y, x+width, y+height, false );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw edges
+
+draw_set_color( c_dkgray );
+draw_set_alpha( image_alpha );
+
+var m = 8;
+var w = 2;
+draw_line_width( x-m, y, x+w/2, y, w );
+draw_line_width( x, y, x, y+height, w );
+draw_line_width( x+w/2, y+height, x-m, y+height, w );
+
+draw_line_width( x, y+26, x+width, y+26, w );
 </string>
           </argument>
         </arguments>
@@ -155,7 +187,7 @@ draw_rectangle( x, y, x+width, y+height, false );
 var m = 8;
 
 draw_set_color( c_white );
-draw_set_alpha( 1 );
+draw_set_alpha( image_alpha );
 draw_set_valign( fa_top );
 
 draw_set_halign( fa_right );
@@ -167,7 +199,7 @@ drawTextSize( x+m, y+m, title, font, 12 );
 for ( var i = 0; i &lt; itemCount; ++i ) {
     var py = ( y + ( i * 20 ) + 32 );
     drawTextSize( x+m, py, itemTitle[i], font, 10 );
-    drawTextSize( x+width/2, py, itemValue[i], font, 10 );
+    drawTextSize( x+width*0.6, py, itemValue[i], font, 10 );
 }
 </string>
           </argument>
