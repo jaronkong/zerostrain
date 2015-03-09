@@ -176,6 +176,7 @@
       <script>scripts\particleDef_enemyBody.gml</script>
       <script>scripts\particleDef_enemyBodyBlue.gml</script>
       <script>scripts\particleDef_enemyBodyGreen.gml</script>
+      <script>scripts\particleDef_ambBackground.gml</script>
       <scripts name="Enemy">
         <script>scripts\particleDef_enemyBullet.gml</script>
       </scripts>
@@ -323,6 +324,7 @@
       </objects>
       <objects name="Misc">
         <object>objects\circleCrack</object>
+        <object>objects\ambientParticles</object>
       </objects>
       <objects name="FullScreenEffects">
         <object>objects\postShader</object>
