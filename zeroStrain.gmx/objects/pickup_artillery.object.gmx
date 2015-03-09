@@ -41,7 +41,7 @@
             <kind>1</kind>
             <string>///Setup
 
-heldWeapon = weapon_mine_con;
+heldWeapon = weapon_artillery_con;
 
 
 
