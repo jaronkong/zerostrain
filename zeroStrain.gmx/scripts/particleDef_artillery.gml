@@ -1,4 +1,4 @@
-///particleDef_fissureBomb();
+///particleDef_artillery();
 
 var t = global.timeTickFactor;
 var ti = 1/t;
@@ -108,4 +108,3 @@ part_type_speed(tPartType,1 *t,15 *t,-0.2 *t,0 *t);
 part_type_direction(tPartType,0,359,0 *t,0 *t);
 part_type_orientation(tPartType,0,0,0 *t,0 *t,1);
 part_type_life(tPartType,30 *ti,60 *ti);
-

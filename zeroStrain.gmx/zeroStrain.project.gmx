@@ -118,6 +118,9 @@
         <sound>sound\artilleryBurst_sd</sound>
         <sound>sound\artilleryLaunch_sd</sound>
       </sounds>
+      <sounds name="Torch">
+        <sound>sound\torchBurn_sd</sound>
+      </sounds>
     </sounds>
     <sound>sound\havoc_bgm</sound>
     <sound>sound\enemyDeath_sd</sound>
@@ -187,6 +190,7 @@
         <script>scripts\particleDef_pulseDriver.gml</script>
         <script>scripts\particleDef_fissureBomb.gml</script>
         <script>scripts\particleDef_artillery.gml</script>
+        <script>scripts\particleDef_torch.gml</script>
       </scripts>
     </scripts>
     <scripts name="Effects">
@@ -361,6 +365,9 @@
       <objects name="Artillery">
         <object>objects\weapon_artillery_con</object>
         <object>objects\weapon_artillery_shot</object>
+      </objects>
+      <objects name="Torch">
+        <object>objects\weapon_torch_con</object>
       </objects>
       <object>objects\weaponPickup</object>
       <objects name="Specials">
