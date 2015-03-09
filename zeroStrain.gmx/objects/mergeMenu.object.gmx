@@ -68,6 +68,7 @@ baseInfoCount = 0;
 baseNeutralX = -0.2;
 baseNeutralY = 0.5
 
+//Current state
 baseX = baseNeutralX;
 baseY = baseNeutralY;
 baseZ = 1000;
@@ -76,7 +77,35 @@ baseRX = 0;
 baseRY = 0;
 baseRZ = 0;
 
+baseTwist = 5;
+baseSplit = -16;
+
+//Misc movement variables
 baseRYspd = 10;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Define state
+
+stateLocked = false;
+stateMerging = false;
 </string>
           </argument>
         </arguments>
@@ -133,26 +162,28 @@ if ( ds_exists( baseDesc, ds_type_grid ) ) ds_grid_destroy( baseDesc );
             <kind>1</kind>
             <string>///Base strand position update
 
-baseRY += ( baseRYspd * global.dt );
-
-var tHor = 0;
-var tVer = 0;
-if ( gamepad_is_connected( 0 ) ) {
-    tHor += gamepad_axis_value( 0, gp_axislh );
-    tVer += gamepad_axis_value( 0, gp_axislv );
+if ( !stateLocked ) {
+    baseRY += ( baseRYspd * global.dt );
+    
+    var tHor = 0;
+    var tVer = 0;
+    if ( gamepad_is_connected( 0 ) ) {
+        tHor += gamepad_axis_value( 0, gp_axislh );
+        tVer += gamepad_axis_value( 0, gp_axislv );
+    }
+    if ( tHor &lt; 0 ) tHor /= 5;
+    
+    //Update rotation
+    baseRX = lerp( baseRX, ( tVer * 5 ), 0.1 );
+    baseRYspd = lerp( baseRYspd, ( clamp( tHor, -0.1, 0.1 ) * 1500 ), abs( tHor / 5 ) );
+    
+    //Update position
+    var tSpd = 0.025;
+    var tGoalX = lerp( baseNeutralX, 0.5, tHor );
+    var tGoalY = ( baseNeutralY + ( tVer * 0.1 ) );
+    baseX = lerp( baseX, tGoalX, tSpd );
+    baseY = lerp( baseY, tGoalY, tSpd );
 }
-if ( tHor &lt; 0 ) tHor /= 5;
-
-//Update rotation
-baseRX = lerp( baseRX, ( tVer * 5 ), 0.1 );
-baseRYspd = lerp( baseRYspd, ( clamp( tHor, -0.1, 0.1 ) * 1500 ), abs( tHor / 5 ) );
-
-//Update position
-var tSpd = 0.025;
-var tGoalX = lerp( baseNeutralX, 0.5, tHor );
-var tGoalY = ( baseNeutralY + ( tVer * 0.1 ) );
-baseX = lerp( baseX, tGoalX, tSpd );
-baseY = lerp( baseY, tGoalY, tSpd );
 </string>
           </argument>
         </arguments>
@@ -179,6 +210,46 @@ var tAlpha = 1;
 if ( baseX &gt; 0.1 ) tAlpha = 0;
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].image_alpha = lerp( baseInfo[i].image_alpha, tAlpha, 0.0875 );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Trigger merge animation
+
+if ( !stateMerging ) {
+    if ( baseX &gt; 0.25 ) {
+        stateLocked = true;
+        stateMerging = true;
+        while ( baseRY &lt; 0 ) baseRY += 360;
+        while ( baseRY &gt;= 0 ) baseRY -= 360;
+    }
+} else {
+    var tSpd = 0.025;
+    baseX = lerp( baseX, 0.35, tSpd );
+    baseY = lerp( baseY, 0.5, tSpd );
+    baseRY = lerp( baseRY, 0, 0.02 );
+    baseTwist = lerp( baseTwist, 0, 0.02 );
+    if ( baseTwist &lt; 0.5 ) {
+        var tOffset = ( lerp( baseSplit, length*1.2, 0.0055 ) - baseSplit );
+        baseSplit += min( tOffset, 0.375 );
+    }
 }
 </string>
           </argument>
@@ -259,8 +330,8 @@ for ( var i = 0; i &lt; 2; ++i ) {
     base[i].rx = baseRX;
     base[i].ry = baseRY;
     base[i].rz = baseRZ;
-    base[i].twist = 5;
-    base[i].split = -16;
+    base[i].twist = baseTwist;
+    base[i].split = baseSplit;
 }
 
 px = base[0].radius * 12;
