@@ -13,6 +13,11 @@
     origin = argument0;
     target = argument1;
     pspeed = argument2;
+    
+    if ( !instance_exists( origin ) || !instance_exists( target ) ) {
+        return -1;
+    }
+    
     dir = point_direction(origin.x,origin.y,target.x,target.y);
     alpha = target.speed / pspeed;
     phi = degtorad(target.direction - dir);

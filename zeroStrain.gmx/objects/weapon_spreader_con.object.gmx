@@ -154,7 +154,7 @@ particleDef_spreader();
 var t = global.timeTickFactor;
 
 if ( instance_exists( owner ) ) {
-    playSound( gunShot_sd, 1, false );
+    playSound( spreadShot_sd, 1, false );
     
     shootOriginX = owner.x;
     shootOriginY = owner.y;

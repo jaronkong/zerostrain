@@ -55,6 +55,7 @@ trackingSpeed = 0.1;
 maxSpeed = 1.5;
 mass = 50;
 sizeFactor = 5;
+boundsRange = 100;
 
 bodyMapNum = BODY_MAPS.ENEMY4;
 
