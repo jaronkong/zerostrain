@@ -63,6 +63,8 @@ loaded = false;
 font = main_ft;
 width = 192;
 height = 128;
+
+mirror = false;
 </string>
           </argument>
         </arguments>
@@ -153,15 +155,23 @@ draw_set_alpha( image_alpha );
             <kind>1</kind>
             <string>///Draw edges
 
-draw_set_color( c_dkgray );
+draw_set_color( c_yellow );
 draw_set_alpha( image_alpha );
 
+var px = x;
 var m = 8;
 var w = 2;
-draw_line_width( x-m, y, x+w/2, y, w );
-draw_line_width( x, y, x, y+height, w );
-draw_line_width( x+w/2, y+height, x-m, y+height, w );
 
+if ( mirror ) {
+    px += width;
+    m *= -1;
+}
+
+draw_line_width( px-m, y, px+w/2, y, w );
+draw_line_width( px, y, px, y+height, w );
+draw_line_width( px+w/2, y+height, px-m, y+height, w );
+
+//Title underline
 draw_line_width( x, y+26, x+width, y+26, w );
 </string>
           </argument>

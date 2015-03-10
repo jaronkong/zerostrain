@@ -98,10 +98,14 @@ baseInfoScale = 1;
             <kind>1</kind>
             <string>///Define option strands
 
-optionCurrent = 1;
-optionCount = 0;
+optionCount = geneOptionCount;
+optionCurrent = 0;
 
 option = false;
+
+optionDesc = false;
+optionInfo = false;
+optionInfoCount = false;
 
 optionPos = instance_create( 0, 0, mergeMenuInput );
 with ( optionPos ) {
@@ -203,6 +207,11 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     for ( var j = 0; j &lt; 2; ++j ) {
         with ( option[i, j] ) instance_destroy( );
     }
+    
+    for ( var j = 0; j &lt; optionInfoCount; ++j ) {
+        with ( optionInfo[i, j] ) instance_destroy( );
+    }
+    if ( ds_exists( optionDesc, ds_type_grid ) ) ds_grid_destroy( optionDesc );
 }
 
 with ( optionPos ) instance_destroy( );
@@ -345,13 +354,12 @@ if ( !stateMerging ) {
             <kind>1</kind>
             <string>///Initialize base strand
 
-base[0] = instance_create( x, y, dnaRender );
-base[1] = instance_create( x, y, dnaRender );
-base[1].mirror = true;
 for ( var i = 0; i &lt; 2; ++i ) {
+    base[i] = instance_create( x, y, dnaRender );
     base[i].segments = other.length;
     base[i].visible = false;
 }
+base[1].mirror = true;
 
 var tEffects = geneComputeEffects( label, geneBase, length );
 baseDesc = geneDescribeEffects( label, tEffects );
@@ -388,7 +396,7 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
             <kind>1</kind>
             <string>///Initialize option strand
 
-optionCount = 3;
+optionCount = geneOptionCount;
 for ( var i = 0; i &lt; optionCount; ++i ) {
     option[i, 0] = instance_create( x, y, dnaRender );
     option[i, 1] = instance_create( x, y, dnaRender );
@@ -396,6 +404,21 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     for ( var j = 0; j &lt; 2; ++j ) {
         option[i, j].segments = other.length;
         option[i, j].visible = false;
+    }
+    
+    var tEffects = geneComputeEffects( label, geneOption[i], length );
+    optionDesc[i] = geneDescribeEffects( label, tEffects );
+    ds_map_destroy( tEffects );
+    
+    optionInfoCount[i] = ds_grid_height( optionDesc[i] );
+    for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
+        optionInfo[i, j] = instance_create( x, y, geneDescriptionBox );
+        with ( optionInfo[i, j] ) {
+            data = other.optionDesc[i];
+            index = j;
+            mirror = true;
+            visible = false;
+        }
     }
 }
 </string>
@@ -441,7 +464,7 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     if ( i &gt; 0 ) tHeight += 16;
     tHeight += baseInfo[i].height;
 }
-var px = base[0].radius * 16;
+var px = ( base[0].radius * 16 );
 var py = -( tHeight / 2 );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].x = px;
@@ -477,13 +500,21 @@ optionY = ( display_get_gui_height( ) * lerp( 0.5, 0.6, optionPos.y ) );
 for ( var i = 0; i &lt; optionCount; ++i ) {
     var tDist = ( i - optionCurrentAni );
     var tDistAbs = abs( tDist );
+    
+    var tX = lerp( optionX, ( display_get_gui_width( ) * 2 ), ( 2 * tDistAbs / optionCount ) );
+    var tY = ( optionY + ( tDist * 1500 ) );
+    var tZ = ( optionPos.z + ( tDistAbs * 1000 ) );
+    var tRX = ( optionPos.rx / ( tDistAbs + 1 ) );
+    var tRY = -optionPos.ry;
+    var tRZ = ( optionPos.rz / ( tDistAbs + 1 ) );
+    
     for ( var j = 0; j &lt; 2; ++j ) {
-        option[i, j].x = lerp( optionX, ( display_get_gui_width( ) * 2 ), ( 2 * tDistAbs / optionCount ) );
-        option[i, j].y = ( optionY + ( tDist * 1500 ) );
-        option[i, j].z = ( optionPos.z + ( tDistAbs * 1000 ) );
-        option[i, j].rx = ( optionPos.rx / ( tDistAbs + 1 ) );
-        option[i, j].ry = -optionPos.ry;
-        option[i, j].rz = ( optionPos.rz / ( tDistAbs + 1 ) );
+        option[i, j].x = tX;
+        option[i, j].y = tY;
+        option[i, j].z = tZ;
+        option[i, j].rx = tRX;
+        option[i, j].ry = tRY;
+        option[i, j].rz = tRZ;
         option[i, j].twist = optionTwist;
         option[i, j].split = optionSplit;
         if ( i == optionCurrent ) {
@@ -491,6 +522,20 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
             option[i, j].split = baseSplit;
         }
     }
+    
+    var tHeight = 0;
+    for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
+        if ( j &gt; 0 ) tHeight += 16;
+        tHeight += optionInfo[i, j].height;
+    }
+    var px = -( ( option[i, 0].radius * 16 ) + optionInfo[i, 0].width );
+    var py = -( tHeight / 2 );
+    for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
+        optionInfo[i, j].x = px;
+        optionInfo[i, j].y = py;
+        py += ( optionInfo[i, j].height + 16 );
+    }
+    optionInfoScale = ( length * 9.5 / tHeight );
 }
 </string>
           </argument>
@@ -612,11 +657,24 @@ d3d_set_depth( -10 );
 var tScale = baseInfoScale;
 d3d_transform_add_scaling( tScale, tScale, tScale );
 d3d_transform_add_rotation_y( 5 );
-d3d_transform_add_rotation_z( basePos.rz );
-d3d_transform_add_rotation_x( basePos.rx );
-d3d_transform_add_translation( baseX, baseY, basePos.z );
+d3d_transform_add_rotation_z( base[0].rz );
+d3d_transform_add_rotation_x( base[0].rx );
+d3d_transform_add_translation( base[0].x, base[0].y, base[0].z );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) event_perform( ev_draw, false );
+}
+
+for ( var i = 0; i &lt; optionCount; ++i ) {
+    tScale = baseInfoScale;
+    d3d_transform_stack_top( );
+    d3d_transform_add_scaling( tScale, tScale, tScale );
+    d3d_transform_add_rotation_y( 5 );
+    d3d_transform_add_rotation_z( option[i, 0].rz );
+    d3d_transform_add_rotation_x( option[i, 0].rx );
+    d3d_transform_add_translation( option[i, 0].x, option[i, 0].y, option[i, 0].z );
+    for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
+        with ( optionInfo[i, j] ) event_perform( ev_draw, false );
+    }
 }
 
 d3d_transform_stack_pop( );
