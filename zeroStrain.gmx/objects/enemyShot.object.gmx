@@ -51,7 +51,7 @@ fireRate = 1 * room_speed;
 currentFireTimer = fireRate;
 fireRange = 700;
 
-bulletSpeed = 8;
+bulletSpeed = 7;
 
 trackingSpeed = 0.6;
 maxSpeed = 2;
