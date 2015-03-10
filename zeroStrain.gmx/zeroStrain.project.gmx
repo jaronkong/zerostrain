@@ -168,6 +168,7 @@
       <sprite>sprites\weapIcon_artillery_spr</sprite>
       <sprite>sprites\weapIcon_torch_spr</sprite>
       <sprite>sprites\weapIcon_mine_spr</sprite>
+      <sprite>sprites\weapIcon_spread_spr</sprite>
     </sprites>
     <sprites name="HUD">
       <sprite>sprites\circleBlack_spr</sprite>
@@ -198,6 +199,7 @@
         <script>scripts\particleDef_artillery.gml</script>
         <script>scripts\particleDef_mine.gml</script>
         <script>scripts\particleDef_torch.gml</script>
+        <script>scripts\particleDef_spreader.gml</script>
       </scripts>
     </scripts>
     <scripts name="Effects">
@@ -362,6 +364,7 @@
         <object>objects\pickup_artillery</object>
         <object>objects\pickup_torch</object>
         <object>objects\pickup_mine</object>
+        <object>objects\pickup_spreader</object>
       </objects>
       <objects name="Gun">
         <object>objects\weapon_gun_con</object>
@@ -382,6 +385,10 @@
       <objects name="Mines">
         <object>objects\weapon_mine_con</object>
         <object>objects\weapon_mine_shot</object>
+      </objects>
+      <objects name="Spreader">
+        <object>objects\weapon_spreader_con</object>
+        <object>objects\weapon_spreader_bullet</object>
       </objects>
       <object>objects\weaponPickup</object>
       <objects name="Specials">
