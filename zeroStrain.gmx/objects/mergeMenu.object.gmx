@@ -98,7 +98,7 @@ baseInfoScale = 1;
             <kind>1</kind>
             <string>///Define option strands
 
-optionCurrent = 0;
+optionCurrent = 1;
 optionCount = 0;
 
 option = false;
@@ -349,7 +349,7 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
             <kind>1</kind>
             <string>///Initialize option strand
 
-optionCount = 1;
+optionCount = 3;
 for ( var i = 0; i &lt; optionCount; ++i ) {
     option[i, 0] = instance_create( x, y, dnaRender );
     option[i, 1] = instance_create( x, y, dnaRender );
@@ -436,13 +436,15 @@ optionX = ( display_get_gui_width( ) * lerp( 1.1, 0.5, optionPos.x ) );
 optionY = ( display_get_gui_height( ) * lerp( 0.5, 0.6, optionPos.y ) );
 
 for ( var i = 0; i &lt; optionCount; ++i ) {
+    var tDist = ( i - optionCurrent );
+    var tDistAbs = abs( tDist );
     for ( var j = 0; j &lt; 2; ++j ) {
-        option[i, j].x = optionX;
-        option[i, j].y = optionY;
-        option[i, j].z = optionPos.z;
-        option[i, j].rx = optionPos.rx;
+        option[i, j].x = lerp( optionX, ( display_get_gui_width( ) * 2 ), ( 2 * tDistAbs / optionCount ) );
+        option[i, j].y = ( optionY + ( tDist * 1500 ) );
+        option[i, j].z = ( optionPos.z + ( tDistAbs * 1000 ) );
+        option[i, j].rx = ( optionPos.rx / ( tDistAbs + 1 ) );
         option[i, j].ry = -optionPos.ry;
-        option[i, j].rz = optionPos.rz;
+        option[i, j].rz = ( optionPos.rz / ( tDistAbs + 1 ) );
         option[i, j].twist = optionTwist;
         option[i, j].split = optionSplit;
         if ( i == optionCurrent ) {
