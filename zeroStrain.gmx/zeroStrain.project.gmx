@@ -421,8 +421,12 @@
       <object>objects\mergeMenu</object>
       <object>objects\mergeMenuInput</object>
     </objects>
+    <objects name="Title">
+      <object>objects\titleObj</object>
+    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\Title_rm</room>
     <room>rooms\room0</room>
   </rooms>
   <constants number="2">

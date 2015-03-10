@@ -81,6 +81,8 @@ rungModel = -1;
 
 edgeSurf = -1;
 rungSurf = -1;
+
+colIsBlack = false;
 </string>
           </argument>
         </arguments>
@@ -192,6 +194,7 @@ if ( !surface_exists( edgeSurf ) ) {
     edgeSurf = surface_create( 1, 1 );
     surface_set_target( edgeSurf );
     draw_clear_alpha( c_ltgray, 1 );
+    if ( colIsBlack ) draw_clear_alpha( c_black, 1 );
     surface_reset_target( );
 }
 
@@ -204,6 +207,7 @@ if ( !surface_exists( rungSurf ) ) {
         var tCol = choose( c_red, c_lime, c_aqua );
         draw_point_color( i, 0, tCol );
     }
+    if ( colIsBlack ) draw_clear_alpha( c_black, 1 );
     surface_reset_target( );
 }
 </string>
