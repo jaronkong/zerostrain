@@ -38,7 +38,7 @@ void main()
     //Apply lighting
     vec4 norm = ( rotate * vec4( in_Normal.xyz, 0.0 ) );
     norm = ( gm_Matrices[MATRIX_WORLD_VIEW] * norm );
-    v_vColour.rgb *= vec3( -norm.z/5.0 );
+    //v_vColour.rgb *= vec3( -norm.z/5.0 );
     
     //Apply fog
     //v_vColour.rgb *= pow(clamp(1.0-(gl_Position.z/750.0),0.0,1.0), 0.6);

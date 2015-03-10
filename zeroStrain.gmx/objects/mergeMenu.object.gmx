@@ -163,6 +163,8 @@ if ( ds_exists( baseDesc, ds_type_grid ) ) ds_grid_destroy( baseDesc );
             <string>///Base strand position update
 
 if ( !stateLocked ) {
+    var t = global.timeTickFactor;
+    
     baseRY += ( baseRYspd * global.dt );
     
     var tHor = 0;
@@ -170,19 +172,24 @@ if ( !stateLocked ) {
     if ( gamepad_is_connected( 0 ) ) {
         tHor += gamepad_axis_value( 0, gp_axislh );
         tVer += gamepad_axis_value( 0, gp_axislv );
+    } else {
+        if ( keyboard_check( vk_left ) ) tHor -= 1;
+        if ( keyboard_check( vk_right ) ) tHor += 1;
+        if ( keyboard_check( vk_up ) ) tVer -= 1;
+        if ( keyboard_check( vk_down ) ) tVer += 1;
     }
     if ( tHor &lt; 0 ) tHor /= 5;
     
     //Update rotation
-    baseRX = lerp( baseRX, ( tVer * 5 ), 0.1 );
-    baseRYspd = lerp( baseRYspd, ( clamp( tHor, -0.1, 0.1 ) * 1500 ), abs( tHor / 5 ) );
+    baseRX = lerpDT( baseRX, ( tVer * 5 ), 0.1, t );
+    baseRYspd = lerpDT( baseRYspd, ( clamp( tHor, -0.1, 0.1 ) * 1500 ), abs( tHor / 5 ), t );
     
     //Update position
     var tSpd = 0.025;
-    var tGoalX = lerp( baseNeutralX, 0.5, tHor );
+    var tGoalX = lerpDT( baseNeutralX, 0.5, tHor, t );
     var tGoalY = ( baseNeutralY + ( tVer * 0.1 ) );
-    baseX = lerp( baseX, tGoalX, tSpd );
-    baseY = lerp( baseY, tGoalY, tSpd );
+    baseX = lerpDT( baseX, tGoalX, tSpd, t );
+    baseY = lerpDT( baseY, tGoalY, tSpd, t );
 }
 </string>
           </argument>
@@ -206,10 +213,12 @@ if ( !stateLocked ) {
             <kind>1</kind>
             <string>///Base strand info fade out
 
+var t = global.timeTickFactor;
+
 var tAlpha = 1;
 if ( baseX &gt; 0.1 ) tAlpha = 0;
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
-    baseInfo[i].image_alpha = lerp( baseInfo[i].image_alpha, tAlpha, 0.0875 );
+    baseInfo[i].image_alpha = lerpDT( baseInfo[i].image_alpha, tAlpha, 0.0875, t );
 }
 </string>
           </argument>
@@ -241,15 +250,17 @@ if ( !stateMerging ) {
         while ( baseRY &gt;= 0 ) baseRY -= 360;
     }
 } else {
+    var t = global.timeTickFactor;
     var tSpd = 0.025;
-    baseX = lerp( baseX, 0.35, tSpd );
-    baseY = lerp( baseY, 0.5, tSpd );
-    baseRY = lerp( baseRY, 0, 0.02 );
-    baseTwist = lerp( baseTwist, 0, 0.02 );
-    if ( baseTwist &lt; 0.5 ) {
-        var tOffset = ( lerp( baseSplit, length*1.2, 0.0055 ) - baseSplit );
-        baseSplit += min( tOffset, 0.375 );
+    baseX = lerpDT( baseX, 0.35, tSpd, t );
+    baseY = lerpDT( baseY, 0.5, tSpd, t );
+    baseRY = lerpDT( baseRY, 0, 0.02, t );
+    baseTwist = lerpDT( baseTwist, 0, 0.02, t );
+    if ( ( baseTwist &lt; 30 ) &amp;&amp; ( baseRY &gt; -180 ) ) {
+        //var tOffset = ( lerpDT( baseSplit, length*1.2, 0.008, t ) - baseSplit );
+        baseSplit += 1.25//min( tOffset, 2 );
     }
+    
 }
 </string>
           </argument>
@@ -450,7 +461,7 @@ with ( base[1] ) event_perform( ev_draw, false );
 d3d_transform_stack_push( );
 
 d3d_set_hidden( false );
-d3d_set_depth( 0 );
+d3d_set_depth( -10 );
 
 var px = ( display_get_gui_width( ) * baseX );
 var py = ( display_get_gui_height( ) * baseY );
