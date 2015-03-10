@@ -82,6 +82,7 @@ baseSplit = -16;
 
 //Misc movement variables
 baseRYspd = 10;
+baseInfoScale = 1;
 </string>
           </argument>
         </arguments>
@@ -347,16 +348,17 @@ for ( var i = 0; i &lt; 2; ++i ) {
 
 var tHeight = 0;
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
-    if ( i &gt; 0 ) tHeight += 32;
+    if ( i &gt; 0 ) tHeight += 16;
     tHeight += baseInfo[i].height;
 }
-px = base[0].radius * 12;
+px = base[0].radius * 16;
 py = -( tHeight / 2 );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].x = px;
     baseInfo[i].y = py;
-    py += ( baseInfo[i].height + 32 );
+    py += ( baseInfo[i].height + 16 );
 }
+baseInfoScale = ( length * 9.5 / tHeight );
 </string>
           </argument>
         </arguments>
@@ -472,7 +474,7 @@ d3d_set_depth( -10 );
 var px = ( display_get_gui_width( ) * baseX );
 var py = ( display_get_gui_height( ) * baseY );
 
-var tScale = 1;
+var tScale = baseInfoScale;
 d3d_transform_add_scaling( tScale, tScale, tScale );
 d3d_transform_add_rotation_y( 5 );
 d3d_transform_add_rotation_z( baseRZ );

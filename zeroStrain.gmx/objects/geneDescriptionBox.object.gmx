@@ -101,6 +101,7 @@ if ( !loaded ) {
         
         loaded = true;
     }
+    height = ( 32 + ( itemCount * 20 ) + 8 );
 }
 </string>
           </argument>
