@@ -98,6 +98,9 @@ baseInfoScale = 1;
             <kind>1</kind>
             <string>///Define option strands
 
+optionCurrent = 0;
+optionCount = 0;
+
 option = false;
 
 optionPos = instance_create( 0, 0, mergeMenuInput );
@@ -195,8 +198,10 @@ with ( basePos ) instance_destroy( );
             <kind>1</kind>
             <string>///Clear option strand objects
 
-for ( var i = 0; i &lt; 2; ++i ) {
-    with ( option[i] ) instance_destroy( );
+for ( var i = 0; i &lt; optionCount; ++i ) {
+    for ( var j = 0; j &lt; 2; ++j ) {
+        with ( option[i, j] ) instance_destroy( );
+    }
 }
 
 with ( optionPos ) instance_destroy( );
@@ -254,11 +259,14 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
             <string>///Trigger merge animation
 
 if ( !stateMerging ) {
-    if ( basePos.x &gt; 0.75 ) {
-        basePos.stateLocked = true;
+    if ( ( basePos.x &gt; 0.75 ) &amp;&amp; ( optionPos.x &gt; 0.75 ) ) {
         stateMerging = true;
+        basePos.stateLocked = true;
         while ( basePos.ry &lt; 0 ) basePos.ry += 360;
         while ( basePos.ry &gt;= 0 ) basePos.ry -= 360;
+        optionPos.stateLocked = true;
+        while ( optionPos.ry &lt; 0 ) optionPos.ry += 360;
+        while ( optionPos.ry &gt;= 0 ) optionPos.ry -= 360;
     }
 } else {
     var t = global.timeTickFactor;
@@ -270,7 +278,9 @@ if ( !stateMerging ) {
     if ( ( baseTwist &lt; 30 ) &amp;&amp; ( basePos.ry &gt; -180 ) ) {
         baseSplit += 1.25
     }
-    
+    optionPos.x = lerpDT( optionPos.x, 0.8, tSpd, t );
+    optionPos.y = lerpDT( optionPos.y, 0, tSpd, t );
+    optionPos.ry = lerpDT( optionPos.ry, 0, 0.02, t );
 }
 </string>
           </argument>
@@ -339,12 +349,15 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
             <kind>1</kind>
             <string>///Initialize option strand
 
-option[0] = instance_create( x, y, dnaRender );
-option[1] = instance_create( x, y, dnaRender );
-option[1].mirror = true;
-for ( var i = 0; i &lt; 2; ++i ) {
-    option[i].segments = other.length;
-    option[i].visible = false;
+optionCount = 1;
+for ( var i = 0; i &lt; optionCount; ++i ) {
+    option[i, 0] = instance_create( x, y, dnaRender );
+    option[i, 1] = instance_create( x, y, dnaRender );
+    option[i, 1].mirror = true;
+    for ( var j = 0; j &lt; 2; ++j ) {
+        option[i, j].segments = other.length;
+        option[i, j].visible = false;
+    }
 }
 </string>
           </argument>
@@ -422,15 +435,21 @@ baseInfoScale = ( length * 9.5 / tHeight );
 optionX = ( display_get_gui_width( ) * lerp( 1.1, 0.5, optionPos.x ) );
 optionY = ( display_get_gui_height( ) * lerp( 0.5, 0.6, optionPos.y ) );
 
-for ( var i = 0; i &lt; 2; ++i ) {
-    option[i].x = optionX;
-    option[i].y = optionY;
-    option[i].z = optionPos.z;
-    option[i].rx = optionPos.rx;
-    option[i].ry = -optionPos.ry;
-    option[i].rz = optionPos.rz;
-    option[i].twist = baseTwist;
-    option[i].split = baseSplit;
+for ( var i = 0; i &lt; optionCount; ++i ) {
+    for ( var j = 0; j &lt; 2; ++j ) {
+        option[i, j].x = optionX;
+        option[i, j].y = optionY;
+        option[i, j].z = optionPos.z;
+        option[i, j].rx = optionPos.rx;
+        option[i, j].ry = -optionPos.ry;
+        option[i, j].rz = optionPos.rz;
+        option[i, j].twist = optionTwist;
+        option[i, j].split = optionSplit;
+        if ( i == optionCurrent ) {
+            option[i, j].twist = -baseTwist;
+            option[i, j].split = baseSplit;
+        }
+    }
 }
 </string>
           </argument>
@@ -518,8 +537,10 @@ d3d_light_define_ambient( c_white );
 with ( base[0] ) event_perform( ev_draw, false );
 with ( base[1] ) event_perform( ev_draw, false );
 
-with ( option[0] ) event_perform( ev_draw, false );
-with ( option[1] ) event_perform( ev_draw, false );
+for ( var i = 0; i &lt; optionCount; ++i ) {
+    with ( option[i, 0] ) event_perform( ev_draw, false );
+    with ( option[i, 1] ) event_perform( ev_draw, false );
+}
 </string>
           </argument>
         </arguments>
