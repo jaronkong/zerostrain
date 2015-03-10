@@ -64,6 +64,37 @@ stateLocked = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Define input
+
+inHorizontal = gp_axislh;
+inVertical = gp_axislv;
+
+inUp = ord( 'W' );
+inDown = ord( 'S' );
+inLeft = ord( 'A' );
+inRight = ord( 'D' );
+
+inFlipH = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -92,14 +123,15 @@ if ( !stateLocked ) {
     var tHor = 0;
     var tVer = 0;
     if ( gamepad_is_connected( 0 ) ) {
-        tHor += gamepad_axis_value( 0, gp_axislh );
-        tVer += gamepad_axis_value( 0, gp_axislv );
+        tHor += gamepad_axis_value( 0, inHorizontal );
+        tVer += gamepad_axis_value( 0, inVertical );
     } else {
-        if ( keyboard_check( ord ( 'A' ) ) ) tHor -= 1;
-        if ( keyboard_check( ord ( 'D' ) ) ) tHor += 1;
-        if ( keyboard_check( ord ( 'W' ) ) ) tVer -= 1;
-        if ( keyboard_check( ord ( 'S' ) ) ) tVer += 1;
+        if ( keyboard_check( inLeft ) ) tHor -= 1;
+        if ( keyboard_check( inRight ) ) tHor += 1;
+        if ( keyboard_check( inUp ) ) tVer -= 1;
+        if ( keyboard_check( inDown ) ) tVer += 1;
     }
+    if ( inFlipH ) tHor *= -1;
     if ( tHor &lt; 0 ) tHor /= 5;
     
     //Update rotation
