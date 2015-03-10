@@ -96,6 +96,45 @@ baseInfoScale = 1;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Define option strands
+
+option = false;
+
+optionPos = instance_create( 0, 0, mergeMenuInput );
+with ( optionPos ) {
+    inHorizontal = gp_axisrh;
+    inVertical = gp_axisrv;
+    inUp = vk_up;
+    inDown = vk_down;
+    inLeft = vk_left;
+    inRight = vk_right;
+    inFlipH = true;
+}
+optionX = 0;
+optionY = 0;
+
+optionTwist = 5;
+optionSplit = -16;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Define state
 
 stateLocked = false;
@@ -134,6 +173,33 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
 if ( ds_exists( baseDesc, ds_type_grid ) ) ds_grid_destroy( baseDesc );
 
 with ( basePos ) instance_destroy( );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Clear option strand objects
+
+for ( var i = 0; i &lt; 2; ++i ) {
+    with ( option[i] ) instance_destroy( );
+}
+
+with ( optionPos ) instance_destroy( );
 </string>
           </argument>
         </arguments>
@@ -255,6 +321,35 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Initialize option strand
+
+option[0] = instance_create( x, y, dnaRender );
+option[1] = instance_create( x, y, dnaRender );
+option[1].mirror = true;
+for ( var i = 0; i &lt; 2; ++i ) {
+    option[i].segments = other.length;
+    option[i].visible = false;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="76">
       <action>
@@ -302,6 +397,41 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     py += ( baseInfo[i].height + 16 );
 }
 baseInfoScale = ( length * 9.5 / tHeight );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update option strand positions
+
+optionX = ( display_get_gui_width( ) * lerp( 1.1, 0.5, optionPos.x ) );
+optionY = ( display_get_gui_height( ) * lerp( 0.5, 0.6, optionPos.y ) );
+
+for ( var i = 0; i &lt; 2; ++i ) {
+    option[i].x = optionX;
+    option[i].y = optionY;
+    option[i].z = optionPos.z;
+    option[i].rx = optionPos.rx;
+    option[i].ry = -optionPos.ry;
+    option[i].rz = optionPos.rz;
+    option[i].twist = baseTwist;
+    option[i].split = baseSplit;
+}
 </string>
           </argument>
         </arguments>
@@ -387,6 +517,9 @@ d3d_light_define_ambient( c_white );
 
 with ( base[0] ) event_perform( ev_draw, false );
 with ( base[1] ) event_perform( ev_draw, false );
+
+with ( option[0] ) event_perform( ev_draw, false );
+with ( option[1] ) event_perform( ev_draw, false );
 </string>
           </argument>
         </arguments>
