@@ -47,10 +47,10 @@ isInstant = true;
 
 fireRate = room_speed * 2;
 duration = room_speed * 1;
-damage = 1000;
+damage = 3000;
 hitForce = 5;
 
-radius = 300;
+radius = 350;
 
 burstX = 200;
 burstY = 200;

@@ -43,6 +43,10 @@
 
 bodyMapNum = BODY_MAPS.ENEMY1;
 
+selfHealth = 800;
+selfHealthMax = selfHealth;
+damageHealth = selfHealth;
+
 baseFriction = 0.1;
 trackingSpeed = 3;
 maxSpeed = 3;
