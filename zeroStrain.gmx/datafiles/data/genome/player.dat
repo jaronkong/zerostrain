@@ -35,7 +35,8 @@ group = 1
 3 = plr_wep_fissure
 4 = plr_wep_torch
 5 = plr_wep_mine
-count = 6
+6 = plr_wep_spreader
+count = 7
 
 
 	[GATLING GUN]
@@ -304,5 +305,47 @@ default = 1
 title = Blast Radius
 offset = 0.01
 tag0 = plr_wep_mine_chance
+off0 = 1
+count = 1
+
+
+	[Spreader Gun]
+
+[plr_wep_spreader]
+group = 1
+title = Spreader Gun
+value = plr_wep_spreader_chance
+0 = plr_wep_spreader_chance
+1 = plr_wep_spreader_dmg
+2 = plr_wep_spreader_rate
+3 = plr_wep_spreader_time
+count = 4
+
+[plr_wep_spreader_chance]
+default = 0
+offset = 2
+hidden = 1
+
+[plr_wep_spreader_dmg]
+default = 1
+title = Damage
+offset = 0.01
+tag0 = plr_wep_spreader_chance
+off0 = 1
+count = 1
+
+[plr_wep_spreader_rate]
+default = 1
+title = Fire Rate
+offset = 0.01
+tag0 = plr_wep_spreader_chance
+off0 = 1
+count = 1
+
+[plr_wep_spreader_time]
+default = 1
+title = Duration
+offset = 0.01
+tag0 = plr_wep_spreader_chance
 off0 = 1
 count = 1
