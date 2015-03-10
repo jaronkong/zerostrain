@@ -74,6 +74,21 @@ pickupTag[pickupCount] = "plr_wep_fissure_chance";
 pickupObj[pickupCount] = pickup_burst;
 pickupChance[pickupCount] = 0;
 pickupCount += 1;
+
+pickupTag[pickupCount] = "plr_wep_torch_chance";
+pickupObj[pickupCount] = pickup_torch;
+pickupChance[pickupCount] = 0;
+pickupCount += 1;
+
+pickupTag[pickupCount] = "plr_wep_mine_chance";
+pickupObj[pickupCount] = pickup_mine;
+pickupChance[pickupCount] = 0;
+pickupCount += 1;
+
+pickupTag[pickupCount] = "plr_wep_spreader_chance";
+pickupObj[pickupCount] = pickup_spreader;
+pickupChance[pickupCount] = 0;
+pickupCount += 1;
 </string>
           </argument>
         </arguments>
