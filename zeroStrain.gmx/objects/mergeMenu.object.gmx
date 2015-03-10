@@ -116,8 +116,9 @@ with ( optionPos ) {
 optionX = 0;
 optionY = 0;
 
-optionTwist = 5;
-optionSplit = -16;
+optionTwist = -baseTwist;
+optionSplit = baseSplit;
+optionCurrentAni = optionCurrent;
 </string>
           </argument>
         </arguments>
@@ -235,6 +236,37 @@ var tAlpha = 1;
 if ( basePos.x &gt; 0.3 ) tAlpha = 0;
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].image_alpha = lerpDT( baseInfo[i].image_alpha, tAlpha, 0.0875, t );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Cycle options
+
+optionCurrentAni = lerpDT( optionCurrentAni, optionCurrent, 0.05, global.timeTickFactor );
+
+if ( keyboard_check_pressed( vk_up ) ) {
+    optionCurrent -= 1;
+}
+
+if ( keyboard_check_pressed( vk_down ) ) {
+    optionCurrent += 1;
 }
 </string>
           </argument>
@@ -436,7 +468,7 @@ optionX = ( display_get_gui_width( ) * lerp( 1.1, 0.5, optionPos.x ) );
 optionY = ( display_get_gui_height( ) * lerp( 0.5, 0.6, optionPos.y ) );
 
 for ( var i = 0; i &lt; optionCount; ++i ) {
-    var tDist = ( i - optionCurrent );
+    var tDist = ( i - optionCurrentAni );
     var tDistAbs = abs( tDist );
     for ( var j = 0; j &lt; 2; ++j ) {
         option[i, j].x = lerp( optionX, ( display_get_gui_width( ) * 2 ), ( 2 * tDistAbs / optionCount ) );
