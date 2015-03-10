@@ -175,6 +175,10 @@
       <sprite>sprites\circleBlack_spr</sprite>
     </sprites>
     <sprite>sprites\driverStack_spr</sprite>
+    <sprites name="Title">
+      <sprite>sprites\titleSplash_spr</sprite>
+      <sprite>sprites\hexBack_spr</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
