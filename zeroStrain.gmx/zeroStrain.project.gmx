@@ -417,6 +417,7 @@
       <object>objects\playerGenetics</object>
       <object>objects\genePickup</object>
       <object>objects\mergeMenu</object>
+      <object>objects\mergeMenuInput</object>
     </objects>
   </objects>
   <rooms name="rooms">

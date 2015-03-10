@@ -69,19 +69,12 @@ baseNeutralX = -0.2;
 baseNeutralY = 0.5
 
 //Current state
-baseX = baseNeutralX;
-baseY = baseNeutralY;
-baseZ = 1000;
-
-baseRX = 0;
-baseRY = 0;
-baseRZ = 0;
+basePos = instance_create( 0, 0, mergeMenuInput );
+baseX = 0;
+baseY = 0;
 
 baseTwist = 5;
 baseSplit = -16;
-
-//Misc movement variables
-baseRYspd = 10;
 baseInfoScale = 1;
 </string>
           </argument>
@@ -139,6 +132,8 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) instance_destroy( );
 }
 if ( ds_exists( baseDesc, ds_type_grid ) ) ds_grid_destroy( baseDesc );
+
+with ( basePos ) instance_destroy( );
 </string>
           </argument>
         </arguments>
@@ -161,63 +156,12 @@ if ( ds_exists( baseDesc, ds_type_grid ) ) ds_grid_destroy( baseDesc );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Base strand position update
-
-if ( !stateLocked ) {
-    var t = global.timeTickFactor;
-    
-    baseRY += ( baseRYspd * global.dt );
-    
-    var tHor = 0;
-    var tVer = 0;
-    if ( gamepad_is_connected( 0 ) ) {
-        tHor += gamepad_axis_value( 0, gp_axislh );
-        tVer += gamepad_axis_value( 0, gp_axislv );
-    } else {
-        if ( keyboard_check( ord ( 'A' ) ) ) tHor -= 1;
-        if ( keyboard_check( ord ( 'D' ) ) ) tHor += 1;
-        if ( keyboard_check( ord ( 'W' ) ) ) tVer -= 1;
-        if ( keyboard_check( ord ( 'S' ) ) ) tVer += 1;
-    }
-    if ( tHor &lt; 0 ) tHor /= 5;
-    
-    //Update rotation
-    baseRX = lerpDT( baseRX, ( tVer * 5 ), 0.1, t );
-    baseRYspd = lerpDT( baseRYspd, ( clamp( tHor, -0.1, 0.1 ) * 1500 ), abs( tHor / 5 ), t );
-    
-    //Update position
-    var tSpd = 0.025;
-    var tGoalX = lerpDT( baseNeutralX, 0.5, tHor, t );
-    var tGoalY = ( baseNeutralY + ( tVer * 0.1 ) );
-    baseX = lerpDT( baseX, tGoalX, tSpd, t );
-    baseY = lerpDT( baseY, tGoalY, tSpd, t );
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Base strand info fade out
 
 var t = global.timeTickFactor;
 
 var tAlpha = 1;
-if ( baseX &gt; 0.1 ) tAlpha = 0;
+if ( basePos.x &gt; 0.3 ) tAlpha = 0;
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].image_alpha = lerpDT( baseInfo[i].image_alpha, tAlpha, 0.0875, t );
 }
@@ -244,22 +188,21 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
             <string>///Trigger merge animation
 
 if ( !stateMerging ) {
-    if ( baseX &gt; 0.25 ) {
-        stateLocked = true;
+    if ( basePos.x &gt; 0.75 ) {
+        basePos.stateLocked = true;
         stateMerging = true;
-        while ( baseRY &lt; 0 ) baseRY += 360;
-        while ( baseRY &gt;= 0 ) baseRY -= 360;
+        while ( basePos.ry &lt; 0 ) basePos.ry += 360;
+        while ( basePos.ry &gt;= 0 ) basePos.ry -= 360;
     }
 } else {
     var t = global.timeTickFactor;
     var tSpd = 0.025;
-    baseX = lerpDT( baseX, 0.35, tSpd, t );
-    baseY = lerpDT( baseY, 0.5, tSpd, t );
-    baseRY = lerpDT( baseRY, 0, 0.02, t );
+    basePos.x = lerpDT( basePos.x, 0.8, tSpd, t );
+    basePos.y = lerpDT( basePos.y, 0, tSpd, t );
+    basePos.ry = lerpDT( basePos.ry, 0, 0.02, t );
     baseTwist = lerpDT( baseTwist, 0, 0.02, t );
-    if ( ( baseTwist &lt; 30 ) &amp;&amp; ( baseRY &gt; -180 ) ) {
-        //var tOffset = ( lerpDT( baseSplit, length*1.2, 0.008, t ) - baseSplit );
-        baseSplit += 1.25//min( tOffset, 2 );
+    if ( ( baseTwist &lt; 30 ) &amp;&amp; ( basePos.ry &gt; -180 ) ) {
+        baseSplit += 1.25
     }
     
 }
@@ -332,16 +275,16 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
             <kind>1</kind>
             <string>///Update base strand positions
 
-var px = ( display_get_gui_width( ) * baseX );
-var py = ( display_get_gui_height( ) * baseY );
+baseX = ( display_get_gui_width( ) * lerp( -0.1, 0.5, basePos.x ) );
+baseY = ( display_get_gui_height( ) * lerp( 0.5, 0.6, basePos.y ) );
 
 for ( var i = 0; i &lt; 2; ++i ) {
-    base[i].x = px;
-    base[i].y = py;
-    base[i].z = baseZ;
-    base[i].rx = baseRX;
-    base[i].ry = baseRY;
-    base[i].rz = baseRZ;
+    base[i].x = baseX;
+    base[i].y = baseY;
+    base[i].z = basePos.z;
+    base[i].rx = basePos.rx;
+    base[i].ry = basePos.ry;
+    base[i].rz = basePos.rz;
     base[i].twist = baseTwist;
     base[i].split = baseSplit;
 }
@@ -351,8 +294,8 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     if ( i &gt; 0 ) tHeight += 16;
     tHeight += baseInfo[i].height;
 }
-px = base[0].radius * 16;
-py = -( tHeight / 2 );
+var px = base[0].radius * 16;
+var py = -( tHeight / 2 );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].x = px;
     baseInfo[i].y = py;
@@ -471,15 +414,12 @@ d3d_transform_stack_push( );
 d3d_set_hidden( false );
 d3d_set_depth( -10 );
 
-var px = ( display_get_gui_width( ) * baseX );
-var py = ( display_get_gui_height( ) * baseY );
-
 var tScale = baseInfoScale;
 d3d_transform_add_scaling( tScale, tScale, tScale );
 d3d_transform_add_rotation_y( 5 );
-d3d_transform_add_rotation_z( baseRZ );
-d3d_transform_add_rotation_x( baseRX );
-d3d_transform_add_translation( px, py, baseZ );
+d3d_transform_add_rotation_z( basePos.rz );
+d3d_transform_add_rotation_x( basePos.rx );
+d3d_transform_add_translation( baseX, baseY, basePos.z );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) event_perform( ev_draw, false );
 }
