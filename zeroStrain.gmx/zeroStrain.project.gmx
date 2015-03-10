@@ -133,6 +133,7 @@
     <sounds name="Enemy">
       <sound>sound\enemySmallShot_sd</sound>
     </sounds>
+    <sound>sound\heartbeat_sd</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
@@ -182,6 +183,8 @@
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
+    <background>background\heart1_bg</background>
+    <background>background\heart2_bg</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
