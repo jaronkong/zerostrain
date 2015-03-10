@@ -41,7 +41,7 @@
             <kind>1</kind>
             <string>///Setup
 
-heldWeapon = weapon_gun_con;
+heldWeapon = weapon_spreader_con;
 
 
 

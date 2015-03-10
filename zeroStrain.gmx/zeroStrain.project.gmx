@@ -198,6 +198,7 @@
         <script>scripts\particleDef_artillery.gml</script>
         <script>scripts\particleDef_mine.gml</script>
         <script>scripts\particleDef_torch.gml</script>
+        <script>scripts\particleDef_spreader.gml</script>
       </scripts>
     </scripts>
     <scripts name="Effects">
@@ -381,6 +382,10 @@
       <objects name="Mines">
         <object>objects\weapon_mine_con</object>
         <object>objects\weapon_mine_shot</object>
+      </objects>
+      <objects name="Spreader">
+        <object>objects\weapon_spreader_con</object>
+        <object>objects\weapon_spreader_bullet</object>
       </objects>
       <object>objects\weaponPickup</object>
       <objects name="Specials">
