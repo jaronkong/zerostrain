@@ -215,7 +215,9 @@ value = plr_wep_torch_chance
 0 = plr_wep_torch_chance
 1 = plr_wep_torch_dmg
 2 = plr_wep_torch_time
-count = 3
+3 = plr_wep_torch_range
+4 = plr_wep_torch_angle
+count = 5
 
 [plr_wep_torch_chance]
 default = 0
@@ -225,7 +227,7 @@ hidden = 1
 [plr_wep_torch_dmg]
 default = 1
 title = Damage
-offset = 0.01
+offset = 0.005
 tag0 = plr_wep_torch_chance
 off0 = 1
 count = 1
@@ -233,6 +235,22 @@ count = 1
 [plr_wep_torch_time]
 default = 1
 title = Duration
+offset = 0.01
+tag0 = plr_wep_torch_chance
+off0 = 1
+count = 1
+
+[plr_wep_torch_range]
+default = 1
+title = Range
+offset = 0.01
+tag0 = plr_wep_torch_chance
+off0 = 1
+count = 1
+
+[plr_wep_torch_angle]
+default = 1
+title = Spread
 offset = 0.01
 tag0 = plr_wep_torch_chance
 off0 = 1
