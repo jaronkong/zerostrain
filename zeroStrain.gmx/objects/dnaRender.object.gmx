@@ -53,7 +53,7 @@ shader_split = shader_get_uniform( dnaShader, "in_split" );
             <string>///Create models
 
 segments = 32;
-radius = 4;
+radius = 6;
 
 edgeModel = -1;
 rungModel = -1;
@@ -191,7 +191,7 @@ if ( surface_exists( rungSurf ) ) surface_free( rungSurf );
 if ( !surface_exists( edgeSurf ) ) {
     edgeSurf = surface_create( 1, 1 );
     surface_set_target( edgeSurf );
-    draw_clear_alpha( make_color_rgb( 110, 49, 74 ), 1 );
+    draw_clear_alpha( c_ltgray, 1 );
     surface_reset_target( );
 }
 
@@ -201,12 +201,7 @@ if ( !surface_exists( rungSurf ) ) {
     draw_clear_alpha( c_black, 1 );
     draw_set_alpha( 1 );
     for ( var i = 0; i &lt; segments; ++i ) {
-        var tCol = choose(
-            make_color_rgb( 102, 85, 122 ),
-            make_color_rgb( 125, 65, 133 ),
-            make_color_rgb( 133, 56, 46 ),
-            make_color_rgb( 122, 46, 7 )
-        );
+        var tCol = choose( c_red, c_lime, c_aqua );
         draw_point_color( i, 0, tCol );
     }
     surface_reset_target( );
