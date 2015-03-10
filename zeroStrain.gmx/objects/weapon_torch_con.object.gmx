@@ -45,6 +45,8 @@ name = "Plasma Torch";
 gene += "torch";
 weaponType = WEAPON_TYPE.BLUE;
 
+isContinuous = true;
+
 //Remember to set the particle def script in the step
 fireRate = room_speed / 10;
 fireSpread = 80;

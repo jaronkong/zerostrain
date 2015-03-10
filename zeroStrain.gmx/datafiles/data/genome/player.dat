@@ -33,7 +33,9 @@ group = 1
 1 = plr_wep_pulse
 2 = plr_wep_artillery
 3 = plr_wep_fissure
-count = 4
+4 = plr_wep_torch
+5 = plr_wep_mine
+count = 6
 
 
 	[GATLING GUN]
@@ -200,5 +202,80 @@ default = 1
 title = Radius
 offset = 0.01
 tag0 = plr_wep_fissure_chance
+off0 = 1
+count = 1
+
+
+	[PLASMA TORCH]
+
+[plr_wep_torch]
+group = 1
+title = Plasma Torch
+value = plr_wep_torch_chance
+0 = plr_wep_torch_chance
+1 = plr_wep_torch_dmg
+2 = plr_wep_torch_time
+count = 3
+
+[plr_wep_torch_chance]
+default = 0
+offset = 2
+hidden = 1
+
+[plr_wep_torch_dmg]
+default = 1
+title = Damage
+offset = 0.01
+tag0 = plr_wep_torch_chance
+off0 = 1
+count = 1
+
+[plr_wep_torch_time]
+default = 1
+title = Duration
+offset = 0.01
+tag0 = plr_wep_torch_chance
+off0 = 1
+count = 1
+
+
+	[Mine Catapault]
+
+[plr_wep_mine]
+group = 1
+title = Mine Catapault
+value = plr_wep_mine_chance
+0 = plr_wep_mine_chance
+1 = plr_wep_mine_dmg
+2 = plr_wep_mine_rate
+3 = plr_wep_mine_time
+count = 4
+
+[plr_wep_mine_chance]
+default = 0
+offset = 2
+hidden = 1
+
+[plr_wep_mine_dmg]
+default = 1
+title = Damage
+offset = 0.01
+tag0 = plr_wep_mine_chance
+off0 = 1
+count = 1
+
+[plr_wep_mine_rate]
+default = 1
+title = Fire Rate
+offset = 0.01
+tag0 = plr_wep_mine_chance
+off0 = 1
+count = 1
+
+[plr_wep_mine_time]
+default = 1
+title = Duration
+offset = 0.01
+tag0 = plr_wep_mine_chance
 off0 = 1
 count = 1
