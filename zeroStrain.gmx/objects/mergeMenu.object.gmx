@@ -173,10 +173,10 @@ if ( !stateLocked ) {
         tHor += gamepad_axis_value( 0, gp_axislh );
         tVer += gamepad_axis_value( 0, gp_axislv );
     } else {
-        if ( keyboard_check( vk_left ) ) tHor -= 1;
-        if ( keyboard_check( vk_right ) ) tHor += 1;
-        if ( keyboard_check( vk_up ) ) tVer -= 1;
-        if ( keyboard_check( vk_down ) ) tVer += 1;
+        if ( keyboard_check( ord ( 'A' ) ) ) tHor -= 1;
+        if ( keyboard_check( ord ( 'D' ) ) ) tHor += 1;
+        if ( keyboard_check( ord ( 'W' ) ) ) tVer -= 1;
+        if ( keyboard_check( ord ( 'S' ) ) ) tVer += 1;
     }
     if ( tHor &lt; 0 ) tHor /= 5;
     
@@ -345,11 +345,17 @@ for ( var i = 0; i &lt; 2; ++i ) {
     base[i].split = baseSplit;
 }
 
+var tHeight = 0;
+for ( var i = 0; i &lt; baseInfoCount; ++i ) {
+    if ( i &gt; 0 ) tHeight += 32;
+    tHeight += baseInfo[i].height;
+}
 px = base[0].radius * 12;
-py = -length * 6 / 2;
+py = -( tHeight / 2 );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].x = px;
-    baseInfo[i].y = py+160*i;
+    baseInfo[i].y = py;
+    py += ( baseInfo[i].height + 32 );
 }
 </string>
           </argument>
@@ -466,7 +472,7 @@ d3d_set_depth( -10 );
 var px = ( display_get_gui_width( ) * baseX );
 var py = ( display_get_gui_height( ) * baseY );
 
-var tScale = 1.5;
+var tScale = 1;
 d3d_transform_add_scaling( tScale, tScale, tScale );
 d3d_transform_add_rotation_y( 5 );
 d3d_transform_add_rotation_z( baseRZ );
