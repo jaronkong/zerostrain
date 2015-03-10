@@ -257,16 +257,18 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Cycle options
+            <string>///Cycle option strands
 
 optionCurrentAni = lerpDT( optionCurrentAni, optionCurrent, 0.05, global.timeTickFactor );
 
-if ( keyboard_check_pressed( vk_up ) ) {
-    optionCurrent -= 1;
-}
-
-if ( keyboard_check_pressed( vk_down ) ) {
-    optionCurrent += 1;
+if ( abs( optionCurrentAni - optionCurrent ) &lt; 0.25 ) {
+    if ( keyboard_check( optionPos.inUp ) ) {
+        optionCurrent -= 1;
+    }
+    if ( keyboard_check( optionPos.inDown ) ) {
+        optionCurrent += 1;
+    }
+    optionCurrent = clamp( optionCurrent, 0, ( optionCount - 1 ) );
 }
 </string>
           </argument>
