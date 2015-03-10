@@ -157,7 +157,7 @@ particleInit_bigBurst();
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="2">
+    <event eventtype="7" enumb="4">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -176,6 +176,9 @@ particleInit_bigBurst();
             <kind>1</kind>
             <string>///Background music
 
+if ( audio_is_playing( havoc_bgm ) ) {
+    audio_stop_sound( havoc_bgm );
+}
 audio_play_sound( havoc_bgm, 1, true );
 
 </string>
