@@ -267,7 +267,8 @@ value = plr_wep_mine_chance
 1 = plr_wep_mine_dmg
 2 = plr_wep_mine_rate
 3 = plr_wep_mine_time
-count = 4
+4 = plr_wep_mine_radius
+count = 5
 
 [plr_wep_mine_chance]
 default = 0
@@ -293,6 +294,14 @@ count = 1
 [plr_wep_mine_time]
 default = 1
 title = Duration
+offset = 0.01
+tag0 = plr_wep_mine_chance
+off0 = 1
+count = 1
+
+[plr_wep_mine_radius]
+default = 1
+title = Blast Radius
 offset = 0.01
 tag0 = plr_wep_mine_chance
 off0 = 1
