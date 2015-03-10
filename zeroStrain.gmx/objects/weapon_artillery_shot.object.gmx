@@ -182,7 +182,7 @@ if ( detonateDelay &gt; 0 ) {
             ///Deal damage
 
             with ( enemyPar ) {
-                if ( point_distance( x, y, other.x, other.y ) &lt; other.radius ) {
+                if ( circlesOverlap( x, y, boundsRange, other.x, other.y, other.radius ) ) {
                     weaponDoDamage( id, other.ownerController );
                     forceApplyToEnemy( id,
                                         point_direction( other.x, other.y, x, y ),

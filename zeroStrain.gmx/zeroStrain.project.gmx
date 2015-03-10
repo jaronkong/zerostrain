@@ -100,6 +100,7 @@
       <sounds name="Gun">
         <sound>sound\gunHit_sd</sound>
         <sound>sound\gunShot_sd</sound>
+        <sound>sound\spreadShot_sd</sound>
       </sounds>
       <sounds name="PulseDriver">
         <sound>sound\pulseDriveShot_sd</sound>
@@ -263,6 +264,7 @@
     <scripts name="Gameplay">
       <script>scripts\damagePlayer.gml</script>
       <script>scripts\intercept_course.gml</script>
+      <script>scripts\circlesOverlap.gml</script>
     </scripts>
     <script>scripts\globalInit.gml</script>
     <script>scripts\playSound.gml</script>

@@ -55,7 +55,7 @@ target = noone; //The enemy to control
 
 with ( target ) {
 
-    var tCollObj = collision_circle( x, y, 48 * sizeFactor, enemyPar, false, true );
+    var tCollObj = collision_circle( x, y, boundsRange, enemyPar, false, true );
     if ( instance_exists( tCollObj ) ) {
         var tDir = point_direction( x, y, tCollObj.x, tCollObj.y );
         motion_add( tDir + 180, 0.3 );

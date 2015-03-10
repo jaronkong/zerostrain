@@ -28,6 +28,10 @@
             <string>///Draw enemy health
 
 with ( enemyPar ) {
+    draw_set_color( c_red );
+    draw_set_alpha( 0.5 );
+    draw_circle( x, y, boundsRange, true );
+
     ///Draw healthbar
     draw_set_color( tagColor );
     draw_set_alpha( 1 );

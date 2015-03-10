@@ -57,6 +57,7 @@ myBrain = noone;
 bodyMapNum = BODY_MAPS.ENEMY1;
 
 bodyType = WEAPON_TYPE.RED;
+boundsRange = 32;
 
 enum ENEMY_EV {
     CREATE,
