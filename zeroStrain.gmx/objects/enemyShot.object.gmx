@@ -43,6 +43,10 @@
 
 bodyMapNum = BODY_MAPS.ENEMY1;
 
+selfHealth = 1300;
+selfHealthMax = selfHealth;
+damageHealth = selfHealth;
+
 fireRate = 1 * room_speed;
 currentFireTimer = fireRate;
 fireRange = 700;

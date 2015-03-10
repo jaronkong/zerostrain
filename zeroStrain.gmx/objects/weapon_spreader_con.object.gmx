@@ -46,6 +46,7 @@ gene += "spreader";
 weaponType = WEAPON_TYPE.GREEN;
 
 //Remember to set the particle def script in the step
+damage = 30;
 fireRate = room_speed / 6;
 projectileSpeed = 7;
 projectileLife = 240;

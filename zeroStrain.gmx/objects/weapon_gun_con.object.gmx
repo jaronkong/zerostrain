@@ -47,7 +47,7 @@ weaponType = WEAPON_TYPE.GREEN;
 
 //Remember to set the particle def script in the step
 fireRate = room_speed / 10;
-projectileSpeed = 10;
+projectileSpeed = 14;
 projectileLife = 240;
 projectileToShoot = weapon_gun_bullet;
 
