@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///Other controllers
 
+instance_create( 0, 0, resController );
 instance_create( 0, 0, weaponSpawner );
 instance_create( 0, 0, spawnCon );
 instance_create( 0, 0, enemyInfoDrawer );

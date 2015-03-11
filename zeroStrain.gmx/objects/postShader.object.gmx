@@ -75,7 +75,8 @@ if (shader_enabled) {
         var_resolution_y = view_hview;
         shader_set_uniform_f(uni_resolution, var_resolution_x, var_resolution_y);
         if (full_screen_effect) {
-           draw_surface(application_surface,0,0);
+           draw_surface_stretched(application_surface,0,0,
+            display_get_gui_width(), display_get_gui_height());
         }
     shader_reset();
 }
