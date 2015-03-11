@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///Define properties
 
-count = 1; //Number of weapons available at a time
+count = 3; //Number of weapons available at a time
 </string>
           </argument>
         </arguments>

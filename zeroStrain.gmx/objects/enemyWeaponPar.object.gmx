@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///Setup
 
-lifespan = 120;
+lifespan = room_speed * 3;
 
 hitForce = 10;
 damage = 5;
