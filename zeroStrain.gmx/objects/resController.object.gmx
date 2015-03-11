@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -25,29 +25,39 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Setup
+            <string>///Specify affected view
 
-cameraTween = 0.05;
+view = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Define reference size
 
-playerOffset = 150;
-
-cameraFocusX = 0;
-cameraFocusY = 0;
-
-targetCameraFocusX = 0;
-targetCameraFocusY = 0;
-
-//Shake 
-shakeAmount = 0;
-shakeOffsetX = 0;
-shakeOffsetY = 0;
-shakeTween = 0.05;
+baseW = 1920;
+baseH = 1080;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -64,87 +74,21 @@ shakeTween = 0.05;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Screen shake
+            <string>///Update resolution
 
-shakeOffsetX = 0;
-shakeOffsetY = 0;
+var tResScale = 1.0;
 
-shakeOffsetX = -(shakeAmount/2) + random( shakeAmount );
-shakeOffsetY = -(shakeAmount/2) + random( shakeAmount );
+var tW = ( window_get_width( ) * tResScale );
+var tH = ( window_get_height( ) * tResScale );
 
-cameraFocusX += shakeOffsetX;
-cameraFocusY += shakeOffsetY;
-
-shakeAmount = lerp( shakeAmount, 0, shakeTween );
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Tween camera
-
-targetCameraFocusX = clamp( targetCameraFocusX, view_wview/2, room_width - view_wview/2 );
-targetCameraFocusY = clamp( targetCameraFocusY, view_hview/2, room_height - view_hview/2 );
-
-cameraFocusX = lerp( cameraFocusX, targetCameraFocusX, cameraTween );
-cameraFocusY = lerp( cameraFocusY, targetCameraFocusY, cameraTween );
-
-view_xview = cameraFocusX - view_wview / 2;
-view_yview = cameraFocusY - view_hview / 2;
-
-//view_xview = clamp( view_xview, 0, room_width - view_wview );
-//view_yview = clamp( view_yview, 0, room_height - view_hview );
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Set camera position
-
-if ( instance_exists( playerShip ) ) {
-    var tCamX, tCamY;
-    
-    with ( playerShip ) {
-        tCamX = x + lengthdir_x( other.playerOffset * aimDistPercent, aimDir );
-        tCamY = y + lengthdir_y( other.playerOffset * aimDistPercent, aimDir );
-    }
-
-    targetCameraFocusX = tCamX;
-    targetCameraFocusY = tCamY;
+if ( ( tW != view_wport[view] ) || ( tH != view_hport[view] ) ) {
+    view_wport[view] = tW;
+    view_hport[view] = tH;
+    var tS = min( ( baseW / view_wport[view] ), ( baseH / view_hport[view] ) );
+    view_wview[view] = ( tS * view_wport[view] );
+    view_hview[view] = ( tS * view_hport[view] );
+    surface_resize( application_surface, view_wport[view], view_hport[view] );
 }
-
 </string>
           </argument>
         </arguments>

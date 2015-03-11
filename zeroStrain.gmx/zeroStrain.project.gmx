@@ -312,6 +312,7 @@
       <object>objects\particleTickController</object>
       <object>objects\cameraController</object>
       <object>objects\HUDController</object>
+      <object>objects\resController</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">
