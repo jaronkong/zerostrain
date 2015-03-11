@@ -50,7 +50,7 @@ startAngle = 90;
 
 currentAngle = 0;
 
-timingOffset = room_speed * 0.1;
+timingOffset = room_speed * 0.04;
 currentTimer = 0;
 
 
@@ -84,12 +84,28 @@ if ( currentAngle &lt; 360 ) {
     
     currentTimer --;
     
-    if ( currentTimer &lt;= 0 ) {
+    if ( timingOffset &lt;= 0 ) {
+        for ( var i = 0; i &lt; 360; i += 360 / numEnemies ) {
+            var tSpawnX = centerX + lengthdir_x( radius, startAngle + i );
+            var tSpawnY = centerY + lengthdir_y( radius, startAngle + i );
+            
+            var tColor = colorGetRandom();
+            if ( spawnColor &gt;= 0 ) {
+                tColor = spawnColor;
+            }
+            
+            spawnEnemy( tSpawnX, tSpawnY,
+                        point_direction( tSpawnX, tSpawnY, centerX, centerY ),
+                        spawnTarget, tColor );
+        }
+        instance_destroy();
+    }
+    else if ( currentTimer &lt;= 0 ) {
         currentTimer = timingOffset;
         var tSpawnX = centerX + lengthdir_x( radius, startAngle + currentAngle );
         var tSpawnY = centerY + lengthdir_y( radius, startAngle + currentAngle );
         
-        var tColor = irandom( 2 );
+        var tColor = colorGetRandom();
         if ( spawnColor &gt;= 0 ) {
             tColor = spawnColor;
         }
@@ -100,6 +116,7 @@ if ( currentAngle &lt; 360 ) {
                     
         currentAngle += 360 / numEnemies;
     }
+    
 }
 else {
     instance_destroy();

@@ -268,6 +268,7 @@
     <scripts name="Enemies">
       <script>scripts\enemyInitColor.gml</script>
       <script>scripts\spawnEnemy.gml</script>
+      <script>scripts\colorGetRandom.gml</script>
     </scripts>
     <scripts name="Gameplay">
       <script>scripts\damagePlayer.gml</script>
@@ -436,6 +437,8 @@
     <objects name="Spawn">
       <object>objects\spawnBehaviorPar</object>
       <object>objects\spawn_circle</object>
+      <object>objects\spawn_circle_staggered</object>
+      <object>objects\spawn_circle_unison</object>
     </objects>
   </objects>
   <rooms name="rooms">

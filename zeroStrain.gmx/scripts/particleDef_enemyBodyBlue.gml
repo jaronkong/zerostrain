@@ -37,7 +37,7 @@ part_type_color3(tPartType,make_color_rgb( 255, 255, 50 ),make_color_rgb( 60, 50
 part_type_alpha2(tPartType,1, 0);
 part_type_speed(tPartType,0 *t,10 *t,0 *t,0 *t);
 part_type_direction(tPartType,0,359,0 *t,0 *t);
-part_type_orientation(tPartType,0,0,0 *t,0 *t,0);
+part_type_orientation(tPartType,0,0,0 *t,0 *t,1);
 part_type_life(tPartType,20 *ti,60 *ti);
 
 tPartName = "enemyLineBurstb"
