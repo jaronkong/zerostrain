@@ -73,10 +73,12 @@ if ( instance_number( enemyPar ) == 0 ) {
             <kind>1</kind>
             <string>///Spawn enemy
 
-with ( instance_create( 0, 0, spawn_stream ) ) {
-    spawnX = 0;
-    spawnY = 0;
-    spawnDir = 270 + 45;
+with ( instance_create( 0, 0, spawn_wall ) ) {
+    spawnX = playerShip.x;
+    spawnY = playerShip.y;
+    angle = 45;
+    
+    
 }
 </string>
           </argument>

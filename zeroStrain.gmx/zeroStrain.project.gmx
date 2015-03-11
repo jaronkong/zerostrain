@@ -440,6 +440,7 @@
       <object>objects\spawn_circle_staggered</object>
       <object>objects\spawn_circle_unison</object>
       <object>objects\spawn_stream</object>
+      <object>objects\spawn_wall</object>
     </objects>
   </objects>
   <rooms name="rooms">
