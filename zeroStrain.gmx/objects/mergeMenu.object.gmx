@@ -154,6 +154,7 @@ mergeRemoval = 0;
 mergeRemovalSpeed = 0;
 
 mergeCombine = 0;
+mergeCombineThreshold = 0.6;
 mergeTwist = 0;
 mergeSplit = 0;
 </string>
@@ -340,12 +341,17 @@ if ( !stateMerging ) {
     var t = global.timeTickFactor;
     //Move to center
     var tSpd = 0.025;
+    var tSpdR = 0.02;
     basePos.x = lerpDT( basePos.x, 0.8, tSpd, t );
     basePos.y = lerpDT( basePos.y, 0, tSpd, t );
-    basePos.ry = lerpDT( basePos.ry, 0, 0.02, t );
+    basePos.rx = lerpDT( basePos.rx, 0, tSpdR, t );
+    basePos.ry = lerpDT( basePos.ry, 0, tSpdR, t );
+    basePos.rz = lerpDT( basePos.rz, 0, tSpdR, t );
     optionPos.x = lerpDT( optionPos.x, 0.8, tSpd, t );
     optionPos.y = lerpDT( optionPos.y, 0, tSpd, t );
-    optionPos.ry = lerpDT( optionPos.ry, 0, 0.02, t );
+    optionPos.rx = lerpDT( optionPos.rx, 0, tSpdR, t );
+    optionPos.ry = lerpDT( optionPos.ry, 0, tSpdR, t );
+    optionPos.rz = lerpDT( optionPos.rz, 0, tSpdR, t );
     //Unroll strands
     baseTwist = lerpDT( baseTwist, 0, 0.02, t );
     if ( ( baseTwist &lt; 30 ) &amp;&amp; ( basePos.ry &gt; -180 ) ) {
@@ -356,14 +362,14 @@ if ( !stateMerging ) {
         mergeRemovalSpeed += ( 0.0025 * t );
         mergeRemoval += ( mergeRemovalSpeed * t );
         //mergeRemoval = lerpDT( mergeRemoval, 4, 0.01, t );
-        mergeCombine = lerpDT( mergeCombine, 1, 0.025, t );
+        mergeCombine = lerpDT( mergeCombine, 1, 0.075, t );
     }
-    if ( mergeCombine &lt; 0.25 ) {
+    if ( mergeCombine &lt; mergeCombineThreshold ) {
         mergeTwist = baseTwist;
         mergeSplit = baseSplit;
     } else {
-        mergeTwist = lerpDT( mergeTwist, 10, 0.005, t );
-        if ( mergeSplit &gt; -32 ) mergeSplit -= ( 0.75 * t );
+        if ( mergeSplit &gt; -48 ) mergeSplit -= ( 1.0 * t );
+        mergeTwist = lerpDT( mergeTwist, 7.5, 0.005, t );
     }
 }
 </string>
@@ -609,10 +615,12 @@ if ( stateMerging ) {
     tBase.x = lerp( tBase.x, tCenter, mergeCombine );
     tOption.x = lerp( tOption.x, tCenter, mergeCombine );
     //Wind strands together
-    tBase.twist = mergeTwist;
-    tBase.split = mergeSplit;
-    tOption.twist = mergeTwist;
-    tOption.split = mergeSplit;
+    if ( mergeCombine &gt; mergeCombineThreshold ) {
+        tBase.twist = mergeTwist;
+        tBase.split = mergeSplit;
+        tOption.twist = mergeTwist;
+        tOption.split = mergeSplit;
+    }
 }
 </string>
           </argument>

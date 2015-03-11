@@ -125,7 +125,8 @@ if ( !stateLocked ) {
     if ( gamepad_is_connected( 0 ) ) {
         tHor += gamepad_axis_value( 0, inHorizontal );
         tVer += gamepad_axis_value( 0, inVertical );
-    } else {
+    }
+    {
         if ( keyboard_check( inLeft ) ) tHor -= 1;
         if ( keyboard_check( inRight ) ) tHor += 1;
         if ( keyboard_check( inUp ) ) tVer -= 1;
