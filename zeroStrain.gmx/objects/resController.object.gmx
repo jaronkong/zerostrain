@@ -28,6 +28,7 @@
             <string>///Specify affected view
 
 view = 0;
+initialized = false;
 </string>
           </argument>
         </arguments>
@@ -78,16 +79,19 @@ baseH = 1080;
 
 var tResScale = 1.0;
 
-var tW = ( window_get_width( ) * tResScale );
-var tH = ( window_get_height( ) * tResScale );
+var tW = ceil( window_get_width( ) * tResScale );
+var tH = ceil( window_get_height( ) * tResScale );
 
-if ( ( tW != view_wport[view] ) || ( tH != view_hport[view] ) ) {
-    view_wport[view] = tW;
-    view_hport[view] = tH;
-    var tS = min( ( baseW / view_wport[view] ), ( baseH / view_hport[view] ) );
-    view_wview[view] = ( tS * view_wport[view] );
-    view_hview[view] = ( tS * view_hport[view] );
-    surface_resize( application_surface, view_wport[view], view_hport[view] );
+if ( ( tW &gt; 0 ) &amp;&amp; ( tH &gt; 0 ) ) {
+    if ( ( tW != view_wport[view] ) || ( tH != view_hport[view] ) || !initialized ) {
+        view_wport[view] = tW;
+        view_hport[view] = tH;
+        var tS = min( ( baseW / view_wport[view] ), ( baseH / view_hport[view] ) );
+        view_wview[view] = ceil( tS * view_wport[view] );
+        view_hview[view] = ceil( tS * view_hport[view] );
+        surface_resize( application_surface, view_wport[view], view_hport[view] );
+        initialized = true;
+    }
 }
 </string>
           </argument>

@@ -169,13 +169,13 @@ if ( surface_exists( prepSurface ) ) {
             <string>///Draw
 
 if ( !surface_exists( prepSurface ) ) {
-    prepSurface = surface_create( view_wview * resolution, view_hview * resolution );
+    prepSurface = surface_create( view_wport * resolution, view_hport * resolution );
     surface_set_target( prepSurface );
         draw_clear_alpha( c_black, 1 );
     surface_reset_target();
 }
 if ( !surface_exists( stageSurface ) ) {
-    stageSurface = surface_create( view_wview * resolution, view_hview * resolution );
+    stageSurface = surface_create( view_wport * resolution, view_hport * resolution );
     surface_set_target( stageSurface );
         draw_clear_alpha( c_black, 1 );
     surface_reset_target();
