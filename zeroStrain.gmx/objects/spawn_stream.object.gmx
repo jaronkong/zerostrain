@@ -41,20 +41,14 @@
             <kind>1</kind>
             <string>///Setup
 
-centerX = 0;
-centerY = 0;
-radius = 300;
-numEnemies = 15;
+spawnX = 0;
+spawnY = 0;
+spawnDir = 0;
 
-startAngle = 90;
+numEnemies = 3;
 
-currentAngle = 0;
-
-timingOffset = room_speed * 0.04;
+timingOffset = room_speed / numEnemies * 1;
 currentTimer = 0;
-
-
-
 
 </string>
           </argument>
@@ -93,49 +87,25 @@ currentTimer = 0;
           <argument>
             <kind>1</kind>
             <string>///Spawn
+currentTimer --;
 
-if ( currentAngle &lt; 360 ) {
-    
-    currentTimer --;
-    
-    if ( timingOffset &lt;= 0 ) {
-        for ( var i = 0; i &lt; 360; i += 360 / numEnemies ) {
-            var tSpawnX = centerX + lengthdir_x( radius, startAngle + i );
-            var tSpawnY = centerY + lengthdir_y( radius, startAngle + i );
-            
-            var tColor = colorGetRandom();
-            if ( spawnColor &gt;= 0 ) {
-                tColor = spawnColor;
-            }
-            
-            spawnEnemy( tSpawnX, tSpawnY,
-                        point_direction( tSpawnX, tSpawnY, centerX, centerY ),
-                        spawnTarget, tColor );
-        }
-        instance_destroy();
-    }
-    else if ( currentTimer &lt;= 0 ) {
-        currentTimer = timingOffset;
-        var tSpawnX = centerX + lengthdir_x( radius, startAngle + currentAngle );
-        var tSpawnY = centerY + lengthdir_y( radius, startAngle + currentAngle );
-        
-        var tColor = colorGetRandom();
-        if ( spawnColor &gt;= 0 ) {
-            tColor = spawnColor;
-        }
-        
-        spawnEnemy( tSpawnX, tSpawnY,
-                    point_direction( tSpawnX, tSpawnY, centerX, centerY ),
-                    spawnTarget, tColor );
-                    
-        currentAngle += 360 / numEnemies;
+if ( currentTimer &lt;= 0 ) {
+    numEnemies --;
+    currentTimer = timingOffset;
+
+    var tColor = colorGetRandom();
+    if ( spawnColor &gt;= 0 ) {
+        tColor = spawnColor;
     }
     
+    spawnEnemy( spawnX, spawnY,
+                spawnDir,
+                spawnTarget, tColor );
 }
-else {
+
+if ( numEnemies &lt;= 0 ) {
     instance_destroy();
 }
-
 </string>
           </argument>
         </arguments>

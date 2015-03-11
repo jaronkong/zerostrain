@@ -73,7 +73,11 @@ if ( instance_number( enemyPar ) == 0 ) {
             <kind>1</kind>
             <string>///Spawn enemy
 
-instance_create( 0, 0, spawn_circle_unison );
+with ( instance_create( 0, 0, spawn_stream ) ) {
+    spawnX = 0;
+    spawnY = 0;
+    spawnDir = 270 + 45;
+}
 </string>
           </argument>
         </arguments>

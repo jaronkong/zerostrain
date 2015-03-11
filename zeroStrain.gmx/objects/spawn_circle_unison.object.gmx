@@ -47,7 +47,7 @@ spawnColor = -1; //-1 is random, 0, 1, 2, is red blue green.
 centerX = playerShip.x;
 centerY = playerShip.y;
 
-radius = 500;
+radius = 600;
 numEnemies = 15;
 
 startAngle = 90;
