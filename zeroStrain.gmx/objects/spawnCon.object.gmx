@@ -74,8 +74,8 @@ if ( instance_number( enemyPar ) == 0 ) {
             <string>///Spawn enemy
 
 with ( instance_create( 0, 0, spawn_wall ) ) {
-    spawnX = playerShip.x;
-    spawnY = playerShip.y;
+    centerX = playerShip.x;
+    centerY = playerShip.y;
     angle = 45;
     
     
