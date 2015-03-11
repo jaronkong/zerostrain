@@ -46,7 +46,7 @@
 centerX = 0;
 centerY = 0;
 
-length = 600;
+length = 1000;
 currentLen = 0;
 numEnemies = 20;
 
@@ -119,8 +119,8 @@ if ( currentLen &lt; length ) {
     }
     else if ( currentTimer &lt;= 0 ) {
         currentTimer = timingOffset;
-        var tSpawnX = centerX + + lengthdir_x( length/2, angle - 180 ) + lengthdir_x( currentLen, angle );
-        var tSpawnY = centerY + + lengthdir_y( length/2, angle - 180 ) + lengthdir_y( currentLen, angle );
+        var tSpawnX = centerX + lengthdir_x( length/2, angle - 180 ) + lengthdir_x( currentLen, angle );
+        var tSpawnY = centerY + lengthdir_y( length/2, angle - 180 ) + lengthdir_y( currentLen, angle );
         
         var tColor = colorGetRandom();
         if ( spawnColor &gt;= 0 ) {
