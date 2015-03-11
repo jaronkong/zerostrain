@@ -208,10 +208,10 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
         with ( option[i, j] ) instance_destroy( );
     }
     
-    for ( var j = 0; j &lt; optionInfoCount; ++j ) {
+    for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
         with ( optionInfo[i, j] ) instance_destroy( );
     }
-    if ( ds_exists( optionDesc, ds_type_grid ) ) ds_grid_destroy( optionDesc );
+    if ( ds_exists( optionDesc[i], ds_type_grid ) ) ds_grid_destroy( optionDesc[i] );
 }
 
 with ( optionPos ) instance_destroy( );
