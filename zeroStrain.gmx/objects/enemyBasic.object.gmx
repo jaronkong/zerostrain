@@ -54,6 +54,8 @@ maxSpeed = 3;
 mass = 1;
 sizeFactor = 1; //used for things like body particles. bigger = more particles.
 
+drawScale = 0.75;
+boundsRange = 20;
 
 
 </string>

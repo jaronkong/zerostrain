@@ -53,7 +53,7 @@ fireRange = 700;
 
 bulletSpeed = 7;
 
-trackingSpeed = 0.6;
+trackingSpeed = 1;
 maxSpeed = 2;
 mass = 10;
 sizeFactor = 1;
