@@ -6,6 +6,11 @@ var aAngle = argument2;
 var aPartSystem = argument3;
 var aPartType = argument4;
 
+if ( !instance_exists( aRootObj ) ) {
+    exit;
+}
+
+var tScale = aRootObj.drawScale;
 var tDataList = global.bodyMaps[? aEnumSource];
 var tRandomIndex = irandom( ( ds_list_size( tDataList ) div BODY_MAP_INFO.NUM_ELEMENTS ) - 1 );
 var tBaseIndex = tRandomIndex * BODY_MAP_INFO.NUM_ELEMENTS;
@@ -27,10 +32,9 @@ var tSign = choose( 1, -1 );
 var tTargetX = tX1 + lengthdir_x( tTargetDist, tDir + tAngle*tSign );
 var tTargetY = tY1 + lengthdir_y( tTargetDist, tDir + tAngle*tSign );
 
-var tActualDist = point_distance( 0, 0, tTargetX, tTargetY );
+var tActualDist = point_distance( 0, 0, tTargetX, tTargetY ) * tScale;
 var tActualAngle = point_direction( 0, 0, tTargetX, tTargetY ) + aAngle;
 
 part_particles_create( aPartSystem, aRootObj.x + lengthdir_x( tActualDist, tActualAngle), 
                                 aRootObj.y + lengthdir_y( tActualDist, tActualAngle ),
                                 aPartType, 1 );
-

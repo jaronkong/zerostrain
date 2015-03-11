@@ -41,9 +41,8 @@
             <kind>1</kind>
             <string>///Setup
 
-orbitDist = 400;
+orbitDist = 450;
 
-currentOrbitAngle = 0;
 orbitSpeed = 0.1;
 
 </string>
@@ -84,23 +83,34 @@ orbitSpeed = 0.1;
             <kind>1</kind>
             <string>///Seek player
 
-if ( currentOrbitAngle &gt; 360 ) {
-    currentOrbitAngle -= 360;
-}
-        
 with ( target ) {
     if ( instance_exists( playerShip ) ) {
         
-        other.currentOrbitAngle += radtodeg( arctan( speed / other.orbitDist ) );
+        if ( point_direction( playerShip.x, playerShip.y, x, y ) &gt; other.orbitDist ) {
+            var tTargetX = playerShip.x;
+            var tTargetY = playerShip.y;
+            
+            var tDir = point_direction( x, y, tTargetX, tTargetY );
+            var tDiff = angle_difference( tDir, direction );
+            motion_add( direction, 0.5 );
+            if ( abs( tDiff ) &gt; trackingSpeed ) {
+                direction += trackingSpeed * sign( tDiff );
+            }
+        }
+        else {
+            var tAngle = point_direction( playerShip.x, playerShip.y, x, y );
+            tAngle += radtodeg( arctan( speed / other.orbitDist ) );
+            
+            var tTargetX = playerShip.x + lengthdir_x( other.orbitDist, tAngle );
+            var tTargetY = playerShip.y + lengthdir_y( other.orbitDist, tAngle );
         
-        var tTargetX = playerShip.x + lengthdir_x( other.orbitDist, other.currentOrbitAngle );
-        var tTargetY = playerShip.y + lengthdir_y( other.orbitDist, other.currentOrbitAngle );
-    
-        var tDir = point_direction( x, y, tTargetX, tTargetY );
-        var tDiff = angle_difference( tDir, direction );
-        motion_add( direction, 0.5 );
-        if ( abs( tDiff ) &gt; trackingSpeed ) {
-            direction += trackingSpeed * sign( tDiff );
+            var tDir = point_direction( x, y, tTargetX, tTargetY );
+            var tDiff = angle_difference( tDir, direction );
+            motion_add( direction, 0.5 );
+            if ( abs( tDiff ) &gt; trackingSpeed ) {
+                direction += trackingSpeed * sign( tDiff );
+            }
+            
         }
         
         image_angle = direction;
@@ -108,6 +118,8 @@ with ( target ) {
         if ( speed &gt; maxSpeed ) {
             speed = maxSpeed;
         }
+        
+        
     }
 }
 

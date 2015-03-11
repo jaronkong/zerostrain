@@ -19,4 +19,3 @@ enum BODY_MAP_INFO {
 };
 
 global.bodyMaps = ds_map_create();
-

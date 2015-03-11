@@ -58,6 +58,8 @@ bodyMapNum = BODY_MAPS.ENEMY1;
 
 bodyType = WEAPON_TYPE.RED;
 boundsRange = 32;
+drawScale = 1;
+
 
 enum ENEMY_EV {
     CREATE,
@@ -406,6 +408,8 @@ with ( myBrain ) {
             <kind>1</kind>
             <string>///Draw
 
+image_xscale = drawScale;
+image_yscale = drawScale;
 draw_self();
 
 
