@@ -92,7 +92,7 @@ part_type_direction(getParticle( "spreaderCore" ), direction + 180 - 30,directio
 part_type_direction(getParticle( "spreaderTrail" ), direction + 180,direction + 180, 0 *t,0 *t);
 
 part_emitter_burst( system1, emitter1, getParticle( "spreaderCore" ), 1 *t );
-part_emitter_burst( system1, emitter1, getParticle( "spreaderTrail" ), 2 *t );
+part_emitter_burst( system1, emitter1, getParticle( "spreaderTrail" ), 1 *t );
 
 
 </string>
