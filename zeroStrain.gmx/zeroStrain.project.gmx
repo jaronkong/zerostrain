@@ -267,6 +267,7 @@
     </scripts>
     <scripts name="Enemies">
       <script>scripts\enemyInitColor.gml</script>
+      <script>scripts\spawnEnemy.gml</script>
     </scripts>
     <scripts name="Gameplay">
       <script>scripts\damagePlayer.gml</script>
@@ -431,6 +432,10 @@
     </objects>
     <objects name="Title">
       <object>objects\titleObj</object>
+    </objects>
+    <objects name="Spawn">
+      <object>objects\spawnBehaviorPar</object>
+      <object>objects\spawn_circle</object>
     </objects>
   </objects>
   <rooms name="rooms">
