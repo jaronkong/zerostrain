@@ -76,6 +76,7 @@ baseY = 0;
 baseTwist = 5;
 baseSplit = -16;
 baseInfoScale = 1;
+baseInfoAlpha = 0;
 </string>
           </argument>
         </arguments>
@@ -123,6 +124,7 @@ optionY = 0;
 optionTwist = -baseTwist;
 optionSplit = baseSplit;
 optionCurrentAni = optionCurrent;
+optionInfoAlpha = 0;
 </string>
           </argument>
         </arguments>
@@ -237,22 +239,23 @@ with ( optionPos ) instance_destroy( );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Base strand info fade out
+            <string>///Fade info in and out
 
 var t = global.timeTickFactor;
 
-var tAlpha = 1;
-if ( basePos.x &gt; 0.3 ) tAlpha = 0;
-for ( var i = 0; i &lt; baseInfoCount; ++i ) {
-    baseInfo[i].image_alpha = lerpDT( baseInfo[i].image_alpha, tAlpha, 0.0875, t );
+var tSpdIn = 0.05;
+var tSpdOut = 0.1;
+
+if ( basePos.x &gt; 0.3 ) {
+    baseInfoAlpha = lerpDT( baseInfoAlpha, 0, tSpdOut, t );
+} else {
+    baseInfoAlpha = lerpDT( baseInfoAlpha, 1, tSpdIn, t );
 }
 
-for ( var i = 0; i &lt; optionCount; ++i ) {
-    tAlpha = 1;
-    if ( optionPos.x &gt; 0.3 ) tAlpha = 0;
-    for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
-        optionInfo[i, j].image_alpha = lerpDT( optionInfo[i, j].image_alpha, tAlpha, 0.0875, t );
-    }
+if ( optionPos.x &gt; 0.3 ) {
+    optionInfoAlpha = lerpDT( optionInfoAlpha, 0, tSpdOut, t );
+} else {
+    optionInfoAlpha = lerpDT( optionInfoAlpha, 1, tSpdIn, t );
 }
 </string>
           </argument>
@@ -287,8 +290,8 @@ if ( abs( optionCurrentAni - optionCurrent ) &lt; 0.25 ) {
     }
     if ( gamepad_is_connected( 0 ) ) {
         var tAxis = gamepad_axis_value( 0, optionPos.inVertical );
-        if ( tAxis &lt; -0.5 ) optionCurrent -= 1;
-        if ( tAxis &gt; 0.5 ) optionCurrent += 1;
+        if ( tAxis &lt; -0.875 ) optionCurrent -= 1;
+        if ( tAxis &gt; 0.875 ) optionCurrent += 1;
     }
     optionCurrent = clamp( optionCurrent, 0, ( optionCount - 1 ) );
 }
@@ -477,6 +480,7 @@ var py = -( tHeight / 2 );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].x = px;
     baseInfo[i].y = py;
+    baseInfo[i].image_alpha = other.baseInfoAlpha;
     py += ( baseInfo[i].height + 16 );
 }
 baseInfoScale = ( length * 9.5 / tHeight );
@@ -541,6 +545,7 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
         optionInfo[i, j].x = px;
         optionInfo[i, j].y = py;
+        optionInfo[i, j].image_alpha = ( other.optionInfoAlpha * max( ( 1 - tDistAbs ), 0 ) );
         py += ( optionInfo[i, j].height + 16 );
     }
     optionInfoScale = ( length * 9.5 / tHeight );

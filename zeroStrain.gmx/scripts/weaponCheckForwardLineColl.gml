@@ -23,6 +23,17 @@ if ( instance_exists( aProjectile ) ) {
 }
 
 //Check for collision
+var tInstance = collision_line( tX, tY,
+    tX + lengthdir_x( tSpeed, tDir ),
+    tY + lengthdir_y( tSpeed, tDir ),
+    enemyPar, true, true
+);
+if ( instance_exists( tInstance ) ) {
+    weaponDoDamage( tInstance, tWeaponCon );
+    return tInstance;
+}
+
+/*
 for ( var i = 0; i < tSpeed; i += STEP_RES ) {
     var tCheckX = tX + lengthdir_x( i, tDir );
     var tCheckY = tY + lengthdir_y( i, tDir );
@@ -33,5 +44,6 @@ for ( var i = 0; i < tSpeed; i += STEP_RES ) {
         return tInstance;
     }
 }
+*/
 
 return noone;

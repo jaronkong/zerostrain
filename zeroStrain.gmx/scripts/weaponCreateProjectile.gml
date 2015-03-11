@@ -10,7 +10,7 @@ var tNewProj = noone;
 if ( instance_exists( aCon ) ) {
     tNewProj = instance_create( aX, aY, aProj );
     with ( tNewProj ) {
-        lifespan = aCon.projectileLife;
+        lifetime = aCon.projectileLife;
         hitForce = aCon.hitForce;
         ownerController = aCon.id;
         system1 = aCon.system1;

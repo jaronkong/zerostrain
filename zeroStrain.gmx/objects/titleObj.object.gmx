@@ -25,6 +25,30 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Create a resolution controller
+
+instance_create( x, y, resController );
+alarm[11] = 1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Create DNA strands
 
 strand = false;
@@ -121,6 +145,33 @@ globalInit();
 
 for ( var i = 0; i &lt; 2; ++i ) {
     with ( strand[i] ) instance_destroy( );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set window size
+
+if ( !window_get_fullscreen( ) ) {
+    window_set_size( 1024, 768 );
 }
 </string>
           </argument>
