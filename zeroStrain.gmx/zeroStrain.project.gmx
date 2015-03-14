@@ -420,6 +420,7 @@
         <object>objects\behaviorPar</object>
         <object>objects\behavior_blindSeek</object>
         <object>objects\behavior_orbitMid</object>
+        <object>objects\behavior_dodge</object>
       </objects>
     </objects>
     <objects name="Genetics">

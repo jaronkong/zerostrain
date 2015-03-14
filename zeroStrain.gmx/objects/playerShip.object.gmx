@@ -233,7 +233,7 @@ if ( !gamepad_is_connected( 0 ) ) {
         tKeyboardInputAngleY += 1;
     }
     
-    if ( mouse_check_button( mb_left )) {
+    if ( mouse_check_button( mb_left ) || keyboard_check( ord("B"))) {
         inputAimPercent = 1;
     }
     
