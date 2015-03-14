@@ -124,6 +124,7 @@ optionY = 0;
 optionTwist = -baseTwist;
 optionSplit = baseSplit;
 optionCurrentAni = optionCurrent;
+optionInfoScale = false;
 optionInfoAlpha = 0;
 </string>
           </argument>
@@ -147,8 +148,15 @@ optionInfoAlpha = 0;
             <kind>1</kind>
             <string>///Define state
 
-stateLocked = false;
 stateMerging = false;
+
+mergeRemoval = 0;
+mergeRemovalSpeed = 0;
+
+mergeCombine = 0;
+mergeCombineThreshold = 0.6;
+mergeTwist = 0;
+mergeSplit = 0;
 </string>
           </argument>
         </arguments>
@@ -281,19 +289,21 @@ if ( optionPos.x &gt; 0.3 ) {
 
 optionCurrentAni = lerpDT( optionCurrentAni, optionCurrent, 0.05, global.timeTickFactor );
 
-if ( abs( optionCurrentAni - optionCurrent ) &lt; 0.25 ) {
-    if ( keyboard_check( optionPos.inUp ) ) {
-        optionCurrent -= 1;
+if ( !optionPos.stateLocked ) {
+    if ( abs( optionCurrentAni - optionCurrent ) &lt; 0.25 ) {
+        if ( keyboard_check( optionPos.inUp ) ) {
+            optionCurrent -= 1;
+        }
+        if ( keyboard_check( optionPos.inDown ) ) {
+            optionCurrent += 1;
+        }
+        if ( gamepad_is_connected( 0 ) ) {
+            var tAxis = gamepad_axis_value( 0, optionPos.inVertical );
+            if ( tAxis &lt; -0.875 ) optionCurrent -= 1;
+            if ( tAxis &gt; 0.875 ) optionCurrent += 1;
+        }
+        optionCurrent = clamp( optionCurrent, 0, ( optionCount - 1 ) );
     }
-    if ( keyboard_check( optionPos.inDown ) ) {
-        optionCurrent += 1;
-    }
-    if ( gamepad_is_connected( 0 ) ) {
-        var tAxis = gamepad_axis_value( 0, optionPos.inVertical );
-        if ( tAxis &lt; -0.875 ) optionCurrent -= 1;
-        if ( tAxis &gt; 0.875 ) optionCurrent += 1;
-    }
-    optionCurrent = clamp( optionCurrent, 0, ( optionCount - 1 ) );
 }
 </string>
           </argument>
@@ -329,17 +339,38 @@ if ( !stateMerging ) {
     }
 } else {
     var t = global.timeTickFactor;
+    //Move to center
     var tSpd = 0.025;
+    var tSpdR = 0.02;
     basePos.x = lerpDT( basePos.x, 0.8, tSpd, t );
     basePos.y = lerpDT( basePos.y, 0, tSpd, t );
-    basePos.ry = lerpDT( basePos.ry, 0, 0.02, t );
-    baseTwist = lerpDT( baseTwist, 0, 0.02, t );
-    if ( ( baseTwist &lt; 30 ) &amp;&amp; ( basePos.ry &gt; -180 ) ) {
-        baseSplit += 1.25
-    }
+    basePos.rx = lerpDT( basePos.rx, 0, tSpdR, t );
+    basePos.ry = lerpDT( basePos.ry, 0, tSpdR, t );
+    basePos.rz = lerpDT( basePos.rz, 0, tSpdR, t );
     optionPos.x = lerpDT( optionPos.x, 0.8, tSpd, t );
     optionPos.y = lerpDT( optionPos.y, 0, tSpd, t );
-    optionPos.ry = lerpDT( optionPos.ry, 0, 0.02, t );
+    optionPos.rx = lerpDT( optionPos.rx, 0, tSpdR, t );
+    optionPos.ry = lerpDT( optionPos.ry, 0, tSpdR, t );
+    optionPos.rz = lerpDT( optionPos.rz, 0, tSpdR, t );
+    //Unroll strands
+    baseTwist = lerpDT( baseTwist, 0, 0.02, t );
+    if ( ( baseTwist &lt; 30 ) &amp;&amp; ( basePos.ry &gt; -180 ) ) {
+        baseSplit += ( 1.25 * t );
+    }
+    //Remove unused halves
+    if ( baseSplit &gt; length ) {
+        mergeRemovalSpeed += ( 0.0025 * t );
+        mergeRemoval += ( mergeRemovalSpeed * t );
+        //mergeRemoval = lerpDT( mergeRemoval, 4, 0.01, t );
+        mergeCombine = lerpDT( mergeCombine, 1, 0.075, t );
+    }
+    if ( mergeCombine &lt; mergeCombineThreshold ) {
+        mergeTwist = baseTwist;
+        mergeSplit = baseSplit;
+    } else {
+        if ( mergeSplit &gt; -48 ) mergeSplit -= ( 1.0 * t );
+        mergeTwist = lerpDT( mergeTwist, 7.5, 0.005, t );
+    }
 }
 </string>
           </argument>
@@ -548,7 +579,48 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
         optionInfo[i, j].image_alpha = ( other.optionInfoAlpha * max( ( 1 - tDistAbs ), 0 ) );
         py += ( optionInfo[i, j].height + 16 );
     }
-    optionInfoScale = ( length * 9.5 / tHeight );
+    optionInfoScale[i] = ( length * 9.5 / tHeight );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Apply merge translations
+
+if ( stateMerging ) {
+    var tBase = base[1];
+    var tOption = option[optionCurrent, 0];
+    //Remove unsed elements
+    var tY = ( mergeRemoval * display_get_gui_height( ) );
+    base[0].y -= tY;
+    option[optionCurrent, 1].y += tY;
+    //Push elementes together
+    var tCenter = ( display_get_gui_width( ) / 2 );
+    tBase.x = lerp( tBase.x, tCenter, mergeCombine );
+    tOption.x = lerp( tOption.x, tCenter, mergeCombine );
+    //Wind strands together
+    if ( mergeCombine &gt; mergeCombineThreshold ) {
+        tBase.twist = mergeTwist;
+        tBase.split = mergeSplit;
+        tOption.twist = mergeTwist;
+        tOption.split = mergeSplit;
+    }
 }
 </string>
           </argument>
@@ -678,10 +750,10 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
 }
 
 for ( var i = 0; i &lt; optionCount; ++i ) {
-    tScale = baseInfoScale;
+    tScale = optionInfoScale[i];
     d3d_transform_stack_top( );
     d3d_transform_add_scaling( tScale, tScale, tScale );
-    d3d_transform_add_rotation_y( 5 );
+    d3d_transform_add_rotation_y( -5 );
     d3d_transform_add_rotation_z( option[i, 0].rz );
     d3d_transform_add_rotation_x( option[i, 0].rx );
     d3d_transform_add_translation( option[i, 0].x, option[i, 0].y, option[i, 0].z );
