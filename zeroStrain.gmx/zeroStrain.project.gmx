@@ -441,8 +441,14 @@
       <object>objects\spawn_circle_unison</object>
       <object>objects\spawn_stream</object>
       <object>objects\spawn_wall</object>
+      <objects name="SpawnMacro">
+        <object>objects\spawn_tri</object>
+      </objects>
     </objects>
   </objects>
+  <timelines name="timelines">
+    <timeline>timelines\spawn_tri_tl</timeline>
+  </timelines>
   <rooms name="rooms">
     <room>rooms\Title_rm</room>
     <room>rooms\room0</room>
