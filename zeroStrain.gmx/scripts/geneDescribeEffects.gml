@@ -47,12 +47,14 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
             tItemCount += 1;
         }
     }
-    var tIndex = ds_grid_height( tResult );
-    ds_grid_resize( tResult, GeneDescGroup.Size, ( tIndex + 1 ) );
-    ds_grid_set( tResult, GeneDescGroup.Title, tIndex, tTitle );
-    ds_grid_set( tResult, GeneDescGroup.Value, tIndex, tValue );
-    ds_grid_set( tResult, GeneDescGroup.Items, tIndex, tItems );
-    ds_grid_set( tResult, GeneDescGroup.ItemCount, tIndex, tItemCount );
+    if ( tItemCount > 0 ) {
+        var tIndex = ds_grid_height( tResult );
+        ds_grid_resize( tResult, GeneDescGroup.Size, ( tIndex + 1 ) );
+        ds_grid_set( tResult, GeneDescGroup.Title, tIndex, tTitle );
+        ds_grid_set( tResult, GeneDescGroup.Value, tIndex, tValue );
+        ds_grid_set( tResult, GeneDescGroup.Items, tIndex, tItems );
+        ds_grid_set( tResult, GeneDescGroup.ItemCount, tIndex, tItemCount );
+    }
 }
 
 //Compute percentages

@@ -283,6 +283,7 @@
     <scripts name="Genetics">
       <script>scripts\geneGetData.gml</script>
       <script>scripts\geneGenerateRandom.gml</script>
+      <script>scripts\geneGenerateGroupedRandom.gml</script>
       <script>scripts\geneComputeEffects.gml</script>
       <script>scripts\geneDescribeEffects.gml</script>
       <script>scripts\geneGetEffect.gml</script>
