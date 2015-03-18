@@ -35,6 +35,9 @@ geneOption = false;
 geneOptionCount = 0;
 
 length = 0;
+
+geneResult = false;
+resultLength = 0;
 </string>
           </argument>
         </arguments>
@@ -162,6 +165,33 @@ mergeSplit = 0;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Post merge animation
+
+stateMergeComplete = false;
+
+resultDesc = -1;
+resultInfo = false;
+resultInfoCount = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -226,6 +256,33 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
 }
 
 with ( optionPos ) instance_destroy( );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Destroy result strand objects
+
+for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+    with ( resultInfo[i] ) instance_destroy( );
+}
+
+if ( ds_exists( resultDesc, ds_type_grid ) ) ds_grid_destroy( resultDesc );
 </string>
           </argument>
         </arguments>
@@ -331,6 +388,12 @@ if ( !optionPos.stateLocked ) {
 if ( !stateMerging ) {
     if ( ( basePos.x &gt; 0.75 ) &amp;&amp; ( optionPos.x &gt; 0.75 ) ) {
         stateMerging = true;
+        //Create merged gene
+        geneResult = geneMergeStrands( label,
+            geneBase, geneOption[optionCurrent], length
+        );
+        resultLength = array_length_1d( geneResult );
+        //Orient strands
         basePos.stateLocked = true;
         while ( basePos.ry &lt; 0 ) basePos.ry += 360;
         while ( basePos.ry &gt;= 0 ) basePos.ry -= 360;
@@ -374,6 +437,48 @@ if ( !stateMerging ) {
         if ( mergeSplit &gt; -48 ) mergeSplit -= ( 1.0 * t );
         mergeTwist = lerpDT( mergeTwist, 7.5, 0.005, t );
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check for merge completion
+
+if ( !stateMergeComplete &amp;&amp; stateMerging ) {
+    if ( ( mergeSplit &lt; 0 ) &amp;&amp; ( mergeCombine &gt; mergeCombineThreshold ) ) {
+        stateMergeComplete = true;
+        //Create result descriptions
+        var tEffects = geneComputeEffects( label, geneResult, resultLength );
+        resultDesc = geneDescribeEffects( label, tEffects );
+        ds_map_destroy( tEffects );
+        //Create result info boxes
+        resultInfoCount = ds_grid_height( resultDesc );
+        for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+            resultInfo[i] = instance_create( x, y, geneDescriptionBox );
+            with ( resultInfo[i] ) {
+                data = other.resultDesc;
+                index = i;
+                //visible = false;
+            }
+        }
+    }
+} else if ( stateMergeComplete ) {
 }
 </string>
           </argument>
