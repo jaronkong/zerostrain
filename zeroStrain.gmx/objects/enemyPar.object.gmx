@@ -50,6 +50,11 @@ healthBarHeight = 8;
 healthBarWidth = 100;
 healthBarVOffset = -64;
 
+temporaryInfo = true;
+currentInfoAlpha = 1;
+targetInfoAlpha = 0;
+infoAlphaTween = 0.01;
+
 
 brainType = behavior_blindSeek;
 myBrain = noone;
@@ -269,6 +274,33 @@ if ( y &gt; room_height ) {
             <string>///Movement Restrictions
 
 friction = baseFriction * global.timeTickFactor;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Info display
+
+if ( temporaryInfo ) {
+    currentInfoAlpha = lerp( currentInfoAlpha, targetInfoAlpha, infoAlphaTween );
+
+}
 
 </string>
           </argument>
