@@ -181,6 +181,7 @@
       <sprite>sprites\titleSplash_spr</sprite>
       <sprite>sprites\hexBack_spr</sprite>
     </sprites>
+    <sprite>sprites\genePickup_spr</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
