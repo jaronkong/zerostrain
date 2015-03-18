@@ -754,10 +754,17 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     if ( i &gt; 0 ) tHeight += 16;
     tHeight += baseInfo[i].height;
 }
-var px = ( base[0].radius * 16 );
+var tHeightOff = ( ( length * 6 ) - tHeight );
+if ( tHeightOff &gt; 0 ) {
+    tHeight += tHeightOff;
+    tHeightOff /= baseInfoCount;
+    for ( var i = 0; i &lt; baseInfoCount; ++i ) {
+        baseInfo[i].height += tHeightOff;
+    }
+}
 var py = -( tHeight / 2 );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
-    baseInfo[i].x = px;
+    baseInfo[i].x = 0;
     baseInfo[i].y = py;
     baseInfo[i].image_alpha = other.baseInfoAlpha;
     py += ( baseInfo[i].height + 16 );
@@ -819,10 +826,17 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
         if ( j &gt; 0 ) tHeight += 16;
         tHeight += optionInfo[i, j].height;
     }
-    var px = -( ( option[i, 0].radius * 16 ) + optionInfo[i, 0].width );
+    var tHeightOff = ( ( length * 6 ) - tHeight );
+    if ( tHeightOff &gt; 0 ) {
+        tHeight += tHeightOff;
+        tHeightOff /= optionInfoCount[i];
+        for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
+            optionInfo[i, j].height += tHeightOff;
+        }
+    }
     var py = -( tHeight / 2 );
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
-        optionInfo[i, j].x = px;
+        optionInfo[i, j].x = -optionInfo[i, j].width;
         optionInfo[i, j].y = py;
         optionInfo[i, j].image_alpha = ( other.optionInfoAlpha * max( ( 1 - tDistAbs ), 0 ) );
         py += ( optionInfo[i, j].height + 16 );
@@ -857,10 +871,17 @@ if ( resultInfoCount &gt; 0 ) {
         if ( i &gt; 0 ) tHeight += 16;
         tHeight += resultInfo[i].height;
     }
-    var px = ( base[1].radius * 16 );
+    var tHeightOff = ( ( length * 6 ) - tHeight );
+    if ( tHeightOff &gt; 0 ) {
+        tHeight += tHeightOff;
+        tHeightOff /= resultInfoCount;
+        for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+            resultInfo[i].height += tHeightOff;
+        }
+    }
     var py = -( tHeight / 2 );
     for ( var i = 0; i &lt; resultInfoCount; ++i ) {
-        resultInfo[i].x = px;
+        resultInfo[i].x = 0;
         resultInfo[i].y = py;
         resultInfo[i].image_alpha = other.resultInfoAlpha;
         py += ( resultInfo[i].height + 16 );
@@ -1065,6 +1086,7 @@ d3d_transform_add_rotation_y( 5 );
 d3d_transform_add_rotation_z( base[0].rz );
 d3d_transform_add_rotation_x( base[0].rx );
 d3d_transform_add_translation( base[0].x, base[0].y, base[0].z );
+d3d_transform_add_translation( ( base[0].radius * 17 ), 0, 0 );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) event_perform( ev_draw, false );
 }
@@ -1078,6 +1100,7 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     d3d_transform_add_rotation_z( option[i, 0].rz );
     d3d_transform_add_rotation_x( option[i, 0].rx );
     d3d_transform_add_translation( option[i, 0].x, option[i, 0].y, option[i, 0].z );
+    d3d_transform_add_translation( -( option[i, 0].radius * 17 ), 0, 0 );
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
         with ( optionInfo[i, j] ) event_perform( ev_draw, false );
     }
@@ -1091,6 +1114,7 @@ d3d_transform_add_rotation_y( 5 );
 d3d_transform_add_rotation_z( base[1].rz );
 d3d_transform_add_rotation_x( base[1].rx );
 d3d_transform_add_translation( base[1].x, base[1].y, base[1].z );
+d3d_transform_add_translation( ( base[1].radius * 17 ), 0, 0 );
 for ( var i = 0; i &lt; resultInfoCount; ++i ) {
     with ( resultInfo[i] ) event_perform( ev_draw, false );
 }
