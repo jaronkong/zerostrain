@@ -105,12 +105,13 @@ with ( target ) {
     
     var tDodging = false;
     
-    with ( weaponPar_projectile ) {
+   with ( weaponPar_projectile ) {
         var lastDistance = point_distance(tOldX, tOldY, xprevious, yprevious);
         var currentDistance = point_distance(tPosX, tPosY, x, y); // decided to set current distance between projectile + enemy to a variable for readability
+        var playerDistance = point_distance(tPosX, tPosY, playerShip.x, playerShip.y);
         var crashCourse = intercept_course( other, weaponPar_projectile, other.speed ); // gets the direction the enemy would need to be moving in to crash into the projectile
         
-        if ( currentDistance &lt; 200 ) {
+        if ( currentDistance &lt; 200 &amp;&amp; playerDistance &gt; 200) {
             tDodging = true;
             
             with ( other ) {
@@ -122,12 +123,10 @@ with ( target ) {
                 }
                 image_angle = point_direction( x, y, playerShip.x, playerShip.y );
                 var dodgeDir = 90 * tDodgeDir; // dodges to the right; if negative, dodges to the left
-                /* Removed for the time being because trying to dodge more than one projectile at a time messes with things.
-                if ( random(2) &lt; 1 ) { // randomly decides to dodge right or left
-                    dodgeDir *= -1;
-                }
-                */
-                motion_add(point_direction(other.x, other.y, x, y) + dodgeDir, 0.5);   
+                motion_add(point_direction(other.x, other.y, x, y) + dodgeDir, 0.5);
+                
+                // make sure enemy doesn't dodge towards player
+                var playerDistance = point_distance(x, y, playerShip.x, playerShip.y);
             }
         }
     }

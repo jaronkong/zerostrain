@@ -286,6 +286,7 @@
       <script>scripts\geneComputeEffects.gml</script>
       <script>scripts\geneDescribeEffects.gml</script>
       <script>scripts\geneGetEffect.gml</script>
+      <script>scripts\geneMergeStrands.gml</script>
     </scripts>
     <script>scripts\drawSegmentHealthBar.gml</script>
     <script>scripts\chooseWeight.gml</script>
