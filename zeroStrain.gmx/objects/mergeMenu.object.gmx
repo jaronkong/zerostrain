@@ -188,6 +188,9 @@ stateMergeComplete = false;
 resultDesc = -1;
 resultInfo = false;
 resultInfoCount = 0;
+
+resultInfoScale = 1;
+resultInfoAlpha = 1;
 </string>
           </argument>
         </arguments>
@@ -474,7 +477,7 @@ if ( !stateMergeComplete &amp;&amp; stateMerging ) {
             with ( resultInfo[i] ) {
                 data = other.resultDesc;
                 index = i;
-                //visible = false;
+                visible = false;
             }
         }
     }
@@ -709,6 +712,44 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Update result info position
+
+if ( resultInfoCount &gt; 0 ) {
+    var tHeight = 0;
+    for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+        if ( i &gt; 0 ) tHeight += 16;
+        tHeight += resultInfo[i].height;
+    }
+    var px = ( base[1].radius * 16 );
+    var py = -( tHeight / 2 );
+    for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+        resultInfo[i].x = px;
+        resultInfo[i].y = py;
+        resultInfo[i].image_alpha = other.resultInfoAlpha;
+        py += ( resultInfo[i].height + 16 );
+    }
+    resultInfoScale = ( resultLength * 9.5 / tHeight );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Apply merge translations
 
 if ( stateMerging ) {
@@ -855,6 +896,7 @@ d3d_transform_stack_push( );
 d3d_set_hidden( false );
 d3d_set_depth( -10 );
 
+//Base strand info
 var tScale = baseInfoScale;
 d3d_transform_add_scaling( tScale, tScale, tScale );
 d3d_transform_add_rotation_y( 5 );
@@ -865,6 +907,7 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) event_perform( ev_draw, false );
 }
 
+//Option strand info
 for ( var i = 0; i &lt; optionCount; ++i ) {
     tScale = optionInfoScale[i];
     d3d_transform_stack_top( );
@@ -876,6 +919,18 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
         with ( optionInfo[i, j] ) event_perform( ev_draw, false );
     }
+}
+
+//Result strand info
+tScale = resultInfoScale;
+d3d_transform_stack_top( );
+d3d_transform_add_scaling( tScale, tScale, tScale );
+d3d_transform_add_rotation_y( 5 );
+d3d_transform_add_rotation_z( base[1].rz );
+d3d_transform_add_rotation_x( base[1].rx );
+d3d_transform_add_translation( base[1].x, base[1].y, base[1].z );
+for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+    with ( resultInfo[i] ) event_perform( ev_draw, false );
 }
 
 d3d_transform_stack_pop( );
