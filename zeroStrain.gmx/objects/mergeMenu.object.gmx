@@ -484,6 +484,28 @@ if ( !stateMergeComplete &amp;&amp; stateMerging ) {
 } else if ( stateMergeComplete ) {
     var t = global.timeTickFactor;
     resultInfoAlpha = lerpDT( resultInfoAlpha, 1, 0.05, t );
+    if ( resultInfoAlpha &gt; 0.875 ) {
+        //Check for menu exit
+        var tExit = false;
+        if ( keyboard_check_pressed( vk_space ) ) {
+            tExit = true;
+        }
+        if ( gamepad_is_connected( 0 ) ) {
+            if ( gamepad_button_check_pressed( 0, gp_shoulderrb ) ) {
+                tExit = true;
+            }
+        }
+        if ( tExit ) {
+            //Apply gene effects
+            with ( playerGenetics ) {
+                genome = other.geneResult;
+                length = other.resultLength;
+                event_user( 1 );
+            }
+            //Remove self
+            instance_destroy( );
+        }
+    }
 }
 </string>
           </argument>
