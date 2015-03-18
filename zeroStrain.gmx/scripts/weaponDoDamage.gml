@@ -20,6 +20,10 @@ with ( aTargetID ) {
         tDamage *= 0.5;
     }
 
+    if ( tEffective > 0 ) {
+        part_particles_create( global.enemySpawnSystem, x, y, getParticle("superEffectiveHit"), 1 );
+    }
+    
     selfHealth -= tDamage;
     damageFlyNumberCreate( x, y, tDamage, aWeaponConID.weaponType, tEffective );
     

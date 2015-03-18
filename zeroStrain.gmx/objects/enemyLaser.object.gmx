@@ -214,7 +214,7 @@ for ( var i = 0; i &lt; tNumBeamLines; ++i ) {
     var tBaseY = tBeamStartY + lengthdir_y( tBeamLineIncrement*i, angle - 90 );
     
     //Number of particles to spawn on each beam line
-    repeat( range div 10 ) {
+    repeat( range div 15 ) {
         var tRandDist = random( range );
         part_particles_create( global.enemyWeaponSystem, 
                             tBaseX + lengthdir_x( tRandDist, angle ),

@@ -30,6 +30,11 @@ var tInstance = collision_line( tX, tY,
 );
 if ( instance_exists( tInstance ) ) {
     weaponDoDamage( tInstance, tWeaponCon );
+    
+    var tEffective = typeGetResolution( tWeaponCon.weaponType, tInstance.bodyType );
+    if ( tEffective > 0 ) {
+    //    part_particles_create( global.enemySpawnSystem, tX, tY, getParticle("superEffectiveHit"), 1 );
+    }
     return tInstance;
 }
 

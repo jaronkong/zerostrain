@@ -196,6 +196,7 @@
       <script>scripts\particleDef_enemyBodyBlue.gml</script>
       <script>scripts\particleDef_enemyBodyGreen.gml</script>
       <script>scripts\particleDef_ambBackground.gml</script>
+      <script>scripts\particleDef_genericDamage.gml</script>
       <scripts name="Enemy">
         <script>scripts\particleDef_enemyBullet.gml</script>
         <script>scripts\particleDef_enemyLaser.gml</script>
