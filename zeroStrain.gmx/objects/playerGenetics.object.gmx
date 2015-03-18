@@ -157,11 +157,15 @@ with ( weaponSpawner ) event_user( 1 );
             <kind>1</kind>
             <string>///Draw collected genes
 
-var px = ( view_xview + 48 );
-var py = ( view_yview + view_hview - 48 );
+var px = ( view_xview + 24 );
+var py = ( view_yview + view_hview - 24 );
 
+    var tScale = 0.5;
 for ( var i = 0; i &lt; pickupCount; ++i ) {
-    draw_sprite( genePickup_spr, 0, ( px + ( i * 96 ) ), py );
+    draw_sprite_ext( genePickup_spr, 0,
+        ( px + ( i * 80 * tScale ) ), py,
+        tScale, tScale, 0, c_white, 1
+    );
 }
 </string>
           </argument>
