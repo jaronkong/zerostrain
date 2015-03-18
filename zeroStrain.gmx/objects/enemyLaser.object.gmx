@@ -47,6 +47,8 @@ inheritAngle = true;
 traceDelay = room_speed * 0.5;
 maxTraceDelay = traceDelay;
 
+hitForce = 10;
+
 range = 600;
 beamWidth = 64;
 angle = 0;
@@ -263,7 +265,11 @@ with ( playerShip ) {
     
     if ( xDist &lt; other.range &amp;&amp; xDist &gt; 0 &amp;&amp; yDist &lt; other.beamWidth/2 ) {
         damagePlayer( id, other.damage );
+        audioSetPitchRand( damageTaken_sd );
+        playSound( damageTaken_sd, 1, false );
+        shakeScreen( 32 );
         
+        motion_add( tAngle, other.hitForce );
         //Create effects
         with ( other ) {
             part_emitter_region( global.enemyWeaponSystem, emitter1, 
@@ -317,6 +323,9 @@ with ( playerShip ) {
 
 draw_set_color( c_red );
 draw_set_alpha( traceDelay / maxTraceDelay );
+draw_line_width( x, y, x + lengthdir_x( range, angle ), y + lengthdir_y( range, angle ), beamWidth );
+
+draw_set_alpha( 1 );
 draw_line( x + lengthdir_x( beamWidth/2, angle - 90 ),
             y + lengthdir_y( beamWidth/2, angle - 90 ),
             x + lengthdir_x( beamWidth/2, angle - 90 ) + lengthdir_x( range, angle ),

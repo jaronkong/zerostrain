@@ -80,6 +80,15 @@ instance_create( room_width/2, room_height/2, playerShip );
             <kind>1</kind>
             <string>///Define play area
 
+enum BOUNDS {
+    RIGHT,
+    UP,
+    LEFT,
+    DOWN,
+    
+    NUM_ELEMENTS
+};
+
 var m = 128;
 roomTop = m;
 roomBottom = room_height-m;

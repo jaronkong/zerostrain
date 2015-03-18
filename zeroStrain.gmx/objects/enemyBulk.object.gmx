@@ -115,6 +115,7 @@ if ( currentFireTimer &lt;= 0 ) {
                 inheritAngle = true;
                 beamWidth = other.beamWidth;
                 range = other.fireRange;
+                angle = other.image_angle;
             }
             
             playSound( enemySmallShot_sd, 1, false );
