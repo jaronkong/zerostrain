@@ -153,6 +153,7 @@ stateMerging = false;
 mergeRemoval = 0;
 mergeRemovalSpeed = 0;
 
+mergeOptionRemove = 0;
 mergeCombine = 0;
 mergeCombineThreshold = 0.6;
 mergeTwist = 0;
@@ -352,6 +353,8 @@ if ( !stateMerging ) {
     optionPos.rx = lerpDT( optionPos.rx, 0, tSpdR, t );
     optionPos.ry = lerpDT( optionPos.ry, 0, tSpdR, t );
     optionPos.rz = lerpDT( optionPos.rz, 0, tSpdR, t );
+    //Remove unchosen option strands
+    mergeOptionRemove = lerpDT( mergeOptionRemove, 0.75, 0.02, t );
     //Unroll strands
     baseTwist = lerpDT( baseTwist, 0, 0.02, t );
     if ( ( baseTwist &lt; 30 ) &amp;&amp; ( basePos.ry &gt; -180 ) ) {
@@ -604,6 +607,14 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
             <string>///Apply merge translations
 
 if ( stateMerging ) {
+    //Remove unused options
+    var tOptionRemove = ( mergeOptionRemove * display_get_gui_width( ) );
+    for ( var i = 0; i &lt; optionCount; ++i ) {
+        if ( i == optionCurrent ) continue;
+        for ( var j = 0; j &lt; 2; ++j ) {
+            option[i, j].x += tOptionRemove;
+        }
+    }
     var tBase = base[1];
     var tOption = option[optionCurrent, 0];
     //Remove unsed elements
