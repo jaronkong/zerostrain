@@ -3,12 +3,12 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-9001</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="8" enumb="0">
+    <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,34 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw enemy health
+            <string>///Setup
 
-with ( enemyPar ) {
-    draw_set_color( c_red );
-    draw_set_alpha( 0.5 );
-    draw_circle( x, y, boundsRange, true );
-
-    ///Draw healthbar
-    draw_set_color( tagColor );
-    draw_set_alpha( currentInfoAlpha );
-    draw_set_valign( fa_bottom );
-    draw_set_halign( fa_left );
-    drawTextSize( x - healthBarWidth/2, y + healthBarVOffset,
-                    name, tagFont, tagFontSize );
-    draw_set_halign( fa_right );
-    /*
-    drawTextSize( x + healthBarWidth/2, y + healthBarVOffset,
-                    "Lv. " + string( level ), tagFont, tagFontSize );
-    */
-                                
-    
-    drawSegmentHealthBar( x - healthBarWidth/2, y + healthBarVOffset,
-                        x + healthBarWidth/2, y + healthBarVOffset + healthBarHeight,
-                        selfHealth, damageHealth, selfHealthMax,
-                        weaponTypeGetColor( bodyType ), c_yellow, c_dkgray,
-                        true, true, currentInfoAlpha );
-
-}   
+timeline_index = spawn_tri_tl;
+timeline_running = true;
 
 </string>
           </argument>

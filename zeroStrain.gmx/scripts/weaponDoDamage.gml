@@ -22,4 +22,6 @@ with ( aTargetID ) {
 
     selfHealth -= tDamage;
     damageFlyNumberCreate( x, y, tDamage, aWeaponConID.weaponType, tEffective );
+    
+    currentInfoAlpha = 1;
 }

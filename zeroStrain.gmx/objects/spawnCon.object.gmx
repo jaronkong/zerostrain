@@ -100,13 +100,15 @@ spawnEnemy( 100, 100,
             <kind>1</kind>
             <string>///Spawn enemy
 
+instance_create( 0, 0, spawn_tri );
+
+/*
 with ( instance_create( 0, 0, spawn_wall ) ) {
     centerX = playerShip.x;
     centerY = playerShip.y;
     angle = 45;
-    
-    
 }
+*/
 </string>
           </argument>
         </arguments>

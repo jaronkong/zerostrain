@@ -1,6 +1,7 @@
 ///Draw segmented health bar
 
-//drawSegmentHealthBar( x1, y1, x2, y2, currentHealth, damageHealth, maxHealth, barColor, damageColor, backColor, showBack, drawSegments )
+//drawSegmentHealthBar( x1, y1, x2, y2, currentHealth, damageHealth, 
+        //maxHealth, barColor, damageColor, backColor, showBack, drawSegments, alpha )
 
 var x1, y1, x2, y2;
 
@@ -14,7 +15,7 @@ var scaling = totalDist / argument6;
 var currentHealth = floor( argument4 * scaling );
 var displayDamageHealth = floor( argument5 * scaling);
 var maxHealth = floor( argument6 * scaling );
-
+var alphaFactor = argument12;
 
 var healthIncrement = 250 * scaling; //Each segment is 250 health
 var segmentSpacing = 2//max( 2 * scaling, 1 ); //Spacing between bars
@@ -38,7 +39,7 @@ var leftoverDist = (currentHealth mod segmentSize);
 ///Backing
 if ( argument10 ) {
     draw_set_color( argument9 );
-    draw_set_alpha( 0.5 );
+    draw_set_alpha( 0.5 * alphaFactor );
     
     draw_rectangle( x1 - borderSpace, y1 - borderSpace, x2 + borderSpace, y2 + borderSpace, false );
     
@@ -48,14 +49,14 @@ if ( currentHealth > 0 ) {
 
     ///Damage coloring
     draw_set_color( argument8 );
-    draw_set_alpha( 0.75 );
+    draw_set_alpha( 0.75 * alphaFactor );
     var farEdge = x1 + ( numFullSegments * segmentSize ) + leftoverDist;
     draw_rectangle( farEdge, y1, farEdge + ( displayDamageHealth - currentHealth ), y2, false );
     
     
     ///Current health coloring
     draw_set_color( argument7 );
-    draw_set_alpha( 0.75 );
+    draw_set_alpha( 0.75 * alphaFactor );
     for ( var i = 1; i <= numFullSegments; i ++ ) {
         
         var leftX = x1 + ((i - 1) * segmentSize);

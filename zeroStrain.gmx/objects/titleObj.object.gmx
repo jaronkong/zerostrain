@@ -442,6 +442,32 @@ draw_sprite_ext( titleSplash_spr, 0, room_width/2, room_height/2, 1, 1, 0, c_whi
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Test Draw
+/*
+draw_set_color( c_orange );
+drawTextSize_backed( 200, 200, "Test string", main_ft, 64 );
+drawTextSize_backed( 200, 300, "Test string", main_ft, 128 );
+*/
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
   </events>
   <PhysicsObject>0</PhysicsObject>
