@@ -25,10 +25,39 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Setup
+            <string>///Make lasers in a circle
 
-timeline_index = spawn_tri_tl;
-timeline_running = true;
+var tNumEnemies = 10;
+var tIncrement = 360 / tNumEnemies;
+var radius = 400;
+var angleOffset = 40;
+
+if ( instance_exists( playerShip ) ) {
+    for ( var i = 0; i &lt; 360; i += tIncrement ) {
+        var tSpawnX = playerShip.x + lengthdir_x( radius, i );
+        var tSpawnY = playerShip.y + lengthdir_y( radius, i ); 
+        
+        if ( pointInBounds( tSpawnX, tSpawnY ) ) {
+            var tNewEnemy = instance_create( tSpawnX, tSpawnY, enemyBulk );
+    
+            with ( tNewEnemy ) {
+                bodyType = colorGetRandom();;
+                direction = i + 180 - 30;
+                image_angle = direction;
+                speed = 1;
+                
+                currentFireTimer =  30;
+                
+                brainType = behavior_fixedDir;
+                event_user( ENEMY_EV.CREATE );
+            }
+        }
+    }
+    
+
+
+}
+
 
 </string>
           </argument>

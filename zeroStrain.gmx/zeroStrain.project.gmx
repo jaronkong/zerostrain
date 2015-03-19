@@ -197,8 +197,10 @@
       <script>scripts\particleDef_enemyBodyBlue.gml</script>
       <script>scripts\particleDef_enemyBodyGreen.gml</script>
       <script>scripts\particleDef_ambBackground.gml</script>
+      <script>scripts\particleDef_genericDamage.gml</script>
       <scripts name="Enemy">
         <script>scripts\particleDef_enemyBullet.gml</script>
+        <script>scripts\particleDef_enemyLaser.gml</script>
       </scripts>
       <scripts name="Weapons">
         <script>scripts\particleInit_bigBurst.gml</script>
@@ -295,6 +297,7 @@
     <script>scripts\clampRange.gml</script>
     <script>scripts\lerpDT.gml</script>
     <script>scripts\deactivateAllInstances.gml</script>
+    <script>scripts\getPlayAreaBounds.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\bloom_sdr.shader</shader>
@@ -417,14 +420,17 @@
       <object>objects\enemyPar</object>
       <object>objects\enemyBasic</object>
       <object>objects\enemyShot</object>
+      <object>objects\enemyBulk</object>
       <object>objects\enemyBattleship</object>
       <objects name="EnemyWeapons">
         <object>objects\enemyWeaponPar</object>
         <object>objects\enemyBullet</object>
+        <object>objects\enemyLaser</object>
       </objects>
       <objects name="EnemyBrains">
         <object>objects\behaviorPar</object>
         <object>objects\behavior_blindSeek</object>
+        <object>objects\behavior_fixedDir</object>
         <object>objects\behavior_orbitMid</object>
         <object>objects\behavior_dodge</object>
         <object>objects\behavior_strafeDodge</object>
@@ -450,7 +456,10 @@
       <object>objects\spawn_stream</object>
       <object>objects\spawn_wall</object>
       <objects name="SpawnMacro">
+        <object>objects\spawnMacroPar</object>
         <object>objects\spawn_tri</object>
+        <object>objects\spawn_laserLineRight</object>
+        <object>objects\spawn_laserCircle</object>
       </objects>
     </objects>
   </objects>

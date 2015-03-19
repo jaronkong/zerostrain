@@ -49,7 +49,7 @@ damageHealth = selfHealth;
 
 baseFriction = 0.1;
 trackingSpeed = 3;
-maxSpeed = 3;
+maxSpeed = 2.2;
 
 mass = 1;
 sizeFactor = 1; //used for things like body particles. bigger = more particles.

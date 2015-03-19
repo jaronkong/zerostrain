@@ -23,9 +23,11 @@ global.particleEmitterMap = ds_map_create();
 
 
 particleDef_ambBackground();
+particleDef_genericDamage();
 
 particleDef_pickups();
 particleDef_enemyBody();
 particleDef_enemyBodyBlue();
 particleDef_enemyBodyGreen();
 particleDef_enemyBullet();
+particleDef_enemyLaser();

@@ -28,13 +28,13 @@
             <string>///Spawn Waves
 
 if ( instance_number( enemyPar ) == 0 ) {
-    repeat( 10 ) {
+    repeat( 1 ) {
         with ( instance_create( random( view_wview ), random( view_hview ), enemyShot ) ) {
             bodyType = irandom( 2 );
             event_user( ENEMY_EV.CREATE );
         }
     }
-    repeat( 15 ) {
+    repeat( 1 ) {
         with ( instance_create( random( view_wview ), random( view_hview ), enemyBasic ) ) {
             bodyType = irandom( 2 );
             event_user( ENEMY_EV.CREATE );
@@ -100,7 +100,8 @@ spawnEnemy( 100, 100,
             <kind>1</kind>
             <string>///Spawn enemy
 
-instance_create( 0, 0, spawn_tri );
+instance_create( 0, 0, spawn_laserCircle );
+//instance_create( 0, 0, spawn_tri );
 
 /*
 with ( instance_create( 0, 0, spawn_wall ) ) {

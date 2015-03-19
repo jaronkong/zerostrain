@@ -105,8 +105,9 @@ if ( currentFireTimer &lt;= 0 ) {
     if( instance_exists( tNearestPlayer ) ) {
         if ( point_distance( x, y, tNearestPlayer.x, tNearestPlayer.y ) &lt; fireRange ) {
             
-            var tTargetDir = intercept_course( id, tNearestPlayer, bulletSpeed );
-
+            //var tTargetDir = intercept_course( id, tNearestPlayer, bulletSpeed );
+            var tTargetDir = point_direction( x, y, tNearestPlayer.x, tNearestPlayer.y );
+            
             var tNewBullet = instance_create( x, y, enemyBullet );
             with ( tNewBullet ) {
                 speed = other.bulletSpeed;

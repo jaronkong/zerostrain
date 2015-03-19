@@ -25,10 +25,36 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Setup
+            <string>///Make lasers on right side of room
 
-timeline_index = spawn_tri_tl;
-timeline_running = true;
+var bounds = getPlayAreaBounds();
+var rightX = bounds[ BOUNDS.RIGHT ];
+var tNumEnemies = 10;
+var tPlayFieldHeight = bounds[ BOUNDS.DOWN ] - bounds[ BOUNDS.UP ];
+var tIncrement = tPlayFieldHeight / tNumEnemies;
+
+if ( instance_exists( playerShip ) ) {
+    
+    for ( var i = 0; i &lt; tNumEnemies; ++i ) {
+        var tNewEnemy = instance_create( rightX, bounds[ BOUNDS.UP ] + i*tIncrement, enemyBulk );
+
+        with ( tNewEnemy ) {
+            bodyType = -1;
+            direction = 180;
+            image_angle = direction;
+            speed = 1;
+            
+            currentFireTimer =  100 * (i mod 3);
+            
+            brainType = behavior_fixedDir;
+            event_user( ENEMY_EV.CREATE );
+        }
+    }
+    
+
+
+}
+
 
 </string>
           </argument>
