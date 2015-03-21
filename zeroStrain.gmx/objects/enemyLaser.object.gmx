@@ -144,6 +144,9 @@ if ( instance_exists( attachTarget ) ) {
         angle = attachTarget.image_angle;
     }
 }
+else {
+    instance_destroy();
+}
 
 </string>
           </argument>
