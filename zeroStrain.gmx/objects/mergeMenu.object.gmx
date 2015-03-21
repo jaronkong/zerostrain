@@ -25,6 +25,35 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Pause the game
+
+pause = background_create_from_surface(
+    application_surface, 0, 0,
+    surface_get_width( application_surface ),
+    surface_get_height( application_surface ),
+    false, false
+);
+deactivateAllInstances( true );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Define genomes
 
 label = "player";
@@ -290,6 +319,29 @@ if ( ds_exists( resultDesc, ds_type_grid ) ) ds_grid_destroy( resultDesc );
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Destroy background image
+
+background_delete( pause );
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -496,20 +548,81 @@ if ( !stateMergeComplete &amp;&amp; stateMerging ) {
             }
         }
         if ( tExit ) {
-            //Apply gene effects
-            with ( playerGenetics ) {
-                genome = other.geneResult;
-                length = other.resultLength;
-                event_user( 1 );
-            }
-            //Remove self
-            instance_destroy( );
+            event_user( 1 );
         }
     }
 }
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Unpause the game
+
+instance_activate_all( );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Apply gene effects
+
+if ( stateMergeComplete ) {
+    with ( playerGenetics ) {
+        genome = other.geneResult;
+        length = other.resultLength;
+        event_user( 1 );
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>203</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_kill_object</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="7" enumb="10">
@@ -641,10 +754,17 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     if ( i &gt; 0 ) tHeight += 16;
     tHeight += baseInfo[i].height;
 }
-var px = ( base[0].radius * 16 );
+var tHeightOff = ( ( length * 6 ) - tHeight );
+if ( tHeightOff &gt; 0 ) {
+    tHeight += tHeightOff;
+    tHeightOff /= baseInfoCount;
+    for ( var i = 0; i &lt; baseInfoCount; ++i ) {
+        baseInfo[i].height += tHeightOff;
+    }
+}
 var py = -( tHeight / 2 );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
-    baseInfo[i].x = px;
+    baseInfo[i].x = 0;
     baseInfo[i].y = py;
     baseInfo[i].image_alpha = other.baseInfoAlpha;
     py += ( baseInfo[i].height + 16 );
@@ -706,10 +826,17 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
         if ( j &gt; 0 ) tHeight += 16;
         tHeight += optionInfo[i, j].height;
     }
-    var px = -( ( option[i, 0].radius * 16 ) + optionInfo[i, 0].width );
+    var tHeightOff = ( ( length * 6 ) - tHeight );
+    if ( tHeightOff &gt; 0 ) {
+        tHeight += tHeightOff;
+        tHeightOff /= optionInfoCount[i];
+        for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
+            optionInfo[i, j].height += tHeightOff;
+        }
+    }
     var py = -( tHeight / 2 );
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
-        optionInfo[i, j].x = px;
+        optionInfo[i, j].x = -optionInfo[i, j].width;
         optionInfo[i, j].y = py;
         optionInfo[i, j].image_alpha = ( other.optionInfoAlpha * max( ( 1 - tDistAbs ), 0 ) );
         py += ( optionInfo[i, j].height + 16 );
@@ -744,10 +871,17 @@ if ( resultInfoCount &gt; 0 ) {
         if ( i &gt; 0 ) tHeight += 16;
         tHeight += resultInfo[i].height;
     }
-    var px = ( base[1].radius * 16 );
+    var tHeightOff = ( ( length * 6 ) - tHeight );
+    if ( tHeightOff &gt; 0 ) {
+        tHeight += tHeightOff;
+        tHeightOff /= resultInfoCount;
+        for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+            resultInfo[i].height += tHeightOff;
+        }
+    }
     var py = -( tHeight / 2 );
     for ( var i = 0; i &lt; resultInfoCount; ++i ) {
-        resultInfo[i].x = px;
+        resultInfo[i].x = 0;
         resultInfo[i].y = py;
         resultInfo[i].image_alpha = other.resultInfoAlpha;
         py += ( resultInfo[i].height + 16 );
@@ -809,6 +943,31 @@ if ( stateMerging ) {
       </action>
     </event>
     <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw paused background
+
+draw_background_stretched( pause, 0, 0,
+    display_get_gui_width( ), display_get_gui_height( )
+);
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -927,6 +1086,7 @@ d3d_transform_add_rotation_y( 5 );
 d3d_transform_add_rotation_z( base[0].rz );
 d3d_transform_add_rotation_x( base[0].rx );
 d3d_transform_add_translation( base[0].x, base[0].y, base[0].z );
+d3d_transform_add_translation( ( base[0].radius * 17 ), 0, 0 );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) event_perform( ev_draw, false );
 }
@@ -940,6 +1100,7 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     d3d_transform_add_rotation_z( option[i, 0].rz );
     d3d_transform_add_rotation_x( option[i, 0].rx );
     d3d_transform_add_translation( option[i, 0].x, option[i, 0].y, option[i, 0].z );
+    d3d_transform_add_translation( -( option[i, 0].radius * 17 ), 0, 0 );
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
         with ( optionInfo[i, j] ) event_perform( ev_draw, false );
     }
@@ -953,6 +1114,7 @@ d3d_transform_add_rotation_y( 5 );
 d3d_transform_add_rotation_z( base[1].rz );
 d3d_transform_add_rotation_x( base[1].rx );
 d3d_transform_add_translation( base[1].x, base[1].y, base[1].z );
+d3d_transform_add_translation( ( base[1].radius * 17 ), 0, 0 );
 for ( var i = 0; i &lt; resultInfoCount; ++i ) {
     with ( resultInfo[i] ) event_perform( ev_draw, false );
 }

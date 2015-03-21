@@ -2,8 +2,8 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
-  <depth>0</depth>
+  <visible>-1</visible>
+  <depth>-100000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -31,9 +31,33 @@ tag = "player";
 owner = noone;
 
 length = 128;
-genome = geneGenerateRandom( tag, length );
+genome = geneGenerateGroupedRandom( tag, length );
 
 effects = ds_map_create( );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Define collected pickups
+
+pickupCount = 0;
+pickup = false;
 </string>
           </argument>
         </arguments>
@@ -114,6 +138,40 @@ with ( weaponSpawner ) event_user( 1 );
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw collected genes
+
+var px = ( view_xview + 24 );
+var py = ( view_yview + view_hview - 24 );
+
+    var tScale = 0.5;
+for ( var i = 0; i &lt; pickupCount; ++i ) {
+    draw_sprite_ext( genePickup_spr, 0,
+        ( px + ( i * 80 * tScale ) ), py,
+        tScale, tScale, 0, c_white, 1
+    );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="118">
       <action>
         <libid>1</libid>
@@ -133,18 +191,19 @@ with ( weaponSpawner ) event_user( 1 );
             <kind>1</kind>
             <string>///Toggle merge menu
 
-if ( instance_exists( mergeMenu ) ) {
-    with ( mergeMenu ) instance_destroy( );
-} else {
+if ( !instance_exists( mergeMenu ) &amp;&amp; ( pickupCount &gt; 0 ) ) {
     with ( instance_create( x, y, mergeMenu ) ) {
         geneBase = other.genome;
         length = other.length;
-        geneOptionCount = 3;
+        geneOptionCount = other.pickupCount;
         for ( var i = 0; i &lt; geneOptionCount; ++i ) {
-            geneOption[i] = geneGenerateRandom( label, length );
+            geneOption[i] = other.pickup[i];
         }
         event_user( 0 );
     }
+    //Clear pickups
+    pickupCount = 0;
+    with ( genePickup ) instance_destroy( );
 }
 </string>
           </argument>

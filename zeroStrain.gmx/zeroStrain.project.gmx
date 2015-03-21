@@ -181,6 +181,7 @@
       <sprite>sprites\titleSplash_spr</sprite>
       <sprite>sprites\hexBack_spr</sprite>
     </sprites>
+    <sprite>sprites\genePickup_spr</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -284,6 +285,7 @@
     <scripts name="Genetics">
       <script>scripts\geneGetData.gml</script>
       <script>scripts\geneGenerateRandom.gml</script>
+      <script>scripts\geneGenerateGroupedRandom.gml</script>
       <script>scripts\geneComputeEffects.gml</script>
       <script>scripts\geneDescribeEffects.gml</script>
       <script>scripts\geneGetEffect.gml</script>
@@ -294,6 +296,7 @@
     <script>scripts\pointInBounds.gml</script>
     <script>scripts\clampRange.gml</script>
     <script>scripts\lerpDT.gml</script>
+    <script>scripts\deactivateAllInstances.gml</script>
     <script>scripts\getPlayAreaBounds.gml</script>
   </scripts>
   <shaders name="shaders">

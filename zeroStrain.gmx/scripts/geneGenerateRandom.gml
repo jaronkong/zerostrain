@@ -1,4 +1,5 @@
 ///geneGenerateRandom( label, length )
+//Generate a purely random genome
 
 var tMax = ( ds_grid_height( geneGetData( argument0 ).alleleData ) - 1 );
 var tResult = false;

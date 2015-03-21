@@ -162,6 +162,31 @@ system1 = global.enemySpawnSystem;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Spawn gene pickups
+
+if ( random( 1 ) &lt; 0.1 ) {
+    instance_create( x, y, genePickup );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -345,6 +370,31 @@ repeat( 100 * sizeFactor ) {
     bodyMaps_spawnParticle( bodyMapNum, id, image_angle, system1, getParticle( part_lineBurst ) );
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Spawn a pickup
+
+if ( random( 1 ) &lt; 0.05 ) {
+    instance_create( x, y, genePickup );
+}
 </string>
           </argument>
         </arguments>
