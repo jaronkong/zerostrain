@@ -132,6 +132,7 @@
     <sound>sound\damageTaken_sd</sound>
     <sounds name="Enemy">
       <sound>sound\enemySmallShot_sd</sound>
+      <sound>sound\enemyBeam_sd</sound>
     </sounds>
     <sound>sound\heartbeat_sd</sound>
   </sounds>
@@ -429,6 +430,9 @@
       <objects name="Boss">
         <object>objects\enemyBossCore</object>
         <object>objects\boss_shield</object>
+        <object>objects\boss_laserPod</object>
+        <object>objects\boss_attack_par</object>
+        <object>objects\boss_attack_lasers</object>
       </objects>
       <objects name="EnemyWeapons">
         <object>objects\enemyWeaponPar</object>

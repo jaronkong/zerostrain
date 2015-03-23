@@ -3,7 +3,7 @@
   <spriteName>enemy3_spr</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-10</depth>
   <persistent>0</persistent>
   <parentName>enemyPar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -41,127 +41,30 @@
             <kind>1</kind>
             <string>///Setup
 
-bodyMapNum = BODY_MAPS.ENEMY1;
+bodyMapNum = BODY_MAPS.ENEMY3;
 
-selfHealth = 100000;
+selfHealth = 3000;
 selfHealthMax = selfHealth;
 damageHealth = selfHealth;
 
-baseFriction = 0.1;
-accel = 0.11;
-maxSpeed = 1;
+fireRate = 2 * room_speed;
+currentFireTimer = fireRate;
+fireRange = 1000;
 
-mass = 200;
-sizeFactor = 10; //used for things like body particles. bigger = more particles.
+beamWidth = 64;
 
-drawScale = 1;
-boundsRange = 20;
+maxSpeed = 0;
+mass = 30;
+sizeFactor = 1;
 
 brainType = noone;
 
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Weapons and Defenses
-
-shields = ds_list_create();
-
-shieldDist = 200;
-shieldRotRate = 1;
-
-
-repeat ( 5 ) {
-    ds_list_add( shields, instance_create( x, y, boss_shield ) );
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Initialization
-
-bodyType = irandom( 2 );
-event_user( ENEMY_EV.CREATE );
-
-
-with ( instance_create( x, y, boss_attack_lasers ) ) {
-    owner = other.id;
-    event_user( 0 );
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Clean up
-
-ds_list_destroy( shields );
+targetPosX = 0;
+targetPosY = 0;
+targetDir = 0;
+moveDelay = 0;
+moveTween = 0.05;
+targetPlayer = false;
 
 </string>
           </argument>
@@ -199,16 +102,30 @@ ds_list_destroy( shields );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Movement
+            <string>///Shoot
 
-if ( instance_exists( playerShip ) ) {
-    var tNearest = instance_nearest( x, y, playerShip );
-    var tDir = point_direction( x, y, tNearest.x, tNearest.y );
-    
-    motion_add( tDir, accel );
-    if ( speed &gt; maxSpeed ) {
-        speed = maxSpeed;
+currentFireTimer -= global.timeTickFactor;
+
+if ( currentFireTimer &lt;= 0 ) {
+    var tNearestPlayer = instance_nearest( x, y, playerShip );
+    if( instance_exists( tNearestPlayer ) ) { 
+        //var tTargetDir = intercept_course( id, tNearestPlayer, bulletSpeed );
+        
+        
+        var tTargetDir = image_angle;
+        
+        var tNewLaser = instance_create( x, y, enemyLaser );
+        with ( tNewLaser ) {
+            ownerEnemy = other.id;
+            attachTarget = other.id;
+            inheritAngle = true;
+            beamWidth = other.beamWidth;
+            range = other.fireRange;
+            angle = other.image_angle;
+        }
+        
     }
+    currentFireTimer = fireRate;
 }
 
 </string>
@@ -231,30 +148,33 @@ if ( instance_exists( playerShip ) ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Shields
+            <string>///Move Tween
 
-//Remove destroyed shields
-for ( var i = ds_list_size( shields ) - 1; i &gt;= 0 ; i-- ) {
-    if ( !instance_exists( shields[| i ] ) ) {
-        ds_list_delete( shields, i );
-    }
+var tTarget = instance_nearest( x, y, playerShip );
+
+if ( moveDelay &lt;= 0 ) {
+
+    image_angle = lerp( image_angle, targetDir, moveTween );    
+    x = lerp( x, targetPosX, moveTween );
+    y = lerp( y, targetPosY, moveTween );
 }
-
-var tNumShields = ds_list_size( shields );
-if ( tNumShields &gt; 0 ) {
-    var tAngleIncrement = 360 / tNumShields;
-    for ( var i = 0; i &lt; tNumShields; ++i ) {
-        with ( shields[| i ] ) {
-            baseAngle = i*tAngleIncrement;
-            rotRate = other.shieldRotRate;
-            orbitDist = other.shieldDist;
-            anchorX = other.x;
-            anchorY = other.y;
-    
-    
+else {
+    moveDelay --;
+    if ( moveDelay == 0 &amp;&amp; instance_exists( playerShip )) {
+        
+        if ( targetPosX &lt; 0 ) {
+            targetPosX = tTarget.x;
         }
+        if ( targetPosY &lt; 0 ) {
+            targetPosY = tTarget.y;
+        }
+        if ( targetPlayer ) {
+            targetDir = intercept_course( id, tTarget, 5 );
+        }
+        
     }
 }
+
 
 </string>
           </argument>

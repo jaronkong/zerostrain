@@ -8,3 +8,6 @@ with ( tNewEnemy ) {
     image_angle = direction;
     event_user( ENEMY_EV.CREATE );
 }
+
+return tNewEnemy;
+
