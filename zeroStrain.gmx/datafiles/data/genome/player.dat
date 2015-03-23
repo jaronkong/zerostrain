@@ -53,32 +53,23 @@ count = 4
 
 [plr_wep_gatling_chance]
 default = 0
-offset = 2
+offset = 1
 hidden = 1
 
 [plr_wep_gatling_dmg]
 default = 1
 title = Damage
 offset = 0.01
-tag0 = plr_wep_gatling_chance
-off0 = 1
-count = 1
 
 [plr_wep_gatling_rate]
 default = 1
 title = Fire Rate
 offset = 0.01
-tag0 = plr_wep_gatling_chance
-off0 = 1
-count = 1
 
 [plr_wep_gatling_time]
 default = 1
 title = Duration
 offset = 0.01
-tag0 = plr_wep_gatling_chance
-off0 = 1
-count = 1
 
 
 	[PULSE DRIVER]
@@ -95,32 +86,23 @@ count = 4
 
 [plr_wep_pulse_chance]
 default = 0
-offset = 2
+offset = 1
 hidden = 1
 
 [plr_wep_pulse_dmg]
 default = 1
 title = Damage
 offset = 0.01
-tag0 = plr_wep_pulse_chance
-off0 = 1
-count = 1
 
 [plr_wep_pulse_rate]
 default = 1
 title = Fire Rate
 offset = 0.01
-tag0 = plr_wep_pulse_chance
-off0 = 1
-count = 1
 
 [plr_wep_pulse_time]
 default = 1
 title = Duration
 offset = 0.01
-tag0 = plr_wep_pulse_chance
-off0 = 1
-count = 1
 
 
 	[BLAST VOLLEY]
@@ -138,40 +120,28 @@ count = 5
 
 [plr_wep_artillery_chance]
 default = 0
-offset = 2
+offset = 1
 hidden = 1
 
 [plr_wep_artillery_dmg]
 default = 1
 title = Damage
 offset = 0.01
-tag0 = plr_wep_artillery_chance
-off0 = 1
-count = 1
 
 [plr_wep_artillery_rate]
 default = 1
 title = Fire Rate
 offset = 0.01
-tag0 = plr_wep_artillery_chance
-off0 = 1
-count = 1
 
 [plr_wep_artillery_radius]
 default = 1
 title = Burst Radius
 offset = 0.01
-tag0 = plr_wep_artillery_chance
-off0 = 1
-count = 1
 
 [plr_wep_artillery_time]
 default = 1
 title = Duration
 offset = 0.01
-tag0 = plr_wep_artillery_chance
-off0 = 1
-count = 1
 
 
 	[FISSURE BOMB]
@@ -187,24 +157,18 @@ count = 3
 
 [plr_wep_fissure_chance]
 default = 0
-offset = 2
+offset = 1
 hidden = 1
 
 [plr_wep_fissure_dmg]
 default = 1
 title = Damage
 offset = 0.01
-tag0 = plr_wep_fissure_chance
-off0 = 1
-count = 1
 
 [plr_wep_fissure_radius]
 default = 1
 title = Radius
 offset = 0.01
-tag0 = plr_wep_fissure_chance
-off0 = 1
-count = 1
 
 
 	[PLASMA TORCH]
@@ -222,40 +186,28 @@ count = 5
 
 [plr_wep_torch_chance]
 default = 0
-offset = 2
+offset = 1
 hidden = 1
 
 [plr_wep_torch_dmg]
 default = 1
 title = Damage
 offset = 0.005
-tag0 = plr_wep_torch_chance
-off0 = 1
-count = 1
 
 [plr_wep_torch_time]
 default = 1
 title = Duration
 offset = 0.01
-tag0 = plr_wep_torch_chance
-off0 = 1
-count = 1
 
 [plr_wep_torch_range]
 default = 1
 title = Range
 offset = 0.01
-tag0 = plr_wep_torch_chance
-off0 = 1
-count = 1
 
 [plr_wep_torch_angle]
 default = 1
 title = Spread
 offset = 0.01
-tag0 = plr_wep_torch_chance
-off0 = 1
-count = 1
 
 
 	[Mine Catapault]
@@ -273,40 +225,28 @@ count = 5
 
 [plr_wep_mine_chance]
 default = 0
-offset = 2
+offset = 1
 hidden = 1
 
 [plr_wep_mine_dmg]
 default = 1
 title = Damage
 offset = 0.01
-tag0 = plr_wep_mine_chance
-off0 = 1
-count = 1
 
 [plr_wep_mine_rate]
 default = 1
 title = Fire Rate
 offset = 0.01
-tag0 = plr_wep_mine_chance
-off0 = 1
-count = 1
 
 [plr_wep_mine_time]
 default = 1
 title = Duration
 offset = 0.01
-tag0 = plr_wep_mine_chance
-off0 = 1
-count = 1
 
 [plr_wep_mine_radius]
 default = 1
 title = Blast Radius
 offset = 0.01
-tag0 = plr_wep_mine_chance
-off0 = 1
-count = 1
 
 
 	[Spreader Gun]
@@ -323,29 +263,20 @@ count = 4
 
 [plr_wep_spreader_chance]
 default = 0
-offset = 2
+offset = 1
 hidden = 1
 
 [plr_wep_spreader_dmg]
 default = 1
 title = Damage
 offset = 0.01
-tag0 = plr_wep_spreader_chance
-off0 = 1
-count = 1
 
 [plr_wep_spreader_rate]
 default = 1
 title = Fire Rate
 offset = 0.01
-tag0 = plr_wep_spreader_chance
-off0 = 1
-count = 1
 
 [plr_wep_spreader_time]
 default = 1
 title = Duration
 offset = 0.01
-tag0 = plr_wep_spreader_chance
-off0 = 1
-count = 1

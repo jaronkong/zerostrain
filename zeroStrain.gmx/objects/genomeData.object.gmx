@@ -226,12 +226,21 @@ while ( !ds_queue_empty( tQueue ) ) {
             {
                 //Load in allele
                 var tOffsets = ds_map_create( );
+                //Increase the base gene
                 ds_map_add( tOffsets, tTag, ini_read_real( tTag, "offset", 1 ) );
+                //Load in additional modifiers
                 var tExtraCount = ini_read_real( tTag, "count", 0 );
                 for ( var j = 0; j &lt; tExtraCount; ++j ) {
                     var tExtraTag = ini_read_string( tTag, "tag"+string(j), "" );
                     var tExtraOff = ini_read_real( tTag, "off"+string(j), 0 );
                     ds_map_add( tOffsets, tExtraTag, tExtraOff );
+                }
+                //Increase group value
+                if ( tGroup &gt; 0 ) {
+                    var tGroupVal = ds_grid_get( groupData, GeneGroup.Value, tGroup );
+                    if ( tGroupVal != "" ) {
+                        ds_map_add( tOffsets, tGroupVal, 1 );
+                    }
                 }
                 var tIndex = ds_grid_height( alleleData );
                 ds_grid_resize( alleleData, GeneAllele.Size, ( tIndex + 1 ) );
