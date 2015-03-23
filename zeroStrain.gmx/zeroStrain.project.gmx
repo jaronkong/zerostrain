@@ -161,6 +161,10 @@
       <sprite>sprites\enemy3_spr</sprite>
       <sprite>sprites\enemy4_spr</sprite>
       <sprite>sprites\enemy4Block_spr</sprite>
+      <sprites name="Boss">
+        <sprite>sprites\enemyBossCore_spr</sprite>
+        <sprite>sprites\bossShield_spr</sprite>
+      </sprites>
     </sprites>
     <sprite>sprites\playerHUDRing_spr</sprite>
     <sprites name="Icons">
@@ -422,6 +426,10 @@
       <object>objects\enemyShot</object>
       <object>objects\enemyBulk</object>
       <object>objects\enemyBattleship</object>
+      <objects name="Boss">
+        <object>objects\enemyBossCore</object>
+        <object>objects\boss_shield</object>
+      </objects>
       <objects name="EnemyWeapons">
         <object>objects\enemyWeaponPar</object>
         <object>objects\enemyBullet</object>

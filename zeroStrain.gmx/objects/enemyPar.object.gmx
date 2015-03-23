@@ -460,10 +460,12 @@ repeat( 40 * sizeFactor ) {
             <kind>1</kind>
             <string>///Make a brain
 
-myBrain = instance_create( 0, 0, brainType );
-
-with ( myBrain ) {
-    target = other.id;
+if ( brainType != noone ) {
+    myBrain = instance_create( 0, 0, brainType );
+    
+    with ( myBrain ) {
+        target = other.id;
+    }
 }
 
 </string>
