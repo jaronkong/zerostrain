@@ -21,6 +21,13 @@ while ( tResultLength < argument1 ) {
     }
     repeat ( min( irandom_range( 32, 48 ), ( argument1 - tResultLength ) ) ) {
         tResult[tResultLength++] = chooseWeight( tGroupArray, tGroupChance, tGroupChanceTotal );
+        for ( var i = 0; i < ds_list_size( tGroupItems ); ++i ) {
+            if ( tGroupArray[i] == tResult[tResultLength-1] ) {
+                tGroupChanceTotal += tGroupChance[i];
+                tGroupChance[i] += tGroupChance[i];
+                break;
+            }
+        }
     }
 }
 
