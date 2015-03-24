@@ -28,7 +28,7 @@
             <string>///Generate a genome
 
 length = playerGenetics.length;
-genome = geneGenerateGroupedRandom( "player", length );
+genome = geneGenerateGroupedQuality( "player", length, random( 1 ) );
 </string>
           </argument>
         </arguments>

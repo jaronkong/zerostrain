@@ -114,6 +114,7 @@ groupData = ds_grid_create( GeneGroup.Size, 0 );
 enum GeneAllele {
     Tag,
     Values,
+    Quality,
     Size
 }
 
@@ -225,6 +226,7 @@ while ( !ds_queue_empty( tQueue ) ) {
             }
             {
                 //Load in allele
+                var tQuality = ini_read_real( tTag, "quality", 1 );
                 var tOffsets = ds_map_create( );
                 //Increase the base gene
                 ds_map_add( tOffsets, tTag, ini_read_real( tTag, "offset", 1 ) );
@@ -246,6 +248,7 @@ while ( !ds_queue_empty( tQueue ) ) {
                 ds_grid_resize( alleleData, GeneAllele.Size, ( tIndex + 1 ) );
                 ds_grid_set( alleleData, GeneAllele.Tag, tIndex, tTag );
                 ds_grid_set( alleleData, GeneAllele.Values, tIndex, tOffsets );
+                ds_grid_set( alleleData, GeneAllele.Quality, tIndex, tQuality );
             }
         }
     }

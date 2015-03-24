@@ -54,6 +54,7 @@ count = 4
 [plr_wep_gatling_chance]
 default = 0
 offset = 1
+quality = 0
 hidden = 1
 
 [plr_wep_gatling_dmg]
@@ -87,6 +88,7 @@ count = 4
 [plr_wep_pulse_chance]
 default = 0
 offset = 1
+quality = 0
 hidden = 1
 
 [plr_wep_pulse_dmg]
@@ -121,6 +123,7 @@ count = 5
 [plr_wep_artillery_chance]
 default = 0
 offset = 1
+quality = 0
 hidden = 1
 
 [plr_wep_artillery_dmg]
@@ -158,6 +161,7 @@ count = 3
 [plr_wep_fissure_chance]
 default = 0
 offset = 1
+quality = 0
 hidden = 1
 
 [plr_wep_fissure_dmg]
@@ -187,6 +191,7 @@ count = 5
 [plr_wep_torch_chance]
 default = 0
 offset = 1
+quality = 0
 hidden = 1
 
 [plr_wep_torch_dmg]
@@ -226,6 +231,7 @@ count = 5
 [plr_wep_mine_chance]
 default = 0
 offset = 1
+quality = 0
 hidden = 1
 
 [plr_wep_mine_dmg]
@@ -264,6 +270,7 @@ count = 4
 [plr_wep_spreader_chance]
 default = 0
 offset = 1
+quality = 0
 hidden = 1
 
 [plr_wep_spreader_dmg]

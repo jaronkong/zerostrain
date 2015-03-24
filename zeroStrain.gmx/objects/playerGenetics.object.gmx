@@ -31,7 +31,7 @@ tag = "player";
 owner = noone;
 
 length = 128;
-genome = geneGenerateGroupedRandom( tag, length );
+genome = geneGenerateGroupedQuality( tag, length, 0 );
 
 effects = ds_map_create( );
 </string>
