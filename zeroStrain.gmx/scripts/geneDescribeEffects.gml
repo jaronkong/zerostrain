@@ -22,11 +22,13 @@ var tResult = ds_grid_create( GeneDescGroup.Size, 0 );
 
 for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
     var tTitle = ds_grid_get( tGroup, GeneGroup.Title, i );
-    var tValue = 0;
+    var tValueDef = 0;
+    var tValue = tValueDef;
     var tValueIndex = ds_grid_get( tGroup, GeneGroup.Value, i );
     if ( tValueIndex >= 0 ) {
         var tValueTag = ds_grid_get( tGene, Gene.Tag, tValueIndex );
         tValue = ds_map_find_value( aEffects, tValueTag );
+        tValueDef = ds_grid_get( tGene, Gene.Default, tValueIndex );
     }
     var tItems = false;
     var tItemCount = 0;
@@ -47,7 +49,7 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
             tItemCount += 1;
         }
     }
-    if ( tItemCount > 0 ) {
+    if ( ( tItemCount > 0 ) || ( tValue != tValueDef ) ) {
         var tIndex = ds_grid_height( tResult );
         ds_grid_resize( tResult, GeneDescGroup.Size, ( tIndex + 1 ) );
         ds_grid_set( tResult, GeneDescGroup.Title, tIndex, tTitle );
