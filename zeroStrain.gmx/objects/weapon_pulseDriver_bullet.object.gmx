@@ -41,7 +41,6 @@
             <kind>1</kind>
             <string>///Specific properties
 
-
 </string>
           </argument>
         </arguments>
@@ -151,7 +150,7 @@ if ( tHitObj != noone ) {
                 bodyMaps_spawnParticle( tHitObj.bodyMapNum, tHitObj, tHitObj.image_angle, system1, getParticle( "pulseShotHitCore" ) );
             }
             if ( instance_exists( tHitObj ) ) {
-                weaponDoDamageRaw( tHitObj, ceil(damage * burstMultiplier + tHitObj.selfHealth*burstPercent) );
+                weaponDoDamageRaw( tHitObj, ceil(damage * burstMultiplier + min( tHitObj.selfHealth*burstPercent, maxDamage )) );
             }
             shakeScreen( 32 );
             doStepSlow( 30, 2 );

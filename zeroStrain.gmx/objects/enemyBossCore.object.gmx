@@ -162,7 +162,7 @@ with ( instance_create( x, y, boss_attack_lasers ) ) {
             <string>///Clean up
 
 ds_list_destroy( shields );
-
+exit;
 </string>
           </argument>
         </arguments>
@@ -234,24 +234,26 @@ if ( instance_exists( playerShip ) ) {
             <string>///Shields
 
 //Remove destroyed shields
-for ( var i = ds_list_size( shields ) - 1; i &gt;= 0 ; i-- ) {
-    if ( !instance_exists( shields[| i ] ) ) {
-        ds_list_delete( shields, i );
+if ( ds_exists( shields, ds_type_list ) ) {
+    for ( var i = ds_list_size( shields ) - 1; i &gt;= 0 ; i-- ) {
+        if ( !instance_exists( shields[| i ] ) ) {
+            ds_list_delete( shields, i );
+        }
     }
-}
-
-var tNumShields = ds_list_size( shields );
-if ( tNumShields &gt; 0 ) {
-    var tAngleIncrement = 360 / tNumShields;
-    for ( var i = 0; i &lt; tNumShields; ++i ) {
-        with ( shields[| i ] ) {
-            baseAngle = i*tAngleIncrement;
-            rotRate = other.shieldRotRate;
-            orbitDist = other.shieldDist;
-            anchorX = other.x;
-            anchorY = other.y;
     
-    
+    var tNumShields = ds_list_size( shields );
+    if ( tNumShields &gt; 0 ) {
+        var tAngleIncrement = 360 / tNumShields;
+        for ( var i = 0; i &lt; tNumShields; ++i ) {
+            with ( shields[| i ] ) {
+                baseAngle = i*tAngleIncrement;
+                rotRate = other.shieldRotRate;
+                orbitDist = other.shieldDist;
+                anchorX = other.x;
+                anchorY = other.y;
+        
+        
+            }
         }
     }
 }
