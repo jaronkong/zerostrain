@@ -68,6 +68,8 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
                     tItems[GeneDescGene.Change, tItemCount] = geneIconImprove_spr;
                 } else if ( tItemValue < tCompareValue ) {
                     tItems[GeneDescGene.Change, tItemCount] = geneIconWorsen_spr;
+                } else {
+                    tItems[GeneDescGene.Change, tItemCount] = geneIconUnchanged_spr;
                 }
             }
             tItemCount += 1;
@@ -115,6 +117,8 @@ for ( var i = 0; i < ds_grid_height( tResult ); ++i ) {
             ds_grid_set( tResult, tChange, i, geneIconImprove_spr );
         } else if ( tValue < tCmpGrpVal[i] ) {
             ds_grid_set( tResult, tChange, i, geneIconWorsen_spr );
+        } else {
+            ds_grid_set( tResult, tChange, i, geneIconUnchanged_spr );
         }
     }
 }

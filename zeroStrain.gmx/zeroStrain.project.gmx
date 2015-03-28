@@ -188,9 +188,10 @@
     </sprites>
     <sprites name="Genetics">
       <sprite>sprites\genePickup_spr</sprite>
-      <sprite>sprites\geneIconImprove_spr</sprite>
       <sprite>sprites\geneIconAddition_spr</sprite>
+      <sprite>sprites\geneIconImprove_spr</sprite>
       <sprite>sprites\geneIconWorsen_spr</sprite>
+      <sprite>sprites\geneIconUnchanged_spr</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
