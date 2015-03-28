@@ -10,13 +10,15 @@ if ( argument_count > 2 ) {
 }
 
 var tDoCompare = ds_exists( aCompare, ds_type_map );
+var tCmpGrpVal = false;
+var tCmpGrpValSum = 0;
 
 var tData = geneGetData( aLabel );
 var tGene = tData.geneData;
 var tGroup = tData.groupData;
 
 enum GeneDescGroup {
-    Title, Value,
+    Title, Value, Change,
     Items, ItemCount,
     Size
 }
@@ -31,12 +33,16 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
     var tTitle = ds_grid_get( tGroup, GeneGroup.Title, i );
     var tValueDef = 0;
     var tValue = tValueDef;
+    var tCmpVal = tValueDef;
     var tValueIndex = ds_grid_get( tGroup, GeneGroup.Value, i );
     if ( tValueIndex >= 0 ) {
         var tValueTag = ds_grid_get( tGene, Gene.Tag, tValueIndex );
-        tValue = ds_map_find_value( aEffects, tValueTag );
         tValueDef = ds_grid_get( tGene, Gene.Default, tValueIndex );
+        tValue = ds_map_find_value( aEffects, tValueTag );
+        if ( tDoCompare ) tCmpVal = ds_map_find_value( aCompare, tValueTag );
+        else tCmpVal = tValueDef;
     }
+    tCmpGrpValSum += tCmpVal;
     var tItems = false;
     var tItemCount = 0;
     var tList = ds_grid_get( tGroup, GeneGroup.Items, i );
@@ -72,8 +78,10 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
         ds_grid_resize( tResult, GeneDescGroup.Size, ( tIndex + 1 ) );
         ds_grid_set( tResult, GeneDescGroup.Title, tIndex, tTitle );
         ds_grid_set( tResult, GeneDescGroup.Value, tIndex, tValue );
+        ds_grid_set( tResult, GeneDescGroup.Change, tIndex, noone );
         ds_grid_set( tResult, GeneDescGroup.Items, tIndex, tItems );
         ds_grid_set( tResult, GeneDescGroup.ItemCount, tIndex, tItemCount );
+        tCmpGrpVal[tIndex] = tCmpVal;
     }
 }
 
@@ -87,13 +95,28 @@ ds_grid_multiply_region( tResult,
     GeneDescGroup.Value, 0, GeneDescGroup.Value,
     ( ds_grid_height( tResult ) - 1 ), ( 100 / tValueSum )
 );
+if ( tCmpGrpValSum <= 0 ) tCmpGrpValSum = 1;
+for ( var i = 0; i < ds_grid_height( tResult ); ++i ) {
+    tCmpGrpVal[i] *= ( 100 / tCmpGrpValSum );
+}
 
 //Convert to numbers
 for ( var i = 0; i < ds_grid_height( tResult ); ++i ) {
     var tValue = ds_grid_get( tResult, GeneDescGroup.Value, i );
     var tValueStr = "";
-    if ( tValue > 0 ) tValueStr = ( string( tValue ) + "%" );
+    if ( tValue > 0 ) tValueStr = ( string_format( tValue, 6, 0 ) + "%" );
     ds_grid_set( tResult, GeneDescGroup.Value, i, tValueStr );
+    //Change group change icon
+    if ( tDoCompare && ( tValue > 0 ) ) {
+        var tChange = GeneDescGroup.Change;
+        if ( tCmpGrpVal[i] == 0 ) {
+            ds_grid_set( tResult, tChange, i, geneIconAddition_spr );
+        } else if ( tValue > tCmpGrpVal[i] ) {
+            ds_grid_set( tResult, tChange, i, geneIconImprove_spr );
+        } else if ( tValue < tCmpGrpVal[i] ) {
+            ds_grid_set( tResult, tChange, i, geneIconWorsen_spr );
+        }
+    }
 }
 
 return tResult;
