@@ -33,8 +33,7 @@ index = 0;
 title = "";
 value = "";
 
-itemTitle = false;
-itemValue = false;
+item = false;
 itemCount = 0;
 
 loaded = false;
@@ -94,12 +93,8 @@ if ( !loaded ) {
         title = ds_grid_get( data, GeneDescGroup.Title, index );
         value = ds_grid_get( data, GeneDescGroup.Value, index );
         
-        var tItems = ds_grid_get( data, GeneDescGroup.Items, index );
+        item = ds_grid_get( data, GeneDescGroup.Items, index );
         itemCount = ds_grid_get( data, GeneDescGroup.ItemCount, index );
-        for ( var i = 0; i &lt; itemCount; ++i ) {
-            itemTitle[i] = tItems[GeneDescGene.Title, i];
-            itemValue[i] = tItems[GeneDescGene.Value, i];
-        }
         
         loaded = true;
     }
@@ -209,8 +204,8 @@ drawTextSize( x+m, y+m, title, font, 12 );
 
 for ( var i = 0; i &lt; itemCount; ++i ) {
     var py = ( y + ( i * 20 ) + 32 );
-    drawTextSize( x+m, py, itemTitle[i], font, 10 );
-    drawTextSize( x+width*0.6, py, itemValue[i], font, 10 );
+    drawTextSize( x+m, py, item[GeneDescGene.Title, i], font, 10 );
+    drawTextSize( x+width*0.6, py, item[GeneDescGene.Value, i], font, 10 );
 }
 </string>
           </argument>
