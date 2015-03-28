@@ -1,8 +1,15 @@
-///geneDescribeEffects( label, effects )
+///geneDescribeEffects( label, effects, compare = -1 )
 //Create a grid with textual data about the effects map
 
-var aLabel = argument0;
-var aEffects = argument1;
+var aLabel = argument[0];
+var aEffects = argument[1];
+var aCompare = -1;
+
+if ( argument_count > 2 ) {
+    aCompare = argument[2];
+}
+
+var tDoCompare = ds_exists( aCompare, ds_type_map );
 
 var tData = geneGetData( aLabel );
 var tGene = tData.geneData;
@@ -14,7 +21,7 @@ enum GeneDescGroup {
     Size
 }
 enum GeneDescGene {
-    Title, Value,
+    Title, Value, Change,
     Size
 }
 
@@ -46,6 +53,17 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
         if ( ( tItemValue != tItemDef ) && !tItemHide ) {
             tItems[GeneDescGene.Title, tItemCount] = tItemTitle;
             tItems[GeneDescGene.Value, tItemCount] = tItemValStr;
+            tItems[GeneDescGene.Change, tItemCount] = noone;
+            if ( tDoCompare ) {
+                var tCompareValue = ds_map_find_value( aCompare, tItemTag );
+                if ( tCompareValue == tItemDef ) {
+                    tItems[GeneDescGene.Change, tItemCount] = geneIconAddition_spr;
+                } else if ( tItemValue > tCompareValue ) {
+                    tItems[GeneDescGene.Change, tItemCount] = geneIconImprove_spr;
+                } else if ( tItemValue < tCompareValue ) {
+                    tItems[GeneDescGene.Change, tItemCount] = geneIconWorsen_spr;
+                }
+            }
             tItemCount += 1;
         }
     }

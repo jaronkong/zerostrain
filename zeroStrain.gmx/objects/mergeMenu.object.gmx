@@ -92,6 +92,7 @@ resultLength = 0;
 base[0] = noone;
 base[1] = noone;
 
+baseEffects = -1;
 baseDesc = -1
 baseInfo = false;
 baseInfoCount = 0;
@@ -252,6 +253,7 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) instance_destroy( );
 }
 if ( ds_exists( baseDesc, ds_type_grid ) ) ds_grid_destroy( baseDesc );
+if ( ds_exists( baseEffects, ds_type_map ) ) ds_map_destroy( baseEffects );
 
 with ( basePos ) instance_destroy( );
 </string>
@@ -520,7 +522,7 @@ if ( !stateMergeComplete &amp;&amp; stateMerging ) {
         stateMergeComplete = true;
         //Create result descriptions
         var tEffects = geneComputeEffects( label, geneResult, resultLength );
-        resultDesc = geneDescribeEffects( label, tEffects );
+        resultDesc = geneDescribeEffects( label, tEffects, baseEffects );
         ds_map_destroy( tEffects );
         //Create result info boxes
         resultInfoCount = ds_grid_height( resultDesc );
@@ -651,9 +653,8 @@ for ( var i = 0; i &lt; 2; ++i ) {
 }
 base[1].mirror = true;
 
-var tEffects = geneComputeEffects( label, geneBase, length );
-baseDesc = geneDescribeEffects( label, tEffects );
-ds_map_destroy( tEffects );
+baseEffects = geneComputeEffects( label, geneBase, length );
+baseDesc = geneDescribeEffects( label, baseEffects );
 
 baseInfoCount = ds_grid_height( baseDesc );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
@@ -684,7 +685,7 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Initialize option strand
+            <string>///Initialize option strands
 
 optionCount = geneOptionCount;
 for ( var i = 0; i &lt; optionCount; ++i ) {
@@ -697,7 +698,7 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     }
     
     var tEffects = geneComputeEffects( label, geneOption[i], length );
-    optionDesc[i] = geneDescribeEffects( label, tEffects );
+    optionDesc[i] = geneDescribeEffects( label, tEffects, baseEffects );
     ds_map_destroy( tEffects );
     
     optionInfoCount[i] = ds_grid_height( optionDesc[i] );
