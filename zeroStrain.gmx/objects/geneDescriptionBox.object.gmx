@@ -33,6 +33,7 @@ index = 0;
 title = "";
 value = "";
 change = noone;
+color = c_white;
 
 item = false;
 itemCount = 0;
@@ -94,6 +95,7 @@ if ( !loaded ) {
         title = ds_grid_get( data, GeneDescGroup.Title, index );
         value = ds_grid_get( data, GeneDescGroup.Value, index );
         change = ds_grid_get( data, GeneDescGroup.Change, index );
+        color = ds_grid_get( data, GeneDescGroup.Color, index );
         
         item = ds_grid_get( data, GeneDescGroup.Items, index );
         itemCount = ds_grid_get( data, GeneDescGroup.ItemCount, index );
@@ -152,7 +154,7 @@ draw_set_alpha( image_alpha );
             <kind>1</kind>
             <string>///Draw edges
 
-draw_set_color( c_yellow );
+draw_set_color( color );
 draw_set_alpha( image_alpha );
 
 var px = x;
@@ -194,7 +196,7 @@ draw_line_width( x, y+26, x+width, y+26, w );
 
 var m = 8;
 
-draw_set_color( c_white );
+draw_set_color( color );
 draw_set_alpha( image_alpha );
 draw_set_halign( fa_left );
 draw_set_valign( fa_top );
@@ -205,7 +207,9 @@ drawTextSize( x+m, py, title, font, 12 );
 drawTextSize( x+width*0.6, py, value, font, 10 );
 if ( sprite_exists( change ) ) {
     var tSize = 15;
-    draw_sprite_stretched( change, 0, x+width-20, py, tSize, tSize );
+    draw_sprite_stretched_ext( change, 0, x+width-20, py,
+        tSize, tSize, c_white, image_alpha
+    );
 }
 
 for ( var i = 0; i &lt; itemCount; ++i ) {
@@ -215,7 +219,9 @@ for ( var i = 0; i &lt; itemCount; ++i ) {
     var tChange = item[GeneDescGene.Change, i];
     if ( sprite_exists( tChange ) ) {
         var tSize = 15;
-        draw_sprite_stretched( tChange, 0, x+width-20, py, tSize, tSize );
+        draw_sprite_stretched_ext( tChange, 0, x+width-20, py,
+            tSize, tSize, c_white, image_alpha
+        );
     }
 }
 </string>

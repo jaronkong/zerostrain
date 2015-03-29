@@ -18,7 +18,7 @@ var tGene = tData.geneData;
 var tGroup = tData.groupData;
 
 enum GeneDescGroup {
-    Title, Value, Change,
+    Title, Value, Change, Color,
     Items, ItemCount,
     Size
 }
@@ -43,6 +43,7 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
         else tCmpVal = tValueDef;
     }
     tCmpGrpValSum += tCmpVal;
+    var tColor = ds_grid_get( tGroup, GeneGroup.Color, i );
     var tItems = false;
     var tItemCount = 0;
     var tList = ds_grid_get( tGroup, GeneGroup.Items, i );
@@ -81,6 +82,7 @@ for ( var i = 0; i < ds_grid_height( tGroup ); ++i ) {
         ds_grid_set( tResult, GeneDescGroup.Title, tIndex, tTitle );
         ds_grid_set( tResult, GeneDescGroup.Value, tIndex, tValue );
         ds_grid_set( tResult, GeneDescGroup.Change, tIndex, noone );
+        ds_grid_set( tResult, GeneDescGroup.Color, tIndex, tColor );
         ds_grid_set( tResult, GeneDescGroup.Items, tIndex, tItems );
         ds_grid_set( tResult, GeneDescGroup.ItemCount, tIndex, tItemCount );
         tCmpGrpVal[tIndex] = tCmpVal;

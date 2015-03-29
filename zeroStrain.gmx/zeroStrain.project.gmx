@@ -310,6 +310,8 @@
     <script>scripts\lerpDT.gml</script>
     <script>scripts\deactivateAllInstances.gml</script>
     <script>scripts\getPlayAreaBounds.gml</script>
+    <script>scripts\parseHex.gml</script>
+    <script>scripts\parseColor.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\bloom_sdr.shader</shader>
