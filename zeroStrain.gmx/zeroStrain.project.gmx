@@ -277,6 +277,8 @@
       <script>scripts\drawTextSize.gml</script>
       <script>scripts\drawTextSize_backed.gml</script>
       <script>scripts\drawTextOutline.gml</script>
+      <script>scripts\getTextHeight.gml</script>
+      <script>scripts\getTextWidth.gml</script>
     </scripts>
     <scripts name="Physics">
       <script>scripts\forceApplyToEnemy.gml</script>

@@ -204,7 +204,9 @@ draw_set_valign( fa_top );
 var py = ( y + m );
 
 drawTextSize( x+m, py, title, font, 12 );
-drawTextSize( x+width*0.6, py, value, font, 10 );
+drawTextSize( x+width-15-getTextWidth( value, font, 10 )-m,
+    py, value, font, 10
+);
 if ( sprite_exists( change ) ) {
     var tSize = 15;
     draw_sprite_stretched_ext( change, 0, x+width-20, py,
@@ -212,14 +214,18 @@ if ( sprite_exists( change ) ) {
     );
 }
 
+draw_set_color( c_white );
 for ( var i = 0; i &lt; itemCount; ++i ) {
     py = ( y + ( i * 20 ) + 32 );
-    drawTextSize( x+m, py, item[GeneDescGene.Title, i], font, 10 );
-    drawTextSize( x+width*0.6, py, item[GeneDescGene.Value, i], font, 10 );
+    drawTextSize( x+m+15+m, py, item[GeneDescGene.Title, i], font, 10 );
+    drawTextSize(
+        x+width-getTextWidth( item[GeneDescGene.Value, i], font, 10 )-m,
+        py, item[GeneDescGene.Value, i], font, 10
+    );
     var tChange = item[GeneDescGene.Change, i];
     if ( sprite_exists( tChange ) ) {
         var tSize = 15;
-        draw_sprite_stretched_ext( tChange, 0, x+width-20, py,
+        draw_sprite_stretched_ext( tChange, 0, x+m, py,
             tSize, tSize, c_white, image_alpha
         );
     }
