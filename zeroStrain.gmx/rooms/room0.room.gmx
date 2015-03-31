@@ -91,7 +91,6 @@
     <instance objName="pickup_spreader" x="896" y="928" name="inst_64C1AC34" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="pickup_spreader" x="992" y="928" name="inst_023BB543" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="pickup_spreader" x="1088" y="928" name="inst_866C7CC5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="enemyBossCore" x="992" y="224" name="inst_70517B33" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

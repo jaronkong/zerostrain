@@ -20,10 +20,18 @@ global.particleEmitterMap = ds_map_create();
     dispersion_attachParticleSystem( global.enemyWeaponSystem );
     part_system_automatic_draw( global.enemyWeaponSystem, true );
 
+    global.playerEffectsSystem = part_system_create();
+    part_system_depth( global.playerEffectsSystem, PARTICLE_DEPTH );
+    bloom_attachParticleSystem( global.playerEffectsSystem, BLOOM_DEPTH );
+    distortionGlow_attachParticleSystem( global.playerEffectsSystem );
+    refraction_attachParticleSystem( global.playerEffectsSystem );
+    dispersion_attachParticleSystem( global.playerEffectsSystem );
+    part_system_automatic_draw( global.playerEffectsSystem, true );
 
 
 particleDef_ambBackground();
 particleDef_genericDamage();
+particleDef_player();
 
 particleDef_pickups();
 particleDef_enemyBody();
