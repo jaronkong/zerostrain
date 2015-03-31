@@ -33,7 +33,7 @@ void main()
     
     //Pass through colors
     v_vColour = in_Colour;
-    v_vTexcoord = vec2( (floor(in_Position.z+0.5)/in_count), 0.5 );
+    v_vTexcoord = vec2( ((floor(in_Position.z + 1.5) + 0.5)/in_count), 0 );
     
     //Apply lighting
     vec4 norm = ( rotate * vec4( in_Normal.xyz, 0.0 ) );
