@@ -491,7 +491,24 @@ if ( !stateMerging ) {
         mergeTwist = baseTwist;
         mergeSplit = baseSplit;
     } else {
-        if ( mergeSplit &gt; -48 ) mergeSplit -= ( 1.0 * t );
+        //Combine the final two strands
+        if ( mergeSplit &gt; -48 ) {
+            var mergeSplitLast = floor( mergeSplit );
+            mergeSplit -= ( 1.0 * t );
+            if ( ( mergeSplitLast &lt; resultLength ) &amp;&amp; ( mergeSplitLast &gt;= 0 ) ) {
+                if ( floor( mergeSplit ) != mergeSplitLast ) {
+                    var tColors = geneGetGenomeColors( label, geneResult, resultLength );
+                    var tLeft = tColors[0];
+                    var tRight = tColors[1];
+                    var tBase = base[1];
+                    var tOption = option[optionCurrent, 0];
+                    tBase.colors[mergeSplitLast] = tLeft[mergeSplitLast];
+                    tOption.colors[mergeSplitLast] = tRight[mergeSplitLast];
+                    tBase.colorRefresh = true;
+                    tOption.colorRefresh = true;
+                }
+            }
+        }
         mergeTwist = lerpDT( mergeTwist, 5, 0.005, t );
     }
 }
@@ -940,6 +957,35 @@ if ( stateMerging ) {
         tOption.twist = mergeTwist;
         tOption.split = mergeSplit;
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DNA strand setup
+
+with ( base[0] ) event_perform( ev_draw, false );
+with ( base[1] ) event_perform( ev_draw, false );
+
+for ( var i = 0; i &lt; optionCount; ++i ) {
+    with ( option[i, 0] ) event_perform( ev_draw, false );
+    with ( option[i, 1] ) event_perform( ev_draw, false );
 }
 </string>
           </argument>

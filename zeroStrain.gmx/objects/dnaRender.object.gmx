@@ -139,6 +139,7 @@ split = 0;
             <string>///Define color array
 
 colors = false;
+colorRefresh = false;
 </string>
           </argument>
         </arguments>
@@ -221,8 +222,8 @@ if ( !surface_exists( edgeSurf ) ) {
     surface_reset_target( );
 }
 
-if ( !surface_exists( rungSurf ) ) {
-    rungSurf = surface_create( segments, 1 );
+if ( !surface_exists( rungSurf ) || colorRefresh ) {
+    if ( !surface_exists( rungSurf ) ) rungSurf = surface_create( segments, 1 );
     surface_set_target( rungSurf );
     draw_clear_alpha( c_black, 1 );
     draw_set_alpha( 1 );
@@ -233,6 +234,7 @@ if ( !surface_exists( rungSurf ) ) {
     }
     if ( colIsBlack ) draw_clear_alpha( c_black, 1 );
     surface_reset_target( );
+    colorRefresh = false;
 }
 </string>
           </argument>
