@@ -646,9 +646,11 @@ if ( stateMergeComplete ) {
             <kind>1</kind>
             <string>///Initialize base strand
 
+var tColors = geneGetGenomeColors( label, geneBase, length );
 for ( var i = 0; i &lt; 2; ++i ) {
     base[i] = instance_create( x, y, dnaRender );
     base[i].segments = other.length;
+    base[i].colors = tColors[i];
     base[i].visible = false;
 }
 base[1].mirror = true;
@@ -689,13 +691,14 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
 
 optionCount = geneOptionCount;
 for ( var i = 0; i &lt; optionCount; ++i ) {
-    option[i, 0] = instance_create( x, y, dnaRender );
-    option[i, 1] = instance_create( x, y, dnaRender );
-    option[i, 1].mirror = true;
+    var tColors = geneGetGenomeColors( label, geneOption[i], length );
     for ( var j = 0; j &lt; 2; ++j ) {
+        option[i, j] = instance_create( x, y, dnaRender );
         option[i, j].segments = other.length;
+        option[i, j].colors = tColors[j];
         option[i, j].visible = false;
     }
+    option[i, 1].mirror = true;
     
     var tEffects = geneComputeEffects( label, geneOption[i], length );
     optionDesc[i] = geneDescribeEffects( label, tEffects, baseEffects );
