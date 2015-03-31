@@ -484,6 +484,7 @@
         <object>objects\spawn_tri</object>
         <object>objects\spawn_laserLineRight</object>
         <object>objects\spawn_laserCircle</object>
+        <object>objects\spawnBasicCircle</object>
       </objects>
     </objects>
   </objects>
