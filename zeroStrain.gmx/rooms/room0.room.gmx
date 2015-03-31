@@ -54,44 +54,7 @@
     <instance objName="effectsGlobalCon" x="128" y="64" name="inst_18D3E473" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="mainController" x="128" y="128" name="inst_6ABBDFDE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="testEmitter" x="544" y="320" name="inst_F54E32AE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_pulseDriver" x="1088" y="352" name="inst_28AE3FE7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="stepController" x="32" y="32" name="inst_E7A50ED6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_artillery" x="992" y="576" name="inst_9470FCFF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_artillery" x="896" y="576" name="inst_F5C264C4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_artillery" x="1088" y="576" name="inst_C3A8999E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_artillery" x="800" y="576" name="inst_67D0E261" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_gun" x="1088" y="768" name="inst_BDA6511A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_burst" x="384" y="736" name="inst_C53C8683" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_pulseDriver" x="992" y="352" name="inst_311B0739" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_pulseDriver" x="896" y="352" name="inst_D94F44B4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_pulseDriver" x="800" y="352" name="inst_8E55813C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_pulseDriver" x="704" y="352" name="inst_9C7C9998" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_burst" x="384" y="640" name="inst_A66A6BB8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_burst" x="384" y="544" name="inst_4C5084D9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_gun" x="704" y="768" name="inst_55BE749B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_gun" x="800" y="768" name="inst_D128D322" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_gun" x="896" y="768" name="inst_7C783FEC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_gun" x="992" y="768" name="inst_E6B624FB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_burst" x="384" y="448" name="inst_48A2CC2A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_artillery" x="704" y="576" name="inst_81ED0E7A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_torch" x="1280" y="352" name="inst_25EB4779" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_torch" x="1376" y="352" name="inst_F3C5FD7E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_torch" x="1472" y="352" name="inst_99C94272" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_torch" x="1568" y="352" name="inst_E2C80930" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_mine" x="1280" y="576" name="inst_A1105E22" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_mine" x="1376" y="576" name="inst_EC18700C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_mine" x="1472" y="576" name="inst_6CCBE35A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_mine" x="1568" y="576" name="inst_0602764D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_mine" x="1280" y="768" name="inst_5CB00D0C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_mine" x="1376" y="768" name="inst_E3824DDD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_mine" x="1472" y="768" name="inst_ACB4EEB1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_mine" x="1568" y="768" name="inst_E59E19BA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_spreader" x="704" y="928" name="inst_9903CC88" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_spreader" x="800" y="928" name="inst_072BC280" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_spreader" x="896" y="928" name="inst_64C1AC34" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_spreader" x="992" y="928" name="inst_023BB543" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="pickup_spreader" x="1088" y="928" name="inst_866C7CC5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="enemyBossCore" x="992" y="224" name="inst_70517B33" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

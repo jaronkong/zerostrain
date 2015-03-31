@@ -8,6 +8,64 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Setup
+
+spawnList = ds_list_create();
+
+currentSpawnPos = 0;
+spawnDelay = room_speed * 4;
+spawnDelayVariance = room_speed * 2;
+
+currentSpawnDelay = room_speed * 2;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Clean up
+
+ds_list_destroy( spawnList );
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -27,27 +85,93 @@
             <kind>1</kind>
             <string>///Spawn Waves
 
-if ( instance_number( enemyPar ) == 0 ) {
-    repeat( 1 ) {
-        with ( instance_create( random( view_wview ), random( view_hview ), enemyShot ) ) {
-            bodyType = irandom( 2 );
-            event_user( ENEMY_EV.CREATE );
-        }
+currentSpawnDelay --;
+
+if ( currentSpawnDelay &lt;= 0 ) {
+    if ( currentSpawnPos &lt; ds_list_size( spawnList ) ) {
+        instance_create( 0, 0, spawnList[| currentSpawnPos] );
+        currentSpawnPos ++;
     }
-    repeat( 1 ) {
-        with ( instance_create( random( view_wview ), random( view_hview ), enemyBasic ) ) {
-            bodyType = irandom( 2 );
-            event_user( ENEMY_EV.CREATE );
-        }
+    else {
+        currentSpawnPos = 0;
+        event_user( 0 );
+        ds_list_shuffle( spawnList );
     }
-    repeat( 1 ) {
-        with ( instance_create( random( view_wview ), random( view_hview ), enemyBattleship ) ) {
-            bodyType = irandom( 2 );
-            event_user( ENEMY_EV.CREATE );
-        }
-    }
+    
+    currentSpawnDelay = spawnDelay + irandom( spawnDelayVariance );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Clean up old spawn objects.
+with ( spawnMacroPar ) {
+    instance_destroy();
+}
+with ( spawnBehaviorPar ) {
+    instance_destroy();
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Increase level
+
+spawnDelay *= 0.98;
+
+var tRand = irandom( 3 );
+
+if ( tRand &lt;= 1 ) {
+    ds_list_add( spawnList, spawn_laserCircle );
+}
+
+tRand = irandom( 4 );
+if ( tRand &lt;= 1 ) {
+    ds_list_add( spawnList, spawn_tri );
+}
+
+tRand = irandom( 4 );
+if ( tRand &lt;= 1 ) {
+    ds_list_add( spawnList, spawn_laserLineRight );
+}
+
+
+ds_list_add( spawnList, spawnBasicCircle );
 
 </string>
           </argument>

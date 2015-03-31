@@ -115,18 +115,19 @@ with ( target ) {
             tDodging = true;
             
             with ( other ) {
-            
-                //show_debug_message("tDodgeDir: " , tDodgeDir);
-                if (random(2) &lt; 1 &amp;&amp; tDodgeDirSet == false) {
-                    tDodgeDir = tDodgeDir * -1;
-                    tDodgeDirSet = true;
+                if ( instance_exists( playerShip ) ) {
+                    //show_debug_message("tDodgeDir: " , tDodgeDir);
+                    if (random(2) &lt; 1 &amp;&amp; tDodgeDirSet == false) {
+                        tDodgeDir = tDodgeDir * -1;
+                        tDodgeDirSet = true;
+                    }
+                    image_angle = point_direction( x, y, playerShip.x, playerShip.y );
+                    var dodgeDir = 90 * tDodgeDir; // dodges to the right; if negative, dodges to the left
+                    motion_add(point_direction(other.x, other.y, x, y) + dodgeDir, 0.5);
+                    
+                    // make sure enemy doesn't dodge towards player
+                    var playerDistance = point_distance(x, y, playerShip.x, playerShip.y);
                 }
-                image_angle = point_direction( x, y, playerShip.x, playerShip.y );
-                var dodgeDir = 90 * tDodgeDir; // dodges to the right; if negative, dodges to the left
-                motion_add(point_direction(other.x, other.y, x, y) + dodgeDir, 0.5);
-                
-                // make sure enemy doesn't dodge towards player
-                var playerDistance = point_distance(x, y, playerShip.x, playerShip.y);
             }
         }
     }
