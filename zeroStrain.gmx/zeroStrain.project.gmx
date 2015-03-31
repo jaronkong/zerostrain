@@ -137,7 +137,7 @@
     <sound>sound\heartbeat_sd</sound>
   </sounds>
   <sprites name="sprites">
-    <sprite>sprites\sprite0</sprite>
+    <sprite>sprites\ship_spr</sprite>
     <sprites name="Particles">
       <sprite>sprites\particle_explosion_spr</sprite>
       <sprite>sprites\particle_fire_spr</sprite>
