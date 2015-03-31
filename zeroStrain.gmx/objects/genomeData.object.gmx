@@ -115,6 +115,7 @@ enum GeneAllele {
     Tag,
     Values,
     Quality,
+    Group,
     Size
 }
 
@@ -251,6 +252,7 @@ while ( !ds_queue_empty( tQueue ) ) {
                 ds_grid_set( alleleData, GeneAllele.Tag, tIndex, tTag );
                 ds_grid_set( alleleData, GeneAllele.Values, tIndex, tOffsets );
                 ds_grid_set( alleleData, GeneAllele.Quality, tIndex, tQuality );
+                ds_grid_set( alleleData, GeneAllele.Group, tIndex, tGroup );
             }
         }
     }

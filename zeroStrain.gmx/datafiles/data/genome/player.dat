@@ -10,6 +10,7 @@ count = 2
 [plr_stat]
 group = 1
 title = Player
+color = $FFFF00
 0 = plr_stat_speed
 1 = plr_stat_health
 count = 2
