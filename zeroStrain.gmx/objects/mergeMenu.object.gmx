@@ -415,8 +415,8 @@ if ( !optionPos.stateLocked ) {
         }
         if ( gamepad_is_connected( 0 ) ) {
             var tAxis = gamepad_axis_value( 0, optionPos.inVertical );
-            if ( tAxis &lt; -0.875 ) optionCurrent -= 1;
-            if ( tAxis &gt; 0.875 ) optionCurrent += 1;
+            if ( tAxis &lt; -0.8 ) optionCurrent -= 1;
+            if ( tAxis &gt; 0.8 ) optionCurrent += 1;
         }
         optionCurrent = clamp( optionCurrent, 0, ( optionCount - 1 ) );
     }

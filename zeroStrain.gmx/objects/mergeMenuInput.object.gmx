@@ -134,6 +134,7 @@ if ( !stateLocked ) {
     }
     if ( inFlipH ) tHor *= -1;
     if ( tHor &lt; 0 ) tHor /= 5;
+    tVer *= -1;
     
     //Update rotation
     rx = lerpDT( rx, ( tVer * 5 ), 0.1, t );
