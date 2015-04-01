@@ -61,6 +61,7 @@ label = "player";
 geneBase = false;
 
 geneOption = false;
+geneOptionColor = false;
 geneOptionCount = 0;
 
 length = 0;
@@ -1197,6 +1198,47 @@ var th = display_get_gui_height( );
 
 d3d_set_projection_ortho( 0, 0, tw, th, 0 );
 d3d_end( );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw icons
+
+var tSize = ( 0.075 * display_get_gui_height( ) );
+var tScale = ( tSize / sprite_get_height( genePickup_spr ) );
+var tOffset = ( display_get_gui_height( ) * 0.1 );
+var px = ( ( 0.95 + mergeOptionRemove ) * display_get_gui_width( ) );
+var py = ( 0.5 * display_get_gui_height( ) );
+py -= ( tOffset * ( geneOptionCount - 1 ) / 2 );
+
+for ( var i = 0; i &lt; geneOptionCount; ++i ) {
+    draw_sprite_ext( genePickup_spr, 0,
+        px, ( py + ( tOffset * i ) ),
+        tScale, tScale, -30, geneOptionColor[i], 1
+    );
+}
+
+tScale *= 0.375;
+draw_sprite_ext( geneSelected_spr, 0,
+    ( px - ( tSize * 0.25 ) ), ( py + ( tOffset * optionCurrentAni ) ),
+    tScale, tScale, 0, c_yellow, 1
+);
 </string>
           </argument>
         </arguments>

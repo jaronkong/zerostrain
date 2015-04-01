@@ -120,6 +120,7 @@ if ( !instance_exists( mergeMenu ) &amp;&amp; ( pickupCount &gt; 0 ) ) {
             geneOptionCount = other.pickupCount;
             for ( var i = 0; i &lt; geneOptionCount; ++i ) {
                 geneOption[i] = other.pickup[i];
+                geneOptionColor[i] = other.pickupColor[i];
             }
             event_user( 0 );
         }
