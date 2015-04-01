@@ -85,20 +85,22 @@ ds_list_destroy( spawnList );
             <kind>1</kind>
             <string>///Spawn Waves
 
-currentSpawnDelay --;
-
-if ( currentSpawnDelay &lt;= 0 ) {
-    if ( currentSpawnPos &lt; ds_list_size( spawnList ) ) {
-        instance_create( 0, 0, spawnList[| currentSpawnPos] );
-        currentSpawnPos ++;
-    }
-    else {
-        currentSpawnPos = 0;
-        event_user( 0 );
-        ds_list_shuffle( spawnList );
-    }
+if ( instance_exists( playerShip ) ) {
+    currentSpawnDelay --;
     
-    currentSpawnDelay = spawnDelay + irandom( spawnDelayVariance );
+    if ( currentSpawnDelay &lt;= 0 ) {
+        if ( currentSpawnPos &lt; ds_list_size( spawnList ) ) {
+            instance_create( 0, 0, spawnList[| currentSpawnPos] );
+            currentSpawnPos ++;
+        }
+        else {
+            currentSpawnPos = 0;
+            event_user( 0 );
+            ds_list_shuffle( spawnList );
+        }
+        
+        currentSpawnDelay = spawnDelay + irandom( spawnDelayVariance );
+    }
 }
 </string>
           </argument>

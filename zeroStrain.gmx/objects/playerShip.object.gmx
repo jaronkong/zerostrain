@@ -61,6 +61,7 @@ inputAimDistPercent = 0;
 // Death
 deathRadius = 600;
 emitter1 = part_emitter_create( global.playerEffectsSystem );
+hasDied = false;
 </string>
           </argument>
         </arguments>
@@ -482,7 +483,7 @@ with ( enemyPar ) {
             <kind>1</kind>
             <string>///Death
 
-if ( selfHealth &lt;= 0 ) {
+if ( selfHealth &lt;= 0 &amp;&amp; !hasDied ) {
 
     ///Detonate
     var t = global.timeTickFactor;
@@ -526,6 +527,13 @@ if ( selfHealth &lt;= 0 ) {
     
     
     // Death logic
+    hasDied = true;
+    with( weaponControllerPar ) {
+        instance_destroy();
+    }
+    with( weaponPar_projectile ) {
+        instance_destroy();
+    }
     instance_destroy();
 }
 
