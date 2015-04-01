@@ -41,7 +41,7 @@ if ( instance_exists( playerShip ) ) {
             var tNewEnemy = instance_create( tSpawnX, tSpawnY, enemyBulk );
     
             with ( tNewEnemy ) {
-                bodyType = colorGetRandom();;
+                bodyType = colorGetRandom();
                 direction = i + 180 - 30;
                 image_angle = direction;
                 speed = 1;
