@@ -61,7 +61,7 @@ label = "player";
 geneBase = false;
 
 geneOption = false;
-geneOptionColor = false;
+geneOptionQuality = false;
 geneOptionCount = 0;
 
 length = 0;
@@ -1228,9 +1228,9 @@ var py = ( 0.5 * display_get_gui_height( ) );
 py -= ( tOffset * ( geneOptionCount - 1 ) / 2 );
 
 for ( var i = 0; i &lt; geneOptionCount; ++i ) {
-    draw_sprite_ext( genePickup_spr, 0,
+    geneDrawIcon(
         px, ( py + ( tOffset * i ) ),
-        tScale, tScale, -30, geneOptionColor[i], 1
+        tScale, -30, geneOptionQuality[i]
     );
 }
 

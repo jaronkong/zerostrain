@@ -58,7 +58,7 @@ effects = ds_map_create( );
 
 pickupCount = 0;
 pickup = false;
-pickupColor = false;
+pickupQuality = false;
 </string>
           </argument>
         </arguments>
@@ -120,7 +120,7 @@ if ( !instance_exists( mergeMenu ) &amp;&amp; ( pickupCount &gt; 0 ) ) {
             geneOptionCount = other.pickupCount;
             for ( var i = 0; i &lt; geneOptionCount; ++i ) {
                 geneOption[i] = other.pickup[i];
-                geneOptionColor[i] = other.pickupColor[i];
+                geneOptionQuality[i] = other.pickupQuality[i];
             }
             event_user( 0 );
         }
@@ -208,9 +208,9 @@ var py = ( view_yview + view_hview - 24 );
 
 var tScale = 0.35;
 for ( var i = 0; i &lt; pickupCount; ++i ) {
-    draw_sprite_ext( genePickup_spr, 0,
+    geneDrawIcon(
         ( px + ( i * 80 * tScale ) ), py,
-        tScale, tScale, 30, pickupColor[i], 1
+        tScale, 30, pickupQuality[i]
     );
 }
 </string>

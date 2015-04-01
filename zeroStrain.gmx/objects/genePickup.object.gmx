@@ -58,20 +58,6 @@ image_xscale = tScale;
 image_yscale = tScale;
 
 image_angle = random( 360 );
-
-if ( quality &lt; 0 ) {
-    image_blend = c_white;
-} else if ( quality &lt; 0.25 ) {
-    image_blend = merge_color( c_white, c_green, ( quality * 4 ) );
-} else if ( quality &lt; 0.5 ) {
-    image_blend = merge_color( c_green, c_blue, ( ( quality - 0.25 ) * 4 ) );
-} else if ( quality &lt; 0.75 ) {
-    image_blend = merge_color( c_blue, c_yellow, ( ( quality - 0.5 ) * 4 ) );
-} else if ( quality &lt; 1 ) {
-    image_blend = merge_color( c_yellow, c_red, ( ( quality - 0.75 ) * 4 ) );
-} else {
-    image_blend = c_red;
-}
 </string>
           </argument>
         </arguments>
@@ -104,7 +90,7 @@ if ( instance_exists( tHit ) ) {
     with ( playerGenetics ) {
         if ( owner != tHit ) continue;
         pickup[pickupCount] = other.genome;
-        pickupColor[pickupCount] = other.image_blend;
+        pickupQuality[pickupCount] = other.quality;
         pickupCount += 1;
         with ( other.id ) instance_destroy( );
         break;
@@ -134,9 +120,9 @@ if ( instance_exists( tHit ) ) {
             <kind>1</kind>
             <string>///Draw self
 
-draw_sprite_ext( sprite_index, image_index,
-    x, y, image_xscale, image_yscale,
-    image_angle, image_blend, image_alpha
+geneDrawIcon( x, y,
+    mean( image_xscale, image_yscale ),
+    image_angle, quality
 );
 </string>
           </argument>
