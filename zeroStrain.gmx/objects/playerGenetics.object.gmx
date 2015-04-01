@@ -58,6 +58,7 @@ effects = ds_map_create( );
 
 pickupCount = 0;
 pickup = false;
+pickupColor = false;
 </string>
           </argument>
         </arguments>
@@ -160,11 +161,11 @@ with ( weaponSpawner ) event_user( 1 );
 var px = ( view_xview + 24 );
 var py = ( view_yview + view_hview - 24 );
 
-var tScale = 0.375;
+var tScale = 0.35;
 for ( var i = 0; i &lt; pickupCount; ++i ) {
     draw_sprite_ext( genePickup_spr, 0,
         ( px + ( i * 80 * tScale ) ), py,
-        tScale, tScale, 30, c_white, 1
+        tScale, tScale, 30, pickupColor[i], 1
     );
 }
 </string>
