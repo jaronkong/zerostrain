@@ -334,6 +334,7 @@
   <objects name="objects">
     <object>objects\playerShip</object>
     <objects name="Controllers">
+      <object>objects\controllersPar</object>
       <object>objects\effectsGlobalCon</object>
       <object>objects\mainController</object>
       <object>objects\stepController</object>
@@ -383,6 +384,7 @@
       </objects>
       <objects name="FullScreenEffects">
         <object>objects\postShader</object>
+        <object>objects\fadeToTitle</object>
       </objects>
       <object>objects\testEmitter</object>
       <object>objects\cameraShake</object>

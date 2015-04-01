@@ -534,6 +534,10 @@ if ( selfHealth &lt;= 0 &amp;&amp; !hasDied ) {
     with( weaponPar_projectile ) {
         instance_destroy();
     }
+    with ( ambientParticles ) {
+        instance_destroy();
+    }
+    instance_create( 0, 0, fadeToTitle );
     instance_destroy();
 }
 

@@ -3,9 +3,9 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1000000</depth>
   <persistent>0</persistent>
-  <parentName>controllersPar</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,16 +25,18 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Info
+            <string>///Setup
 
-//Updates tick rates for global particles that don't belong to a particular object.
+alpha = 0;
+fadeRate = 0.005;
+
 
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -51,11 +53,45 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Update particle definitions
+            <string>///Fade
 
-particleDef_enemyBody();
-particleDef_enemyBodyBlue();
-particleDef_enemyBodyGreen();
+alpha += fadeRate;
+
+if ( alpha &gt;= 1 ) {
+    with ( controllersPar ) {
+        instance_destroy();
+    }
+    room_goto( Title_rm );
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw
+
+draw_set_color( c_black );
+draw_set_alpha( alpha );
+draw_rectangle( view_xview, view_yview, view_xview + view_wview , view_yview + view_hview, false );
+
 
 </string>
           </argument>
