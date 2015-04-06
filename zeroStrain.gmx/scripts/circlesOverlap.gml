@@ -12,4 +12,3 @@ if ( point_distance( aX1, aY1, aX2, aY2 ) < aR1 + aR2 ) {
 }
 
 return false;
-

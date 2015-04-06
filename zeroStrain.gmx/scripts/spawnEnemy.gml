@@ -10,4 +10,3 @@ with ( tNewEnemy ) {
 }
 
 return tNewEnemy;
-

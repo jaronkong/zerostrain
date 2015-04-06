@@ -24,4 +24,3 @@ for ( var i = 0; i < 360; i += 360 / argument13 ) {
         
     }
 }
-

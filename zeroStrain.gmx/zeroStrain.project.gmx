@@ -455,6 +455,7 @@
       <objects name="EnemyWeapons">
         <object>objects\enemyWeaponPar</object>
         <object>objects\enemyBullet</object>
+        <object>objects\enemyHomingMissile</object>
         <object>objects\enemyLaser</object>
       </objects>
       <objects name="EnemyBrains">

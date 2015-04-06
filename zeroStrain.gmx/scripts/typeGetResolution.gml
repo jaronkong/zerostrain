@@ -52,4 +52,3 @@ else if ( aWeapType == WEAPON_TYPE.RED ) {
 
 return 0;
 
-

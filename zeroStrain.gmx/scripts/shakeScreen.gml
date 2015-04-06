@@ -3,4 +3,3 @@
 with ( cameraController ) {
     shakeAmount = argument0;
 }
-

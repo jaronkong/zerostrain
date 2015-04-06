@@ -7,4 +7,3 @@ with ( aTargetID ) {
     damageFlyNumberCreate( x, y, argument1, -1, 0 );
     currentInfoAlpha = 1;
 }
-

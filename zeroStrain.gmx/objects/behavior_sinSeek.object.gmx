@@ -90,9 +90,9 @@ initialized = false;
             <kind>1</kind>
             <string>/// Sin Seek main behavior
 
-if ( initialized == false ) {
-    oldX = x;
-    oldY = y;
+if ( initialized == false &amp;&amp; instance_exists( target )) {
+    oldX = target.x;
+    oldY = target.y;
     initialized = true;
 }
 
@@ -103,15 +103,17 @@ if ( initialized ) {
     with ( target ) {
         if ( instance_exists( playerShip ) ) {
         
-            //show_debug_message(other.oldX);
-            //show_debug_message(other.oldY);
+
+            image_angle = point_direction( x, y, playerShip.x, playerShip.y );
+            
+            motion_add(direction, 0.5);
             other.oldX += hspeed;
             other.oldY += vspeed;
-            //show_debug_message(other.oldX);
-            //show_debug_message(other.oldY);
-            x = other.oldX + lengthdir_x(other.shift, direction + 90);
+            x = other.oldX + lengthdir_x(other.shift, direction + 90); // add 90
             y = other.oldY + lengthdir_y(other.shift, direction + 90);
-            image_angle = point_direction( x, y, playerShip.x, playerShip.y );
+            if ( speed &gt; maxSpeed ) {
+                speed = maxSpeed;
+            }
         }
         
     }
