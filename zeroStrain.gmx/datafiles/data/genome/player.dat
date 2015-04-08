@@ -72,7 +72,7 @@ offset = 0.0125
 [plr_wep_gatling_time]
 default = 1
 title = Duration
-offset = 0.03
+offset = 0.05
 
 
 	[PULSE DRIVER]
@@ -107,7 +107,7 @@ offset = 0.0125
 [plr_wep_pulse_time]
 default = 1
 title = Duration
-offset = 0.03
+offset = 0.05
 
 
 	[BLAST VOLLEY]
@@ -148,7 +148,7 @@ offset = 0.02
 [plr_wep_artillery_time]
 default = 1
 title = Duration
-offset = 0.03
+offset = 0.05
 
 
 	[FISSURE BOMB]
@@ -208,7 +208,7 @@ offset = 0.003
 [plr_wep_torch_time]
 default = 1
 title = Duration
-offset = 0.03
+offset = 0.05
 
 [plr_wep_torch_range]
 default = 1
@@ -254,7 +254,7 @@ offset = 0.0125
 [plr_wep_mine_time]
 default = 1
 title = Duration
-offset = 0.03
+offset = 0.05
 
 [plr_wep_mine_radius]
 default = 1
@@ -294,4 +294,4 @@ offset = 0.0125
 [plr_wep_spreader_time]
 default = 1
 title = Duration
-offset = 0.03
+offset = 0.05
