@@ -212,6 +212,7 @@
       <script>scripts\particleDef_enemyBodyGreen.gml</script>
       <script>scripts\particleDef_ambBackground.gml</script>
       <script>scripts\particleDef_genericDamage.gml</script>
+      <script>scripts\particleDef_standaloneEffects.gml</script>
       <script>scripts\particleDef_player.gml</script>
       <scripts name="Enemy">
         <script>scripts\particleDef_enemyBullet.gml</script>
@@ -263,6 +264,7 @@
       <script>scripts\doTimeSlow.gml</script>
       <script>scripts\doStepSlow.gml</script>
       <script>scripts\damageFlyNumberCreate.gml</script>
+      <script>scripts\createScreenDNAPop.gml</script>
     </scripts>
     <scripts name="Weapons">
       <script>scripts\weaponDoDamage.gml</script>
@@ -399,6 +401,9 @@
       </objects>
       <object>objects\timeSlow</object>
       <object>objects\stepSlow</object>
+      <objects name="Standalone">
+        <object>objects\dnaPop</object>
+      </objects>
     </objects>
     <objects name="Weapons">
       <object>objects\weaponSpawner</object>
