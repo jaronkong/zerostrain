@@ -61,6 +61,11 @@ pickup = false;
 pickupQuality = false;
 
 pickupOffset = 0;
+
+pickupBaseX = 64;
+pickupBaseY = 64;
+pickupScale = 0.75;
+pickupSpace = ( pickupScale * 80 );
 </string>
           </argument>
         </arguments>
@@ -110,7 +115,10 @@ ds_map_destroy( effects );
             <kind>1</kind>
             <string>///Cap number of held genomes
 
-pickupOffset = lerpDT( pickupOffset, 0, 0.025, global.timeTickFactor );
+pickupOffset = lerpDT( pickupOffset, 0, 0.02, global.timeTickFactor );
+
+var tBaseX = ( view_xview + pickupBaseX );
+var tBaseY = ( view_yview + view_hview - pickupBaseY );
 
 while ( pickupCount &gt; 5 ) {
     for ( var i = 1; i &lt; pickupCount; ++i ) {
@@ -118,6 +126,9 @@ while ( pickupCount &gt; 5 ) {
         pickupQuality[i-1] = pickupQuality[i];
     }
     pickupCount -= 1;
+    
+    var px = ( tBaseX + ( ( pickupCount - pickupOffset ) * pickupSpace ) );
+    effect_create_above( ef_explosion, px, tBaseY, 1, c_white );
 }
 </string>
           </argument>
@@ -235,11 +246,11 @@ with ( weaponSpawner ) event_user( 1 );
             <kind>1</kind>
             <string>///Draw collected genes
 
-var px = ( view_xview + 64 );
-var py = ( view_yview + view_hview - 64 );
+var px = ( view_xview + pickupBaseX );
+var py = ( view_yview + view_hview - pickupBaseY );
 
-var tScale = 0.75;
-var tSpace = ( tScale * 80 );
+var tScale = pickupScale;
+var tSpace = pickupSpace;
 
 for ( var i = 0; i &lt; pickupCount; ++i ) {
     var tOffset = pickupOffset;
