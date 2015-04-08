@@ -140,6 +140,9 @@ if ( instance_exists( playerShip ) ) {
         tCamX = x + lengthdir_x( other.playerOffset * aimDistPercent, aimDir );
         tCamY = y + lengthdir_y( other.playerOffset * aimDistPercent, aimDir );
     }
+    
+    tCamX = (tCamX + room_width/2) / 2;
+    tCamY = (tCamY + room_height/2) / 2;
 
     targetCameraFocusX = tCamX;
     targetCameraFocusY = tCamY;
