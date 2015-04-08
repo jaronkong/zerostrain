@@ -108,7 +108,7 @@ ds_map_destroy( effects );
             <kind>1</kind>
             <string>///Toggle merge menu
 
-if ( !instance_exists( mergeMenu ) &amp;&amp; ( pickupCount &gt; 0 ) ) {
+if ( !instance_exists( mergeMenu ) ) {
     var tOpen = keyboard_check_pressed( vk_space );
     if ( gamepad_is_connected( 0 ) ) {
         if ( gamepad_button_check_pressed( 0, gp_shoulderrb ) ) tOpen = true;
@@ -124,9 +124,6 @@ if ( !instance_exists( mergeMenu ) &amp;&amp; ( pickupCount &gt; 0 ) ) {
             }
             event_user( 0 );
         }
-        //Clear pickups
-        pickupCount = 0;
-        with ( genePickup ) instance_destroy( );
     }
 }
 </string>

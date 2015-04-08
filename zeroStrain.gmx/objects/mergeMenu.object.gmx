@@ -444,7 +444,7 @@ if ( !optionPos.stateLocked ) {
             <string>///Trigger merge animation
 
 if ( !stateMerging ) {
-    if ( ( basePos.x &gt; 0.75 ) &amp;&amp; ( optionPos.x &gt; 0.75 ) ) {
+    if ( ( basePos.x &gt; 0.75 ) &amp;&amp; ( optionPos.x &gt; 0.75 ) &amp;&amp; ( geneOptionCount &gt; 0 ) ) {
         stateMerging = true;
         //Create merged gene
         geneResult = geneMergeStrands( label,
@@ -556,22 +556,50 @@ if ( !stateMergeComplete &amp;&amp; stateMerging ) {
 } else if ( stateMergeComplete ) {
     var t = global.timeTickFactor;
     resultInfoAlpha = lerpDT( resultInfoAlpha, 1, 0.05, t );
-    if ( resultInfoAlpha &gt; 0.875 ) {
-        //Check for menu exit
-        var tExit = false;
-        if ( keyboard_check_pressed( vk_space ) ) {
-            tExit = true;
-        }
-        if ( gamepad_is_connected( 0 ) ) {
-            if ( gamepad_button_check_pressed( 0, gp_shoulderrb ) ) {
-                tExit = true;
-            }
-        }
-        if ( tExit ) {
-            event_user( 1 );
-        }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check for exit
+
+var tExit = false;
+if ( keyboard_check_pressed( vk_space ) ) {
+    tExit = true;
+}
+if ( gamepad_is_connected( 0 ) ) {
+    if ( gamepad_button_check_pressed( 0, gp_shoulderrb ) ) {
+        tExit = true;
     }
 }
+
+if ( tExit ) {
+    if ( stateMergeComplete ) {
+        if ( resultInfoAlpha &gt; 0.875 ) {
+                event_user( 1 );
+        }
+    } else if ( !stateMerging ) {
+        instance_activate_all( );
+        instance_destroy( );
+    }
+}
+        
 </string>
           </argument>
         </arguments>
@@ -621,8 +649,15 @@ instance_activate_all( );
 
 if ( stateMergeComplete ) {
     with ( playerGenetics ) {
+        for ( var i = ( other.optionCurrent + 1 ); i &lt; pickupCount; ++i ) {
+            pickup[i-1] = pickup[i];
+            pickupQuality[i-1] = pickupQuality[i];
+        }
+        pickupCount -= 1;
+        
         genome = other.geneResult;
         length = other.resultLength;
+        
         event_user( 1 );
     }
 }
@@ -1234,11 +1269,13 @@ for ( var i = 0; i &lt; geneOptionCount; ++i ) {
     );
 }
 
-tScale *= 0.375;
-draw_sprite_ext( geneSelected_spr, 0,
-    ( px - ( tSize * 0.25 ) ), ( py + ( tOffset * optionCurrentAni ) ),
-    tScale, tScale, 0, c_yellow, 1
-);
+if ( geneOptionCount &gt; 0 ) {
+    tScale *= 0.375;
+    draw_sprite_ext( geneSelected_spr, 0,
+        ( px - ( tSize * 0.25 ) ), ( py + ( tOffset * optionCurrentAni ) ),
+        tScale, tScale, 0, c_yellow, 1
+    );
+}
 </string>
           </argument>
         </arguments>
