@@ -195,6 +195,7 @@
       <sprite>sprites\geneIconWorsen_spr</sprite>
       <sprite>sprites\geneIconUnchanged_spr</sprite>
       <sprite>sprites\geneSelected_spr</sprite>
+      <sprite>sprites\genePickupBacking_spr</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
