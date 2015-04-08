@@ -27,4 +27,3 @@ while ( ini_section_exists( tSection ) ) {
 ini_close();
 
 ds_map_add( global.bodyMaps, aEnumTarget, tNewBodyMap );
-

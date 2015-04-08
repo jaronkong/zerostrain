@@ -41,14 +41,14 @@
             <kind>1</kind>
             <string>/// Specific Properties
 
-/* Add particle emitter here
+// Add particle emitter here
 
-Example:
+// Example:
 
 emitter1 = part_emitter_create( global.enemyWeaponSystem );
 part_emitter_region( global.enemyWeaponSystem, emitter1, x, x, y, y, ps_shape_ellipse, ps_distr_gaussian );
 
-*/
+
 </string>
           </argument>
         </arguments>
@@ -87,11 +87,10 @@ part_emitter_region( global.enemyWeaponSystem, emitter1, x, x, y, y, ps_shape_el
             <kind>1</kind>
             <string>/// Clean up Particle Emitter
 
-/* TODO: Get rid of particle emitter instance once implemented
+// Get rid of particle emitter instance once implemented
 
 part_emitter_destroy( global.enemyWeaponSystem, emitter1 );
 
-*/
 </string>
           </argument>
         </arguments>
@@ -128,30 +127,25 @@ part_emitter_destroy( global.enemyWeaponSystem, emitter1 );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Check collision
+            <string>/// Move missile towards player
 
-var tHitObj = weaponCheckForwardLineAny( id, playerShip );
-if ( tHitObj != noone ) {
-    var tTargetDir = point_direction( x, y, tHitObj.x, tHitObj.y );
-    
-    with ( tHitObj ) {
-        motion_add( tTargetDir, other.hitForce );
-        damagePlayer( id, other.damage );
+with ( target ) {
+    if ( instance_exists( playerShip ) ) {
+        
+        
+        var tDir = point_direction( x, y, playerShip.x, playerShip.y );
+        var tDiff = angle_difference( tDir, direction );
+        motion_add( direction, 0.2 );
+        if ( abs( tDiff ) &gt; trackingSpeed ) {
+            direction += trackingSpeed * sign( tDiff );
+        }
+        
+        image_angle = direction;
+        if ( speed &gt; 2 ) {
+            speed = 2;
+        }
     }
-    /* TODO: Add particles for collision with player
-    part_type_direction(getParticle( "enemyShotSparks" ), tTargetDir + 180 - 30,tTargetDir + 180 + 30, 0 *t,0 *t);
-    part_type_direction(getParticle( "enemyShotHit" ), tTargetDir + 180 - 10,tTargetDir + 180 + 10, 0 *t,0 *t);
-
-    part_emitter_burst( global.enemyWeaponSystem, emitter1, getParticle( "enemyShotSparks" ), 50 *t );
-    part_emitter_burst( global.enemyWeaponSystem, emitter1, getParticle( "enemyShotHit" ), 10 *t );
-    */    
-    audioSetPitchRand( damageTaken_sd );
-    playSound( damageTaken_sd, 1, false );
-    shakeScreen( 15 );
-
-    instance_destroy();
 }
-
 </string>
           </argument>
         </arguments>
@@ -172,25 +166,30 @@ if ( tHitObj != noone ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Move missile towards player
+            <string>///Check collision
 
-with ( target ) {
-    if ( instance_exists( playerShip ) ) {
-        
-        
-        var tDir = point_direction( x, y, playerShip.x, playerShip.y );
-        var tDiff = angle_difference( tDir, direction );
-        motion_add( direction, 0.2 );
-        if ( abs( tDiff ) &gt; trackingSpeed ) {
-            direction += trackingSpeed * sign( tDiff );
-        }
-        
-        image_angle = direction;
-        if ( speed &gt; 2 ) {
-            speed = 2;
-        }
+var tHitObj = weaponCheckForwardLineAny( id, playerShip );
+if ( tHitObj != noone ) {
+    var tTargetDir = point_direction( x, y, tHitObj.x, tHitObj.y );
+    
+    with ( tHitObj ) {
+        motion_add( tTargetDir, other.hitForce );
+        damagePlayer( id, other.damage );
     }
+    // Add particles for collision with player
+    part_type_direction(getParticle( "enemyShotSparks" ), tTargetDir + 180 - 30,tTargetDir + 180 + 30, 0 *t,0 *t);
+    part_type_direction(getParticle( "enemyShotHit" ), tTargetDir + 180 - 10,tTargetDir + 180 + 10, 0 *t,0 *t);
+
+    part_emitter_burst( global.enemyWeaponSystem, emitter1, getParticle( "enemyShotSparks" ), 50 *t );
+    part_emitter_burst( global.enemyWeaponSystem, emitter1, getParticle( "enemyShotHit" ), 10 *t );
+        
+    audioSetPitchRand( damageTaken_sd );
+    playSound( damageTaken_sd, 1, false );
+    shakeScreen( 15 );
+
+    instance_destroy();
 }
+
 </string>
           </argument>
         </arguments>
