@@ -257,7 +257,7 @@ for ( var i = -1; i &lt; ( pickupCountMax + 1 ); ++i ) {
     var tIndex = 0;
     if ( i == pickupCountMax ) tIndex = 1;
     draw_sprite_ext( genePickupBacking_spr, tIndex,
-        ( px + ( i * tSpace ) ), py,
+        ( px + ( ( i - 0.8 ) * tSpace ) ), py,
         tScale, tScale, 0, c_white, 1
     );
 }
