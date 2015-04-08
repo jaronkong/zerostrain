@@ -56,6 +56,7 @@ fireRate = room_speed / 2;
 projectileSpeed = 20;
 projectileLife = 120;
 projectileToShoot = weapon_pulseDriver_bullet;
+duration = 6 * room_speed;
 hitForce = 2;
 
 kickAmount = 8;

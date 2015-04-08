@@ -53,7 +53,7 @@ fireRate = room_speed / 4;
 projectileSpeed = 10;
 projectileLife = 240;
 projectileToShoot = weapon_artillery_shot;
-
+duration = 4 * room_speed;
 damage = 700;
 
 hitForce = 2;

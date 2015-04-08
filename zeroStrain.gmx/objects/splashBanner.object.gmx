@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-9010</depth>
+  <depth>-9002</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,35 +27,14 @@
             <kind>1</kind>
             <string>///Setup
 
-flyDist = 32;
-baseFlyDistance = 32;
-maxFlyDistance = 64;
+color = c_orange;
+textColor = c_white;
 
-value = 0;
-damageType = -1;
-minValue = 100;
-maxValue = 1000;
-color = c_white;
-damageEffectiveness = 0;
+text = "AAAAAAHHHHHHHHHHHHHH";
 
-text = "";
-font = main_ft;
-fontSize = 32;
-baseFontSize = 32;
-maxFontSize = 32;
-
-//Distance
-distanceFactor = 0;
-distanceTween = 0.2;
-
-//Alpha
-tweenFactor = 0;
-tweenPercent = 0.08;
-baseTweenPercent = tweenPercent;
-minTweenPercent = 0.05;
-
-isCrit = false;
-isWeak = false;
+currentAlpha = 1;
+targetAlpha = 0;
+fadeRate = 0.01;
 
 </string>
           </argument>
@@ -81,65 +60,11 @@ isWeak = false;
             <kind>1</kind>
             <string>///Tween
 
-tweenFactor = lerp( tweenFactor, 1, tweenPercent );
-distanceFactor = lerp( distanceFactor, 1, distanceTween );
+currentAlpha -= fadeRate;
 
-if ( tweenFactor &gt;= 0.99 ) {
+if ( currentAlpha &lt;= 0 ) {
     instance_destroy();
 }
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Create the fly number
-
-var tValuePercent = value / maxValue;
-tValuePercent = clamp( tValuePercent, 0, 1 );
-
-flyDist = baseFlyDistance + (maxFlyDistance - baseFlyDistance) * tValuePercent;
-fontSize = baseFontSize + (maxFontSize - baseFontSize) * tValuePercent;
-tweenPercent = baseTweenPercent - ( baseTweenPercent - minTweenPercent ) * tValuePercent;
-
-color = weaponTypeGetColor( damageType );
-
-if ( damageEffectiveness &gt; 0 ) {
-    isCrit = true;
-}
-else if ( damageEffectiveness &lt; 0 ) {
-    isWeak = true;
-}
-
-if ( isCrit ) {
-    text = string( value ) + " Critical!";
-    fontSize *= 1.5;
-}
-else if ( isWeak ) {
-    text = string( value ) + " Ineffective...";
-    color = c_black;
-}
-else {
-    text = string( value );
-}
-
 
 </string>
           </argument>
@@ -166,19 +91,14 @@ else {
             <string>///Draw
 
 draw_set_color( color );
-draw_set_alpha( 1 - tweenFactor );
+draw_set_alpha( currentAlpha );
 
-if ( isWeak ) {
-    draw_set_alpha( (1-tweenFactor) * 0.5 );
-}
+draw_rectangle( view_xview, view_yview + view_hview/2 - 64, view_xview + view_wview, view_yview + view_hview/2 + 64, false );
 
+draw_set_color( textColor );
 draw_set_valign( fa_center );
 draw_set_halign( fa_center );
-
-var tX = x;
-var tY = y - flyDist*distanceFactor;
-drawTextOutline( tX, tY, text, font, fontSize, 0.1, 1 - tweenFactor, c_white, 1, 1 );
-//drawTextSize( tX, tY, text, font, fontSize );
+drawTextSize( view_xview + view_wview/2, view_yview + view_hview/2, text, main_ft, 32 );
 
 </string>
           </argument>

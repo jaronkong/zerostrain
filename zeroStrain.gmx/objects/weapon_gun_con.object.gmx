@@ -51,6 +51,7 @@ projectileSpeed = 14;
 projectileLife = 240;
 projectileToShoot = weapon_gun_bullet;
 
+duration = 3 * room_speed;
 bulletHalfSpread = 16;
 hitForce = 0.5;
 kickAmount = 3;

@@ -136,6 +136,8 @@ hudFlashOn = false;
 hudFlashRate = 3;
 hudFlashTimer = 0;
 
+
+
 </string>
           </argument>
         </arguments>
@@ -624,6 +626,19 @@ if ( instance_exists( equippedWeapon ) ) {
     draw_set_alpha( 1 );
     drawArc( weaponDurationRange * tDurationPercent, arcRes, radius, weaponDurationStartAngle, hudX, hudY );
 
+}
+
+//---------------------------------------------------
+// Warning flash
+//---------------------------------------------------
+if ( !instance_exists( equippedWeapon ) ) {
+    draw_set_color( weaponDurationColor );
+    if ( hudFlashOn ) {
+        draw_set_color( hudFlashColor );
+    }
+    draw_set_valign( fa_center );
+    draw_set_halign( fa_center );
+    drawTextSize( hudX, hudY - 150, "WARNING: Weapon depleted", main_ft, 32 );
 }
 
 //---------------------------------------------------

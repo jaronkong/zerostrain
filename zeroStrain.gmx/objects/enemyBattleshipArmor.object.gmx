@@ -56,7 +56,7 @@ mass = 1;
 sizeFactor = 1; //used for things like body particles. bigger = more particles.
 
 drawScale = 1;
-boundsRange = 0;
+boundsRange = 32;
 
 brainType = noone;
 anchorTarget = noone;
@@ -99,8 +99,8 @@ anchorTarget = noone;
             <kind>1</kind>
             <string>///Lock on to owner
 if ( instance_exists( anchorTarget ) ) {
-    x = anchorTarget.x + lengthdir_x( 64, image_angle + angleOffset );
-    y = anchorTarget.y + lengthdir_y( 64, image_angle + angleOffset );
+    x = anchorTarget.x + lengthdir_x( 211, image_angle + angleOffset );
+    y = anchorTarget.y + lengthdir_y( 211, image_angle + angleOffset );
     image_angle = anchorTarget.image_angle;
 }
 else {

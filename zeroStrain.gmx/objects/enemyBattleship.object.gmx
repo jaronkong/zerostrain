@@ -55,12 +55,78 @@ trackingSpeed = 0.1;
 maxSpeed = 1.5;
 mass = 50;
 sizeFactor = 5;
-boundsRange = 32;
+boundsRange = 100;
+
+fireRate = 0.2 * room_speed;
+currentFireTimer = fireRate;
+fireRange = 1200;
+bulletSpeed = 6;
 
 brainType = behavior_blindSeek;
 
 bodyMapNum = BODY_MAPS.ENEMY4;
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Shoot
+
+currentFireTimer -= global.timeTickFactor;
+
+if ( currentFireTimer &lt;= 0 ) {
+    var tNearestPlayer = instance_nearest( x, y, playerShip );
+    if( instance_exists( tNearestPlayer ) ) {
+        if ( point_distance( x, y, tNearestPlayer.x, tNearestPlayer.y ) &lt; fireRange ) {
+            
+            //var tTargetDir = intercept_course( id, tNearestPlayer, bulletSpeed );
+            var tTargetDir = point_direction( x, y, tNearestPlayer.x, tNearestPlayer.y );
+            
+            var tNewBullet = instance_create( x, y, enemyBullet );
+            with ( tNewBullet ) {
+                speed = other.bulletSpeed;
+                direction = tTargetDir;
+                ownerEnemy = other.id;
+            }
+            
+            playSound( enemySmallShot_sd, 1, false );
+        
+        }
+    }
+    currentFireTimer = fireRate;
+}
 </string>
           </argument>
         </arguments>
@@ -138,7 +204,7 @@ shakeScreen( 128 );
           <argument>
             <kind>1</kind>
             <string>///Make shields
-
+/*
 with ( instance_create( x, y, enemyBattleshipArmor ) ) {
     anchorTarget = other.id;
     angleOffset = 90;
@@ -150,7 +216,7 @@ with ( instance_create( x, y, enemyBattleshipArmor ) ) {
     angleOffset = -90;
 
 }
-
+*/
 </string>
           </argument>
         </arguments>
@@ -189,6 +255,8 @@ with ( instance_create( x, y, enemyBattleshipArmor ) ) {
             <kind>1</kind>
             <string>///Draw
 
+draw_sprite_ext( enemy4Block_spr, 0, x, y, 1, 1, image_angle, c_white, 1 );
+draw_sprite_ext( enemy4Block2_spr, 0, x, y, 1, 1, image_angle, c_white, 1 );
 
 </string>
           </argument>

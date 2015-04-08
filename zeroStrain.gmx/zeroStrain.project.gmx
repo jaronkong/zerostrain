@@ -394,6 +394,9 @@
       <objects name="FlyNumbers">
         <object>objects\damageFlyNumber</object>
       </objects>
+      <objects name="SplashText">
+        <object>objects\splashBanner</object>
+      </objects>
       <object>objects\timeSlow</object>
       <object>objects\stepSlow</object>
     </objects>
