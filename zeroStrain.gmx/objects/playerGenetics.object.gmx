@@ -120,9 +120,6 @@ ds_map_destroy( effects );
 
 pickupOffset = lerpDT( pickupOffset, 0, 0.02, global.timeTickFactor );
 
-var tBaseX = ( view_xview + pickupBaseX );
-var tBaseY = ( view_yview + view_hview - pickupBaseY );
-
 while ( pickupCount &gt; pickupCountMax ) {
     for ( var i = 1; i &lt; pickupCount; ++i ) {
         pickup[i-1] = pickup[i];
@@ -130,8 +127,8 @@ while ( pickupCount &gt; pickupCountMax ) {
     }
     pickupCount -= 1;
     
-    var px = ( tBaseX + ( ( pickupCount - pickupOffset ) * pickupSpace ) );
-    effect_create_above( ef_explosion, px, tBaseY, 1, c_white );
+    var px = ( pickupBaseX + ( ( pickupCount - pickupOffset ) * pickupSpace ) );
+    createScreenDNAPop( px, ( view_hview - pickupBaseY ) );
 }
 </string>
           </argument>
