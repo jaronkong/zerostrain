@@ -228,7 +228,7 @@ spawnEnemy( 100, 100,
             <kind>1</kind>
             <string>spawnEnemy( 800, 100,
                     random(360),
-                    enemyBattleship, -1 );
+                    enemyBattleship, irandom( 2 ) );
 </string>
           </argument>
         </arguments>

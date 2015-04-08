@@ -31,6 +31,7 @@ global.particleEmitterMap = ds_map_create();
 
 particleDef_ambBackground();
 particleDef_genericDamage();
+particleDef_standaloneEffects();
 particleDef_player();
 
 particleDef_pickups();

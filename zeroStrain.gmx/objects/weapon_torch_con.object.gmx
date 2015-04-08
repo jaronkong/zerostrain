@@ -51,7 +51,7 @@ isContinuous = true;
 fireRate = room_speed / 10;
 fireSpread = 80;
 fireRange = 500;
-
+duration = 4 * room_speed;
 edgePercent = 0.5; //visual, the max distance to spawn particles at. ( percent of fire range ).
 
 damage = 100;

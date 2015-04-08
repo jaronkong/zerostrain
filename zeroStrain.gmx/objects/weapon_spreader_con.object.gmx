@@ -52,6 +52,7 @@ projectileSpeed = 8;
 projectileLife = 240;
 projectileToShoot = weapon_spreader_bullet;
 
+duration = 3 * room_speed;
 aimOffset = 16
 shotAngleRange = 100;
 numShots = 10;
