@@ -18,12 +18,12 @@ count = 2
 [plr_stat_speed]
 default = 1
 title = Speed
-offset = 0.01
+offset = 0.025
 
 [plr_stat_health]
 default = 1
 title = Health
-offset = 0.001
+offset = 0.01
 
 
 	[PLAYER WEAPONS]
@@ -62,17 +62,17 @@ hidden = 1
 [plr_wep_gatling_dmg]
 default = 1
 title = Damage
-offset = 0.01
+offset = 0.025
 
 [plr_wep_gatling_rate]
 default = 1
 title = Fire Rate
-offset = 0.01
+offset = 0.0125
 
 [plr_wep_gatling_time]
 default = 1
 title = Duration
-offset = 0.01
+offset = 0.03
 
 
 	[PULSE DRIVER]
@@ -97,17 +97,17 @@ hidden = 1
 [plr_wep_pulse_dmg]
 default = 1
 title = Damage
-offset = 0.01
+offset = 0.025
 
 [plr_wep_pulse_rate]
 default = 1
 title = Fire Rate
-offset = 0.01
+offset = 0.0125
 
 [plr_wep_pulse_time]
 default = 1
 title = Duration
-offset = 0.01
+offset = 0.03
 
 
 	[BLAST VOLLEY]
@@ -133,22 +133,22 @@ hidden = 1
 [plr_wep_artillery_dmg]
 default = 1
 title = Damage
-offset = 0.01
+offset = 0.025
 
 [plr_wep_artillery_rate]
 default = 1
 title = Fire Rate
-offset = 0.01
+offset = 0.0125
 
 [plr_wep_artillery_radius]
 default = 1
 title = Burst Radius
-offset = 0.01
+offset = 0.02
 
 [plr_wep_artillery_time]
 default = 1
 title = Duration
-offset = 0.01
+offset = 0.03
 
 
 	[FISSURE BOMB]
@@ -172,12 +172,12 @@ hidden = 1
 [plr_wep_fissure_dmg]
 default = 1
 title = Damage
-offset = 0.01
+offset = 0.025
 
 [plr_wep_fissure_radius]
 default = 1
 title = Radius
-offset = 0.01
+offset = 0.0125
 
 
 	[PLASMA TORCH]
@@ -203,22 +203,22 @@ hidden = 1
 [plr_wep_torch_dmg]
 default = 1
 title = Damage
-offset = 0.005
+offset = 0.003
 
 [plr_wep_torch_time]
 default = 1
 title = Duration
-offset = 0.01
+offset = 0.03
 
 [plr_wep_torch_range]
 default = 1
 title = Range
-offset = 0.01
+offset = 0.0125
 
 [plr_wep_torch_angle]
 default = 1
 title = Spread
-offset = 0.01
+offset = 0.0125
 
 
 	[Mine Catapault]
@@ -244,22 +244,22 @@ hidden = 1
 [plr_wep_mine_dmg]
 default = 1
 title = Damage
-offset = 0.01
+offset = 0.025
 
 [plr_wep_mine_rate]
 default = 1
 title = Fire Rate
-offset = 0.01
+offset = 0.0125
 
 [plr_wep_mine_time]
 default = 1
 title = Duration
-offset = 0.01
+offset = 0.03
 
 [plr_wep_mine_radius]
 default = 1
 title = Blast Radius
-offset = 0.01
+offset = 0.0125
 
 
 	[Spreader Gun]
@@ -284,14 +284,14 @@ hidden = 1
 [plr_wep_spreader_dmg]
 default = 1
 title = Damage
-offset = 0.01
+offset = 0.025
 
 [plr_wep_spreader_rate]
 default = 1
 title = Fire Rate
-offset = 0.01
+offset = 0.0125
 
 [plr_wep_spreader_time]
 default = 1
 title = Duration
-offset = 0.01
+offset = 0.03
