@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-9002</depth>
+  <depth>-9010</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -40,8 +40,8 @@ damageEffectiveness = 0;
 
 text = "";
 font = main_ft;
-fontSize = 16;
-baseFontSize = 16;
+fontSize = 32;
+baseFontSize = 32;
 maxFontSize = 32;
 
 //Distance
@@ -50,9 +50,9 @@ distanceTween = 0.2;
 
 //Alpha
 tweenFactor = 0;
-tweenPercent = 0.05;
+tweenPercent = 0.08;
 baseTweenPercent = tweenPercent;
-minTweenPercent = 0.02;
+minTweenPercent = 0.05;
 
 isCrit = false;
 isWeak = false;
@@ -129,10 +129,11 @@ else if ( damageEffectiveness &lt; 0 ) {
 }
 
 if ( isCrit ) {
-    text = string( value ) + "!";
+    text = string( value ) + " Critical!";
+    fontSize *= 2;
 }
 else if ( isWeak ) {
-    text = string( value ) + "...";
+    text = string( value ) + " Ineffective...";
     color = c_black;
 }
 else {

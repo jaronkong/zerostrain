@@ -11,21 +11,23 @@ with ( aWeaponConID ) {
 }
 
 with ( aTargetID ) {
-    var tEffective = typeGetResolution( aWeaponConID.weaponType, bodyType );
+    if ( instance_exists( aWeaponConID ) ) {
+        var tEffective = typeGetResolution( aWeaponConID.weaponType, bodyType );
+        
+        if ( tEffective > 0 ) {
+            tDamage *= 2;
+        }
+        else if ( tEffective < 0 ) {
+            tDamage *= 0.5;
+        }
     
-    if ( tEffective > 0 ) {
-        tDamage *= 2;
+        if ( tEffective > 0 ) {
+            part_particles_create( global.enemySpawnSystem, x, y, getParticle("superEffectiveHit"), 1 );
+        }
+        
+        selfHealth -= tDamage;
+        damageFlyNumberCreate( x, y, tDamage, aWeaponConID.weaponType, tEffective );
+        
+        currentInfoAlpha = 1;
     }
-    else if ( tEffective < 0 ) {
-        tDamage *= 0.5;
-    }
-
-    if ( tEffective > 0 ) {
-        part_particles_create( global.enemySpawnSystem, x, y, getParticle("superEffectiveHit"), 1 );
-    }
-    
-    selfHealth -= tDamage;
-    damageFlyNumberCreate( x, y, tDamage, aWeaponConID.weaponType, tEffective );
-    
-    currentInfoAlpha = 1;
 }
