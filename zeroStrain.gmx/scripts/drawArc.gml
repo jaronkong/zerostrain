@@ -29,7 +29,7 @@ for (i=0; i<=argument0; i+=argument1)
         }
     }
     */
-    draw_line(xx, yy, prevX, prevY);
+    draw_line_width(xx, yy, prevX, prevY, 6);
     //draw_vertex(xx,yy);
 
     prevX = xx;
