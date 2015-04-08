@@ -92,6 +92,7 @@ if ( instance_exists( tHit ) ) {
         pickup[pickupCount] = other.genome;
         pickupQuality[pickupCount] = other.quality;
         pickupCount += 1;
+        pickupOffset += 1;
         with ( other.id ) instance_destroy( );
         break;
     }

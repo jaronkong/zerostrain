@@ -59,6 +59,13 @@ effects = ds_map_create( );
 pickupCount = 0;
 pickup = false;
 pickupQuality = false;
+
+pickupOffset = 0;
+
+pickupBaseX = 64;
+pickupBaseY = 64;
+pickupScale = 0.75;
+pickupSpace = ( pickupScale * 80 );
 </string>
           </argument>
         </arguments>
@@ -89,6 +96,45 @@ ds_map_destroy( effects );
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Cap number of held genomes
+
+pickupOffset = lerpDT( pickupOffset, 0, 0.02, global.timeTickFactor );
+
+var tBaseX = ( view_xview + pickupBaseX );
+var tBaseY = ( view_yview + view_hview - pickupBaseY );
+
+while ( pickupCount &gt; 5 ) {
+    for ( var i = 1; i &lt; pickupCount; ++i ) {
+        pickup[i-1] = pickup[i];
+        pickupQuality[i-1] = pickupQuality[i];
+    }
+    pickupCount -= 1;
+    
+    var px = ( tBaseX + ( ( pickupCount - pickupOffset ) * pickupSpace ) );
+    effect_create_above( ef_explosion, px, tBaseY, 1, c_white );
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -108,7 +154,7 @@ ds_map_destroy( effects );
             <kind>1</kind>
             <string>///Toggle merge menu
 
-if ( !instance_exists( mergeMenu ) &amp;&amp; ( pickupCount &gt; 0 ) ) {
+if ( !instance_exists( mergeMenu ) ) {
     var tOpen = keyboard_check_pressed( vk_space );
     if ( gamepad_is_connected( 0 ) ) {
         if ( gamepad_button_check_pressed( 0, gp_shoulderrb ) ) tOpen = true;
@@ -124,9 +170,6 @@ if ( !instance_exists( mergeMenu ) &amp;&amp; ( pickupCount &gt; 0 ) ) {
             }
             event_user( 0 );
         }
-        //Clear pickups
-        pickupCount = 0;
-        with ( genePickup ) instance_destroy( );
     }
 }
 </string>
@@ -203,14 +246,18 @@ with ( weaponSpawner ) event_user( 1 );
             <kind>1</kind>
             <string>///Draw collected genes
 
-var px = ( view_xview + 24 );
-var py = ( view_yview + view_hview - 24 );
+var px = ( view_xview + pickupBaseX );
+var py = ( view_yview + view_hview - pickupBaseY );
 
-var tScale = 0.35;
+var tScale = pickupScale;
+var tSpace = pickupSpace;
+
 for ( var i = 0; i &lt; pickupCount; ++i ) {
+    var tOffset = pickupOffset;
+    if ( i == 0 ) tOffset *= 2;
     geneDrawIcon(
-        ( px + ( i * 80 * tScale ) ), py,
-        tScale, 30, pickupQuality[i]
+        ( px + ( ( i - tOffset ) * tSpace ) ), py,
+        tScale, 30, pickupQuality[pickupCount - i - 1]
     );
 }
 </string>
