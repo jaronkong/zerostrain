@@ -162,6 +162,7 @@
       <sprite>sprites\enemy3_spr</sprite>
       <sprite>sprites\enemy4_spr</sprite>
       <sprite>sprites\enemy4Block_spr</sprite>
+      <sprite>sprites\enemy4Block2_spr</sprite>
       <sprites name="Boss">
         <sprite>sprites\enemyBossCore_spr</sprite>
         <sprite>sprites\bossShield_spr</sprite>
@@ -445,6 +446,7 @@
       <object>objects\enemyShot</object>
       <object>objects\enemyBulk</object>
       <object>objects\enemyBattleship</object>
+      <object>objects\enemyBattleshipArmor</object>
       <objects name="Boss">
         <object>objects\enemyBossCore</object>
         <object>objects\boss_shield</object>

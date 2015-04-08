@@ -9,8 +9,8 @@
   <bboxmode>0</bboxmode>
   <bbox_left>200</bbox_left>
   <bbox_right>447</bbox_right>
-  <bbox_top>97</bbox_top>
-  <bbox_bottom>227</bbox_bottom>
+  <bbox_top>284</bbox_top>
+  <bbox_bottom>414</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -20,6 +20,6 @@
   <width>512</width>
   <height>512</height>
   <frames>
-    <frame index="0">images\enemy4Block_spr_0.png</frame>
+    <frame index="0">images\enemy4Block2_spr_0.png</frame>
   </frames>
 </sprite>
