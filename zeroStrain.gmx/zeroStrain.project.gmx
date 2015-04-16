@@ -266,6 +266,7 @@
       <script>scripts\doStepSlow.gml</script>
       <script>scripts\damageFlyNumberCreate.gml</script>
       <script>scripts\createScreenDNAPop.gml</script>
+      <script>scripts\splashBannerCreate.gml</script>
     </scripts>
     <scripts name="Weapons">
       <script>scripts\weaponDoDamage.gml</script>
@@ -404,6 +405,7 @@
       <object>objects\stepSlow</object>
       <objects name="Standalone">
         <object>objects\dnaPop</object>
+        <object>objects\dnaCollectPop</object>
       </objects>
     </objects>
     <objects name="Weapons">

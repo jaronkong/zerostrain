@@ -27,20 +27,21 @@
             <kind>1</kind>
             <string>///Setup
 
-burstX = 0;
-burstY = 0;
+burstX = x;
+burstY = y;
 
 system1 = part_system_create( );
-part_system_depth( system1, -100001 );
 
 emitter1 = part_emitter_create( system1 );
 part_emitter_region( system1, emitter1, x, x, y, y, ps_shape_ellipse, ps_distr_gaussian );
 
-bloom_attachParticleSystem( system1, -100001 );
+bloom_attachParticleSystem( system1, BLOOM_DEPTH );
 //distortionGlow_attachParticleSystem( system1 );
 refraction_attachParticleSystem( system1 );
 dispersion_attachParticleSystem( system1 );
 part_system_automatic_draw( system1, true );
+
+event_user( 0 );
 
 </string>
           </argument>
@@ -91,32 +92,6 @@ part_system_destroy( system1 );
         <isnot>0</isnot>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Lock system to screen
-
-part_system_position( system1, view_xview, view_yview );
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
@@ -142,7 +117,8 @@ alarm [ 0 ] = room_speed * 2;
 
 part_emitter_region( system1, emitter1, burstX, burstX, burstY, burstY, ps_shape_ellipse, ps_distr_gaussian );
 
-part_emitter_burst( system1, emitter1, getParticle( "dnaPopBurst" ), 30 );
+part_emitter_burst( system1, emitter1, getParticle( "dnaCollectBurst" ), 100 );
+part_emitter_burst( system1, emitter1, getParticle( "dnaCollectBurst2" ), 100 );
 
 </string>
           </argument>
