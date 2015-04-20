@@ -242,7 +242,7 @@ event_perform( ev_draw, false );
 if ( !surface_exists( edgeSurf ) ) {
     edgeSurf = surface_create( 1, 1 );
     surface_set_target( edgeSurf );
-    draw_clear_alpha( c_ltgray, 1 );
+    draw_clear_alpha( c_gray, 1 );
     if ( colIsBlack ) draw_clear_alpha( c_black, 1 );
     surface_reset_target( );
 }
