@@ -180,6 +180,31 @@ optionInfoAlpha = 0;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Info box positioning
+
+infoSpacing = 16;
+infoDefSize = 5.5;
+infoLengthScale = 9.5
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Define state
 
 stateMerging = false;
@@ -808,10 +833,10 @@ for ( var i = 0; i &lt; 2; ++i ) {
 
 var tHeight = 0;
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
-    if ( i &gt; 0 ) tHeight += 16;
+    if ( i &gt; 0 ) tHeight += infoSpacing;
     tHeight += baseInfo[i].height;
 }
-var tHeightOff = ( ( length * 6 ) - tHeight );
+var tHeightOff = ( ( length * infoDefSize ) - tHeight );
 if ( tHeightOff &gt; 0 ) {
     tHeight += tHeightOff;
     tHeightOff /= baseInfoCount;
@@ -824,9 +849,9 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].x = 0;
     baseInfo[i].y = py;
     baseInfo[i].image_alpha = other.baseInfoAlpha;
-    py += ( baseInfo[i].height + 16 );
+    py += ( baseInfo[i].height + infoSpacing );
 }
-baseInfoScale = ( length * 9.5 / tHeight );
+baseInfoScale = ( length * infoLengthScale / tHeight );
 </string>
           </argument>
         </arguments>
@@ -880,10 +905,10 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     
     var tHeight = 0;
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
-        if ( j &gt; 0 ) tHeight += 16;
+        if ( j &gt; 0 ) tHeight += infoSpacing;
         tHeight += optionInfo[i, j].height;
     }
-    var tHeightOff = ( ( length * 6 ) - tHeight );
+    var tHeightOff = ( ( length * infoDefSize ) - tHeight );
     if ( tHeightOff &gt; 0 ) {
         tHeight += tHeightOff;
         tHeightOff /= optionInfoCount[i];
@@ -896,9 +921,9 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
         optionInfo[i, j].x = -optionInfo[i, j].width;
         optionInfo[i, j].y = py;
         optionInfo[i, j].image_alpha = ( other.optionInfoAlpha * max( ( 1 - tDistAbs ), 0 ) );
-        py += ( optionInfo[i, j].height + 16 );
+        py += ( optionInfo[i, j].height + infoSpacing );
     }
-    optionInfoScale[i] = ( length * 9.5 / tHeight );
+    optionInfoScale[i] = ( length * infoLengthScale / tHeight );
 }
 </string>
           </argument>
@@ -925,10 +950,10 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
 if ( resultInfoCount &gt; 0 ) {
     var tHeight = 0;
     for ( var i = 0; i &lt; resultInfoCount; ++i ) {
-        if ( i &gt; 0 ) tHeight += 16;
+        if ( i &gt; 0 ) tHeight += infoSpacing;
         tHeight += resultInfo[i].height;
     }
-    var tHeightOff = ( ( length * 6 ) - tHeight );
+    var tHeightOff = ( ( length * infoDefSize ) - tHeight );
     if ( tHeightOff &gt; 0 ) {
         tHeight += tHeightOff;
         tHeightOff /= resultInfoCount;
@@ -941,9 +966,9 @@ if ( resultInfoCount &gt; 0 ) {
         resultInfo[i].x = 0;
         resultInfo[i].y = py;
         resultInfo[i].image_alpha = other.resultInfoAlpha;
-        py += ( resultInfo[i].height + 16 );
+        py += ( resultInfo[i].height + infoSpacing );
     }
-    resultInfoScale = ( resultLength * 9.5 / tHeight );
+    resultInfoScale = ( resultLength * infoLengthScale / tHeight );
 }
 </string>
           </argument>
