@@ -584,6 +584,7 @@ optionCurrentAni = lerpDT( optionCurrentAni, optionCurrent, 0.05, global.timeTic
 
 if ( !optionPos.stateLocked ) {
     if ( abs( optionCurrentAni - optionCurrent ) &lt; 0.25 ) {
+        var tOptionPrev = optionCurrent;
         if ( keyboard_check( optionPos.inUp ) ) {
             optionCurrent -= 1;
         }
@@ -596,6 +597,7 @@ if ( !optionPos.stateLocked ) {
             if ( tAxis &gt; 0.8 ) optionCurrent += 1;
         }
         optionCurrent = clamp( optionCurrent, 0, ( optionCount - 1 ) );
+        if ( optionCurrent != tOptionPrev ) playSound( cycle_sd, 1, false );
     }
 }
 </string>
@@ -929,6 +931,10 @@ baseInfoMat = instance_create( x, y, mergeMenuTransform );
             <kind>1</kind>
             <string>///Initialize option strands
 
+if ( geneOptionCount &lt;= 0 ) {
+    optionPos.stateLocked = true;
+}
+
 optionCount = geneOptionCount;
 for ( var i = 0; i &lt; optionCount; ++i ) {
     var tColors = geneGetGenomeColors( label, geneOption[i], length );
@@ -1003,8 +1009,8 @@ resultInfoMat = instance_create( x, y, mergeMenuTransform );
             <kind>1</kind>
             <string>///Update base strand positions
 
-baseX = ( display_get_gui_width( ) * lerp( -0.1, 0.5, basePos.x ) );
-baseY = ( display_get_gui_height( ) * lerp( 0.5, 0.6, basePos.y ) );
+baseX = ( 1600 * lerp( -0.5, 0, basePos.x ) );
+baseY = ( 900 * lerp( 0, 0.1, basePos.y ) );
 
 for ( var i = 0; i &lt; 2; ++i ) {
     base[i].x = baseX;
@@ -1060,14 +1066,14 @@ baseInfoScale = ( length * infoLengthScale / tHeight );
             <kind>1</kind>
             <string>///Update option strand positions
 
-optionX = ( display_get_gui_width( ) * lerp( 1.1, 0.5, optionPos.x ) );
-optionY = ( display_get_gui_height( ) * lerp( 0.5, 0.6, optionPos.y ) );
+optionX = ( 1600 * lerp( 0.5, 0, optionPos.x ) );
+optionY = ( 900 * lerp( 0, 0.1, optionPos.y ) );
 
 for ( var i = 0; i &lt; optionCount; ++i ) {
     var tDist = ( i - optionCurrentAni );
     var tDistAbs = abs( tDist );
     
-    var tX = lerp( optionX, ( display_get_gui_width( ) * 2 ), ( 2 * tDistAbs / optionCount ) );
+    var tX = lerp( optionX, ( 1600 * 1 ), ( 2 * tDistAbs / optionCount ) );
     var tY = ( optionY + ( tDist * 1500 ) );
     var tZ = ( optionPos.z + ( tDistAbs * 1000 ) );
     var tRX = ( optionPos.rx / ( tDistAbs + 1 ) );
@@ -1180,7 +1186,7 @@ if ( resultInfoCount &gt; 0 ) {
 
 if ( stateMerging ) {
     //Remove unused options
-    var tOptionRemove = ( mergeOptionRemove * display_get_gui_width( ) );
+    var tOptionRemove = ( mergeOptionRemove * 1600 );
     for ( var i = 0; i &lt; optionCount; ++i ) {
         if ( i == optionCurrent ) continue;
         for ( var j = 0; j &lt; 2; ++j ) {
@@ -1190,13 +1196,12 @@ if ( stateMerging ) {
     var tBase = base[1];
     var tOption = option[optionCurrent, 0];
     //Remove unsed elements
-    var tY = ( mergeRemoval * display_get_gui_height( ) );
+    var tY = ( mergeRemoval * 900 );
     base[0].y -= tY;
     option[optionCurrent, 1].y += tY;
     //Push elementes together
-    var tCenter = ( display_get_gui_width( ) / 2 );
-    tBase.x = lerp( tBase.x, tCenter, mergeCombine );
-    tOption.x = lerp( tOption.x, tCenter, mergeCombine );
+    tBase.x = lerp( tBase.x, 0, mergeCombine );
+    tOption.x = lerp( tOption.x, 0, mergeCombine );
     //Wind strands together
     if ( mergeCombine &gt; mergeCombineThreshold ) {
         tBase.twist = mergeTwist;
@@ -1565,7 +1570,7 @@ bloomIndex = 0;
 var tSize = ( 0.075 * display_get_gui_height( ) );
 var tScale = ( tSize / sprite_get_height( genePickup_spr ) );
 var tOffset = ( display_get_gui_height( ) * 0.1 );
-var px = ( ( 0.95 + mergeOptionRemove ) * display_get_gui_width( ) );
+var px = ( ( 0.965 + mergeOptionRemove ) * display_get_gui_width( ) );
 var py = ( 0.5 * display_get_gui_height( ) );
 py -= ( tOffset * ( geneOptionCount - 1 ) / 2 );
 
