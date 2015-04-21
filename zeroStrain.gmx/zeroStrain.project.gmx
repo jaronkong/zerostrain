@@ -135,6 +135,9 @@
       <sound>sound\enemyBeam_sd</sound>
     </sounds>
     <sound>sound\heartbeat_sd</sound>
+    <sounds name="Merging">
+      <sound>sound\cycle_sd</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\ship_spr</sprite>

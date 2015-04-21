@@ -584,6 +584,7 @@ optionCurrentAni = lerpDT( optionCurrentAni, optionCurrent, 0.05, global.timeTic
 
 if ( !optionPos.stateLocked ) {
     if ( abs( optionCurrentAni - optionCurrent ) &lt; 0.25 ) {
+        var tOptionPrev = optionCurrent;
         if ( keyboard_check( optionPos.inUp ) ) {
             optionCurrent -= 1;
         }
@@ -596,6 +597,7 @@ if ( !optionPos.stateLocked ) {
             if ( tAxis &gt; 0.8 ) optionCurrent += 1;
         }
         optionCurrent = clamp( optionCurrent, 0, ( optionCount - 1 ) );
+        if ( optionCurrent != tOptionPrev ) playSound( cycle_sd, 1, false );
     }
 }
 </string>
