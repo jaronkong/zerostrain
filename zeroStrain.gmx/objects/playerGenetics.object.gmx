@@ -165,8 +165,8 @@ if ( !instance_exists( mergeMenu ) ) {
             length = other.length;
             geneOptionCount = other.pickupCount;
             for ( var i = 0; i &lt; geneOptionCount; ++i ) {
-                geneOption[i] = other.pickup[i];
-                geneOptionQuality[i] = other.pickupQuality[i];
+                geneOption[geneOptionCount-i-1] = other.pickup[i];
+                geneOptionQuality[geneOptionCount-i-1] = other.pickupQuality[i];
             }
             event_user( 0 );
         }
