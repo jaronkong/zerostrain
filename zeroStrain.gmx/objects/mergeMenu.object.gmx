@@ -588,10 +588,10 @@ if ( !stateMerging ) {
     } else {
         //Combine the final two strands
         if ( mergeSplit &gt; -48 ) {
-            var mergeSplitLast = floor( mergeSplit );
+            var mergeSplitLast = floor( mergeSplit + 12 );
             mergeSplit -= ( 1.0 * t );
             if ( ( mergeSplitLast &lt; resultLength ) &amp;&amp; ( mergeSplitLast &gt;= 0 ) ) {
-                if ( floor( mergeSplit ) != mergeSplitLast ) {
+                if ( floor( mergeSplit + 12 ) != mergeSplitLast ) {
                     var tColors = geneGetGenomeColors( label, geneResult, resultLength );
                     var tLeft = tColors[0];
                     var tRight = tColors[1];
