@@ -135,6 +135,7 @@
       <sound>sound\enemyBeam_sd</sound>
     </sounds>
     <sound>sound\heartbeat_sd</sound>
+    <sound>sound\dnaPickup_sd</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\ship_spr</sprite>
@@ -351,6 +352,8 @@
       <object>objects\cameraController</object>
       <object>objects\HUDController</object>
       <object>objects\resController</object>
+      <object>objects\gameoverCon</object>
+      <object>objects\scoreDisplay</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">

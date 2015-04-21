@@ -58,6 +58,8 @@ maxSpeed = 1;
 mass = 30;
 sizeFactor = 1;
 
+pointVal = 750;
+
 brainType = behavior_blindSeek;
 
 </string>

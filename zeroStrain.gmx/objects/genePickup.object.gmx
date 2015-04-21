@@ -89,7 +89,9 @@ var tHit = collision_circle(
 if ( instance_exists( tHit ) ) {
 
     instance_create( x, y, dnaCollectPop );
-
+    audioSetPitchRand( dnaPickup_sd );
+    playSound( dnaPickup_sd, 1, false );
+    
     with ( playerGenetics ) {
         if ( owner != tHit ) continue;
         pickup[pickupCount] = other.genome;

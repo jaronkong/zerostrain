@@ -541,6 +541,7 @@ if ( selfHealth &lt;= 0 &amp;&amp; !hasDied ) {
         instance_destroy();
     }
     instance_create( 0, 0, fadeToTitle );
+    instance_create( 0, 0, gameoverCon );
     instance_destroy();
 }
 
@@ -716,6 +717,29 @@ draw_line( x, y, x + lengthdir_x( 128, aimDir ), y + lengthdir_y( 128, aimDir ) 
 
 event_user( 0 );
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="66">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>selfHealth = 0
 </string>
           </argument>
         </arguments>

@@ -62,6 +62,8 @@ currentFireTimer = fireRate;
 fireRange = 1200;
 bulletSpeed = 6;
 
+pointVal = 1500;
+
 brainType = behavior_blindSeek;
 
 bodyMapNum = BODY_MAPS.ENEMY4;
