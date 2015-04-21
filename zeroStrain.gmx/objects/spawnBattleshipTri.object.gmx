@@ -3,12 +3,12 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-10000</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>bloomablePar</parentName>
+  <parentName>spawnMacroPar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="7" enumb="10">
+    <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,40 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw
-draw_set_alpha( 1 );
-draw_set_valign( fa_top );
-draw_set_halign( fa_center );
-draw_set_color( c_orange );
-drawTextSize( view_xview + view_wview/2, view_yview + 8, "Score", main_ft, 16 );
+            <string>///Setup
 
-drawTextSize( view_xview + view_wview/2, view_yview + 32, string( global.pointScore ), main_ft, 32 );
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Draw
-
-event_user( 0 );
+timeline_index = spawn_tri_tl;
+timeline_running = true;
 
 </string>
           </argument>

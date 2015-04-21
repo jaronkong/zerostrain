@@ -512,11 +512,14 @@
         <object>objects\spawn_laserLineRight</object>
         <object>objects\spawn_laserCircle</object>
         <object>objects\spawnBasicCircle</object>
+        <object>objects\spawnBattleshipTri</object>
+        <object>objects\spawnBattleshipSingle</object>
       </objects>
     </objects>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\spawn_tri_tl</timeline>
+    <timeline>timelines\spawn_battle_tri_tl</timeline>
   </timelines>
   <rooms name="rooms">
     <room>rooms\Title_rm</room>

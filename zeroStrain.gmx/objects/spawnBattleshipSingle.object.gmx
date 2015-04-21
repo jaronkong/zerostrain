@@ -3,43 +3,26 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-10000</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>bloomablePar</parentName>
+  <parentName>spawnBehaviorPar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="7" enumb="10">
+    <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>604</id>
+        <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Draw
-draw_set_alpha( 1 );
-draw_set_valign( fa_top );
-draw_set_halign( fa_center );
-draw_set_color( c_orange );
-drawTextSize( view_xview + view_wview/2, view_yview + 8, "Score", main_ft, 16 );
-
-drawTextSize( view_xview + view_wview/2, view_yview + 32, string( global.pointScore ), main_ft, 32 );
-
-</string>
-          </argument>
-        </arguments>
       </action>
-    </event>
-    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -56,10 +39,25 @@ drawTextSize( view_xview + view_wview/2, view_yview + 32, string( global.pointSc
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw
+            <string>///Setup
 
-event_user( 0 );
+spawnTarget = enemyBattleship;
+spawnColor = irandom( 2 );; //-1 is random, 0, 1, 2, is red blue green.
 
+centerX = 0;
+centerY = 0;
+
+if ( instance_exists( playerShip ) ) {
+    centerX = playerShip.x;
+    centerY = playerShip.y;    
+}
+if ( pointInBounds( centerX, centerY + 400 ) ) {
+    spawnEnemy( centerX, centerY + 400,
+                        random( 360 ),
+                        spawnTarget, spawnColor );
+}
+
+instance_destroy();
 </string>
           </argument>
         </arguments>
