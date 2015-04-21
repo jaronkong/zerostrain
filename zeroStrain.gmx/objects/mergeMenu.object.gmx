@@ -287,6 +287,40 @@ surface_free( global.shaderEffectSurface );
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set up the particle system
+
+partMat = instance_create( x, y, mergeMenuTransform );
+
+partSys = part_system_create( );
+part_system_automatic_draw( partSys, false );
+part_system_automatic_update( partSys, false );
+
+partEmit = part_emitter_create( partSys );
+
+partType = part_type_create( );
+part_type_shape( partType, pt_shape_smoke );
+part_type_scale( partType, 0.01, 0.01 );
+part_type_life( partType, 1000, 2000 );
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="1" enumb="0">
       <action>
@@ -439,8 +473,57 @@ surface_free( global.shaderEffectSurface );
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Clear particles
+
+with ( partMat ) instance_destroy( );
+part_type_destroy( partType );
+part_emitter_destroy( partSys, partEmit );
+part_system_destroy( partSys );
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update the particle system
+
+part_system_update( partSys );
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -601,6 +684,15 @@ if ( !stateMerging ) {
                     tOption.colors[mergeSplitLast] = tRight[mergeSplitLast];
                     tBase.colorRefresh = true;
                     tOption.colorRefresh = true;
+                    //Particles
+                    var tRange = 1;
+                    var tPartPos = ( mergeSplitLast - ( resultLength / 2 ) );
+                    part_emitter_region(
+                        partSys, partEmit, -tRange, tRange,
+                        tPartPos-tRange, tPartPos+tRange,
+                        ps_shape_ellipse, ps_distr_gaussian
+                    );
+                    part_emitter_burst( partSys, partEmit, partType, 4 );
                 }
             }
         }
@@ -1363,6 +1455,42 @@ for ( var i = 0; i &lt; resultInfoCount; ++i ) {
 }
 
 d3d_transform_stack_pop( );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw the particle system
+
+d3d_set_depth( 0 );
+d3d_set_hidden( false );
+
+d3d_transform_stack_push( );
+d3d_transform_add_scaling( 10, 10, 10 );
+d3d_transform_add_rotation_z( base[1].rz );
+d3d_transform_add_rotation_x( base[1].rx );
+d3d_transform_add_translation( base[1].x, base[1].y, base[1].z );
+partMat.transform = matrix_get( matrix_world );
+d3d_transform_stack_pop( );
+
+bloom_addToQueue( partMat, bloomIndex++ );
+with ( partMat ) event_perform( ev_draw, false );
+part_system_drawit( partSys );
 </string>
           </argument>
         </arguments>
