@@ -279,6 +279,10 @@ proj = instance_create( x, y, mergeMenuProjection );
 projEnd = instance_create( x, y, mergeMenuProjectionEnd );
 
 bloomIndex = 0;
+
+bloomResOld = global.shaderEffectResolution;
+global.shaderEffectResolution = 0.5;
+surface_free( global.shaderEffectSurface );
 </string>
           </argument>
         </arguments>
@@ -428,6 +432,9 @@ background_delete( pause );
 with ( bloom ) instance_destroy( );
 with ( proj ) instance_destroy( );
 with ( projEnd ) instance_destroy( );
+
+global.shaderEffectResolution = bloomResOld;
+surface_free( global.shaderEffectSurface );
 </string>
           </argument>
         </arguments>
