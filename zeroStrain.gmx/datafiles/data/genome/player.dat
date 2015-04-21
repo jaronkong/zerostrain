@@ -86,7 +86,8 @@ color = $0000FF
 1 = plr_wep_pulse_dmg
 2 = plr_wep_pulse_rate
 3 = plr_wep_pulse_time
-count = 4
+4 = plr_wep_pulse_speed
+count = 5
 
 [plr_wep_pulse_chance]
 default = 0
@@ -108,6 +109,11 @@ offset = 0.0125
 default = 1
 title = Duration
 offset = 0.05
+
+[plr_wep_pulse_speed]
+default = 1
+title = Speed
+offset = 0.015
 
 
 	[BLAST VOLLEY]
