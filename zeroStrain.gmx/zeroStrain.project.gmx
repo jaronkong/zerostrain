@@ -489,6 +489,9 @@
       <object>objects\genePickup</object>
       <object>objects\mergeMenu</object>
       <object>objects\mergeMenuInput</object>
+      <object>objects\mergeMenuProjection</object>
+      <object>objects\mergeMenuProjectionEnd</object>
+      <object>objects\mergeMenuTransform</object>
     </objects>
     <objects name="Title">
       <object>objects\titleObj</object>

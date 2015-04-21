@@ -173,6 +173,7 @@ surface_set_target( passSurface );
 surface_reset_target();
 shader_reset();
 
+d3d_set_projection_ortho( view_xview[0], view_yview[0], view_wview[0], view_hview[0], view_angle[0] );
 shader_set(blurVShader);
     shader_set_uniform_f( blurSizeV, _size );
     texture_set_stage(colorMapV, surface_get_texture( tGlobalSurface ));

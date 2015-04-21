@@ -97,6 +97,7 @@ baseEffects = -1;
 baseDesc = -1
 baseInfo = false;
 baseInfoCount = 0;
+baseInfoMat = noone;
 
 //Move here if no input
 baseNeutralX = -0.2;
@@ -141,6 +142,7 @@ option = false;
 optionDesc = false;
 optionInfo = false;
 optionInfoCount = false;
+optionInfoMat = false;
 
 optionPos = instance_create( 0, 0, mergeMenuInput );
 with ( optionPos ) {
@@ -160,6 +162,31 @@ optionSplit = baseSplit;
 optionCurrentAni = optionCurrent;
 optionInfoScale = false;
 optionInfoAlpha = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Info box positioning
+
+infoSpacing = 16;
+infoDefSize = 5.5;
+infoLengthScale = 9.5
 </string>
           </argument>
         </arguments>
@@ -219,9 +246,77 @@ mergeSplit = 0;
 resultDesc = -1;
 resultInfo = false;
 resultInfoCount = 0;
+resultInfoMat = noone;
 
 resultInfoScale = 1;
 resultInfoAlpha = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Create a bloom controller
+
+bloom = instance_create( x, y, bloomController );
+bloom.visible = false;
+
+proj = instance_create( x, y, mergeMenuProjection );
+projEnd = instance_create( x, y, mergeMenuProjectionEnd );
+
+bloomIndex = 0;
+
+bloomResOld = global.shaderEffectResolution;
+global.shaderEffectResolution = 0.5;
+surface_free( global.shaderEffectSurface );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set up the particle system
+
+partMat = instance_create( x, y, mergeMenuTransform );
+
+partSys = part_system_create( );
+part_system_automatic_draw( partSys, false );
+part_system_automatic_update( partSys, false );
+
+partEmit = part_emitter_create( partSys );
+
+partType = part_type_create( );
+part_type_shape( partType, pt_shape_smoke );
+part_type_scale( partType, 0.01, 0.01 );
+part_type_life( partType, 1000, 2000 );
 </string>
           </argument>
         </arguments>
@@ -253,6 +348,8 @@ for ( var i = 0; i &lt; 2; ++i ) {
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     with ( baseInfo[i] ) instance_destroy( );
 }
+with ( baseInfoMat ) instance_destroy( );
+
 if ( ds_exists( baseDesc, ds_type_grid ) ) ds_grid_destroy( baseDesc );
 if ( ds_exists( baseEffects, ds_type_map ) ) ds_map_destroy( baseEffects );
 
@@ -287,6 +384,8 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
         with ( optionInfo[i, j] ) instance_destroy( );
     }
+    with ( optionInfoMat[i] ) instance_destroy( );
+    
     if ( ds_exists( optionDesc[i], ds_type_grid ) ) ds_grid_destroy( optionDesc[i] );
 }
 
@@ -316,6 +415,7 @@ with ( optionPos ) instance_destroy( );
 for ( var i = 0; i &lt; resultInfoCount; ++i ) {
     with ( resultInfo[i] ) instance_destroy( );
 }
+with ( resultInfoMat ) instance_destroy( );
 
 if ( ds_exists( resultDesc, ds_type_grid ) ) ds_grid_destroy( resultDesc );
 </string>
@@ -345,8 +445,85 @@ background_delete( pause );
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Destroy bloom controller
+
+with ( bloom ) instance_destroy( );
+with ( proj ) instance_destroy( );
+with ( projEnd ) instance_destroy( );
+
+global.shaderEffectResolution = bloomResOld;
+surface_free( global.shaderEffectSurface );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Clear particles
+
+with ( partMat ) instance_destroy( );
+part_type_destroy( partType );
+part_emitter_destroy( partSys, partEmit );
+part_system_destroy( partSys );
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update the particle system
+
+part_system_update( partSys );
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -494,10 +671,10 @@ if ( !stateMerging ) {
     } else {
         //Combine the final two strands
         if ( mergeSplit &gt; -48 ) {
-            var mergeSplitLast = floor( mergeSplit );
+            var mergeSplitLast = floor( mergeSplit + 12 );
             mergeSplit -= ( 1.0 * t );
             if ( ( mergeSplitLast &lt; resultLength ) &amp;&amp; ( mergeSplitLast &gt;= 0 ) ) {
-                if ( floor( mergeSplit ) != mergeSplitLast ) {
+                if ( floor( mergeSplit + 12 ) != mergeSplitLast ) {
                     var tColors = geneGetGenomeColors( label, geneResult, resultLength );
                     var tLeft = tColors[0];
                     var tRight = tColors[1];
@@ -507,6 +684,15 @@ if ( !stateMerging ) {
                     tOption.colors[mergeSplitLast] = tRight[mergeSplitLast];
                     tBase.colorRefresh = true;
                     tOption.colorRefresh = true;
+                    //Particles
+                    var tRange = 1;
+                    var tPartPos = ( mergeSplitLast - ( resultLength / 2 ) );
+                    part_emitter_region(
+                        partSys, partEmit, -tRange, tRange,
+                        tPartPos-tRange, tPartPos+tRange,
+                        ps_shape_ellipse, ps_distr_gaussian
+                    );
+                    part_emitter_burst( partSys, partEmit, partType, 4 );
                 }
             }
         }
@@ -720,6 +906,7 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
         visible = false;
     }
 }
+baseInfoMat = instance_create( x, y, mergeMenuTransform );
 </string>
           </argument>
         </arguments>
@@ -767,7 +954,31 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
             visible = false;
         }
     }
+    optionInfoMat[i] = instance_create( x, y, mergeMenuTransform );
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Initialize results strand
+
+resultInfoMat = instance_create( x, y, mergeMenuTransform );
 </string>
           </argument>
         </arguments>
@@ -808,10 +1019,10 @@ for ( var i = 0; i &lt; 2; ++i ) {
 
 var tHeight = 0;
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
-    if ( i &gt; 0 ) tHeight += 16;
+    if ( i &gt; 0 ) tHeight += infoSpacing;
     tHeight += baseInfo[i].height;
 }
-var tHeightOff = ( ( length * 6 ) - tHeight );
+var tHeightOff = ( ( length * infoDefSize ) - tHeight );
 if ( tHeightOff &gt; 0 ) {
     tHeight += tHeightOff;
     tHeightOff /= baseInfoCount;
@@ -824,9 +1035,9 @@ for ( var i = 0; i &lt; baseInfoCount; ++i ) {
     baseInfo[i].x = 0;
     baseInfo[i].y = py;
     baseInfo[i].image_alpha = other.baseInfoAlpha;
-    py += ( baseInfo[i].height + 16 );
+    py += ( baseInfo[i].height + infoSpacing );
 }
-baseInfoScale = ( length * 9.5 / tHeight );
+baseInfoScale = ( length * infoLengthScale / tHeight );
 </string>
           </argument>
         </arguments>
@@ -880,10 +1091,10 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     
     var tHeight = 0;
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
-        if ( j &gt; 0 ) tHeight += 16;
+        if ( j &gt; 0 ) tHeight += infoSpacing;
         tHeight += optionInfo[i, j].height;
     }
-    var tHeightOff = ( ( length * 6 ) - tHeight );
+    var tHeightOff = ( ( length * infoDefSize ) - tHeight );
     if ( tHeightOff &gt; 0 ) {
         tHeight += tHeightOff;
         tHeightOff /= optionInfoCount[i];
@@ -896,9 +1107,9 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
         optionInfo[i, j].x = -optionInfo[i, j].width;
         optionInfo[i, j].y = py;
         optionInfo[i, j].image_alpha = ( other.optionInfoAlpha * max( ( 1 - tDistAbs ), 0 ) );
-        py += ( optionInfo[i, j].height + 16 );
+        py += ( optionInfo[i, j].height + infoSpacing );
     }
-    optionInfoScale[i] = ( length * 9.5 / tHeight );
+    optionInfoScale[i] = ( length * infoLengthScale / tHeight );
 }
 </string>
           </argument>
@@ -925,10 +1136,10 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
 if ( resultInfoCount &gt; 0 ) {
     var tHeight = 0;
     for ( var i = 0; i &lt; resultInfoCount; ++i ) {
-        if ( i &gt; 0 ) tHeight += 16;
+        if ( i &gt; 0 ) tHeight += infoSpacing;
         tHeight += resultInfo[i].height;
     }
-    var tHeightOff = ( ( length * 6 ) - tHeight );
+    var tHeightOff = ( ( length * infoDefSize ) - tHeight );
     if ( tHeightOff &gt; 0 ) {
         tHeight += tHeightOff;
         tHeightOff /= resultInfoCount;
@@ -941,9 +1152,9 @@ if ( resultInfoCount &gt; 0 ) {
         resultInfo[i].x = 0;
         resultInfo[i].y = py;
         resultInfo[i].image_alpha = other.resultInfoAlpha;
-        py += ( resultInfo[i].height + 16 );
+        py += ( resultInfo[i].height + infoSpacing );
     }
-    resultInfoScale = ( resultLength * 9.5 / tHeight );
+    resultInfoScale = ( resultLength * infoLengthScale / tHeight );
 }
 </string>
           </argument>
@@ -1027,8 +1238,34 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Resize view
+
+view_xview = 0;
+view_yview = 0;
+view_wview = display_get_gui_width( );
+view_hview = display_get_gui_height( );
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -1103,12 +1340,8 @@ draw_set_blend_mode( bm_normal );
             <kind>1</kind>
             <string>///Enable 3D
 
-var tw = display_get_gui_width( );
-var th = display_get_gui_height( );
-
-d3d_start( );
-d3d_set_projection_perspective( 0, th, tw, -th, 0 );
-d3d_light_define_ambient( c_white );
+bloom_addToQueue( proj, bloomIndex++ );
+with ( proj ) event_perform( ev_draw, false );
 </string>
           </argument>
         </arguments>
@@ -1131,10 +1364,14 @@ d3d_light_define_ambient( c_white );
             <kind>1</kind>
             <string>///Draw DNA strands
 
+bloom_addToQueue( base[0], bloomIndex++ );
+bloom_addToQueue( base[1], bloomIndex++ );
 with ( base[0] ) event_perform( ev_draw, false );
 with ( base[1] ) event_perform( ev_draw, false );
 
 for ( var i = 0; i &lt; optionCount; ++i ) {
+    bloom_addToQueue( option[i, 0], bloomIndex++ );
+    bloom_addToQueue( option[i, 1], bloomIndex++ );
     with ( option[i, 0] ) event_perform( ev_draw, false );
     with ( option[i, 1] ) event_perform( ev_draw, false );
 }
@@ -1173,7 +1410,11 @@ d3d_transform_add_rotation_z( base[0].rz );
 d3d_transform_add_rotation_x( base[0].rx );
 d3d_transform_add_translation( base[0].x, base[0].y, base[0].z );
 d3d_transform_add_translation( ( base[0].radius * 17 ), 0, 0 );
+baseInfoMat.transform = matrix_get( matrix_world );
+bloom_addToQueue( baseInfoMat, bloomIndex++ );
+with ( baseInfoMat ) event_perform( ev_draw, false );
 for ( var i = 0; i &lt; baseInfoCount; ++i ) {
+    bloom_addToQueue( baseInfo[i], bloomIndex++ );
     with ( baseInfo[i] ) event_perform( ev_draw, false );
 }
 
@@ -1187,7 +1428,11 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
     d3d_transform_add_rotation_x( option[i, 0].rx );
     d3d_transform_add_translation( option[i, 0].x, option[i, 0].y, option[i, 0].z );
     d3d_transform_add_translation( -( option[i, 0].radius * 17 ), 0, 0 );
+    optionInfoMat[i].transform = matrix_get( matrix_world );
+    bloom_addToQueue( optionInfoMat[i], bloomIndex++ );
+    with ( optionInfoMat[i] ) event_perform( ev_draw, false );
     for ( var j = 0; j &lt; optionInfoCount[i]; ++j ) {
+        bloom_addToQueue( optionInfo[i, j], bloomIndex++ );
         with ( optionInfo[i, j] ) event_perform( ev_draw, false );
     }
 }
@@ -1201,7 +1446,11 @@ d3d_transform_add_rotation_z( base[1].rz );
 d3d_transform_add_rotation_x( base[1].rx );
 d3d_transform_add_translation( base[1].x, base[1].y, base[1].z );
 d3d_transform_add_translation( ( base[1].radius * 17 ), 0, 0 );
+resultInfoMat.transform = matrix_get( matrix_world );
+bloom_addToQueue( resultInfoMat, bloomIndex++ );
+with ( resultInfoMat ) event_perform( ev_draw, false );
 for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+    bloom_addToQueue( resultInfo[i], bloomIndex++ );
     with ( resultInfo[i] ) event_perform( ev_draw, false );
 }
 
@@ -1226,13 +1475,71 @@ d3d_transform_stack_pop( );
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Draw the particle system
+
+d3d_set_depth( 0 );
+d3d_set_hidden( false );
+
+d3d_transform_stack_push( );
+d3d_transform_add_scaling( 10, 10, 10 );
+d3d_transform_add_rotation_z( base[1].rz );
+d3d_transform_add_rotation_x( base[1].rx );
+d3d_transform_add_translation( base[1].x, base[1].y, base[1].z );
+partMat.transform = matrix_get( matrix_world );
+d3d_transform_stack_pop( );
+
+bloom_addToQueue( partMat, bloomIndex++ );
+with ( partMat ) event_perform( ev_draw, false );
+part_system_drawit( partSys );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Disable 3D
 
-var tw = display_get_gui_width( );
-var th = display_get_gui_height( );
+bloom_addToQueue( projEnd, bloomIndex++ );
+with ( projEnd ) event_perform( ev_draw, false );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Run bloom
 
-d3d_set_projection_ortho( 0, 0, tw, th, 0 );
-d3d_end( );
+with ( bloom ) event_perform( ev_draw, false );
+
+bloomIndex = 0;
 </string>
           </argument>
         </arguments>
