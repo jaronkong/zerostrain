@@ -56,7 +56,7 @@ var tw = display_get_gui_width( );
 var th = display_get_gui_height( );
 
 d3d_start( );
-d3d_set_projection_perspective( 0, th, tw, -th, 0 );
+d3d_set_projection_perspective( -tw/2, th/2, tw, -th, 0 );
 d3d_light_define_ambient( c_white );
 </string>
           </argument>
