@@ -95,6 +95,55 @@ inFlipH = false;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Start sound
+
+sound = playSound( slide_sd, 10, true );
+audio_sound_gain( sound, 0, 0 );
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Stop the sound
+
+audio_stop_sound( sound );
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -146,7 +195,10 @@ if ( !stateLocked ) {
     var tGoalY = tVer;
     x = lerpDT( x, tGoalX, tSpd, t );
     y = lerpDT( y, tGoalY, tSpd, t );
-}
+    
+    var tDist = point_distance( 0, 0, (tGoalX-x), (tGoalY-y)*0.5 );
+    audio_sound_gain( sound, clampRange( tDist, 0, 0.75, 0.75 ), 10 );
+} else audio_sound_gain( sound, 0, 250 );
 </string>
           </argument>
         </arguments>

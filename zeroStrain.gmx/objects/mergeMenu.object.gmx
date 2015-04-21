@@ -931,6 +931,10 @@ baseInfoMat = instance_create( x, y, mergeMenuTransform );
             <kind>1</kind>
             <string>///Initialize option strands
 
+if ( geneOptionCount &lt;= 0 ) {
+    optionPos.stateLocked = true;
+}
+
 optionCount = geneOptionCount;
 for ( var i = 0; i &lt; optionCount; ++i ) {
     var tColors = geneGetGenomeColors( label, geneOption[i], length );
