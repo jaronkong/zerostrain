@@ -87,6 +87,9 @@ var tHit = collision_circle(
     playerShip, true, false
 );
 if ( instance_exists( tHit ) ) {
+
+    instance_create( x, y, dnaCollectPop );
+
     with ( playerGenetics ) {
         if ( owner != tHit ) continue;
         pickup[pickupCount] = other.genome;

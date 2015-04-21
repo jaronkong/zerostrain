@@ -30,6 +30,7 @@
 selfHealthMaxBase = 100;
 selfHealthMax = selfHealthMaxBase;
 selfHealth = selfHealthMax;
+healthWarningAmount = 30;
 
 aimDir = 0;
 aimPercent = 0;
@@ -544,6 +545,43 @@ if ( selfHealth &lt;= 0 &amp;&amp; !hasDied ) {
 }
 
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Stay in bounds
+
+var borderForce = 5;
+if ( x &lt; 0 ) {
+    motion_add( 0, borderForce );
+}
+if ( x &gt; room_width ) {
+    motion_add( 180, borderForce );
+}
+
+if ( y &lt; 0 ) {
+    motion_add( 270, borderForce );
+}
+if ( y &gt; room_height ) {
+    motion_add( 90, borderForce );
+}
 
 </string>
           </argument>
