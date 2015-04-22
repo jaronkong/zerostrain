@@ -197,7 +197,7 @@ if ( !stateLocked ) {
     y = lerpDT( y, tGoalY, tSpd, t );
     
     var tDist = point_distance( 0, 0, (tGoalX-x), (tGoalY-y)*0.5 );
-    audio_sound_gain( sound, clampRange( tDist, 0, 0.75, 0.75 ), 10 );
+    audio_sound_gain( sound, clampRange( tDist, 0, 0.75, 0.9 ), 10 );
 } else audio_sound_gain( sound, 0, 250 );
 </string>
           </argument>
