@@ -670,6 +670,9 @@ if ( !stateMerging ) {
         optionPos.stateLocked = true;
         while ( optionPos.ry &lt; 0 ) optionPos.ry += 360;
         while ( optionPos.ry &gt;= 0 ) optionPos.ry -= 360;
+        //Play audio
+        playSound( mergeStart_sd, 1, false );
+        playSound( mergeSplit_sd, 1, false );
     }
 } else {
     var t = global.timeTickFactor;
@@ -719,6 +722,9 @@ if ( !stateMerging ) {
                     tOption.colors[mergeSplitLast] = tRight[mergeSplitLast];
                     tBase.colorRefresh = true;
                     tOption.colorRefresh = true;
+                    //Audio
+                    playSound( mergeRung_sd, 1, false );
+                    playSound( mergeSplit_sd, 1, false );
                     //Particles
                     var tRange = 1;
                     var tPartPos = ( mergeSplitLast - ( resultLength / 2 ) );

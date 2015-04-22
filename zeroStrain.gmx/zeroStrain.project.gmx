@@ -139,6 +139,9 @@
     <sounds name="Merging">
       <sound>sound\cycle_sd</sound>
       <sound>sound\slide_sd</sound>
+      <sound>sound\mergeRung_sd</sound>
+      <sound>sound\mergeStart_sd</sound>
+      <sound>sound\mergeSplit_sd</sound>
     </sounds>
   </sounds>
   <sprites name="sprites">
