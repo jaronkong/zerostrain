@@ -35,6 +35,9 @@ pause = background_create_from_surface(
 );
 deactivateAllInstances( true );
 
+instance_activate_object( postShader );
+instance_activate_object( ambientParticles );
+
 fade = 0;
 </string>
           </argument>
@@ -1566,11 +1569,11 @@ bloomIndex = 0;
             <kind>1</kind>
             <string>///Draw icons
 
-var tSize = ( 0.075 * display_get_gui_height( ) );
+var tSize = ( 0.075 * view_hview );
 var tScale = ( tSize / sprite_get_height( genePickup_spr ) );
-var tOffset = ( display_get_gui_height( ) * 0.1 );
-var px = ( ( 0.965 + mergeOptionRemove ) * display_get_gui_width( ) );
-var py = ( 0.5 * display_get_gui_height( ) );
+var tOffset = ( view_hview * 0.1 );
+var px = ( view_xview + ( ( 0.965 + mergeOptionRemove + ( 0.2 - fade/5 ) ) * view_wview ) );
+var py = ( view_yview + ( 0.5 * view_hview ) );
 py -= ( tOffset * ( geneOptionCount - 1 ) / 2 );
 
 for ( var i = 0; i &lt; geneOptionCount; ++i ) {
