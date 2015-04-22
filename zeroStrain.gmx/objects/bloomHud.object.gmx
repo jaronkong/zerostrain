@@ -34,6 +34,11 @@ drawTextSize( view_xview + view_wview/2, view_yview + 8, "Score", main_ft, 16 );
 
 drawTextSize( view_xview + view_wview/2, view_yview + 32, string( global.pointScore ), main_ft, 32 );
 
+if ( global.pointScore &gt;= global.highscore ) {
+    draw_set_color( c_lime );
+    global.highscore = global.pointScore;
+}
+drawTextSize( view_xview + view_wview/2, view_yview + 80, "high: " + string( global.highscore ), main_ft, 16 );
 </string>
           </argument>
         </arguments>
