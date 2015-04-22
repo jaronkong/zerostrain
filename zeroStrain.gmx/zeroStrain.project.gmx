@@ -360,7 +360,7 @@
       <object>objects\HUDController</object>
       <object>objects\resController</object>
       <object>objects\gameoverCon</object>
-      <object>objects\scoreDisplay</object>
+      <object>objects\bloomHud</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">

@@ -99,8 +99,8 @@ shakeAmount = lerp( shakeAmount, 0, shakeTween );
             <kind>1</kind>
             <string>///Tween camera
 
-targetCameraFocusX = clamp( targetCameraFocusX, view_wview/2, room_width - view_wview/2 );
-targetCameraFocusY = clamp( targetCameraFocusY, view_hview/2, room_height - view_hview/2 );
+//targetCameraFocusX = clamp( targetCameraFocusX, view_wview/2, room_width - view_wview/2 );
+//targetCameraFocusY = clamp( targetCameraFocusY, view_hview/2, room_height - view_hview/2 );
 
 cameraFocusX = lerp( cameraFocusX, targetCameraFocusX, cameraTween );
 cameraFocusY = lerp( cameraFocusY, targetCameraFocusY, cameraTween );
@@ -141,8 +141,8 @@ if ( instance_exists( playerShip ) ) {
         tCamY = y + lengthdir_y( other.playerOffset * aimDistPercent, aimDir );
     }
     
-    tCamX = (tCamX + room_width/2) / 2;
-    tCamY = (tCamY + room_height/2) / 2;
+    tCamX = (0.66 * tCamX) + (0.3 * room_width/2);
+    tCamY = (0.66 * tCamY) + (0.3 * room_height/2);
 
     targetCameraFocusX = tCamX;
     targetCameraFocusY = tCamY;
