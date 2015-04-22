@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>///Define position
 
-x = 0;
-y = 0;
+//x = 0;
+//y = 0;
 z = 1000;
 
 rx = 0;

@@ -34,6 +34,11 @@ pause = background_create_from_surface(
     false, false
 );
 deactivateAllInstances( true );
+
+instance_activate_object( postShader );
+instance_activate_object( ambientParticles );
+
+fade = 0;
 </string>
           </argument>
         </arguments>
@@ -104,7 +109,7 @@ baseNeutralX = -0.2;
 baseNeutralY = 0.5
 
 //Current state
-basePos = instance_create( 0, 0, mergeMenuInput );
+basePos = instance_create( -1, 0, mergeMenuInput );
 baseX = 0;
 baseY = 0;
 
@@ -144,7 +149,7 @@ optionInfo = false;
 optionInfoCount = false;
 optionInfoMat = false;
 
-optionPos = instance_create( 0, 0, mergeMenuInput );
+optionPos = instance_create( -1, 0, mergeMenuInput );
 with ( optionPos ) {
     inHorizontal = gp_axisrh;
     inVertical = gp_axisrv;
@@ -525,6 +530,29 @@ part_system_destroy( partSys );
             <string>///Update the particle system
 
 part_system_update( partSys );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Fade out the background
+
+fade = lerpDT( fade, 1, 0.025, global.timeTickFactor );
 </string>
           </argument>
         </arguments>
@@ -1252,32 +1280,6 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
           </argument>
         </arguments>
       </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Resize view
-
-view_xview = 0;
-view_yview = 0;
-view_wview = display_get_gui_width( );
-view_hview = display_get_gui_height( );
-</string>
-          </argument>
-        </arguments>
-      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -1298,9 +1300,7 @@ view_hview = display_get_gui_height( );
             <kind>1</kind>
             <string>///Draw paused background
 
-draw_background_stretched( pause, 0, 0,
-    display_get_gui_width( ), display_get_gui_height( )
-);
+draw_background_stretched( pause, view_xview, view_yview, view_wview, view_hview );
 </string>
           </argument>
         </arguments>
@@ -1323,11 +1323,11 @@ draw_background_stretched( pause, 0, 0,
             <kind>1</kind>
             <string>///Darken the screen
 
-draw_set_color( c_dkgray );
+draw_set_color( merge_color( c_white, c_dkgray, fade ) );
 draw_set_alpha( 1 );
 draw_set_blend_mode_ext( bm_dest_color, bm_zero );
 
-draw_rectangle( 0, 0, display_get_gui_width( ), display_get_gui_height( ), false );
+draw_rectangle( view_xview, view_yview, view_xview+view_wview, view_yview+view_hview, false );
 
 draw_set_color( c_white );
 draw_set_alpha( 1 );
@@ -1576,11 +1576,11 @@ bloomIndex = 0;
             <kind>1</kind>
             <string>///Draw icons
 
-var tSize = ( 0.075 * display_get_gui_height( ) );
+var tSize = ( 0.075 * view_hview );
 var tScale = ( tSize / sprite_get_height( genePickup_spr ) );
-var tOffset = ( display_get_gui_height( ) * 0.1 );
-var px = ( ( 0.965 + mergeOptionRemove ) * display_get_gui_width( ) );
-var py = ( 0.5 * display_get_gui_height( ) );
+var tOffset = ( view_hview * 0.1 );
+var px = ( view_xview + ( ( 0.965 + mergeOptionRemove + ( 1 - fade ) ) * view_wview ) );
+var py = ( view_yview + ( 0.5 * view_hview ) );
 py -= ( tOffset * ( geneOptionCount - 1 ) / 2 );
 
 for ( var i = 0; i &lt; geneOptionCount; ++i ) {
