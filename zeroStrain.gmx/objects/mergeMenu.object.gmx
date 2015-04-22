@@ -34,6 +34,8 @@ pause = background_create_from_surface(
     false, false
 );
 deactivateAllInstances( true );
+
+fade = 0;
 </string>
           </argument>
         </arguments>
@@ -522,6 +524,29 @@ part_system_destroy( partSys );
             <string>///Update the particle system
 
 part_system_update( partSys );
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Fade out the background
+
+fade = lerpDT( fade, 1, 0.01, global.timeTickFactor );
 </string>
           </argument>
         </arguments>
@@ -1288,7 +1313,7 @@ draw_background_stretched( pause, view_xview, view_yview, view_wview, view_hview
             <kind>1</kind>
             <string>///Darken the screen
 
-draw_set_color( c_dkgray );
+draw_set_color( merge_color( c_white, c_dkgray, fade ) );
 draw_set_alpha( 1 );
 draw_set_blend_mode_ext( bm_dest_color, bm_zero );
 
