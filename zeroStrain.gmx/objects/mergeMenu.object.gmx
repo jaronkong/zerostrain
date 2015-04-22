@@ -316,7 +316,9 @@ partEmit = part_emitter_create( partSys );
 partType = part_type_create( );
 part_type_shape( partType, pt_shape_smoke );
 part_type_scale( partType, 0.01, 0.01 );
-part_type_life( partType, 1000, 2000 );
+part_type_color1( partType, c_yellow );
+part_type_alpha3( partType, 0.75, 0.1, 0 );
+part_type_life( partType, 6, 12 );
 </string>
           </argument>
         </arguments>
@@ -837,7 +839,7 @@ instance_activate_all( );
 
 if ( stateMergeComplete ) {
     with ( playerGenetics ) {
-        for ( var i = ( other.optionCurrent + 1 ); i &lt; pickupCount; ++i ) {
+        for ( var i = ( pickupCount - other.optionCurrent ); i &lt; pickupCount; ++i ) {
             pickup[i-1] = pickup[i];
             pickupQuality[i-1] = pickupQuality[i];
         }
