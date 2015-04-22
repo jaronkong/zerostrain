@@ -185,15 +185,17 @@ draw_set_alpha( image_alpha );
 var px = x;
 var m = 8;
 var w = 2;
+var wo = ( w / 2 );
 
 if ( mirror ) {
     px += width;
     m *= -1;
+    wo *= -1;
 }
 
-draw_line_width( px-m, y, px+w/2, y, w );
+draw_line_width( px-m, y, px+wo, y, w );
 draw_line_width( px, y, px, y+height, w );
-draw_line_width( px+w/2, y+height, px-m, y+height, w );
+draw_line_width( px+wo, y+height, px-m, y+height, w );
 
 //Title underline
 draw_line_width( x, y+26, x+width, y+26, w );
