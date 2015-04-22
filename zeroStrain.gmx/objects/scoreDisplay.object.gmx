@@ -3,12 +3,12 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1000000</depth>
+  <depth>-10000</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>bloomablePar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
+    <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,44 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Setup
+            <string>///Draw
+draw_set_alpha( 1 );
+draw_set_valign( fa_top );
+draw_set_halign( fa_center );
+draw_set_color( c_orange );
+drawTextSize( view_xview + view_wview/2, view_yview + 8, "Score", main_ft, 16 );
 
-alpha = 0;
-fadeRate = 0.002;
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Fade
-
-alpha += fadeRate;
-
-if ( alpha &gt;= 1 ) {
-    with ( controllersPar ) {
-        instance_destroy();
-    }
-    room_goto( Title_rm );
-}
+drawTextSize( view_xview + view_wview/2, view_yview + 32, string( global.pointScore ), main_ft, 32 );
 
 </string>
           </argument>
@@ -88,10 +58,7 @@ if ( alpha &gt;= 1 ) {
             <kind>1</kind>
             <string>///Draw
 
-draw_set_color( c_black );
-draw_set_alpha( alpha );
-draw_rectangle( view_xview, view_yview, view_xview + view_wview , view_yview + view_hview, false );
-
+event_user( 0 );
 
 </string>
           </argument>

@@ -58,6 +58,8 @@ maxSpeed = 2;
 mass = 10;
 sizeFactor = 1;
 
+pointVal = 300;
+
 brainType = behavior_orbitMid;
 
 </string>

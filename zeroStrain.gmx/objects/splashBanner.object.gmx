@@ -30,7 +30,7 @@
 color = c_orange;
 textColor = c_white;
 
-text = "AAAAAAHHHHHHHHHHHHHH";
+text = "";
 
 currentAlpha = 1;
 targetAlpha = 0;

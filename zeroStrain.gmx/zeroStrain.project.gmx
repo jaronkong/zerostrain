@@ -135,6 +135,7 @@
       <sound>sound\enemyBeam_sd</sound>
     </sounds>
     <sound>sound\heartbeat_sd</sound>
+    <sound>sound\dnaPickup_sd</sound>
     <sounds name="Merging">
       <sound>sound\cycle_sd</sound>
       <sound>sound\slide_sd</sound>
@@ -355,6 +356,8 @@
       <object>objects\cameraController</object>
       <object>objects\HUDController</object>
       <object>objects\resController</object>
+      <object>objects\gameoverCon</object>
+      <object>objects\scoreDisplay</object>
     </objects>
     <objects name="Effects">
       <objects name="Bloom">
@@ -513,11 +516,14 @@
         <object>objects\spawn_laserLineRight</object>
         <object>objects\spawn_laserCircle</object>
         <object>objects\spawnBasicCircle</object>
+        <object>objects\spawnBattleshipTri</object>
+        <object>objects\spawnBattleshipSingle</object>
       </objects>
     </objects>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\spawn_tri_tl</timeline>
+    <timeline>timelines\spawn_battle_tri_tl</timeline>
   </timelines>
   <rooms name="rooms">
     <room>rooms\Title_rm</room>
