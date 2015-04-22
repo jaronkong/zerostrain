@@ -104,7 +104,7 @@ baseNeutralX = -0.2;
 baseNeutralY = 0.5
 
 //Current state
-basePos = instance_create( 0, 0, mergeMenuInput );
+basePos = instance_create( -2, 0, mergeMenuInput );
 baseX = 0;
 baseY = 0;
 
@@ -144,7 +144,7 @@ optionInfo = false;
 optionInfoCount = false;
 optionInfoMat = false;
 
-optionPos = instance_create( 0, 0, mergeMenuInput );
+optionPos = instance_create( -2, 0, mergeMenuInput );
 with ( optionPos ) {
     inHorizontal = gp_axisrh;
     inVertical = gp_axisrv;
