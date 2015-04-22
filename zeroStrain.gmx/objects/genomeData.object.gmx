@@ -115,6 +115,7 @@ enum GeneAllele {
     Tag,
     Values,
     Quality,
+    Color,
     Group,
     Size
 }
@@ -230,6 +231,11 @@ while ( !ds_queue_empty( tQueue ) ) {
             {
                 //Load in allele
                 var tQuality = ini_read_real( tTag, "quality", 1 );
+                var tColorStr = ini_read_string( tTag, "color", "" );
+                var tColor = parseColor( tColorStr );
+                if ( ( tGroup &gt;= 0 ) &amp;&amp; ( tColorStr == "" ) ) {
+                    tColor = ds_grid_get( groupData, GeneGroup.Color, tGroup );
+                }
                 var tOffsets = ds_map_create( );
                 //Increase the base gene
                 ds_map_add( tOffsets, tTag, ini_read_real( tTag, "offset", 1 ) );
@@ -241,7 +247,7 @@ while ( !ds_queue_empty( tQueue ) ) {
                     ds_map_add( tOffsets, tExtraTag, tExtraOff );
                 }
                 //Increase group value
-                if ( tGroup &gt; 0 ) {
+                if ( tGroup &gt;= 0 ) {
                     var tGroupVal = ds_grid_get( groupData, GeneGroup.Value, tGroup );
                     if ( tGroupVal != "" ) {
                         ds_map_add( tOffsets, tGroupVal, 1 );
@@ -252,6 +258,7 @@ while ( !ds_queue_empty( tQueue ) ) {
                 ds_grid_set( alleleData, GeneAllele.Tag, tIndex, tTag );
                 ds_grid_set( alleleData, GeneAllele.Values, tIndex, tOffsets );
                 ds_grid_set( alleleData, GeneAllele.Quality, tIndex, tQuality );
+                ds_grid_set( alleleData, GeneAllele.Color, tIndex, tColor );
                 ds_grid_set( alleleData, GeneAllele.Group, tIndex, tGroup );
             }
         }

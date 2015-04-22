@@ -13,11 +13,16 @@ var tLeft = false;
 var tRight = false;
 
 for ( var i = 0; i < aLength; ++i ) {
-    var tGrpCol = c_dkgray;
+    tLeft[i] = c_dkgray;
     var tGroup = ds_grid_get( tAlleleData, GeneAllele.Group, aGenome[i] );
-    if ( tGroup >= 0 ) tGrpCol = ds_grid_get( tGroupData, GeneGroup.Color, tGroup );
-    tLeft[i] = tGrpCol;
-    tRight[i] = tGrpCol;
+    if ( tGroup >= 0 ) tLeft[i] = ds_grid_get( tGroupData, GeneGroup.Color, tGroup );
+    tRight[i] = ds_grid_get( tAlleleData, GeneAllele.Color, aGenome[i] );
+    tLeft[i] = tRight[i]; //Both sides use allele color
+    if ( choose( true, false ) ) {
+        var tSwap = tLeft[i];
+        tLeft[i] = tRight[i];
+        tRight[i] = tSwap;
+    }
 }
 
 var tColors = false;

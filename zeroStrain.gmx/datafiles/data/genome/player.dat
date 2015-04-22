@@ -11,9 +11,17 @@ count = 2
 group = 1
 title = Player
 color = $AAAA00
-0 = plr_stat_speed
-1 = plr_stat_health
-count = 2
+0 = plr_stat_junk
+1 = plr_stat_speed
+2 = plr_stat_health
+count = 3
+
+[plr_stat_junk]
+default = 0
+offset = 2
+quality = 0
+hidden = 1
+color = $333300
 
 [plr_stat_speed]
 default = 1
@@ -58,6 +66,7 @@ default = 0
 offset = 1
 quality = 0
 hidden = 1
+color = $003300
 
 [plr_wep_gatling_dmg]
 default = 1
@@ -94,6 +103,7 @@ default = 0
 offset = 1
 quality = 0
 hidden = 1
+color = $000033
 
 [plr_wep_pulse_dmg]
 default = 1
@@ -135,6 +145,7 @@ default = 0
 offset = 1
 quality = 0
 hidden = 1
+color = $330000
 
 [plr_wep_artillery_dmg]
 default = 1
@@ -174,6 +185,7 @@ default = 0
 offset = 1
 quality = 0
 hidden = 1
+color = $000033
 
 [plr_wep_fissure_dmg]
 default = 1
@@ -205,6 +217,7 @@ default = 0
 offset = 1
 quality = 0
 hidden = 1
+color = $000033
 
 [plr_wep_torch_dmg]
 default = 1
@@ -246,6 +259,7 @@ default = 0
 offset = 1
 quality = 0
 hidden = 1
+color = $330000
 
 [plr_wep_mine_dmg]
 default = 1
@@ -286,6 +300,7 @@ default = 0
 offset = 1
 quality = 0
 hidden = 1
+color = $003300
 
 [plr_wep_spreader_dmg]
 default = 1
