@@ -315,6 +315,9 @@ partMat = instance_create( x, y, mergeMenuTransform );
 partSys = part_system_create( );
 part_system_automatic_draw( partSys, false );
 part_system_automatic_update( partSys, false );
+bloom_attachParticleSystem( partSys, BLOOM_DEPTH );
+distortionGlow_attachParticleSystem( partSys );
+refraction_attachParticleSystem( partSys );
 
 partEmit = part_emitter_create( partSys );
 
@@ -724,7 +727,11 @@ if ( !stateMerging ) {
                         tPartPos-tRange, tPartPos+tRange,
                         ps_shape_ellipse, ps_distr_gaussian
                     );
-                    part_emitter_burst( partSys, partEmit, partType, 4 );
+                    part_emitter_burst( partSys, partEmit, getParticle("dnaMergeFuseLine"), 2 );
+                    part_type_direction( getParticle("dnaMergeFuseSparks"), 0 - 20, 0 + 20, 0, 1 );
+                    part_emitter_burst( partSys, partEmit, getParticle("dnaMergeFuseSparks"), 8 );
+                    part_type_direction( getParticle("dnaMergeFuseSparks"), 180 - 20, 180 + 20, 0, 1 );
+                    part_emitter_burst( partSys, partEmit, getParticle("dnaMergeFuseSparks"), 8 );
                 }
             }
         }
