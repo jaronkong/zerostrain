@@ -110,6 +110,7 @@ baseNeutralY = 0.5
 
 //Current state
 basePos = instance_create( -1, 0, mergeMenuInput );
+basePos.inSide = 1;
 baseX = 0;
 baseY = 0;
 
@@ -157,7 +158,7 @@ with ( optionPos ) {
     inDown = vk_down;
     inLeft = vk_left;
     inRight = vk_right;
-    inFlipH = true;
+    inSide = -1;
 }
 optionX = 0;
 optionY = 0;
@@ -255,6 +256,9 @@ resultInfoMat = noone;
 
 resultInfoScale = 1;
 resultInfoAlpha = 0;
+
+resultPos = instance_create( 0, 0, mergeMenuInput );
+resultPos.stateLocked = true;
 </string>
           </argument>
         </arguments>
@@ -428,6 +432,8 @@ for ( var i = 0; i &lt; resultInfoCount; ++i ) {
 with ( resultInfoMat ) instance_destroy( );
 
 if ( ds_exists( resultDesc, ds_type_grid ) ) ds_grid_destroy( resultDesc );
+
+with ( resultPos ) instance_destroy( );
 </string>
           </argument>
         </arguments>
@@ -783,6 +789,8 @@ if ( !stateMergeComplete &amp;&amp; stateMerging ) {
                 visible = false;
             }
         }
+        //Unlock movement
+        resultPos.stateLocked = false;
     }
 } else if ( stateMergeComplete ) {
     var t = global.timeTickFactor;
@@ -1183,51 +1191,6 @@ for ( var i = 0; i &lt; optionCount; ++i ) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Update result info position
-
-if ( resultInfoCount &gt; 0 ) {
-    var tHeight = 0;
-    for ( var i = 0; i &lt; resultInfoCount; ++i ) {
-        if ( i &gt; 0 ) tHeight += infoSpacing;
-        tHeight += resultInfo[i].height;
-    }
-    var tHeightOff = ( ( length * infoDefSize ) - tHeight );
-    if ( tHeightOff &gt; 0 ) {
-        tHeight += tHeightOff;
-        tHeightOff /= resultInfoCount;
-        for ( var i = 0; i &lt; resultInfoCount; ++i ) {
-            resultInfo[i].height += tHeightOff;
-        }
-    }
-    var py = -( tHeight / 2 );
-    for ( var i = 0; i &lt; resultInfoCount; ++i ) {
-        resultInfo[i].x = 0;
-        resultInfo[i].y = py;
-        resultInfo[i].image_alpha = other.resultInfoAlpha;
-        py += ( resultInfo[i].height + infoSpacing );
-    }
-    resultInfoScale = ( resultLength * infoLengthScale / tHeight );
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Apply merge translations
 
 if ( stateMerging ) {
@@ -1255,6 +1218,65 @@ if ( stateMerging ) {
         tOption.twist = mergeTwist;
         tOption.split = mergeSplit;
     }
+    //Post merge movement
+    if ( stateMergeComplete ) {
+        tBase.x += ( lerp( 0, 1, resultPos.x ) * 600 );
+        tBase.y += ( lerp( 0, 0.1, resultPos.y ) * 900 );
+        tBase.rx += resultPos.rx;
+        tBase.ry += resultPos.ry;
+        tBase.rz += resultPos.rz;
+        tOption.x = tBase.x;
+        tOption.y = tBase.y;
+        tOption.z = tBase.z;
+        tOption.rx = tBase.rx;
+        tOption.ry = tBase.ry;
+        tOption.rz = tBase.rz;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Update result info position
+
+if ( resultInfoCount &gt; 0 ) {
+    var tHeight = 0;
+    for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+        if ( i &gt; 0 ) tHeight += infoSpacing;
+        tHeight += resultInfo[i].height;
+    }
+    var tHeightOff = ( ( length * infoDefSize ) - tHeight );
+    if ( tHeightOff &gt; 0 ) {
+        tHeight += tHeightOff;
+        tHeightOff /= resultInfoCount;
+        for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+            resultInfo[i].height += tHeightOff;
+        }
+    }
+    var py = -( tHeight / 2 );
+    for ( var i = 0; i &lt; resultInfoCount; ++i ) {
+        resultInfo[i].x = 0;
+        resultInfo[i].y = py;
+        resultInfo[i].image_alpha = other.resultInfoAlpha;
+        py += ( resultInfo[i].height + infoSpacing );
+    }
+    resultInfoScale = ( resultLength * infoLengthScale / tHeight );
 }
 </string>
           </argument>
