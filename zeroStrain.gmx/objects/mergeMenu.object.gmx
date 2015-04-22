@@ -552,7 +552,7 @@ part_system_update( partSys );
             <kind>1</kind>
             <string>///Fade out the background
 
-fade = lerpDT( fade, 1, 0.01, global.timeTickFactor );
+fade = lerpDT( fade, 1, 0.025, global.timeTickFactor );
 </string>
           </argument>
         </arguments>
@@ -1579,7 +1579,7 @@ bloomIndex = 0;
 var tSize = ( 0.075 * view_hview );
 var tScale = ( tSize / sprite_get_height( genePickup_spr ) );
 var tOffset = ( view_hview * 0.1 );
-var px = ( view_xview + ( ( 0.965 + mergeOptionRemove + ( 0.2 - fade/5 ) ) * view_wview ) );
+var px = ( view_xview + ( ( 0.965 + mergeOptionRemove + ( 1 - fade ) ) * view_wview ) );
 var py = ( view_yview + ( 0.5 * view_hview ) );
 py -= ( tOffset * ( geneOptionCount - 1 ) / 2 );
 
