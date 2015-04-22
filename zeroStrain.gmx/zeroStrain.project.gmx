@@ -205,6 +205,7 @@
       <sprite>sprites\geneSelected_spr</sprite>
       <sprite>sprites\genePickupBacking_spr</sprite>
     </sprites>
+    <sprite>sprites\noise_spr</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
