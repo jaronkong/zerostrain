@@ -8,3 +8,8 @@ with ( argument0 ) {
     }
     selfHealth -= argument1;
 }
+
+with ( postShader ) {
+    var_thresh_block = 0.2;
+    var_thresh_line = 0.7;
+}
