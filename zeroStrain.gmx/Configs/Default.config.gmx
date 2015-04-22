@@ -64,7 +64,7 @@
     <option_audioGroupCount>1</option_audioGroupCount>
     <option_author></option_author>
     <option_backimage>nil</option_backimage>
-    <option_borderless>false</option_borderless>
+    <option_borderless>False</option_borderless>
     <option_changed>false</option_changed>
     <option_changeresolution>false</option_changeresolution>
     <option_closeesc>true</option_closeesc>
@@ -103,7 +103,7 @@
     <option_html5_interpolate>-1</option_html5_interpolate>
     <option_html5_jsprepend></option_html5_jsprepend>
     <option_html5_loadingbar>-1</option_html5_loadingbar>
-    <option_html5_localrunalert>true</option_html5_localrunalert>
+    <option_html5_localrunalert>True</option_html5_localrunalert>
     <option_html5_outputdebugtoconsole>False</option_html5_outputdebugtoconsole>
     <option_html5_outputname>index.html</option_html5_outputname>
     <option_html5_scale>-1</option_html5_scale>
@@ -264,8 +264,14 @@
     <option_textureGroup0_parent>&lt;none&gt;</option_textureGroup0_parent>
     <option_textureGroup0_scaled>0</option_textureGroup0_scaled>
     <option_textureGroup0_targets>9223372036854775807</option_textureGroup0_targets>
-    <option_textureGroup_count>1</option_textureGroup_count>
+    <option_textureGroup1_border>2</option_textureGroup1_border>
+    <option_textureGroup1_nocropping>0</option_textureGroup1_nocropping>
+    <option_textureGroup1_parent>&lt;none&gt;</option_textureGroup1_parent>
+    <option_textureGroup1_scaled>0</option_textureGroup1_scaled>
+    <option_textureGroup1_targets>9223372036854775807</option_textureGroup1_targets>
+    <option_textureGroup_count>2</option_textureGroup_count>
     <option_textureGroups0>Default</option_textureGroups0>
+    <option_textureGroups1>Title</option_textureGroups1>
     <option_tizen_app_id>http://yourdomain/zeroStrain</option_tizen_app_id>
     <option_tizen_build_version>0</option_tizen_build_version>
     <option_tizen_display_name>zeroStrain</option_tizen_display_name>
