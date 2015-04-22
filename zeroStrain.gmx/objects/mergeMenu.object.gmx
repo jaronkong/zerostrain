@@ -813,10 +813,13 @@ if ( !stateMergeComplete &amp;&amp; stateMerging ) {
 var tExit = false;
 if ( keyboard_check_pressed( vk_space ) ) {
     tExit = true;
-}
-if ( gamepad_is_connected( 0 ) ) {
+} else if ( gamepad_is_connected( 0 ) ) {
     if ( gamepad_button_check_pressed( 0, gp_shoulderrb ) ) {
         tExit = true;
+    } else if ( stateMergeComplete ) {
+        if ( gamepad_button_check_pressed( 0, gp_face1 ) ) {
+            tExit = true;
+        }
     }
 }
 
