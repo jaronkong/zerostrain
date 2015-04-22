@@ -315,7 +315,7 @@ partMat = instance_create( x, y, mergeMenuTransform );
 partSys = part_system_create( );
 part_system_automatic_draw( partSys, false );
 part_system_automatic_update( partSys, false );
-bloom_attachParticleSystem( partSys, BLOOM_DEPTH );
+bloom_attachParticleSystem( partSys, 99 );
 distortionGlow_attachParticleSystem( partSys );
 refraction_attachParticleSystem( partSys );
 
@@ -1536,7 +1536,7 @@ part_system_drawit( partSys );
             <kind>1</kind>
             <string>///Disable 3D
 
-bloom_addToQueue( projEnd, bloomIndex++ );
+bloom_addToQueue( projEnd, 100 );
 with ( projEnd ) event_perform( ev_draw, false );
 </string>
           </argument>
