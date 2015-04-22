@@ -113,8 +113,13 @@ inFlipH = false;
             <kind>1</kind>
             <string>///Start sound
 
-sound = playSound( slide_sd, 10, true );
-audio_sound_gain( sound, 0, 0 );
+sound = false;
+soundCount = 8;
+
+for ( var i = 0; i &lt; soundCount; ++i ) {
+    sound[i] = playSound( slide_sd, 10, true );
+    audio_sound_gain( sound[i], 0, 0 );
+}
 </string>
           </argument>
         </arguments>
@@ -139,7 +144,9 @@ audio_sound_gain( sound, 0, 0 );
             <kind>1</kind>
             <string>///Stop the sound
 
-audio_stop_sound( sound );
+for ( var i = 0; i &lt; soundCount; ++i ) {
+    audio_stop_sound( sound[i] );
+}
 </string>
           </argument>
         </arguments>
@@ -197,8 +204,14 @@ if ( !stateLocked ) {
     y = lerpDT( y, tGoalY, tSpd, t );
     
     var tDist = point_distance( 0, 0, (tGoalX-x), (tGoalY-y)*0.5 );
-    audio_sound_gain( sound, clampRange( tDist, 0, 0.75, 0.9 ), 10 );
-} else audio_sound_gain( sound, 0, 250 );
+    for ( var i = 0; i &lt; soundCount; ++i ) {
+        audio_sound_gain( sound[i], clampRange( tDist, 0, 0.75, 0.9 ), 10 );
+    }
+} else {
+    for ( var i = 0; i &lt; soundCount; ++i ) {
+        audio_sound_gain( sound[i], 0, 250 );
+    }
+}
 </string>
           </argument>
         </arguments>
