@@ -17,3 +17,6 @@ global.timeTickFactor = 1; //Percent of real time to run things at. For slowdown
 
 global.pointScore = 0;
 
+ini_open( "scores.ini" );
+global.highscore = ini_read_real( "scores", "high", 0 );
+ini_close();
