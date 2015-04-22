@@ -38,6 +38,34 @@ drawTextSize( view_xview + view_wview/2, view_yview + 32, string( global.pointSc
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw arena border
+
+draw_set_color( c_orange );
+draw_set_alpha( 1 );
+draw_line( 0,0, room_width, 0 );
+draw_line( 0,0, 0, room_height );
+draw_line( room_width,0, room_width, room_height );
+draw_line( 0,room_height, room_width, room_height );
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>

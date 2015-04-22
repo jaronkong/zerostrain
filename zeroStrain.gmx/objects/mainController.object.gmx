@@ -34,7 +34,7 @@ instance_create( 0, 0, enemyInfoDrawer );
 instance_create( 0, 0, particleTickController );
 instance_create( 0, 0, cameraController );
 instance_create( 0, 0, HUDController );
-instance_create( 0, 0, scoreDisplay );
+instance_create( 0, 0, bloomHud );
 
 </string>
           </argument>
