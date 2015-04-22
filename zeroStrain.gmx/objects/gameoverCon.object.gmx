@@ -95,6 +95,11 @@ with ( instance_create( 0, 0, splashBanner ) ) {
     fadeRate = 0.05;
 }
 
+with ( postShader ) {
+    var_thresh_line = max( 0.05, var_thresh_line );
+    var_thresh_block = max( 0.1, var_thresh_block );
+}
+
 alarm[ 0 ] = pulseRate;
 
 </string>
