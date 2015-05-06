@@ -191,8 +191,8 @@ optionInfoAlpha = 0;
             <string>///Info box positioning
 
 infoSpacing = 16;
-infoDefSize = 5.5;
-infoLengthScale = 9.5
+infoDefSize = 5;
+infoLengthScale = 9.5;
 </string>
           </argument>
         </arguments>

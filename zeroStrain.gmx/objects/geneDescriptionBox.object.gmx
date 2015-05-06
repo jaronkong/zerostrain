@@ -31,6 +31,7 @@ data = -1;
 index = 0;
 
 title = "";
+icon = noone;
 value = "";
 change = noone;
 color = c_white;
@@ -62,8 +63,9 @@ loaded = false;
             <string>///Define formatting
 
 font = main_ft;
-width = 192;
+width = 216;
 height = 128;
+m = 8
 
 mirror = false;
 </string>
@@ -93,6 +95,7 @@ mirror = false;
 if ( !loaded ) {
     if ( ds_exists( data, ds_type_grid ) &amp;&amp; ( index &gt;= 0 ) ) {
         title = ds_grid_get( data, GeneDescGroup.Title, index );
+        icon = ds_grid_get( data, GeneDescGroup.Icon, index );
         value = ds_grid_get( data, GeneDescGroup.Value, index );
         change = ds_grid_get( data, GeneDescGroup.Change, index );
         color = ds_grid_get( data, GeneDescGroup.Color, index );
@@ -151,51 +154,25 @@ event_perform( ev_draw, false );
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw back
-
-draw_set_color( c_dkgray );
-draw_set_alpha( image_alpha );
-
-//draw_rectangle( x, y, x+width, y+height, false );
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Draw edges
 
 draw_set_color( color );
 draw_set_alpha( image_alpha );
 
 var px = x;
-var m = 8;
+var tm = m;
 var w = 2;
 var wo = ( w / 2 );
 
 if ( mirror ) {
     px += width;
-    m *= -1;
+    tm *= -1;
     wo *= -1;
 }
 
-draw_line_width( px-m, y, px+wo, y, w );
+draw_line_width( px-tm, y, px+wo, y, w );
 draw_line_width( px, y, px, y+height, w );
-draw_line_width( px+wo, y+height, px-m, y+height, w );
+draw_line_width( px+wo, y+height, px-tm, y+height, w );
 
 //Title underline
 draw_line_width( x, y+26, x+width, y+26, w );
@@ -221,38 +198,45 @@ draw_line_width( x, y+26, x+width, y+26, w );
             <kind>1</kind>
             <string>///Draw values
 
-var m = 8;
-
 draw_set_color( c_white );
 draw_set_alpha( image_alpha );
 draw_set_halign( fa_left );
-draw_set_valign( fa_top );
+draw_set_valign( fa_middle );
 
-var py = ( y + m );
+var py = ( y + 16 );
+var tSize = 15;
 
-drawTextSize( x+m, py, title, font, 12 );
-drawTextSize( x+width-15-getTextWidth( value, font, 10 )-m,
-    py, value, font, 10
-);
+if ( sprite_exists( icon ) ) {
+    var tIconScale = ( 1.4 * tSize / sprite_get_width( icon ) );
+    var tIconWidth = ( sprite_get_width( icon ) * tIconScale );
+    var tIconHeight = ( sprite_get_height( icon ) * tIconScale );
+    draw_sprite_stretched_ext( icon, 0, x+m+tSize/2-tIconWidth/2, py-tIconHeight/2,
+        tIconWidth, tIconHeight, c_white, image_alpha
+    );
+}
 if ( sprite_exists( change ) ) {
-    var tSize = 15;
-    draw_sprite_stretched_ext( change, 0, x+width-20, py,
+    draw_sprite_stretched_ext( change, 0,
+        x+width-tSize-m, py-tSize/2,
         tSize, tSize, c_white, image_alpha
     );
 }
 
+drawTextSize( x+m+tSize+m, py, title, font, 12 );
+drawTextSize( x+width-m-tSize-getTextWidth( value, font, 10 )-m,
+    py, value, font, 10
+);
+
 draw_set_color( c_white );
 for ( var i = 0; i &lt; itemCount; ++i ) {
-    py = ( y + ( i * 20 ) + 32 );
-    drawTextSize( x+m+15+m, py, item[GeneDescGene.Title, i], font, 10 );
+    py = ( y + ( ( i + 0.5 ) * 20 ) + 32 );
+    drawTextSize( x+m+tSize+m, py, item[GeneDescGene.Title, i], font, 10 );
     drawTextSize(
         x+width-getTextWidth( item[GeneDescGene.Value, i], font, 10 )-m,
         py, item[GeneDescGene.Value, i], font, 10
     );
     var tChange = item[GeneDescGene.Change, i];
     if ( sprite_exists( tChange ) ) {
-        var tSize = 15;
-        draw_sprite_stretched_ext( tChange, 0, x+m, py,
+        draw_sprite_stretched_ext( tChange, 0, x+m, py-tSize/2,
             tSize, tSize, c_white, image_alpha
         );
     }
