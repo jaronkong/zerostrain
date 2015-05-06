@@ -82,7 +82,7 @@ geneData = ds_grid_create( Gene.Size, 0 );
             <string>///Define group data to load
 
 enum GeneGroup {
-    Title,
+    Title, Icon,
     Value, Color,
     Items,
     Size
@@ -192,11 +192,13 @@ while ( !ds_queue_empty( tQueue ) ) {
     //Process group
     if ( ini_key_exists( tSection, "title" ) ) {
         var tGroupTitle = ini_read_string( tSection, "title", "" );
+        var tGroupIcon = ini_read_string( tSection, "icon", "" );
         var tGroupValue = ini_read_string( tSection, "value", "" );
         var tGroupColor = ini_read_string( tSection, "color", "$FFFFFF" );
         var tIndex = ds_grid_height( groupData );
         ds_grid_resize( groupData, GeneGroup.Size, ( tIndex + 1 ) );
         ds_grid_set( groupData, GeneGroup.Title, tIndex, tGroupTitle );
+        ds_grid_set( groupData, GeneGroup.Icon, tIndex, asset_get_index( tGroupIcon ) );
         ds_grid_set( groupData, GeneGroup.Value, tIndex, tGroupValue );
         ds_grid_set( groupData, GeneGroup.Color, tIndex, parseColor( tGroupColor ) );
         ds_grid_set( groupData, GeneGroup.Items, tIndex, ds_list_create( ) );

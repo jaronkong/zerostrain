@@ -53,6 +53,7 @@ count = 7
 [plr_wep_gatling]
 group = 1
 title = Gatling Gun
+icon = weapIcon_gun_spr
 value = plr_wep_gatling_chance
 color = $00AA00
 0 = plr_wep_gatling_chance
@@ -89,6 +90,7 @@ offset = 0.05
 [plr_wep_pulse]
 group = 1
 title = Pulse Driver
+icon = weapIcon_pulse_spr
 value = plr_wep_pulse_chance
 color = $0000FF
 0 = plr_wep_pulse_chance
@@ -131,6 +133,7 @@ offset = 0.015
 [plr_wep_artillery]
 group = 1
 title = Blast Volley
+icon = weapIcon_artillery_spr
 value = plr_wep_artillery_chance
 color = $AA0000
 0 = plr_wep_artillery_chance
@@ -173,6 +176,7 @@ offset = 0.05
 [plr_wep_fissure]
 group = 1
 title = Fissure Bomb
+icon = weapIcon_burst_spr
 value = plr_wep_fissure_chance
 color = $0000FF
 0 = plr_wep_fissure_chance
@@ -203,6 +207,7 @@ offset = 0.0125
 [plr_wep_torch]
 group = 1
 title = Plasma Torch
+icon = weapIcon_torch_spr
 value = plr_wep_torch_chance
 color = $0000FF
 0 = plr_wep_torch_chance
@@ -245,6 +250,7 @@ offset = 0.0125
 [plr_wep_mine]
 group = 1
 title = Mine Catapault
+icon = weapIcon_mine_spr
 value = plr_wep_mine_chance
 color = $AA0000
 0 = plr_wep_mine_chance
@@ -287,6 +293,7 @@ offset = 0.0125
 [plr_wep_spreader]
 group = 1
 title = Spreader Gun
+icon = weapIcon_spread_spr
 value = plr_wep_spreader_chance
 color = $00AA00
 0 = plr_wep_spreader_chance
