@@ -19,12 +19,13 @@ while ( tResultLength < argument1 ) {
         tGroupChance[i] = ( 1 / power( ( abs( argument2 - tQuality ) + 1 ), 5 ) );
         tGroupChanceTotal += tGroupChance[i];
     }
-    repeat ( min( irandom_range( 32, 48 ), ( argument1 - tResultLength ) ) ) {
+    repeat ( min( irandom_range( 40, 72 ), ( argument1 - tResultLength ) ) ) {
         tResult[tResultLength++] = chooseWeight( tGroupArray, tGroupChance, tGroupChanceTotal );
         for ( var i = 0; i < ds_list_size( tGroupItems ); ++i ) {
             if ( tGroupArray[i] == tResult[tResultLength-1] ) {
-                tGroupChanceTotal += tGroupChance[i];
-                tGroupChance[i] += tGroupChance[i];
+                var tGroupChanceInc = ( tGroupChance[i] * 1.5 );
+                tGroupChance[i] += tGroupChanceInc;
+                tGroupChanceTotal += tGroupChanceInc;
                 break;
             }
         }
