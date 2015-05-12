@@ -1074,7 +1074,7 @@ resultInfoMat = instance_create( x, y, mergeMenuTransform );
             <string>///Update base strand positions
 
 baseX = ( 1600 * lerp( -0.5, 0, basePos.x ) );
-baseY = ( 900 * lerp( 0, 0.1, basePos.y ) );
+baseY = ( 900 * lerp( 0, 0.125, basePos.y ) );
 
 for ( var i = 0; i &lt; 2; ++i ) {
     base[i].x = baseX;
@@ -1131,7 +1131,7 @@ baseInfoScale = ( length * infoLengthScale / tHeight );
             <string>///Update option strand positions
 
 optionX = ( 1600 * lerp( 0.5, 0, optionPos.x ) );
-optionY = ( 900 * lerp( 0, 0.1, optionPos.y ) );
+optionY = ( 900 * lerp( 0, 0.125, optionPos.y ) );
 
 for ( var i = 0; i &lt; optionCount; ++i ) {
     var tDist = ( i - optionCurrentAni );

@@ -190,12 +190,12 @@ if ( !stateLocked ) {
     }
     if ( inSide != 0 ) {
         if ( inSide &lt; 0 ) tHor *= -1;
-        if ( tHor &lt; 0 ) tHor /= 5;
+        if ( tHor &lt; 0 ) tHor /= 4;
     }
     tVer *= -1;
     
     //Update rotation
-    rx = lerpDT( rx, ( tVer * 5 ), 0.1, t );
+    rx = lerpDT( rx, ( tVer * 6 ), 0.05, t );
     rySpeed = lerpDT( rySpeed, ( clamp( tHor, -0.1, 0.1 ) * 1500 ), abs( tHor / 5 ), t );
     
     //Update position
