@@ -69,6 +69,8 @@ pickupScale = 0.75;
 pickupBaseX = 64;
 pickupBaseY = ( pickupScale * ( sprite_get_height( tBacking ) - sprite_get_yoffset( tBacking ) ) );
 pickupSpace = ( pickupScale * sprite_get_width( tBacking ) );
+
+pickupPromptTime = 0;
 </string>
           </argument>
         </arguments>
@@ -205,6 +207,38 @@ if ( !instance_exists( mergeMenu ) ) {
         }
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Show merge ready message
+
+if ( pickupCount &gt; 0 ) {
+    pickupPromptTime -= global.timeTickFactor;
+    if ( pickupPromptTime &lt; 0 ) {
+        pickupPromptTime += 90;
+        with ( instance_create( x, y, splashBanner ) ) {
+            text = "DNA acquired#RT to merge";
+            posY = 0.8;
+        }
+    }
+} else pickupPromptTime = 0;
 </string>
           </argument>
         </arguments>

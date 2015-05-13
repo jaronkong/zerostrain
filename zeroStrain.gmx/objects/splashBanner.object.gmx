@@ -32,6 +32,8 @@ textColor = c_white;
 
 text = "";
 
+posY = 0.5;
+
 currentAlpha = 1;
 targetAlpha = 0;
 fadeRate = 0.01;
@@ -93,12 +95,12 @@ if ( currentAlpha &lt;= 0 ) {
 draw_set_color( color );
 draw_set_alpha( currentAlpha );
 
-draw_rectangle( view_xview, view_yview + view_hview/2 - 64, view_xview + view_wview, view_yview + view_hview/2 + 64, false );
+draw_rectangle( view_xview, view_yview + view_hview*posY - 64, view_xview + view_wview, view_yview + view_hview*posY + 64, false );
 
 draw_set_color( textColor );
 draw_set_valign( fa_center );
 draw_set_halign( fa_center );
-drawTextSize( view_xview + view_wview/2, view_yview + view_hview/2, text, main_ft, 32 );
+drawTextSize( view_xview + view_wview/2, view_yview + view_hview*posY, text, main_ft, 32 );
 
 </string>
           </argument>
