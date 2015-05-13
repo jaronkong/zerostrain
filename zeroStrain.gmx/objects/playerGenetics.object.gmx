@@ -186,7 +186,11 @@ while ( pickupCount &gt; pickupCountMax ) {
 if ( !instance_exists( mergeMenu ) ) {
     var tOpen = keyboard_check_pressed( vk_space );
     if ( gamepad_is_connected( 0 ) ) {
-        if ( gamepad_button_check_pressed( 0, gp_shoulderrb ) ) tOpen = true;
+        if ( gamepad_button_check_pressed( 0, gp_shoulderrb )
+            || gamepad_button_check_pressed( 0, gp_shoulderlb ) ) 
+        {
+            tOpen = true;
+        }
     }
     if ( tOpen ) {
         with ( instance_create( x, y, mergeMenu ) ) {
