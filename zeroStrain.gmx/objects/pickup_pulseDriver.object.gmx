@@ -41,6 +41,8 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Pulse Driver";
+color = c_blue;
 heldWeapon = weapon_pulseDriver_con;
 
 

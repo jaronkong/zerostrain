@@ -41,6 +41,8 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Gatling Gun";
+color = c_lime;
 heldWeapon = weapon_gun_con;
 
 

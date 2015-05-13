@@ -41,6 +41,8 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Spreader";
+color = c_lime;
 heldWeapon = weapon_spreader_con;
 
 

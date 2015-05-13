@@ -425,6 +425,7 @@
       <object>objects\weaponController_projectiles</object>
       <object>objects\weaponPar_projectile</object>
       <objects name="Pickups">
+        <object>objects\weaponPickup</object>
         <object>objects\pickup_pulseDriver</object>
         <object>objects\pickup_gun</object>
         <object>objects\pickup_burst</object>
@@ -457,7 +458,6 @@
         <object>objects\weapon_spreader_con</object>
         <object>objects\weapon_spreader_bullet</object>
       </objects>
-      <object>objects\weaponPickup</object>
       <objects name="Specials">
         <object>objects\weapon_fissureBomb</object>
       </objects>

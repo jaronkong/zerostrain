@@ -41,6 +41,8 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Fissure Bomb";
+color = c_blue;
 heldWeapon = weapon_fissureBomb;
 
 

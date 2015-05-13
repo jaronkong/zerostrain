@@ -41,6 +41,8 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Blast Volley";
+color = c_red;
 heldWeapon = weapon_artillery_con;
 
 

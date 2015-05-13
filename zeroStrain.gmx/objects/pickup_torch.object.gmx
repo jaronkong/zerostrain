@@ -41,6 +41,8 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Plasma Torch";
+color = c_blue;
 heldWeapon = weapon_torch_con;
 
 

@@ -480,12 +480,19 @@ draw_sprite_ext( titleSplash_spr, 0, room_width/2, room_height/2, 1, 1, 0, c_whi
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Test Draw
-/*
+            <string>///credits
+
 draw_set_color( c_orange );
-drawTextSize_backed( 200, 200, "Test string", main_ft, 64 );
-drawTextSize_backed( 200, 300, "Test string", main_ft, 128 );
-*/
+draw_set_alpha( 1 );
+draw_set_valign( fa_bottom );
+draw_set_halign( fa_left );
+drawTextSize( 16, room_height - 8, "Terence Farell. Jaron Kong. Greg Weil.", main_ft, 16 );
+
+draw_set_valign( fa_bottom );
+draw_set_halign( fa_right );
+drawTextSize( room_width - 16, room_height - 8, "Game Development II 2015", main_ft, 16 );
+
+
 </string>
           </argument>
         </arguments>

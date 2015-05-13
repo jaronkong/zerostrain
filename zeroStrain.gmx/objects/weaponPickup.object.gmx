@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "";
+color = c_white;
 heldWeapon = weapon_pulseDriver_con;
 
 </string>
@@ -76,6 +78,51 @@ instance_destroy();
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw text label
+
+var tTextSpace = string_width( name ) / 2;
+var tUnderlineOffset = 16;
+
+var tXOffset = 64;
+var tYOffset = -64;
+/*
+if ( !pointInBounds( x + tXOffset + tTextSpace, y ) ) {
+    tXOffset *= -1;
+}
+if ( !pointInBounds( x, y + tYOffset ) ) {
+    tYOffset *= -1;
+}
+*/
+draw_set_color( color );
+draw_set_alpha( 1 );
+draw_set_valign( fa_center );
+draw_set_halign( fa_left );
+drawTextSize( x + tXOffset, y + tYOffset, name, main_ft, 16 );
+draw_line( x + tXOffset, y + tYOffset + tUnderlineOffset,
+            x + tXOffset + tTextSpace, y + tYOffset + tUnderlineOffset );
+draw_line( x + tXOffset, y + tYOffset + tUnderlineOffset,
+            x, y );
+
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="8" enumb="0">

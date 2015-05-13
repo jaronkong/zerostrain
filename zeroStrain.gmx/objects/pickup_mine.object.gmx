@@ -41,6 +41,8 @@
             <kind>1</kind>
             <string>///Setup
 
+name = "Mine Catapult";
+color = c_red;
 heldWeapon = weapon_mine_con;
 
 
