@@ -686,6 +686,19 @@ if ( !instance_exists( equippedWeapon ) || equippedWeapon.duration &lt;= 0) {
 }
 
 //---------------------------------------------------
+// Merge prompt
+//---------------------------------------------------
+if ( !instance_exists( genome ) || genome.pickupCount &gt; 0) {
+    draw_set_color( weaponDurationColor );
+    if ( hudFlashOn ) {
+        draw_set_color( hudFlashColor );
+    }
+    draw_set_valign( fa_center );
+    draw_set_halign( fa_center );
+    drawTextSize( hudX, hudY + 88, "RT to merge DNA", main_ft, 20 );
+}
+
+//---------------------------------------------------
 // Player image and tracers
 //---------------------------------------------------
 
